@@ -1,0 +1,134 @@
+\documentclass{article}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+
+
+\title{CS 2051 Practice Exam 1 Solutions}
+\author {TAs: Alan Tao, Nithya Jayakumar, Rishi Raman}
+\date{Spring 2022}
+
+\begin{document}
+    \maketitle
+    \section{Logic}
+    \begin{enumerate}
+    \item 1.1 Question 17 from Textbook
+    \item $2^n$
+    \end{enumerate}
+    Negations: \\
+    \begin{enumerate}
+        \item $\exists x \exists y \neg P(x,y)$
+        \item $\exists x \forall y \neg P(x,y)$
+        \item $\forall x \exists y \neg P(x,y)$
+        \item $\forall x \forall y \neg P(x,y)$
+    \end{enumerate}
+    1.5 Question 9 from Textbook
+    \section{Proof Techniques}
+		
+			Q1. Direct Proof. Premise: $a$ divides $b$.
+				\begin{enumerate}
+					\item $\exists k \in \mathbb{N}$ s.t. $ak = b$. (Definition of Divisibility from Premise)
+					\item $ak = b$. (Existential Instantiation)
+					\item $ a^{3}k^{3} = b^{3}$. (Raise both sides to the 3rd power)
+					\item $ 3 \cdot a^{3}k^{3} = 3 \cdot b^{3}$. (Multiply by 3 on both sides)
+					\item $a (3a^{2}k^{3}) = 3b^{3}$. (Regrouping)
+					\item Let $m = (3a^{2}k^{3})$.
+					\item $\exists m \in \mathbb{N}$ s.t. $am = 3b^{3}$, $m = 3a^{2}k^{3}$. (Existential Generalization)
+					\item $\therefore a$ divides $3b^{3}$. (Definition of Divisibility)
+					
+					\item $ak = b$. (Existential Instantiation)
+					\item $a^{2}k^{2} = b^{2}$. (Square both sides)
+					\item $a(ak^{2}) = b^{2}$. (Regrouping)
+					\item Let $m = ak^{2}$.
+					\item $\exists m \in \mathbb{N}$ s.t. $am = b^{2}$. (Existential Generalization)
+					\item $\therefore a$ divides $b^{2}$. (Definition of Divisibility)
+
+					\item $ak = b$. (Existential Instantiation)
+					\item $5 \cdot ak = 5b$. (Multiply both sides of equation by 5)
+					\item $a (5k) = 5b$. (Regrouping)
+					\item Let $m = 5k$.
+					\item $\exists m \in \mathbb{N}$ s.t. $am = 5b$. (Existential Generalization)
+					\item $\therefore a$ divides $5b$. (Definition of Divisibility)
+
+					\item $\exists i, j, k \in \mathbb{N}$ s.t. $ai = 3b^{3}$, $aj = b^{2}$, $ak = 5b$. (Definition of Divisibility; lines 8, 14, 20)
+					\item $3b^{3} - b^{2} + 5b \implies ai + aj + ak$. (Existential Instantiation)
+					\item $a(i + j + k)$. (Regrouping)
+					\item Let $l = i + j + k$.
+					\item $\exists l$ s.t. $al = 3b^{3} - b^{2} + 5b$. (Existential Generalization)
+					\item $\therefore a$ divides $3b^{3} - b^{2} + 5b$. (Definition of Divisibility) $\blacksquare$ 
+					
+				\end{enumerate}
+					
+				Q10. Proof by Contraposition. Contrapositive statement: If $n$ is composite, then $2^{n} - 1$ is composite.
+
+					\begin{enumerate}
+						\item  $\exists p,q \in \mathbb{N}$ s.t. $pq = n$ (Definition of composite number)
+						\item $2^{n} - 1 \implies 2^{pq} - 1$ (Substitution)
+						\item $2^{pq} - 1 = (2^{q} - 1)(2^{pq-q} + 2^{pq - 2q} + 2^{pq-3q}+...+2^{pq - pq})$
+						\item $\exists i, j \in \mathbb{N}$ s.t. $i\cdot j = 2^{n} - 1$.
+						\item $\therefore 2^{n} - 1$ is composite. 
+						
+						The contrapositive statement has been proved, therefore the original statement must also be true.
+					\end{enumerate}
+				Q14. Proof by Contradiction. Negated statement: There exists an $x$, among the positive rationals such that all $y$ among the positive rationals are greater than or equal to $x$. Assume $c$ is the smallest positive rational number (Existential Instantiation). $\frac{c}{2}$ is also a rational number (Definition of a Rational Number), and is smaller than $c$. Which contradicts the original assumption that $c$ was the smallest positive rational number. \newline
+					Since the negation of the original statement leads to a contradiction, we can conclude that the original statement must be true. $\blacksquare$
+					
+		
+    \section {Set Theory}
+        \begin{enumerate}
+            \item The answer is \textbf{B}. A is not correct since 1, 2, and 3 are not elements of S: $\{1\}$, $\{2,
+            3\}$ are. C is not correct as 2 and 3 are not elements of S, but $\{2, 3\}$ is an element of S. D is not
+            correct as 1 is not an element of S, but $\{1\}$ is.
+            \item $\{\emptyset, \{\emptyset\}, \{\{\emptyset\}\}, \{\emptyset, \{\emptyset\}\}\}.$
+            \item The answer is yes as the union of all the sets in the power set of some set $S$ must be equal to the
+            set $S$. This means that we can recover a unique set from every power set. Thus, $A$ and $B$ must be equal.
+            \item $\{(6, 1, 4), (6, 1, 5), (6, 2, 4), (6, 2, 5), (6, 3, 4), (6, 3, 5), (7, 1, 4), (7, 1, 5), (7, 2, 4),
+            (7, 2, 5), (7, 3, 4), (7, 3, 5)\}$.
+            \item $A \cup B = \{1, 2, 3, 4, 5, 6, 7, 8\}$, $A \cap B = \{1, 2, 3, 4, 5\}$, $A - B = \emptyset$, $B - A =
+            \{6, 7, 8\}.$
+            \item Every element that belongs to $A \cap B$ is in A by the definition of set intersection. Thus, $A \cap
+            B \subseteq A.$
+            \item $$\overline{A \cap B} = \{x \vert x \notin A \cap B\} \textrm{ by definition of complement}$$
+                $$= \{x \vert \neg(x \in (A \cap B))\} \textrm{ by definition of does not belong}$$
+                $$= \{x \vert \neg(x \in A \and x \in B)\} \textrm{ by definition of intersection}$$
+                $$= \{x \vert \neg(x \in A) \lor \neg(x \in B)\} \textrm{ by De Morgan's law for logical equivalences}$$
+                $$= \{x \vert x \notin A \lor x \notin B\} \textrm{ by definition of does not belong}$$
+                $$= \{x \vert x \in \overline{A} \lor x \in \overline{B}\} \textrm{ by definition of complement}$$
+                $$= \{x \vert x \in \overline{A} \cup \overline{B}\} \textrm{ by definition of union}$$
+                $$= \overline{A} \cup \overline{B}.$$
+            \item The cardinality is 3 as there are 3 elements in this set.
+            \item The set of integers is in fact countable, because you can create a bijection between them and the
+                natural numbers. An example of a bijection that fits this is mapping n to $\frac{n + 1}{2}$ if n is odd
+                and to $-\frac{n}{2}$ if n is even.
+        \end{enumerate}
+    \section {Functions}
+        \begin{enumerate}
+            \item Following are examples of correct answers, of course many more are possible.
+                \begin{itemize}
+                    \item $f(n) = n + 1$
+                    \item $f(n) = \lceil \frac{n}{2} \rceil$
+                    \item Let $f(n) = n - 1$ for all even n and and $f(n) = n + 1$ for all odd values of n. 
+                    \item f(n) = 1
+                \end{itemize}
+            \item No
+        \end{enumerate}
+    \section{Relations}
+    Proof on Page 640 of Textbook \\
+    Proof on Page 643 of Textbook \\
+    9.1 Question 7 from Textbook
+    \section{Induction}
+	Q1. Assume Induction Hypothesis, that is, $F_{1} + F_{2} + F_{3} + ... + F_{n} = F_{n+2} - 1$. The following is true for the sum of the first $n + 1$ fibonacci numbers.
+
+		Add $F_{n + 1}$ to both sides of the equation:
+		$$ F_{1} + F_{2} + F_{3} + ... + F_{n} + F_{n + 1} = F_{n + 2} - 1 + F_{n + 1}$$
+		$$ F_{n + 2} + F_{n + 1} = F_{n + 3}$$
+		Make substitution into equation above:
+		$$F_{1} + F_{2} + F_{3} + ... + F_{n} + F_{n + 1} = F_{n + 3} - 1$$
+		Base case: \newline
+			The sum of the first fibonacci number is equal to the third fibonacci number minus one. $1$ = $2$ - $1$. \newline
+		Since we have shown $P(0)$ to be true and $P(n) \implies P(n + 1)$, we have shown by induction that $P(n)$ is true for any $n$.
+
+\end{document}

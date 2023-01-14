@@ -1,6 +1,6 @@
 # CS 2051 Spring 2023 - Programming Assignment 1 : Python Primer
 # instructor: Gerandy Brito
-# author: Sarthak Mohanty
+# author: Sarthak Mohanty (replace with your name)
 
 # This assignment is designed to help you get familiar with Python and submitting assignments on Gradescope.
 # This assignment is ungraded.
