@@ -1,0 +1,254 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Cases Environment
+\newlist{Cases}{enumerate}{3}
+\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+%Custom Title Fields
+\newcommand{\lectTitle}{Lecture 11 Notes}
+\newcommand{\lectTime}{February 16, 2022}
+\newcommand{\lectClass}{Honors Discrete Mathematics}
+\newcommand{\lectClassInstructor}{Gerandy Brito}
+\newcommand{\lectSection}{Spring 2022}
+\newcommand{\lectAuthorName}{Sarthak Mohanty}
+
+%Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{\lectTime}
+\chead{\lectClass \ (\lectClassInstructor)}
+\rhead{\lectTitle}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\lectClass:\\ \lectTitle}\\
+    \vspace{0.1in}\large{\textit{\lectClassInstructor\ \lectSection}}
+    \vspace{3in}
+    \author{\textbf{\lectAuthorName}}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\section*{Ordering Relations}
+    Recall that a relation is (partially) ordered if it is reflexive, antisymmetric, and transitive. 
+    
+    Examples:
+    \begin{itemize}
+        \item $(\mathbb{N}, \le)$
+        \item $(\mathbb{N}, \setminus)$ 
+        \item $([n], \le)$
+        \item $([n], \setminus)$
+        \item $(\mathcal{P}(S), \subseteq)$
+        \item $(\prod_{n}, \le)$
+    \end{itemize}
+    
+    Principle of Well-ordered Induction
+    \begin{itemize}
+        \item Totally ordered: every pair of elements are comparable. 
+        \item Well ordered: every subset has a least element.
+    \end{itemize}
+    
+    \textbf{Definition}: An element $a \in (A, \le)$ is called minimal (maximal) if there is \underline{no} element $x$ such that $x \le a$. ($a \le x)$.
+    
+    \textbf{Example} Let the ordered relation $([6], \setminus)$. 
+    
+    We can create a partial ordering of the this relation using a Hasse diagram.
+    
+    level one: 1
+    
+    level two: 2, 3, 5
+    
+    level three: 4, 6
+    
+    1 connected to 2, 3, 5
+    
+    2 is connected to 4, 6
+    
+    3 is connected to 6
+    
+    There are three maximal elements: 4, 5, 6.
+    
+    \vspace{1.5mm}
+    \textbf{Lemma}: If a poset $(A, \le)$ is finite then there is at least one minimal element. If $(A, \le)$ is totally orderd, then minimal element is unique!
+    
+    \vspace{1.5mm}
+    \textbf{Proof}: Take any $a \in A$.
+    \begin{itemize}
+        \item If $a$ is minimal, then the statement is complete
+        \item Else, there is $a_{1} \le a$. Repeat for $a_{1}$ until we have found our desired element (we know this algorithm terminates because $A$ is finite) and outputs a minimal element.
+    \end{itemize}
+    
+    \vspace{1.5mm}
+    \textbf{Example}
+    Let $(\mathcal{P}(\{1, 2, 3, 4\}), \subseteq)$. Then the Hasse Diagram is 
+    Level 1: $\emptyset$
+    
+    Level 2: $\{1\}, \{2\}, \{3\}, \{4\}$.
+    
+    Level 3: $\{1, 2\}, \{1, 3\}, \{2, 3\}, \{2, 4\}, \{3, 4\}, \{1, 4\}$
+    
+    dots 
+    up to the maximal element $\{1, 2, 3, 4\}$
+    
+    \vspace{1.5mm}
+    \textbf{Definition} Given a poset $(A \le)$ and $S \subseteq A$, a \textit{least upper bound} for $S$ is an element $y$ such that 
+    \begin{itemize}
+        \item $s \le y \forall s \in S$.
+        \item If $x$ is an upper bound for $S$, $y \le x$.
+    \end{itemize}
+    Analogously we can define a greatest lower bound.
+    
+    \vspace{1.5mm}
+    \textbf{Example}: 
+    
+    Level One: 1
+    
+    Level 2: 2, 3, 5, 7
+    
+    Level 3: 4, 6, 9, 10
+    
+    Level 4: 8
+    
+    1 connected to 2, 3, 5, 7
+    
+    2 connected to 4, 6, 9, 10
+    
+    3 connected to 6, 9
+    
+    5 connected to 10
+    
+    4 connected to 6
+    
+    Then $6$ is the least upper bound
+    
+    \vspace{1.5mm}
+    Hence $\{1, 2, 3\}$ lub is 6
+    
+    $\{1, 2, 4\}$ Then the l.u.b is 4
+    
+    For $\{3, 5, 7\}$, then l.u.b DNE
+    
+    \vspace{1.5mm}
+    \textbf{Lemma} The l.u.b is unique
+    
+    \vspace{1.5mm}
+    \textbf{Lemma} Let $x, y$ be l.u.b for $S$
+    \begin{itemize}
+        \item $x$ is an upper bound is l.u.b so $y \le x$.
+        \item $y$ is an upper bound and $x$ is l.u.b so $x \le y$.
+        \item By antisymmetric property $x = y$
+    \end{itemize}
+    
+    \vspace{1.5mm}
+    \textbf{Definition} A poset is called a \textit{lattice} if very pair of elements has a l.u.b.\ and g.l.b.
+    
+    \vspace{1.5mm}
+    \textbf{Example} $(\mathbb{N}, \setminus)$ is a lattice
+    
+    $a, b \in \mathbb{N}$
+    
+    l.u.b.\ of $(a, b)  = $
+    
+    Hasse Diagram
+    
+    Level one: d
+    
+    Level two: a, b
+    
+    Level three: c
+    
+    $d$ connected to $a, b$
+    
+    $a, b$ connected to $c$.
+    
+    $a \setminus c$, $b \setminus c$, $d \setminus a$, $d \setminus b$.
+    
+    Note that $c$ is the mminimal common multiple.
+    
+    Note that $d$ is the greatest common divisor
+    3
+    
+    \vspace{1.5mm}
+    
+    Let the set of lists equal $\{CS1, CS2, \dots, CSn\}$.
+    
+    $a \mathcal{R} b$ if you must go through class $a$ before class $b$.
+    
+    Hasse Diagram
+    
+    Level One: CS1
+    
+    Level Two: CS3, CS4, CS5
+    
+    Level Three: CS2
+    
+    CS1 is connected to CS3, CS4, CS5
+    
+    CS3 is connected to CS2
+    
+    CS4 is connected to CS2
+    
+    \vspace{1.5mm}
+    \textbf{Definition}: Given a poset $(A, \le)$. A \underline{topological sorting} of $A$ is an enumeration of elements in $A$: $a_{1}, a_{2}, a_{3}, \dots, a_{n}$ such that if $a_{i} \le a_{j}$ then $i \le j$.
+    
+    Can we always find a topological sorting for a finite set $A$? Answer: yes; find the least element, exclude the element from the set, and find the least element of that subset. Rinse and repeat until you have found what you are looking for.
+    
+    In other words, to find a topological sorting on the poset $(S, \subseteq)$
+    
+    \begin{enumerate}
+        \item Find a minimal element of $S$, $s_{1}$,
+        \item Iterate on $S \setminus \{s_{1}\}$
+    \end{enumerate}
+    
+    \vspace{1.5mm}
+\textbf{Example}: $(\{1, 2, 4, 5, 10, 20\}, \setminus)$.
+
+Hasse Diagram: 
+    Level 1: 1
+    
+    Level 2: 2, 5
+    
+    Level 3: 4, 10
+    
+    Level 4: 20
+    
+    1 is connected to 2, 5
+    
+    2 is connected to 4
+    
+    5 is connected to 10
+    
+    4 is connected to 20
+    
+    10 is connected to 20
+    
+    A topological sorting is given by $1, 5, 2, 10, 4, 20$. However, there are multiple topological sortings, can you find one more?
+
+    Question: How many topological sortings exist for a totally ordered set.
+    
+    \vspace{1.5mm}
+    \textbf{Proposition}: Let $(A, \le)$ be a poset s.t.\ $A$ has a unique Topological Sorting. Then $A$ is totally ordered.
+    
+    \textbf{Proof} Let $a_{1} a_{2}, \dots, a_{n}$ be the topological sorting of $A$. We will show that $a_{i} \le a_{i + 1}$. Suppose there is a value of $i$ for which $a_{i} \& a_{i + 1}$ are not comparable.
+    
+    Note that the topological sorting $(a_{1}, a_{2}, a_{3}, \dots, a_{i}, a_{i + 1}, \dots, a_{n}$
+    
+    There is also a topological sorting $a_{1}, a_{2}, \dots, a_{i + 1}, a_{i}, \dots, a_{n}$. Since we do not have a topological sorting of $A$, there are no two points that are not comparable.
+\end{document}

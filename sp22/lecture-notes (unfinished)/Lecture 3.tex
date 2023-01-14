@@ -1,0 +1,249 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Multiple Columns
+\usepackage{multicol}
+
+%Links
+\usepackage[colorlinks]{hyperref}
+
+%Cases Environment
+\newlist{Cases}{enumerate}{3}
+\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.15}
+
+%Fancy Footnotes
+\newcommand{\fancyfootnotetext}[2]{
+  \fancypagestyle{dingens}{\fancyfoot[LO]{\parbox{6cm}{\footnotemark[#1]\footnotesize #2}}}\thispagestyle{dingens}
+ }
+
+%Custom Title Fields
+\newcommand{\lectTitle}{Lecture 3 Notes}
+\newcommand{\lectTime}{January 19, 2022}
+\newcommand{\lectClass}{Honors Discrete Mathematics}
+\newcommand{\lectClassInstructor}{Professor Gerandy Brito}
+\newcommand{\lectSection}{Spring 2022}
+\newcommand{\lectAuthorName}{Sarthak Mohanty}
+
+%Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{\lectTime}
+\chead{\lectClass \ (\lectClassInstructor)}
+\rhead{\lectTitle}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\lectClass:\\ \lectTitle}\\
+    \vspace{0.1in}\large{\textit{\lectClassInstructor\ \lectSection}}
+    \vspace{3in}
+    \author{\textbf{\lectAuthorName}}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\section*{Implications and Double Implications}
+    Before continuing with where we left off last lecture, let us introduce one more implicative statement, the \textit{biconditional}, or double implication. The biconditional of a proposition $p \Rightarrow q$ is the statement $p \Leftrightarrow q$, or ``$p$ if and only if $q$ ($p$ iff $q$)". These are all the major propositional statements we will discuss in this course.
+    
+    \vspace{3mm}
+    \textbf{TA Remark}: The following statements are logically equivalent to the conditional statement ``If $p$, then $q$". Make sure you understand these, as they show up many times in higher Mathematics and CS textbooks.
+    \setlength{\multicolsep}{6.0pt plus 2.0pt minus 1.5pt}% 50% of original values
+    \begin{itemize}
+    \begin{multicols}{2}
+        \item $q$ if $p$.
+        \item $p$ is sufficient for $q$.
+        \item $q$ is necessary for $p$.
+        \item $p$ only if $q$\footnotemark[1]
+    \end{multicols}
+    \end{itemize}
+    Hopefully the reason why $p \Leftrightarrow q$ is commonly referred to as ``$p$ if and only if $q$" is more clear now.
+    
+    \fancyfootnotetext{1}{This one is especially difficult for students. I personally like \href{https://philosophy.stackexchange.com/a/40879}{this} explanation.}
+
+\section*{Arguments}
+    Another word for premises (in the context discussed in last lecture) is \textit{rules of inference}. As said before, most of the information on arguments can be found in the textbook. In fact, this next example is taken from pg.\ 73 of the textbook. For the sake of completeness, we will restate it here, using the rules of inference on pg.\ 72. You will have access to these rules of inference on your quizzes/exams.
+
+    \vspace{1.5mm}
+    \textbf{Example}
+
+    Show that the premises ``It is not sunny this afternoon and it is colder than yesterday,” ``We will go swimming only if it is sunny,” ``If we do not go swimming, then we will take a canoe trip,” and ``If we take a canoe trip, then we will be home by sunset” lead to the conclusion ``We will be home by sunset.”
+
+    \vspace{1.5mm}
+    \textbf{Solution}
+    
+   Let $p$ be the proposition ``It is sunny this afternoon,” $q$ the proposition ``It is colder than yesterday,” $r$ the proposition ``We will go swimming,” $s$ the proposition ``We will take a canoe trip,” and $t$ the proposition ``We will be home by sunset.” Then the premises become $\neg p \land q$, $r \Rightarrow p$, $\neg r \Rightarrow s$, and $s \Rightarrow t$. The conclusion is simply $t$. We need to give a valid argument with premises $\neg p \land q$, $r \Rightarrow p$, $\neg r \Rightarrow s$, and $s \Rightarrow t$ and conclusion $t$. We construct an argument to show that our premises lead to the desired conclusion as follows.
+
+    \begin{center}
+        \begin{tabular}{ll}
+            \textbf{Step} & \textbf{Reason} \\
+            1. $\neg p \land q$ & Premise \\
+            2. $r \Rightarrow p$ & Premise \\
+            3. $\neg r \Rightarrow s$ & Premise \\
+            4. $s \Rightarrow t$ & Premise \\
+            5. $\neg p$ & Simplification using (1) \\
+            6. $\neg r$ & Modus tollens using (2) and (5) \\
+            7. $s$ & Modus ponens using (3) and (6) \\
+            8. $t$ & Modus ponens using (4) and (7)
+        \end{tabular}
+    \end{center}
+    
+    There are also more rules of inference using quantified statements. While there are only four of these, they are important to know, and you may be tested on these. For the sake of time, we did not cover these in class, so \underline{please} refer to the textbook to cover these.
+
+\section*{More Proof Methods}
+    We have already touched upon ``direct proof" and ``proof by contraposition". There are a few more techniques we use to prove propositional statements. In this section, we discuss ``proof by contradiction", ``proof by cases", and ``proof by construction".
+    
+    \subsection*{Proof by Contradiction}
+    Proof by contradiction is best described with the statement $p \Rightarrow (q \land \neg q)$. In other words, if a statement is true, a logical fallacy occurs, meaning the statement must be false. Although not shown in lecture, a sample proof by construction is given below.
+    
+    \vspace{1.5mm}
+    \textbf{Example} \\
+     If $S$ is the set of all real numbers, is $S$ bounded above?
+    
+    \vspace{1.5mm}
+    \textbf{Solution} \\
+        $S$ is bounded above iff $(\exists b \in \mathbb{R})(\forall x \in S)(x \le b)$. Suppose $S$ is bounded above. Then there must exist some $b_0 \in \mathbb{R}$ such that $(\forall x \in S)(x \le b_0)$. However, $b_0 + 1$ is a real number $\ge b_0$, so $(\forall x \in S)(x \le b_0)$ is false. This is a contradiction, therefore $S$ is not bounded above.
+
+    \subsection*{Proof by Cases}
+    Proof by cases, also known as ``proof by exhaustion", is a subset of direct proofs where the domain of our variables is split up into disjoint cases, and the proposition we wish to prove is proven in each of the cases: in other words, we show $p = (p_{1} \lor p_{2} \lor \dots \lor p_{k}) \Rightarrow q$.
+
+    \vspace{1.5mm}
+    \textbf{Example} \\
+    Show that for all real numbers $x, y$, $$|xy| = |x| \cdot |y|.$$
+    
+    \vspace{1.5mm}
+    \textbf{Solution} \\
+    We split up the domains of $x$ and $y$ as follows.
+    
+    \begin{Cases}
+        \item Suppose $x > 0$ and $y > 0$. Then $|x| = x$ and $|y| = y$, so $xy > 0$, so $|xy| = xy = |x| \cdot |y|$.
+        \item Suppose $x < 0$ and $y > 0$. Then $|x| = -x$ and $|y| = y$, so $xy < 0$, so $|xy| = -xy = |x| \cdot |y|$.
+    \end{Cases}
+    The remaining cases follow a similar format, and are left as an exercise for the reader.
+    
+\subsection*{Proof by Construction}
+    This method of proof is fairly tricky to pin down to one definition. For now, let's use the Wikipedia definition: a constructive proof is one which ``demonstrates the existence of a mathematical object by creating or providing a method for creating the object."
+    
+    \vspace{1.5mm}
+    Most of the proofs we have encountered so far as constructive as well. However, let's introduce a \textit{non-constructive proof}, which proves a statement without giving an exact example or method.
+    
+    \vspace{1.5mm}
+    \textbf{Example} \\
+    Show that there exists two irrational numbers $x$ and $y$ such that $x^{y}$ is rational.
+    
+    \vspace{1.5mm}
+    \textbf{Solution} \\
+    For now, we assume $\sqrt{2}$ is irrational (we will prove this statement in the next lecture). Now $\sqrt{2}^{2} = 2$, by definition of the square root. If $(\sqrt{2})^{\sqrt{2}}$ is rational, then we are done. On the other hand, if $(\sqrt{2})^{\sqrt{2}}$ is irrational, then $$\left(\sqrt{2}^{\sqrt{2}}\right)^{\sqrt{2}} = \sqrt{2}^{\sqrt{2} \cdot \sqrt{2}} = \sqrt{2}^{2} = 2,$$ which is rational. In either case, we have found two irrational numbers $x, y$ such that $x^{y}$ is rational. Note that this non-constructive proof also utilized the ``proof by cases" method.
+    
+\section*{Post-Lecture Practice}
+
+\subsection*{Question 1}
+    Let $x$ be an integer. Prove that $x(x + 1)$ is even.
+
+\subsection*{Solution}
+    Since $x$ is an integer, $x$ is even or $x$ is odd.
+
+    \begin{Cases}
+        \item Suppose $x$ is even. Since $x$ is even, we can pick an integer $k$ such that $x = 2k$. Then $x(x + 1) = 2k(2k + 1) = 2(2k^2 + k)$ and $2k^2 + k$ is an integer. Hence $x(x + 1)$ is even.
+        \item Suppose $x$ is odd. Since $x$ is odd, we can pick an integer $k$ such that $x = 2k + 1$. Then $x(x + 1) = (2k + 1)(2k + 2) = 4k^2 + 6k + 2 = 2(2k^2 + 3k + 1)$ and $2k^2 + 3k + 1$ is an integer. Hence $x(x + 1)$ is even.
+    \end{Cases}
+    In either case, $x(x + 1)$ is even.
+
+\subsection*{Question 2}
+    Suppose the universe of discourse is the set of people \{Adam, Bree, Chase\}. To save time, sometimes we shall write $a$ for Adam, $b$ for Bree, and $c$ for Chase. Let $P(x, y)$ be the sentence ``$x$ likes $y$". Suppose the truth value of $P(x, y)$ depends on $x$ and $y$ as shown in the following table.
+    \begin{center}
+        \begin{tabular}{|c|ccc|}
+            \hline
+            $P(x,y)$ & $y = a$ & $y = b$ & $y = c$ \\
+            \hline
+            $x = a$ & F & T & F \\
+            $x = b$ & T & T & F \\
+            $x = c$ & F & T & T \\
+            \hline
+        \end{tabular}
+    \end{center}
+    \begin{enumerate}
+        \item Is the proposition $(\forall y)P(a, y)$ true or false? What does this proposition mean in ordinary English? Answer the same two questions about each of the two propositions $(\forall y)P(b, y)$ and $(\forall y)P(c, y)$. Make a table showing how the truth value of the proposition $(\forall y)P(x, y)$ depends on $x$. What does the sentence $(\forall y)P(x, y)$ mean?
+        \item Is the proposition $(\exists x)(\forall y)P(x, y)$ true or false? What does this proposition mean in ordinary English?
+        \item Make a table showing how the truth value of the proposition $(\exists x)P(x, y)$ depends on $y$. What does this proposition mean in ordinary English?
+        \item Is the proposition $(\forall y)(\exists x)P(x, y)$ true or false? What does this proposition mean in ordinary English?
+        \item Consider the two conditional propositions 
+        \begin{align*}
+            & (\exists x)(\forall y)P(x, y) \Rightarrow (\forall y)(\exists x)P(x, y) \text{ and } \\
+            & (\forall y)(\exists x)P(x, y) \Rightarrow (\exists x)(\forall y)P(x, y)
+        \end{align*}
+        Which of these two propositions is true and which is false in this example?
+    \end{enumerate}
+
+
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item The proposition $(\forall y)P(a, y)$ means ``Adam likes everybody". This statement is false, as Adam does not like Chase nor himself. The proposition $(\forall y)P(b, y)$ means ``Bree likes everybody". This statement is false, as Bree does not like Chase. The proposition $(\forall y)P(c, y)$ means ``Chase likes everybody". This statement is false, as Chase doesn't like Adam. The proposition $(\forall y)P(x, y)$ means ``x likes everyone", and its truth value depends on $x$ as shown in the following table.
+        \begin{center}
+            \begin{tabular}{|c|c|}
+                \hline
+                $P(x,y)$ & $\forall y$\\
+                \hline
+                $x = a$ & F \\
+                $x = b$ & F \\
+                $x = c$ & F \\
+                \hline
+            \end{tabular}
+        \end{center}
+        \item The proposition $(\exists x)(\forall y)P(x, y)$ means ``For some $x$, $x$ likes everybody", or in other words ``Somebody likes everyone". This statement is false.
+        \item The proposition $(\exists x)P(x, y)$ means ``Somebody likes $y$". Its truth value depends on $y$ as shown in the following table.
+        \begin{center}
+            \begin{tabular}{|c|ccc|}
+                \hline
+                $P(x,y)$ & $y = a$ & $y = b$ & $y = c$ \\
+                \hline
+                $\exists x$ & T & T & T \\
+                \hline
+            \end{tabular}
+        \end{center}
+        \item The proposition $(\forall y)(\exists x)P(x, y)$ means ``For all $y$, somebody likes $y$", or in other words ``Everybody is liked by someone". This statement is true.
+        \item In this example, the proposition $(\exists x)(\forall y)P(x, y) \Rightarrow (\forall y)(\exists x)P(x, y)$ is true, as the antecedent is false. On the other hand, the proposition $(\forall y)(\exists x)P(x, y) \Rightarrow (\exists x)(\forall y)P(x, y)$ is false.
+    \end{enumerate}
+
+\subsection*{Question 3}
+Let $u$, $v$, and $w$ be rational numbers (numbers that can be expressed in the form $\frac{a}{b}$, where $a \in \mathbb{Z}$ and $b \in \mathbb{N}$). Prove the following statements.
+    \begin{enumerate}
+        \item $-v$ is a rational number.
+        \item $u - v$ is a rational number.
+        \item $uv$ is a rational number.
+        \item If $w \ne 0$, then $1/w$ is a rational number.
+        \item If $w \ne 0$, then $u/w$ is a rational number.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item Since $v$ is rational, we can pick integers $a$ and $b$ such that $b \ne 0$ and $v = a/b$. Then $-v = -a/b$. Hence $-v$ is a rational number.
+        \item Since $u$ is rational, we can pick integers $a$ and $b$ such that $b \ne 0$ and $u = a/b$. Since $v$ is rational, we can pick integers $c$ and $d$ such that $d \ne 0$ and $v = c/d$. Then $$u - v  = \frac{a}{b} - \frac{c}{d} = \frac{ad}{bd} - \frac{bc}{bd} = \frac{ad - bc}{bd}$$
+        Note $ad - bc$ and $bd$ are integers. Also, since $b \ne 0$ and $d \ne 0$, $bd \ne 0$. Hence $u - v$ is a rational number.
+        \item Since $u$ is rational, we can pick integers $a$ and $b$ such that $b \ne 0$ and $u = a/b$. Since $v$ is rational, we can pick integers $c$ and $d$ such that $d \ne 0$ and $v = c/d$. Then $uv = ac/bd$. Note that $ac$ and $bd$ are integers. Also, $bd = 0$ because $b \ne 0$ and $d \ne 0$. Hence $uv$ is a rational number.
+        \item Suppose $w \ne 0$. Since $w$ is rational, we can pick integers $a$ and $b$ such that $b \ne 0$ and $w = a/b$. Then $1/w = 1/(a/b) = b/a$. Note that $a \ne 0$ because $w \ne 0$. Hence if $w \ne 0$, then $1/w$ is a rational number.
+        \item Suppose $w \ne 0$. We can express $u/w$ as $(u)(1/w)$. From part (d), since $w \ne 0$, $1/w$ is a rational number. Now we know both $u$ and $1/w$ are rational numbers. Then from part (c), $u(1/w) = u/w$ is a rational number. Hence if $w \ne 0$, then $u/w$ is a rational number.
+    \end{enumerate}
+
+\subsection*{Question 4}
+    Show that for each real number $x$, $\pi + x$ is irrational or $\pi - x$ is irrational.
+
+\subsection*{Solution}
+    Because $\pi$ is irrational, $\pi \in \mathbb{R}$. So $\pi + x \in \mathbb{R}$ and $\pi - x \in \mathbb{R}$. We wish to prove that $\pi + x \notin \mathbb{Q}$ or $\pi - x \notin \mathbb{Q}$, and shall do so using contradiction. Suppose it is not the case that $\pi + x \notin \mathbb{Q}$ or $\pi - x \notin \mathbb{Q}$. Then by De Morgan's law, $\pi + x \in \mathbb{Q}$ and $\pi - x \in \mathbb{Q}$. Then by a property of $\mathbb{Q}$, $(\pi + x) + (\pi - x) = \pi \in \mathbb{Q}$. But as stated before, $\pi$ is irrational. This is a contradiction, therefore $\pi + x$ is irrational or $\pi - x$ is irrational for each real number $x$.
+
+\end{document}

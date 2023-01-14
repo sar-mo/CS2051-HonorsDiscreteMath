@@ -1,0 +1,131 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Cases Environment
+\newlist{Cases}{enumerate}{3}
+\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+%Custom Title Fields
+\newcommand{\lectTitle}{Lecture 9 Notes}
+\newcommand{\lectTime}{February 9, 2022}
+\newcommand{\lectClass}{Honors Discrete Mathematics}
+\newcommand{\lectClassInstructor}{Gerandy Brito}
+\newcommand{\lectSection}{Spring 2022}
+\newcommand{\lectAuthorName}{Sarthak Mohanty}
+
+%Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{\lectTime}
+\chead{\lectClass \ (\lectClassInstructor)}
+\rhead{\lectTitle}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\lectClass:\\ \lectTitle}\\
+    \vspace{0.1in}\large{\textit{\lectClassInstructor\ \lectSection}}
+    \vspace{3in}
+    \author{\textbf{\lectAuthorName}}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\section*{Induction Examples}
+
+\subsection*{Example 6 (Continued)}
+    There is a group of $n \ge 2$ people standing on a field. The distances between each pair are distinct numbers. Every person has a ball. At the same time, they each throw their respective balls to the closest person next to them. Show that if $n$ is odd, at least one person is left with no ball.
+
+\subsection*{Solution}
+    Let $P(n)$ be the sentence $$\text{At least one person is left with no ball.}.$$
+    \textsc{Base Case}: $P(3)$ is true. For any configuration of three players, the closest two players must throw the ball to each other. The remaining player will throw the ball to someone else, leaving that player with no ball. \\
+    \textsc{Inductive Step}: Now let $k \in \{2\ell + 1 : \ell \ge 1\}$ such that $P(k)$ is true. We wish to show $P(k + 2)$ is true. Observe that as in the base case, there will always be two players have the smallest distance between them, and thus will always pass to each other. Call these players the Pair.
+    \begin{Cases}
+        \item Suppose none of the other $k$ players pass to the Pair. Then we have two isolated systems, one corresponding to the Pair, and one corresponding to the other $k$ players. By the inductive hypothesis, one of the remaining $k$ players will be left with no ball.
+        \item Suppose at least one of the other $k$ players pass to the Pair. Then there will be $k - 1$ balls passed amongst $k$ players, leaving one person without a ball, as desired.
+    \end{Cases}
+    \textsc{Conclusion}: We have proved by induction that for each odd $n \ge 3$, $P(n)$ is true.
+
+\subsection*{Example 7}
+    A certain country has only two bill denominations: $4$ Cubans and $7$ Cubans. Show that the citizens of this country can make change for any value $n \ge 18$.
+
+\subsection*{Solution}
+    Let $P(n)$ be the sentence $$\text{Change can be made for some $n$.}.$$
+    \textsc{Base Case}: $P(18)$ is true, using one ``4 Cuban'' and two ``7 Cubans" will give us our desired result.
+    \textsc{Inductive Step}: Now let $k \ge 18$ such that $P(k)$ is true. To make change for $k + 1$,
+    \begin{itemize}
+        \item simply remove one bill of value $7$, and add $2$ bills of value $4$.
+        \item If change for $k$ was made using only ``4 Cuban" bills, then remove $5$ bills of value $4$ and add $3$ bills of value $7$.
+    \end{itemize}
+    \textsc{Conclusion}: We have proved by induction that for each $n \ge 18$, $P(n)$ is true.
+
+\section*{Strong Induction}
+    To do: Introduce strong induction, explain why it works.
+    
+    Works by showing $(\forall k)(P(1) \land P(2) \land \dots \land P(k) \Rightarrow P(k + 1))$
+
+\subsection*{Example 7 Solution (Continued)}
+    An easier proof exists for Example 7 using strong induction. \\
+    \textsc{Base Case}: $P(18)$, $P(19)$, $P(20)$, and $P(21)$ are true. (left as an exercise to reader) \\
+    \textsc{Inductive Step}: Now let $k \ge 18$ such that $P(1), P(2), \dots, P(k)$ is true. To make change for $k + 1$, simply add a $4$ dollar bill to $k - 3$!. \\
+    \textsc{Conclusion}: We have proved by strong induction that for each $n \ge 18$, $P(n)$ is true.
+    
+    \vspace{1.5mm}
+    As was just shown, the inductive step was a lot more simple. However, we had to modify our base case in order to use this ``stronger" version of induction.
+
+\subsection*{Example 8}
+    Let $A = \{2, 3, 4 \dots\}$. Prove by strong induction that for each $n \in A$, $n$ is a product of two or more primes or $n$ is prime itself.
+
+\subsection*{Solution}
+    Let $P(n)$ be the sentence $$\text{$n$ is a product of two or more primes or $n$ is prime itself}.$$
+    \textsc{Base Case}: $P(2)$ is true, since $2$ is a prime. \\
+    \textsc{Inductive Step}: Now let $n \in \mathbb{A}$ such that $P(2), P(3), \dots, P(n)$ are all true. We wish to prove that $P(n + 1)$ is also true.
+    
+    \begin{Cases}
+        \item Suppose $n + 1$ is a prime. Then by definition, $P(n + 1)$ is true.
+        \item Suppose $n + 1$ is not a prime. By the definition of prime, there exists some $a, b \in \mathbb{N}$ such that $n + 1 = ab$ and $a \ne 1$ and $b \ne 1$. Since $a \in \mathbb{N}$, we know $a > 0$, and since $b \in \mathbb{N}$ and $b \ne 1$, we get $b > 1$. Using this, we know $ab > a$. Thus $a \in \{2, 3, \dots, n\}$. Similarly, $b \in \{2, 3, \dots, n\}$. Hence by the inductive hypothesis, we know $P(a)$ and $P(b)$ are true. From this it follows that $P(n + 1)$ is true.
+    \end{Cases}
+    In either case, $P(n + 1)$ is true. \\
+    \textsc{Conclusion}: We have proved by strong induction that for each $n \in \mathbb{A}$, $P(n)$ is true.
+
+\subsection*{Post-Lecture (TBC)}
+
+\subsection*{Question 1}
+    Prove the Arithmetic Mean-Geometric Mean inequality (AM-GM). for a set of $a_{1}, \dots, a_{n}$ non-negative real numbers, the following is true: $$\frac{a_{1} + \dots + a_{n}}{n} \ge \sqrt[n]{a_{1} \cdot \cdots \cdot a_{n}}.$$
+    \begin{enumerate}[label = {}]
+        \item Step 1: Prove it is true for powers of $2$ (aka, when $n = 2^{k}$.
+        \item Step 2: Prove that if AM-GM holds for $n$, then it also holds for $n - 1$. (When trying to prove for $n - 1$, cleverly choose a value $a_{n}$ in order to use the hypothesis that AM-GM holds for $n$.
+        \item Step 3: Note that Step 2 is somehow inducing in an opposite direction. Convince yourself why combining the previous two steps proves AM-GM.
+    \end{enumerate}
+
+
+\subsection*{Question 2}
+    The \textit{Well-Ordering Principle} states $\ldots$. Show that this principle and the principle of induction are equivalent using a two-sided proof.
+    
+    
+    To say $S$ has a least element means that there exists some $a \in S$ such that for each $b \in S$, $a \le b$.
+    
+    Let $S$ be a subset of $\mathbb{N}$ such that $S$ does not have a least element. Prove by complete induction that for every $n \in \mathbb{N}$, $n \notin S$.
+
+\subsection*{Solution}
+    Let $P(n)$ be the sentence $$n \notin S.$$
+    \textsc{Base Case}: $P(1)$ is true. This is because $S$ is a subset of $\mathbb{N}$, and since $1$ is the least element of $\mathbb{N}$, if $1 \in S$, then $1$ would be the least element of $\mathbb{S}$. But $S$ does not have a least element. Therefore $1 \notin S$. \\
+    \textsc{Inductive Step}: Now let $n \in \mathbb{N}$ such that $P(1), P(2), \dots, P(n)$ are all true. This means $1 \notin S, 2 \notin S, \dots, k \notin S$. Note that $k + 1$ is the next smallest integer of $\mathbb{N}$ after $1, 2, \dots, k$. Therefore $(k + 1) \notin S$, because otherwise it would be the least element of $S$. Hence $P(n + 1)$ is also true. \\
+    \textsc{Conclusion}: We have proved by complete induction that for each $n \in \mathbb{N}$, $P(n)$ is true.
+
+\end{document}
