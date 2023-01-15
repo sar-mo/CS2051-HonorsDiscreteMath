@@ -3,25 +3,6 @@
 
 2051 is theoretically much easier this semester, but computationally a bit more difficult.
 
-[Homework 1 Supplement](hw-supplements/hw1-supp/): Intro to Propositions
-
-[Homework 2 Supplement](hw-supplements/hw1-supp/): Programmatic Proofs in Logic
-
-[Homework 3 Supplement](hw-supplements/hw2-supp/): Satisfiability and Reductions
-
-[Homework 4 Supplement](hw-supplements/hw3-supp/): Relations and Parallel Task Scheduling
-
-[Homework 5 Supplement](hw-supplements/hw3-supp/): Infinite Sets and Proof by Diagonalization
-
-[Homework 6 Supplement](hw-supplements/hw4-supp/): Linguistic Theory and Language Development
-
-[Homework 7 Supplement](hw-supplements/hw5-supp/): Advanced RSA and Diffie Helman Encryption Schemes
-
-[Homework 8 Supplement](hw-supplements/hw6-supp/): Elliptic Curve Cryptography
-
-[Homework 9 Supplement](hw-supplements/hw7-supp/): Functional Programming and Structural Induction
-
-
 Colons can be used to align columns.
 
 | Week       | Assignments | Relevant Files
@@ -36,7 +17,7 @@ Colons can be used to align columns.
 | Week 8        | hw6-supp due @ friday | [Homework 6 Supplement](hw-supplements/hw6-supp/): Big-O Theory and TBD
 | Week 9        | hw7-supp due @ friday |  <br> [Homework 7 Supplement](hw-supplements/hw7-supp/): Cryptography Part 1: Foundations and History 
 | Week 10       | hw8-supp due @ friday |  <br> [Homework 8 Supplement](hw-supplements/hw8-supp/): Cryptography Part 2: Elliptic Curve Cryptography (**important**)
-| Week 11       | None, Spring Break | 
+| Week 11       | Spring Break | 
 | Week 12       |  Exam 3 <br> hw9-supp due @ friday |  <br> [Homework 9 Supplement](hw-supplements/hw9-supp/): Functional Programming and Structural Induction (fun?!)
 | Week 13       | hw10-supp due @ friday <br> Project Draft due  |  <br> [Homework 10 Supplement](hw-supplements/hw10-supp/): Linguistic Theory and Context-Free Languages
 | Week 14       | hw11-supp due @ friday | [Homework 11 Supplement](hw-supplements/hw11-supp/): Grid Traversals
