@@ -5,6 +5,10 @@
 \date{\today}
 \begin{document}
 \maketitle
+
+% useful resource: 
+% https://web.stanford.edu/class/cs103/tools/truth-table-tool/
+
 \begin{enumerate}
     \item Five people of different mythical species and with different jobs live in consecutive houses along a street. These houses are painted different colors. They have different pets and have different favorite drinks. Determine who owns a cat and whose favorite drink is soda given these clues: The Hobbit lives in the red house. The Dwarf owns a dog. The Human is an artist. The Maia drinks tea. The Elf lives on the first house on the left. The green house is immediately to the right of the white one. The harpist breeds snails. The ranger lives in the yellow house. Milk is drunk in the middle house. The owner of the green house drinks coffee. The Elf's house is next to the blue one. The pianist drinks orange juice. The fox is in a house next to that of the physician. The horse is in a house next to that of the ranger.
 
@@ -17,78 +21,5 @@
     Show that $\neg$ and $\land$ form a functionally complete collection of logical operators.
 \end{enumerate}
 
-
-% \subsection*{\Idea\ (10 pts)}
-%     \begin{enumerate}
-%         \item Let $f$ be a function from $\mathbb{R}$ to $\mathbb{R}$ and let $L \in \mathbb{R}$. To say that \textit{$f(x)$ tends to $k$ as $x$ tends to $\infty$} means that for each $\epsilon > 0$, there exists $k \in \mathbb{R}$ such that for each $x > k$, $|f(x) - L| < \epsilon$.
-        
-%         \vspace{1mm}
-%         \qquad Explain step by step (using the generalized De Morgan's laws?) why it is that $f(x)$ does not tend to $L$ as $x$ tends to $\infty$ iff there exists $\epsilon > 0$ such that for each $k \in \mathbb{R}$, there exists $x > k$ such that $|f(x) - L| \ge \epsilon$. Be careful not to skip any steps.
-        
-%         \vspace{1.5mm}
-%         \textcolor{blue}{\textit{Note: This definition will be useful in a later homework. If you want to get ahead, also consider what it means to say ``$f$ tends to $\infty$ as $x$ tends to $\infty$."}}
-        
-%         \item Let $f$ be a function from $\mathbb{R}$ to $\mathbb{R}$ and let $a \in \mathbb{R}$. To say that \textit{$f$ is continuous at $a$} means that for each $\epsilon > 0$, there exists $\delta > 0$ such that for each $x \in \mathbb{R}$, if $|x - a| < \delta$, then $|f(x) - f(a)| < \epsilon$.
-        
-%         \vspace{1mm}
-%         \qquad Use the generalized De Morgan's laws and what we know about the negation of a conditional sentence to show that $f$ is not continuous at $a$ iff there exists $\epsilon > 0$ such that for each $\delta > 0$, there exists $x \in \mathbb{R}$ such that $|x - a| < \delta$ and $|f(x) - f(a)| \ge \epsilon$. Be careful not to skip any steps.
-%     \end{enumerate}
-
-
-% \subsection*{Solution}
-%     \begin{enumerate}
-%     \item First, we express our sentence using propositional logic. ``$f(x)$ tends to $L$ as $x$ tends to $\infty$" iff $$(\forall \epsilon > 0)(\exists k \in \mathbb{R})(\forall x > k)(|f(x) - L| < \epsilon)$$ Now, ``$f(x)$ does \emph{not} tend to L as $x$ tends to $\infty$" iff       
-%     \begin{align*}
-%             & \neg (\forall \epsilon > 0)(\exists k \in \mathbb{R})(\forall x > k)(|f(x) - L| < \epsilon) \\
-%             \equiv {}& (\exists \epsilon > 0) \neg (\exists k \in \mathbb{R})(\forall x > k)(|f(x) - L| < \epsilon) \tag{Gen. De Morgan's Law}  \\
-%             \equiv {}& (\exists \epsilon > 0)(\forall k \in \mathbb{R}) \neg  (\forall x > k)(|f(x) - L| < \epsilon) \tag{Gen. De Morgan's Law} \\
-%             \equiv {}& (\exists \epsilon > 0)(\forall k \in \mathbb{R})(\exists x > k) \neg (|f(x) - L| < \epsilon) \tag{Gen. De Morgan's Law} \\
-%             \equiv {}& (\exists \epsilon > 0)(\forall k \in \mathbb{R})(\exists x > k)(|f(x) - L| \ge \epsilon)
-%         \end{align*}
-%     In other words, iff there exists $\epsilon > 0$ such that for each $k \in \mathbb{R}$, there exists $x > k$ such that $|f(x) - L| \ge \epsilon$.
-%     \item First, we express our sentence using propositional logic. ``$f$ is continuous at $a$" iff $$(\forall \epsilon > 0)(\exists \delta > 0)(\forall x \in R)(|x - a| < \delta \Rightarrow |f(x) - f(a)| < \epsilon)$$ Now, ``$f$ is not continuous at $a$" iff         
-%     \begin{align*}
-%             & \neg (\forall \epsilon > 0)(\exists \delta > 0)(\forall x \in R)(|x - a| < \delta \Rightarrow |f(x) - f(a)| < \epsilon) \\
-%             \equiv {}& (\exists \epsilon > 0) \neg (\exists \delta > 0)(\forall x \in R)(|x - a| < \delta \Rightarrow |f(x) - f(a)| < \epsilon) \tag{\footnotesize{Gen. De Morgan's Law}}  \\
-%             \equiv {}& (\exists \epsilon > 0)(\forall \delta > 0) \neg (\forall x \in R)(|x - a| < \delta \Rightarrow |f(x) - f(a)| < \epsilon) \tag{\footnotesize{Gen. De Morgan's Law}} \\
-%             \equiv {}& (\exists \epsilon > 0)(\forall \delta > 0)(\exists x \in R) \neg (|x - a| < \delta \Rightarrow |f(x) - f(a)| < \epsilon) \tag{\footnotesize{Gen. De Morgan's Law}} \\
-%             \equiv {}& (\exists \epsilon > 0)(\forall \delta > 0)(\exists x \in R)[|x - a| < \delta \land \neg (|f(x) - f(a)| < \epsilon)] \tag{\footnotesize{Implication Negation Law}} \\
-%             \equiv {}& (\exists \epsilon > 0)(\forall \delta > 0)(\exists x \in R)(|x - a| < \delta \land |f(x) - f(a)| \ge \epsilon)
-%         \end{align*}
-%     In other words, iff there exists $\epsilon > 0$ such that for each $\delta > 0$, there exists $x \in \mathbb{R}$ such that $|x - a| < \delta$ and $|f(x) - f(a)| \ge \epsilon$.
-%     \end{enumerate}
-
-% \subsection*{\Idea}
-%     Points: 2 * 8 = 16
-    
-%     Which of the following assertions are true no matter what proposition Q represents? For any false assertion, state a counterexample (i.e. come up with a statement $Q(x, y)$ that would make the implication false). For any true assertion, give a brief explanation for why it is true.
-%     \begin{enumerate}
-%         \item $\exists x \exists y Q(x, y) \implies \exists y \exists x Q(x, y)$
-%         \item $\forall x \exists y Q(x, y) \implies \exists y \forall x Q(x, y)$
-%         \item $\exists x \forall y Q(x, y) \implies \forall y \exists x Q(x, y)$
-%         \item $\exists x \exists y Q(x, y) \implies \forall y \exists x Q(x, y)$
-%     \end{enumerate}
-% \subsection*{\Idea}
-%     Decide whether each of the following logical equivalencies are correct and explain your answer.
-%     \begin{enumerate}
-%         \item $\forall x (P(x) \land Q(x)) \equiv \forall x P(x) \land \forall x Q(x)$
-%         \item $\forall x (P(x) \lor Q(x)) \equiv \forall x P(x) \lor \forall x Q(x)$
-%         \item $\exists x (P(x) \land Q(x)) \equiv \exists x P(x) \land \exists x Q(x)$
-%         \item $\exists x (P(x) \lor Q(x)) \equiv \exists x P(x) \lor \exists x Q(x)$
-%     \end{enumerate}
-    
-% \subsection*{Solution}
-%     \begin{enumerate}
-%         \item True
-%         \item False
-%         \item True
-%         \item False
-%         \item Correct
-%         \item Incorrect
-%         \item Correct
-%         \item Incorrect
-%     \end{enumerate}
-
-% https://web.stanford.edu/class/cs103/tools/truth-table-tool/
 
 \end{document}

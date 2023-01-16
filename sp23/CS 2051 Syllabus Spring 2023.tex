@@ -1,14 +1,16 @@
 \documentclass{article}
 \usepackage[margin=1in]{geometry}
-\usepackage{url}
+
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
     filecolor=magenta,      
     urlcolor=blue,
-    pdftitle={Overleaf Example},
     }
+
+% multiple columns
+\usepackage{multicol}
 
 %Formatting and Spacing
 \usepackage{enumitem}
@@ -17,10 +19,8 @@
 \setlength\parindent{0pt}
 \linespread{1.1}
 
-\usepackage{multicol}
-
+% title
 \title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Syllabus\vspace{-1cm}}
-
 \author{}
 \date{}
 
@@ -39,20 +39,26 @@
         \noindent Gerandy Brito \\
         gbrito3 (at) gatech (dot) edu \\
         Office Hours: TBD
-        
+
+        \columnbreak
+
         \textbf{Teaching Assistant} \\
         Sarthak Mohanty \\
         smohanty@gatech.edu \\
-        Office Hours: TBD
+        Office Hours: Thursdays, \\
+        10:00am-12:00pm in CCB 333
+        % The door to the room may be locked, the key code to unlock the door is: 1 and 3 (together) then 5
+
+        \columnbreak
         
         \textbf{Teaching Assistant} \\
         Nithya Jayakumar \\
         n.jayakumar@gatech.edu \\
-        Office Hours: TBD
+        Office Hours: Mondays, \\
+        1:00-3:00pm in CCB 333
     \end{multicols}
 
-
-\subsection*{Lecture}
+\subsection*{Lecture Format}
     Lectures are Tuesdays and Thursdays from 8:00-9:15am in CCB 016. Lectures are not recorded.
     
 \subsection*{Textbooks}
@@ -65,15 +71,14 @@
     \begin{itemize}
         \item \textbf{Exams (60\%)}: There are four exams, each of equal weight.
         \item \textbf{Homeworks (15\%)}: Homework assignments will be posted weekly.
-        \item \textcolor{red}{\textbf{Homework Supplementals (5\%)}:} For each homework, CS 2051 students will need to complete a few supplemental questions.
-        \item \textbf{ZyBooks (10\%)}: ZyBook quizzes will be posted weekly.
+        \item \textcolor{red}{\textbf{Homework Supplements (5\%)}:} For each homework, CS 2051 students will need to complete a few supplemental questions.
+        \item \textbf{ZyBooks (10\%)}: ZyBooks quizzes will be posted weekly.
         \item \textcolor{red}{\textbf{Course Project: (10\%)}}: CS 2051 students will complete a final course project.
     \end{itemize}
-    After all your grades are entered letter grades are computed according to the following brackets: A[90, 100]; B[80, 90);
-    C[70, 80); D[60, 70); F [0, 60). These brackets may change, but only in your benefit. Rounding and curving is unlikely.
+    After all your grades are entered letter grades are computed according to the following brackets: A[90, 100]; B[80, 90); C[70, 80); D[60, 70); F [0, 60). These brackets may change, but only in your benefit. Rounding and curving is unlikely.
 
-\subsection*{Homework}
-    Homeworks will be posted on Canvas and submitted on Gradescope. Homework Supplementals will be posted on the 2051 Course Homepage, and will also submitted on Gradescope.  You are encouraged to type your homework. If you choose not to, please be considered of your TAs and write clear and legible. We will penalize your score if your homework is not readable. Once grades are released you will have a week to dispute your grade. Regrade requests must be based on solid arguments.
+\subsection*{Homeworks}
+    Homeworks will be posted on Canvas and submitted on Gradescope. You are encouraged to type your homework. If you choose not to, please be considered of your TAs and write clear and legible. We will penalize your score if your homework is not readable. Once grades are released you will have a week to dispute your grade through a regrade request. Regrade request must be based on solid arguments and frivolous requests won’t be addressed.
 
     \vspace{3mm}
     Homeworks submitted at least 24 hours before the due date will receive a bonus 2.5 points. Late submissions will be allowed up to 2 days late.  Your first late submission will incur no late penalty. All other late submissions will result in the following deductions: 
@@ -86,6 +91,12 @@
     \vspace{3mm}
     \textbf{Collaboration policy}: Collaboration is allowed. You must write your own solutions though. On every homework, you should list the names of those students you collaborated with. Mind that copying a solution from your peer or from the internet is plagiarism and is penalized by the GT Code of Conduct. If cheating is detected, you will receive a zero on the assignment and a report will be filed with the Office of Student Integrity. Homework are the best way to learn the material and prepare for the exams.
 
+\subsection*{Homework Supplements}
+    Homework Supplements will be posted on the \href{https://github.com/sar-mo/CS2051-HonorsDiscreteMath}{CS2051 Course Homepage} and submitted on Gradescope. Late submissions will not be accepted, but the lowest supplemental will be dropped. The collaboration policy is the same as for homeworks.
+    
+    \vspace{3mm}
+    Some of the questions on the supplement will ask you to write Python code. You’ll code these in the IDE of your choice on your own computer and upload the appropriate files on Gradescope. Note that programming questions and written questions for a supplement will end up as two separate uploads on Gradescope.
+
 \subsection*{Exams}
     Exams will be conducted individually and in-person. These exams will be identical to those in the 2050 section. Exams will be held during regular class times, please see the schedule for the exact days. By registering to take this class, you are responsible for taking the exam during these days. There will be no make up exam unless you have an official excuse from Student Services. If that is the case, make sure to contact the staff at least 48 hours in advance. There are obvious exception to this rule (like an accident the day of the exam...which hopefully won’t happen). Final decision is at the sole discretion of the instructor.
 
@@ -93,11 +104,11 @@
     The regrade policy for exams is the same as for homeworks.
 
 \subsection*{Course Project}
-    CS 2051 students will be working on a final group project throughout the semester. This project will include several intermediate milestones as well as a final product and presentation at the end of the semester. There will be four graded parts to the project: A thesis/outline, a first draft, a final product, and an in-person final presentation. More information will be provided on the 2051 Course Homepage.
+    CS 2051 students will be working on a final group project throughout the semester. This project will include several intermediate milestones as well as a final product and presentation at the end of the semester. There will be four graded parts to the project: A thesis/outline, a first draft, a final product, and an in-person final presentation. More information will be provided on the \href{https://github.com/sar-mo/CS2051-HonorsDiscreteMath}{CS2051 Course Homepage}.
 
 \subsection*{Online Resources}
     \begin{itemize}
-        \item The \href{https://github.com/sar-mo/CS2051-HonorsDiscreteMath}{CS 2051 Course Homepage} will provide general course information, homework assignments, and other resources. Announcements and other CS 2050 assignments will be posted on Canvas.
+        \item The \href{https://github.com/sar-mo/CS2051-HonorsDiscreteMath}{CS2051 Course Homepage} will provide the schedule, homework assignments, course project information, and other resources. All 2050 content will be posted on Canvas.
         \item We are using \href{https://edstem.org/}{Ed Discussion} as a tool to ask questions, discuss problems, form study/project groups, etc. \textbf{If you make a post, please mark it under the 2051 category}. Unless your question is personal in nature, please do not make a private post — if you have a question you are probably not the only one, and other students may benefit from seeing the discussion.
         \item We recommend using \href{https://overleaf.com}{Overleaf} to typeset your homework submissions (Your @gatech.edu email address gives access to ``Pro" features.)
     \end{itemize}
