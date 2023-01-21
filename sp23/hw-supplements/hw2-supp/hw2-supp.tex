@@ -45,31 +45,28 @@
 \linespread{1.1}
 
 % title
-\title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Homework 2 Supplement\vspace{-1cm}}
-\author{}
+\title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Homework 2 Supplement}
+\author{Nithya Jayakumar \\ \small{Written Assignment Lead}
+\and Sarthak Mohanty \\ \small{Programming Assignment Lead}}
 \date{}
 
 \begin{document}
 \maketitle
 
-{\hypersetup{linkbordercolor=black}
-\tableofcontents
-}
+% \tableofcontents
 
-\pagebreak
-
-\addcontentsline{toc}{section}{Written Assignment}
-\section*{Written Assignment (5pts)}
+% \addcontentsline{toc}{section}{Written Assignment}
+\section*{Written Assignment (10pts)}
     Show that $\forall a P(a) \lor \forall a Q(a)$ and $\forall a \forall b (P(a) \lor Q(b)),$ where all the quantifiers have the same nonempty domain, are logically equivalent.
 
     \vspace{3mm}
     \textbf{Submission Instructions:} 
     Submit a pdf or image of your answer to Gradescope.
 
-\pagebreak
+% \addcontentsline{toc}{section}{Programming Assignment}
 
-\addcontentsline{toc}{section}{Programming Assignment}
 \section*{Programming Assignment: Logic Playground (15pts)}
+
     Your first ``official" programming assignment is to reason about a few functions that prove some statements about propositions. You won't need any advanced knowledge of Python, but you should be familiar with sets, lists, and string parsing.
 
     \vspace{3mm}
@@ -104,7 +101,7 @@
     
     Now it's your turn to pick up the keyboard. We've tasked you to write six (well, really four) additional functions that determine the following properties of a proposition:
     \begin{itemize}
-        \item \verb+count_satisfying(proposition)+: receives a Boolean expression in exactly the same format as \verb+truth_table+ and returns the number of assignments of the variables for which the result is True. So for example, \verb+count_satisfying('p and q')+ should return 1.
+        \item \verb+count_satisfying(proposition)+: receives a Boolean expression in exactly the same format as \\ \verb+truth_table+ and returns the number of assignments of the variables for which the result is True. So for example, \verb+count_satisfying('p and q')+ should return 1.
         \item \verb+are_equivalent(proposition1, propositions2)+: receives two Boolean expressions as input and returns a Boolean value that indicates if the two expressions are logically equivalent. For example, \verb+are_equivalent('(not p) or q', 'p |implies| q')+ should return \verb+True+. Note that if two expressions do not have the same variables, they are not considered equivalent. For example, \verb+"(not p) or q"+ is not logically equivalent to \verb+"x |implies| y"+'.
         \item \verb+is_tautology(proposition), is_contradiction(proposition), is_contingency(proposition)+: receives a Boolean expression in exactly the same format as \verb+truth_table+ and returns a Boolean value that indicates whether the expression is a tautology, contraction, or contingency, respectively. For example, \verb+is_tautology('p and q')+ should return \verb+False+, but \verb+is_contingency('p and q')+ should return \verb+True+.
         \item \verb+model_fitting(truth_table)+: If the \verb+truth_table+ method asks you to generate a truth table from a given proposition, this method asks you to work backwards: given a truth table, return a corresponding proposition. There will always be one such proposition.
