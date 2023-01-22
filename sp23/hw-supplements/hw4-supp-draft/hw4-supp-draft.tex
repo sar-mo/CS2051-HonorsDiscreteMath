@@ -1,0 +1,109 @@
+% \qquad As soon as we got to infinite sets, I'm sure many of you thought ``This is getting ridiculous! Why bring up infinity in a \textit{CS} course?" After all, any data set in a computer is limited by the size of the computer’s memory, and there is a bound on the possible size of computer memory, for the simple reason that the universe is (or at least appears to be) bounded. So why not stick with finite sets of some large, but bounded, size? This is a good question, but let’s see if we can persuade you that dealing with infinite sets is inevitable.
+    
+% \vspace{1mm}
+% \qquad You may not have noticed, but up to now you’ve already accepted the routine use of the integers, the rationals and irrationals, and sequences of them—infinite sets, all. Further, do you really want Physics or the other sciences to give up the real numbers on the grounds that only a bounded number of bounded measurements can be made in a bounded universe? It’s pretty convincing—and a lot simpler—to ignore such big and uncertain bounds (the universe seems to be getting bigger all the time) and accept theories using real numbers.
+
+% \vspace{1mm}
+% \qquad Likewise in computer science, it’s implausible to think that writing a program to add nonnegative integers with up to as many digits as, say, the stars in the sky— billions of galaxies each with billions of stars—would be different from writing a program that would add any two integers, no matter how many digits they had. The same is true in designing a compiler: it’s neither useful nor sensible to make use of the fact that in a bounded universe, only a bounded number of programs will ever be compiled.
+
+% \vspace{1mm}
+% \qquad Infinite sets also provide a nice setting to practice proof methods, because it’s harder to sneak in unjustified steps under the guise of intuition. And there has been a truly astonishing outcome of studying infinite sets. Their study led to the discovery of fundamental, logical limits on what computers can possibly do, such as the \textbf{Halting Problem}.
+
+% \vspace{1mm}
+% \qquad If the romance of different-size infinities and continuum hypotheses doesn't appeal to you, not knowing about them is not going to limit you as a computer scientist. These abstract issues about infinite sets rarely come up in mainstream mathematics, and they don’t come up at all in computer science, where the focus is generally on “countable,” and often just finite, sets. In practice, only logicians and set theorists have to worry about collections that are “too big” to be sets. But the challenge of reasoning correctly about this far-out stuff led directly to the profound discoveries about the logical limits of computation, and that really is something every computer scientist should understand.
+
+
+
+
+
+
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Highlighting
+\usepackage{xcolor, soul}
+\sethlcolor{lightgray}
+
+%Cases Environment
+\newlist{Cases}{enumerate}{3}
+\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.15}
+
+%Custom Title Fields
+\newcommand{\lectTitle}{Lecture 7 Notes}
+\newcommand{\lectTime}{February 2, 2022}
+\newcommand{\lectClass}{Honors Discrete Mathematics}
+\newcommand{\lectClassInstructor}{Professor Gerandy Brito}
+\newcommand{\lectSection}{Spring 2022}
+\newcommand{\lectAuthorName}{Sarthak Mohanty}
+
+
+%Formatting and Spacing
+\usepackage{enumitem}
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+% title
+\title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Homework 4 Supplement}
+\author{Nithya Jayakumar \\ \small{Written Assignment Lead}
+\and Sarthak Mohanty \\ \small{Programming Assignment Lead}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Cardinality}
+    
+    There is an easy way to test if two numbers have the same cardinality, which will become useful when we deal with infinite sets.
+    
+    \vspace{1.5mm}
+    \textbf{Theorem.} Two sets $A$ and $B$ are said to have the same cardinality if there exists a bijection (surjection?) from $A$ to $B$. The proof of this theorem is outside the scope of this course.
+    
+    \vspace{1.5mm}
+    \textbf{Definition}: A set is said to be \textit{countable} if it is finite or has the same cardinality as the natural numbers.
+
+    
+    \textbf{Example.} 
+    Show that $\mathbb{N}$ to $A = \{x \in \mathbb{Q}: x > 0\}$ is a bijection.
+    
+    We have many options, we can use the previous lemma and define the Cartesian product as $A \times B$, where $A$ is the set of all numerators and $B$ is the set of all denominators.
+    
+    
+    Let $A$ denote the set of positive rational numbers. Define a function $f$ as follows:
+    \begin{align*}
+        & f(1) = \frac{1}{1}, \\
+        & f(2) = \frac{1}{2}, \quad f(3) = \frac{2}{1}, \\
+        & f(4) = \frac{1}{3}, \quad f(5) = \frac{3}{1}, \\
+        & f(6) = \frac{1}{4}, \quad f(7) = \frac{2}{3}, \quad f(8) = \frac{3}{2}, \quad f(9) = \frac{4}{1},
+    \end{align*}
+
+\subsection*{Cantor's Diagonal Lemma}
+    Let $f$ be a function from $\mathbb{N}$ to $(0, 1)$. Prove that there exists $y \in (0, 1)$ such that $y$ does not belong to the range of $f$. (in other words, prove the set of real numbers is not countable.)
+
+\subsection*{Solution}
+    We are given a function $f: \mathbb{N} \rightarrow (0, 1)$. We wish to find a number $y \in (0, 1)$ such that $$y \notin \{\text{$f(1)$, $f(2)$, $f(3)$, $f(4)$, \dots}\}.$$ For each $n \in \mathbb{N}$ and each $k \in \mathbb{N}$, let $x_{nk}$ be the $k$-th digit in the \textit{standard} decimal expansion of $f(n)$. Then 
+    \begin{align*}
+        &f(1) = 0.\text{\hl{$x_{11}$}}x_{12}x_{13}x_{14}\dots, \\
+        &f(2) = 0.x_{21}\text{\hl{$x_{22}$}}x_{23}x_{24}\dots, \\
+        &f(3) = 0.x_{31}x_{32}\text{\hl{$x_{33}$}}x_{34}\dots, \\
+        &f(4) = 0.x_{41}x_{42}x_{43}\text{\hl{$x_{44}$}}\dots, \\
+        &\text{and so on}.
+    \end{align*}
+    We shall define the number $y$ by defining the digits in its decimal expansion so that they are different from the ``diagonal" entries $x_{11}, x_{22}, x_{33}, x_{44}, \dots$ that are highlighted in the equations above. For each $n \in \mathbb{N}$, let
+    $$y_n = 
+    \begin{cases}
+        5 & \text{if } x_{nn} \ne 5, \\
+        4 & \text{if } x_{nn} = 5.
+    \end{cases}$$
+    Then for each $n \in \mathbb{N}$, $y_n \ne x_{nn}$. Now let $y$ be the number whose standard decimal expansion is $$y = 0.y_1y_2y_3y_4 \dots.$$ Then $y \in (0, 1)$. In fact, $0.444 \ldots \le y \le 0.555 \dots$. To see that $y$ is not in the range of $f$, note that for each $n \in \mathbb{N}$, $y \ne f(x)$ (because the numbers $y$ and $f(n)$ differ in their $n$-th decimal place; in other words, $y_n \ne x_{nn}$).
+\end{document}
