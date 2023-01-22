@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Highlighting
+\usepackage{xcolor, soul}
+\sethlcolor{lightgray}
+
+%Cases Environment
+\newlist{Cases}{enumerate}{3}
+\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.15}
+
+%Formatting and Spacing
+\usepackage{enumitem}
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+% title
+\title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Homework 5 Supplement}
+\author{Sarthak Mohanty }
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Relations}
+
+    Recall the definition of a relation:
+    
+    \vspace{1.5mm}
+    \textbf{Definition} a \textit{relation} is a subset of the Cartesian product $A\times B$.
+    
+    \vspace{1.5mm}
+    We denote relations by $\mathcal{R}$. We write $a\mathcal{R} b$ to indicate that $(a,b)\in \mathcal{R}$ (i.e.: in the subset denoted by $\mathcal{R}$). When $A=B$ we said that $\mathcal{R}$ is a relation on $A$.\\
+    
+    Let $\mathcal{R}_1, \dots, \mathcal{R}_4$ be a relation on $A = \{1, 2, 3, 4\}$.
+    \begin{itemize}
+        \item $\mathcal{R}_1 = \{(a, b) \mid a \le b)\}$
+        \item $\mathcal{R}_2 = \{(a, b) \mid a = b)\}$
+        \item $\mathcal{R}_3 = \{(a, b) \mid a+b \le 2022)\}$
+        \item $\mathcal{R}_4 = \{(a, b) \mid a \text{ divides } b\}$
+    \end{itemize}
+    % Create bijective (bean diagram) graph in tikz.
+    
+    % \begin{tikzpicture}[ele/.style={fill=black,circle,minimum width=.8pt,inner sep=1pt},every fit/.style={ellipse,draw,inner sep=-2pt}]
+    %   \node[ele,label=left:$a$] (a1) at (0,4) {};    
+    %   \node[ele,label=left:$b$] (a2) at (0,3) {};    
+    %   \node[ele,label=left:$c$] (a3) at (0,2) {};
+    %   \node[ele,label=left:$d$] (a4) at (0,1) {};
+    
+    %   \node[ele,,label=right:$1$] (b1) at (4,4) {};
+    %   \node[ele,,label=right:$2$] (b2) at (4,3) {};
+    %   \node[ele,,label=right:$3$] (b3) at (4,2) {};
+    %   \node[ele,,label=right:$4$] (b4) at (4,1) {};
+    
+    %   \node[draw,fit= (a1) (a2) (a3) (a4),minimum width=2cm] {} ;
+    %   \node[draw,fit= (b1) (b2) (b3) (b4),minimum width=2cm] {} ;  
+    %   \draw[->,thick,shorten <=2pt,shorten >=2pt] (a1) -- (b4);
+    %   \draw[->,thick,shorten <=2pt,shorten >=2] (a2) -- (b2);
+    %   \draw[->,thick,shorten <=2pt,shorten >=2] (a3) -- (b1);
+    %   \draw[->,thick,shorten <=2pt,shorten >=2] (a4) -- (b3);
+    %  \end{tikzpicture}
+    So why relations? They are more general and allow us to study more complex sets. Elaborate. \\
+    
+\subsection*{Properties}
+    
+    \begin{itemize}
+        \item \underline{Reflexive:} $(\forall a \in A)(a\mathcal{R}a)$
+        \item \underline{Symmetric:} $(\forall a, b \in A)(a\mathcal{R}b \iff b\mathcal{R}a)$
+        \item \underline{Antisymmetric:} $(\forall a, b\in A)(a\mathcal{R}b \wedge b\mathcal{R}a \rightarrow a=b)$
+        \item \underline{Transitive:} $(\forall a, b, c\in A)(a\mathcal{R}b \wedge b\mathcal{R}c \rightarrow a\mathcal{R}c)$
+    \end{itemize}
+
+\end{document}
