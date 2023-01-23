@@ -1,14 +1,11 @@
 # CS 2051 Spring 2023
 # HW2 Supplement - Logic Playground
-# Professor: Gerandy Brito
-# created by: Sarthak Mohanty
-
-# author - your name here
-# collaborators - list any collaborators here
+# author - Sarthak Mohanty
+# collaborators - N/A
 
 # NOTE (s):
 # You must use small single letters in [p-z] for your variable names, eg. p, q, r
-# The use of GitHub Copilot or ChatGPT to complete this assignment will be considered cheating.
+# we strongly discourage the use of GitHub Copilot or ChatGPT to complete this assignment. It will be considered cheating.
 
 ######## Do not modify the following block of code ########
 # ********************** BEGIN *******************************
@@ -34,7 +31,8 @@ def implies(p, q):
 def iff(p, q):
     return (p |implies| q) and (q |implies| p)
 
-def extract_variables(proposition: str):
+
+def extract_variables(proposition: str) -> list:
     """Extracts variables from a proposition.
 
     Parameters:
@@ -49,7 +47,7 @@ def extract_variables(proposition: str):
     """
     return sorted(set(re.findall(r'\b[a-z]\b', proposition)))
 
-def evaluate(proposition: str, model: dict):
+def evaluate(proposition: str, model: dict) -> bool:
     """Evaluates a proposition given a model.
 
     Parameters:
@@ -68,7 +66,7 @@ def evaluate(proposition: str, model: dict):
     return eval(proposition, model)
 
 @cache
-def truth_table(proposition: str):
+def truth_table(proposition: str) -> list:
     """Generates a truth table for a given proposition.
 
     Parameters:
@@ -107,7 +105,7 @@ def truth_table(proposition: str):
 ############## IMPLEMENT THE FOLLOWING FUNCTIONS  ##############
 ############## Do not modify function definitions ##############
 
-def count_satisfying(proposition: str):
+def count_satisfying(proposition: str) -> int:
     """Count the number of satisfying models in a proposition.
         
     Parameters:
@@ -122,9 +120,8 @@ def count_satisfying(proposition: str):
         >>> count_satisfying('p or q')
         3
     """
-    raise NotImplementedError
 
-def are_equivalent(prop1: str, prop2: str):
+def are_equivalent(prop1: str, prop2: str) -> bool:
     """Checks if two propositions are logically equivalent.
         
     Parameters:
@@ -140,9 +137,8 @@ def are_equivalent(prop1: str, prop2: str):
         >>> are_equivalent('p and q', '(not p) or q')
         False
     """
-    raise NotImplementedError
 
-def is_tautology(proposition: str):
+def is_tautology(proposition: str) -> bool:
     """Checks if a proposition is a tautology.
         
     Parameters:
@@ -154,12 +150,11 @@ def is_tautology(proposition: str):
     Examples:
         >>> is_tautology('p |implies| q')
         False
-        >>> is_tautology('p |implies| (not p)')
+        >>> is_tautology('(not p) |implies| p')
         True
     """
-    raise NotImplementedError
 
-def is_contradiction(proposition: str):
+def is_contradiction(proposition: str) -> bool:
     """Checks if a proposition is a contradiction.
         
     Parameters:
@@ -174,9 +169,8 @@ def is_contradiction(proposition: str):
         >>> is_contradiction('p and (not p)')
         True
     """
-    raise NotImplementedError
 
-def is_contingency(proposition: str):
+def is_contingency(proposition: str) -> bool:
     """Checks if a proposition is a contingency.
         
     Parameters:
@@ -191,9 +185,8 @@ def is_contingency(proposition: str):
         >>> is_contingency('p and (not p)')
         False
     """
-    raise NotImplementedError
 
-def model_fitting(truth_table: str):
+def model_fitting(truth_table: list) -> str:
     """Fits a proposition to a truth table.
         
     Parameters:
@@ -209,6 +202,5 @@ def model_fitting(truth_table: str):
         If the truth table is of the form {{}, True}, then return True. 
         If the truth table is of the form {{}, False}, then return False.
     """
-    raise NotImplementedError
 
 # *********************** END ***************************
