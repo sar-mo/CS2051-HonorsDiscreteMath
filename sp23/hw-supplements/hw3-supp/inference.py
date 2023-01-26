@@ -1,0 +1,31 @@
+# CS 2051 Spring 2023 - HW3 Supplement Part 1: Inference
+# instructor: Gerandy Brito
+# creator - Sarthak Mohanty
+
+# author - your name here
+# collaborators - list collaborators here
+
+# NOTE (s):
+# You must use small single letters in [p-z] for your variable names followed by an (optional) number, eg. p, q3, r22
+# We strongly discourage the use of GitHub Copilot or ChatGPT to complete this assignment. It will be considered cheating (at least for this semester).
+
+from logic_helper import *
+
+def infer(inference_rules: list, conclusion: str):
+    """Checks if a conclusion can be proved using given inference rules.
+    
+    Parameters:
+        inference_rules: list of strings representing inference rules.
+        conclusion: conclusion to prove.
+
+    Returns: 
+        True iff the conclusion can be proved using the given inference rules, False otherwise
+    
+    Examples:
+        >>> infer(['p |implies| q', 'q |implies| r'], 'p |implies| r')
+        True
+        >>> infer(['p |implies| q', 'q |implies| r'], 'r |implies| p')
+        False
+    """
+    raise NotImplementedError
+
