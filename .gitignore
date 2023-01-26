@@ -1,5 +1,6 @@
 .DS_STORE
 .vscode
+.history
 .__pycache__
 fa21/private/
 sp22/private/

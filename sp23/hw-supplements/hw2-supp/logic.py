@@ -1,6 +1,6 @@
 # CS 2051 Spring 2023
 # HW2 Supplement - Logic Playground
-# author - Sarthak Mohanty
+# creator - Sarthak Mohanty
 # collaborators - N/A
 
 # NOTE (s):
@@ -10,7 +10,7 @@
 ######## Do not modify the following block of code ########
 # ********************** BEGIN *******************************
 
-from functools import partial, cache
+from functools import partial
 import re
 
 class Infix(object):
@@ -65,7 +65,6 @@ def evaluate(proposition: str, model: dict) -> bool:
     model['implies'] = implies
     return eval(proposition, model)
 
-@cache
 def truth_table(proposition: str) -> list:
     """Generates a truth table for a given proposition.
 
@@ -150,7 +149,7 @@ def is_tautology(proposition: str) -> bool:
     Examples:
         >>> is_tautology('p |implies| q')
         False
-        >>> is_tautology('(not p) |implies| p')
+        >>> is_tautology('(not p) |implies| (p or (not p))')
         True
     """
 
