@@ -198,8 +198,8 @@ def model_fitting(truth_table: list) -> str:
         None, try to think of some yourself!
     
     Note: 
-        If the truth table is of the form {{}, True}, then return True. 
-        If the truth table is of the form {{}, False}, then return False.
+        If the truth table is of the form {{}, True}, then return 'True'. 
+        If the truth table is of the form {{}, False}, then return 'False'.
     """
 
 # *********************** END ***************************
