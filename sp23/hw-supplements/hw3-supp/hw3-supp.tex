@@ -67,9 +67,9 @@
     \vspace{3mm}
     \textbf{In this part, you'll implement the following function:}
     \begin{tcolorbox}[colback=blue!10]
-        \lstinline{infer(inference_rules, conclusion)}: This function takes in a list of inference rules and a conclusion (both in their string representations), and returns \verb+True+ iff the conclusion can be proved using the provided rules. For example, testing the function on the familiar "modus ponens" rule yields:
+        \lstinline{infer(inference_rules, conclusion)}: This function takes in a list of inference rules and a conclusion (both in their string representations), and returns \verb+True+ iff the conclusion can be proved using the provided rules. For example, testing the function on the familiar ``modus ponens" rule yields:
         \begin{lstlisting}[belowskip=-10pt]
-            >>> infer(["p |implies| q", "p"], "q")
+            >>> infer(['p |implies| q', 'p'], 'q')
             True
         \end{lstlisting}
     \end{tcolorbox}
@@ -84,7 +84,7 @@
     Now that you have some semblance of intuition for the problem, let's formalize it using logical notation. Define a \textit{clause} as a disjunction (`$\lor$'ing) of variables or their negations. For example, one such clause would be $(p \lor \neg q_{0} \lor r_{10})$. A proposition is in \textit{conjunctive normal form} (CNF) if it is expressed as a conjunction (`$\land$'ing) of clauses, such as the proposition $(p \lor \neg q_{0}) \land (q_{0} \lor \neg r_{10}) \land (r_{10} \lor \neg p)$. Finally, we say a proposition is \textit{satisfied} by an model if the proposition evaluates to \lstinline{True} under the model. For example, one model satisfying the above proposition is $p = \text{\lstinline{False}}$, $q_{0} = \text{\lstinline{False}}$, $r_{10} = \text{\lstinline{False}}$.
 
     \vspace{2mm}
-    Formally, the \lstinline{SAT} problem asks ``Given a proposition in CNF, is it possible to create a satisfiable model?"
+    The \lstinline{SAT} problem then asks ``Given a proposition in CNF, is it possible to create a satisfiable model?"
 
 \subsection*{Brute Force Solver}
         One solution to the \lstinline{SAT} problem is simple: generate all possible models for the proposition, and evaluate the function over each of them. This has all been done for you in the function \lstinline{brute_force_SAT_solver}. However, generating all the models is computationally expensive, since for $n$ variables there exist $2^{n}$ possible models. Another way to say this is that the runtime of this function is \textit{exponential}.
@@ -148,10 +148,10 @@
     \end{tcolorbox}
 
 \subsection*{Putting It All Together}
-    Finally, it's time to see your hard work come to fruition. In the file \lstinline{fourColor.py}, we've created some methods generating a \href{https://en.wikipedia.org/wiki/Voronoi_diagram}{Voronoi diagram} to help simulate Britoville. An example is shown in Figure (\ref{fig:walkSAT}). If \lstinline{walkSAT_solver} is implemented correctly, running the main function in the file should generate a successful coloring.
+    Finally, it's time to see your hard work come to fruition. In the file \lstinline{fourColor.py}, I've created some methods generating a \href{https://en.wikipedia.org/wiki/Voronoi_diagram}{Voronoi diagram} to help simulate Britoville. An example is shown in Figure (\ref{fig:walkSAT}). If \lstinline{walkSAT_solver} is implemented correctly, running the main function in the file should generate a successful coloring.
     
     \vspace{2mm}
-    However, when we set \lstinline{num_points} higher than $\approx 30$, our \lstinline{walkSAT} solver times out, as the coloring problem becomes too large to solve. If you want to generate graphs with more regions, change the \lstinline{solver} parameter in the \lstinline{colormap} call in the main function from \lstinline{walkSAT_solver} to \lstinline{pySAT_solver}. \lstinline{pysat_solver} is a much more powerful solver, and can handle up to 5000 points with ease (for example, the map generated in Figure (\ref{fig:pySAT}) contains 500 points, and was generated in seconds). This solver is also handy if you want to test the \lstinline{fourColoringtoSAT} function without having completed \lstinline{walkSAT_solver}.
+    However, when we set \lstinline{num_points} higher than $\approx 50$, our \lstinline{walkSAT} solver times out, as the coloring problem becomes too large to solve. If you want to generate graphs with more regions, change the \lstinline{solver} parameter in the \lstinline{colormap()} call in the main function from \lstinline{walkSAT_solver} to \lstinline{pySAT_solver}. \lstinline{pysat_solver} is a much more powerful solver, and can handle up to 5000 points with ease (for example, the map generated in Figure (\ref{fig:pySAT}) contains 500 points, and was generated in seconds). This solver is also handy if you want to test the \lstinline{fourColoringtoSAT} function without having completed \lstinline{walkSAT_solver}.
 
     \vspace{-2mm}
     \begin{figure}[H]
@@ -192,7 +192,7 @@
         Countless others tried their hand at a proof, but none were successful until 1976, when two mathematicians at the University of Illinois, Kenneth Appel and Wolfgang Haken announced their computer-assisted proof.  It was the first major theorem to be proven with extensive computer assistance, and was initially met with doubt and concern.
 
         \vspace{3mm}
-        It took many years for the proof to gain widespread acceptance, and even now mathematicians approach computer-assisted proofs with trepidation. In fact, some claim that ``proofs” should only be accepted if they are proved by people, not machines, and any work performed by machines should be regarded only as ``calculation." Nevertheless, is of the author's personal opinion that computer-assisted proofs are a definitive step in the right direction.
+        It took many years for the proof to gain widespread acceptance, and even now mathematicians approach computer-assisted proofs with trepidation. In fact, some claim that ``proofs” should only be accepted if they are proved by people, not machines, and any work performed by machines should be regarded only as ``calculation." Nevertheless, it is the author's personal opinion that computer-assisted proofs are a definitive step in the right direction.
     \end{tcolorbox}
 
 \section*{Submission Instructions (10 pts)}
@@ -207,9 +207,9 @@
     \textbf{Notes}
 
     \begin{itemize}
-        \item Propositional variables are notated differently as compared to the last supplement. Propositional variables now consist of a letter from \lstinline{[p-z]}, followed by an optional number (ex. \lstinline{p0}, \lstinline{r10}, \lstinline{r200}). This change has been made to help complete Part 3, and should not affect your implementations otherwisee.
+        \item Propositional variables are notated differently as compared to the last supplement. Propositional variables now consist of a letter from \lstinline{[p-z]}, followed by an optional number (ex. \lstinline{p0}, \lstinline{r10}, \lstinline{r200}). This change has been made to help complete Part 3, and should not affect your implementations otherwise.
         \item The autograder may not reflect your final grade on the assignment. We reserve the right to run additional tests during grading.
-        \item Do not import additional packages, as your submission may not pass the test cases.
+        \item Do not import additional packages, as your submission may not pass the test cases or manual review.
         \item If you think you may encounter dependency/versioning issues by running code on your local machine, try completing the assignment on \href{https://colab.research.google.com/}{Google Colab}.
     \end{itemize}
 
