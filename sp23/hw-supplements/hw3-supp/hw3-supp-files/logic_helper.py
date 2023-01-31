@@ -2,7 +2,7 @@
 # This file contains helper functions for the logic homework.
 # Do not modify this file.
 
-from functools import partial, cache
+from functools import partial
 import re
 
 class Infix(object):
@@ -57,7 +57,6 @@ def evaluate(proposition: str, model: dict):
     model['implies'] = implies
     return eval(proposition, model)
 
-@cache
 def truth_table(proposition: str):
     """Generates a truth table for a given proposition.
 
