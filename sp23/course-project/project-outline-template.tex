@@ -1,33 +1,13 @@
-\documentclass[11pt,fleqn]{article}
-
-\usepackage[latin1]{inputenc}
-\usepackage{enumerate}
-\usepackage[hang,flushmargin]{footmisc}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{amsthm}
-
-\theoremstyle{definition}
-
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-
-\setlength{\oddsidemargin}{0px}
-\setlength{\textwidth}{460px}
-\setlength{\voffset}{-1.5cm}
-\setlength{\textheight}{20cm}
-\setlength{\parindent}{0px}
-\setlength{\parskip}{10pt}
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
 
 \title{CS 2051: Project Title}
-\date{2017\\ December}
 \author{Author 1 \\ Georgia Institute of Technology
-\and Author 2 \\ Georgia Institute of Technology}
+\and Author 2 \\ Georgia Institute of Technology
+\and Author 3 \\ Georgia Institute of Technology}
+\date{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -35,15 +15,6 @@
 
 \maketitle
 
-\begin{abstract} \noindent
-% Here you write a short summary of what the document contains, 
-% like the blurb on the back of a book.
-
-\end{abstract}
-
-\tableofcontents
-
-\newpage
 
 \section{Background}
 % This section should develop the basic definitions and
@@ -82,6 +53,30 @@
 % for (and why), and any sources such as books and websites that
 % you used when studying for the project.
 
+
+\pagebreak
+
+
+\section*{(Informal) Example Outline}
+
+\subsection*{Linear Diophantine Equations}
+    A \textit{linear Diophantine equation} is an equation of the form $$a_{1}x_{1} + a_{2}x_{2} + \dots + a_{n}x_{n} = c$$ where $a_{1}, a_{2}, \dots, a_{n}, c \in \mathbb{Z}$.
+    
+    \vspace{3mm}
+    In the course, we considered the case when $n = 2$ and asked when the equation $ax + by = c$ has an integral solution. We proved that a solution exists if and only if $\gcd(a, b) \mid c$, or else no solution exists -- this was B\'ezout's Lemma. However, we didn't develop a way of \textit{finding} the solution.
+    
+    \vspace{3mm}
+    One method to find a solution is to reverse the Euclidean algorithm (see page 131 in the text). The aim of this project is to classify \textit{all} solutions to such an equation. This leads us to the following main result:
+    
+    \vspace{3mm}
+    \textbf{Theorem.} Let $a, b, c \in \mathbb{Z}$, let $d = \gcd(a, b)$ and suppose that $d \mid c$. Let $(x_{0}, y_{0})$ be a fixed integral solution to the equation $ax + by = c$. A pair of integers $(x, y)$ is a solution to the equation if and only if $$x = x_{0} + k \cdot \frac{b}{d} \text{\quad and\quad} y = y_{0} - k \cdot \frac{a}{d}$$ for some $k \in \mathbb{Z}$.
+    
+    \vspace{3mm}
+    A couple of possible areas for extension or generalizations are as follows:
+    \begin{itemize}
+        \item Consider the case where the coefficients and solutions to the equation $ax + by = c$ are required to be \textit{natural numbers} -- that is, we fix $a, b, c \in \mathbb{N}$ and ask when natural number solutions $x, y$ to the equation $ax + by = c$ exist. When $a$ and $b$ are coprime, it is know that the least value of $c$ for which no natural number solution exists is $ab - a - b$. Prove this, and consider what happens when $a$ and $b$ are \textit{not} coprime.
+        \item Consider the case when there are $n \ge 1$ variables, not necessarily exactly two variables - that is, consider an equation of the form $\sum_{k = 1}^{n} a_{k}x_{k} = c$ for some $n \ge 1$ and some $a_{1}, a_{2}, \dots, a_{n}, c \in \mathbb{Z}$. Generalize B\'ezout's lemma to this case; this will require that you define a notion of greatest common divisor for collections of $n$ integers, and then find a prove a necessary and sufficient condition for the equation $\sum_{k = 1}^{n} a_{k}x_{k} = x$ to have a solution.
+    \end{itemize}
 
 
 

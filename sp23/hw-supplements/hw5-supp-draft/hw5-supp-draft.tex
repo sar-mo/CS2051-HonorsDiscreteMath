@@ -33,6 +33,30 @@
 
 \maketitle
 
+
+\textbf{Overview}
+    Traditionally, computer software has been written for serial computation: instructions corrresponding to a tasks are executed on one processing unit at a time.
+
+
+
+  computational task consisted of many elementary operations, some of which had to be computed sequentially, while others could be computed in parallel. 
+
+  In a distributed computing class, one of the first things you learn is \textbf{Amdahl’s law}, which gives a quantitative measure of the speedup $S$ -i.e., how much faster the task can be performed by using $n$ parallel processors:
+  $$S = \frac{1}{1 - p + \frac{p}{n}}.$$ Here, $p$ is the proportion of operations that can be performed in parallel.
+
+    \vspace{2mm}
+    However, it is not typically the case that we can classify operations simply as “parallel” or “sequential.” Instead, a task might consist of several sub-tasks, some of which need to be completed before others are started. The ordering of these subtasks, as well as computing the speedup, is a much harder problem (comparable in difficulty to the \verb+SAT+ problem encountered previously).
+
+    \vspace{2mm}
+    In this supplement, you'll develop the mathematical intuition to formally represent this problem. You've learned about functions, now you'll learn about a specialized version of them known as \textbf{relations}.
+    
+    
+    You'll then apply different techniques to solve and analyze different applications of this problem.
+
+
+
+
+
 \section*{Relations}
 
     Recall the definition of a relation:
@@ -50,26 +74,6 @@
         \item $\mathcal{R}_3 = \{(a, b) \mid a+b \le 2022)\}$
         \item $\mathcal{R}_4 = \{(a, b) \mid a \text{ divides } b\}$
     \end{itemize}
-    % Create bijective (bean diagram) graph in tikz.
-    
-    % \begin{tikzpicture}[ele/.style={fill=black,circle,minimum width=.8pt,inner sep=1pt},every fit/.style={ellipse,draw,inner sep=-2pt}]
-    %   \node[ele,label=left:$a$] (a1) at (0,4) {};    
-    %   \node[ele,label=left:$b$] (a2) at (0,3) {};    
-    %   \node[ele,label=left:$c$] (a3) at (0,2) {};
-    %   \node[ele,label=left:$d$] (a4) at (0,1) {};
-    
-    %   \node[ele,,label=right:$1$] (b1) at (4,4) {};
-    %   \node[ele,,label=right:$2$] (b2) at (4,3) {};
-    %   \node[ele,,label=right:$3$] (b3) at (4,2) {};
-    %   \node[ele,,label=right:$4$] (b4) at (4,1) {};
-    
-    %   \node[draw,fit= (a1) (a2) (a3) (a4),minimum width=2cm] {} ;
-    %   \node[draw,fit= (b1) (b2) (b3) (b4),minimum width=2cm] {} ;  
-    %   \draw[->,thick,shorten <=2pt,shorten >=2pt] (a1) -- (b4);
-    %   \draw[->,thick,shorten <=2pt,shorten >=2] (a2) -- (b2);
-    %   \draw[->,thick,shorten <=2pt,shorten >=2] (a3) -- (b1);
-    %   \draw[->,thick,shorten <=2pt,shorten >=2] (a4) -- (b3);
-    %  \end{tikzpicture}
     So why relations? They are more general and allow us to study more complex sets. Elaborate. \\
     
 \subsection*{Properties}
@@ -80,5 +84,10 @@
         \item \underline{Antisymmetric:} $(\forall a, b\in A)(a\mathcal{R}b \wedge b\mathcal{R}a \rightarrow a=b)$
         \item \underline{Transitive:} $(\forall a, b, c\in A)(a\mathcal{R}b \wedge b\mathcal{R}c \rightarrow a\mathcal{R}c)$
     \end{itemize}
+
+    Some examples of relations:
+
+
+\section*{Partially Ordered Sets}
 
 \end{document}
