@@ -1,94 +1,181 @@
+
+
+
 \documentclass{article}
-\usepackage[margin=1in]{geometry}
+
+%Basics
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
 
-% colored links
-\usepackage{hyperref} 
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,      
-    urlcolor=blue,
-    }
+%Creating subfigures
+\usepackage{subcaption}
+
+%Colored Strikethrough
+\usepackage{soul}
+\setstcolor{red}
+
+\setcounter{section}{9}
+
+\usepackage[colorlinks, urlcolor = red]{hyperref}
+
+%Coloring Digits
+\usepackage{xcolor}
 
 %Formatting and Spacing
 \setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
 \setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
-\setlength\parindent{0pt}
+% \setlength\parindent{0pt}
 \linespread{1.1}
 
-% title
-\title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Project Ideas 10-20}
-\author{}
-\date{}
+%Easy Numbering
+\newcounter{counter}
+\newcommand{\Exercise}{Exercise \stepcounter{counter}\thecounter}
+
+%Custom Title Fields
+\newcommand{\hmwkTitle}{Course Project Topics 10-20}
+\newcommand{\hmwkDueDate}{Sunday, April 24, 2022}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Professor Gerandy Brito}
+\newcommand{\hmwkSection}{Spring 2023}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{CS 2051}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{Course Topics}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\\ \hmwkTitle} \\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkSection}} \\
+    % \vspace{1in}
+    % \begin{minipage}[t]{0.5\columnwidth}
+    % {\footnotesize \textbf{IMPORTANT:} For this assignment, you may NOT collaborate with other students, nor use resources outside the ones from class. Think of it as an open book, open notes, take-home exam.}
+    % \end{minipage}
+    % \vspace{1in}
+    \vspace{3in}
+    \author{\textbf{\hmwkAuthorName}}
+    \date{}
+}
 
 \begin{document}
 
 \maketitle
-
-\subsection*{Cryptography in the Modern Age}
-    Cryptography plays a vital role in ensuring secure communication in the modern age. In this project, we will be focusing on modern encryption algorithms, specifically Advanced Encryption Standard (AES). AES is a symmetric-key encryption algorithm that is widely used in various applications such as internet security protocols, electronic funds transfers, and secure communications.
-    
-    \vspace{3mm}
-    The implementation of an encryption system using AES will be one of the main deliverables in this project. In addition to the implementation, we will delve into the mathematical foundations of AES and other encryption algorithms. This will include an in-depth analysis of the underlying mathematical concepts such as number theory, linear algebra, and cryptography-specific concepts like trapdoor functions.
-    
-    \vspace{3mm}
-    A trapdoor function is a mathematical function that is easy to compute in one direction but difficult to compute in the opposite direction without knowing some additional information, called the trapdoor. AES makes use of this concept through the use of S-boxes, which are non-linear functions that are used to scramble the data before it is encrypted. The mathematical properties of these functions and their implementation in AES will be explored in this project.
-    
-    \vspace{3mm}
-    Moreover, we will also delve into the mathematical concepts that AES is based on, including finite fields and Galois fields. Finite fields are mathematical structures that are similar to the field of real numbers, but they have a finite number of elements. Galois fields, also known as Galois fields, are a specific type of finite field that have important properties that make them ideal for use in cryptography. The properties and applications of finite fields and Galois fields in cryptography will be covered in this project.
-    
-    \vspace{3mm}
-    In conclusion, this project will explore the mathematical foundations of modern cryptography, with a specific focus on AES encryption. The project will provide a comprehensive understanding of the mathematical concepts that are the building blocks of AES and other encryption algorithms, including number theory, linear algebra, finite fields, Galois fields, and trapdoor functions. The project's main deliverable will be the implementation of an AES encryption system, which will provide hands-on experience in the application of the mathematical concepts covered in this project.
-
 \pagebreak
 
-\subsection*{Recursive Algorithms and Fractals}
-    A \textit{fractal} is a self-similar geometric shape that can be divided into smaller copies of itself. One way to generate fractals is through the use of recursive algorithms.
+\section{Genetic Algorithms}
+
+    Genetic Algorithms (GAs) are a type of optimization algorithm inspired by the process of natural selection and genetics. They are used to find an optimal solution to a problem by mimicking the process of evolution.
     
     \vspace{3mm}
-    One famous example of a fractal is the \textit{Koch snowflake}, which is created by starting with an equilateral triangle, and then dividing each line segment into three equal parts, and replacing the middle part with two line segments that form a smaller equilateral triangle. This process is repeated an infinite number of times, creating a fractal shape with an infinitely complex boundary.
+    A general framework for a GA starts with a set of solutions called the population. Each solution is represented by a chromosome, which is a binary string of bits. The chromosomes are then evolved through several generations, with each generation having a better solution than the previous one. The evolution process is done using a combination of selection, crossover, and mutation operations.
     
     \vspace{3mm}
-    Another example of a fractal is the \textit{Mandelbrot set}, which is a set of complex numbers that exhibit complex, self-similar patterns when plotted on a graph. The algorithm for generating the Mandelbrot set is also recursive, and involves iterating the function $f_{c}(z) = z^{2} + c$ for each value of $c$ in the complex plane. The boundary of the Mandelbrot set is a fractal shape.
+    Selection is the process of choosing the best solutions from the current population to form the next generation. This is done using a fitness function that evaluates each solution and assigns it a score. The solutions with the highest scores are chosen as parents to create offspring for the next generation.
     
     \vspace{3mm}
-    The mathematics involved in fractals and recursive algorithms includes complex numbers, iterative algorithms, and infinite sequences. In the course, we will study these mathematical concepts in more depth and apply them to the study of fractals.
+    Crossover is the process of combining two solutions to create a new solution. It is done by randomly selecting a crossover point in the binary string of each parent and then swapping the bits between the two parents to create the offspring. This process creates new solutions that have a combination of the best traits from both parents.
     
     \vspace{3mm}
-    A couple of possible areas for extension or generalizations are as follows:
+    Mutation is the process of randomly changing bits in the binary string to introduce new solutions into the population. This helps maintain genetic diversity and allows the GA to explore new solutions.
+    
+    \vspace{3mm}
+    Main ideas for this project can go in many directions. You could explore the learning aspect through deep neural networks. You could also analyze the implementation of GAs and how they use techniques such as particle swarm or simulated annealing. A couple of possible areas for extension or generalizations are as follows:
+    
     \begin{itemize}
-    \item Study different types of fractals and the algorithms used to generate them, including the \textit{Sierpinski triangle}, \textit{dragon curve}, and \textit{Julia sets}.
-    \item Explore the properties of fractals, including their dimensionality and self-similarity, and how these properties relate to the underlying mathematical concepts.
-    \item Study applications of fractals and recursive algorithms in areas such as computer graphics, data compression, and chaos theory.
+    \item Study of hybrid genetic algorithms that combine GAs with other optimization algorithms
+    \item Study of parallel and distributed GAs, including island models and particle swarm optimization
+    \item Application of GAs to real-world problems, including optimization of engineering designs and financial portfolios
     \end{itemize}
 
 \pagebreak
 
-\subsection*{The Master Theorem}
+\section{Cryptography in the Modern Age}
+    Cryptography plays a vital role in ensuring secure communication in the modern age. In this project, we will be focusing on modern encryption algorithms, specifically Advanced Encryption Standard (AES). AES is a symmetric-key encryption algorithm that is widely used in various applications such as internet security protocols, electronic funds transfers, and secure communications.
+    
+    \vspace{3mm}
+    The implementation of an encryption system using AES will be one of the main deliverables in this project. In addition to the implementation, we will delve into the mathematical foundations of AES and other encryption algorithms. This will include an in-depth analysis of the underlying mathematical concepts such as number theory, Galois fields, and cryptography-specific concepts like trapdoor functions.
+
+    \vspace{3mm}
+    A trapdoor function is a mathematical function that is easy to compute in one direction but difficult to compute in the opposite direction without knowing some additional information, called the trapdoor.
+
+    \vspace{3mm}
+    As an example, the trapdoor function in RSA encryption is the modular exponentiation function, $c = m^e \mod N$, where $m$ is the plaintext, $e$ is the public exponent, $N$ is the modulus and $c$ is the ciphertext. The trapdoor information is the private key, which consists of the factors of $N$. In the opposite direction, decryption is performed by computing $m = c^d \mod N$, where $d$ is the private exponent derived from the private key.
+
+    \vspace{3mm}
+    Another example is the trapdoor function in Elliptic Curve Cryptography (ECC). In ECC, the trapdoor function is the scalar multiplication operation $Q = kP$, where $P$ is a point on the elliptic curve, $k$ is the scalar and $Q$ is the result of the scalar multiplication. The trapdoor information is the private key, which is the scalar $k$. Decryption is performed by computing $Q = -kP$.
+
+    \vspace{3mm}
+    The trapdoor function in AES encryption is based on the substitution-permutation network (SPN) structure. The SPN structure consists of repeated rounds of substitution and permutation operations, where the substitution operation is performed by the use of S-boxes, and the permutation operation is performed by the use of linear transformations. The S-boxes are non-linear functions that scramble the input data, and their inverse operations are difficult to compute without the knowledge of the key used in AES encryption.
+    
+    \vspace{3mm}
+    Specifically, let $x$ be the plaintext and $y$ be the ciphertext. The encryption operation in AES can be expressed as $y = E(x, K)$, where $K$ is the secret key. The S-boxes used in AES are non-linear functions $S(x)$, and their implementation in AES can be expressed as: $$y = S(x) \oplus K,$$ where $\oplus$ represents the bitwise exclusive-or operation. The inverse operation, decryption, can be expressed as:$$x = S^{-1}(y) \oplus K$$
+
+    \vspace{3mm}
+    The inverse operation $S^{-1}(y)$ is difficult to compute without knowledge of the key $K$. This is the essence of the trapdoor function in AES encryption. The implementation of the S-boxes and their properties, as well as the use of the key schedule, make AES a secure encryption algorithm.
+
+    \vspace{3mm}
+    I recommend using \href{http://www.moserware.com/2009/09/stick-figure-guide-to-advanced.html}{this} comic as a starting point.
+
+\pagebreak
+
+\section{Recursive Algorithms and Fractals}
+    A \textit{fractal} is a self-similar geometric shape that can be divided into smaller copies of itself. One way to generate fractals is through the use of recursive algorithms.
+    
+    \vspace{3mm}
+    One famous example of a fractal is the \textit{Koch snowflake}, which is created by starting with an equilateral triangle, and then dividing each line segment into three equal parts, and replacing the middle part with two line segments that form a smaller equilateral triangle. This process is repeated an infinite number of times, creating a fractal shape with an infinitely complex boundary. The Koch snowflake can be described mathematically as a fractal curve with the fractal dimension, $D$, which is a measure of its roughness, given by the equation $D = \log_3 4$.
+    
+    \vspace{3mm}
+    Another example of a fractal is the \textit{Mandelbrot set}, which is a set of complex numbers that exhibit complex, self-similar patterns when plotted on a graph. The algorithm for generating the Mandelbrot set is also recursive, and involves iterating the function $f_{c}(z) = z^{2} + c$ for each value of $c$ in the complex plane. The boundary of the Mandelbrot set is a fractal shape with a fractal dimension given by $D = 2$.
+    
+    \vspace{3mm}
+    The mathematics involved in fractals and recursive algorithms includes complex numbers, iterative algorithms, and infinite sequences. The complex numbers are represented in the form $z = a + bi$, where $a$ and $b$ are real numbers and $i$ is the imaginary unit, $i^2 = -1$. The iterative algorithm for the Mandelbrot set involves checking the behavior of the sequence defined by the recursive formula $z_{n+1} = f_{c}(z_n) = z_n^2 + c$ starting from $z_0 = 0$. The sequence is considered to be a member of the Mandelbrot set if it remains bounded in the complex plane, i.e. if $\left|z_n\right| < \infty$ for all $n$.
+
+    \vspace{3mm}
+    Your main task for this project should be where you demonstrate some of the recursive techniques that you have learned to create interesting fractals. It should also include some coding implementation of your techniques.
+    
+    \vspace{3mm}A couple of possible areas for extension or generalization are as follows:
+    \begin{itemize}
+        \item Study different types of fractals and the algorithms used to generate them, including the \textit{Sierpinski triangle}, \textit{dragon curve}, and \textit{Julia sets}.
+        \item Explore the properties of fractals, including their dimensionality and self-similarity, and how these properties relate to the underlying mathematical concepts, such as complex dynamics and iterated function systems.
+        \item Study applications of fractals and recursive algorithms in areas such as computer graphics, data compression, and chaos theory, where the self-similarity and infinite detail of fractals can be utilized to achieve efficient representations of data and to model complex, dynamic systems.
+    \end{itemize}
+
+
+\pagebreak
+
+\section{Master Theorem}
     The Master Theorem is a result in the theory of algorithms that provides a framework for analyzing the running time of divide-and-conquer algorithms. Given a divide-and-conquer algorithm that solves a problem of size $n$ by dividing the problem into subproblems of size $n/b$, then solving each subproblem in $O(n^d)$ time, and then combining the solutions of the subproblems in $O(n^c)$ time, the running time of the algorithm is given by the following:
-        
-    $$[T(n) = O(n^d)\text{ if }d > c]$$
-    $$[T(n) = O(n^c \log n)\text{ if }d = c]$$
-    $$[T(n) = O(n^c)\text{ if }d < c]$$
+
+    $$T(n) = \begin{cases}
+        O(n^d) & \text{ if }d > c \\
+        O(n^c \log n)& \text{ if }d = c \\
+        O(n^c) & \text{ if }d < c \\
+    \end{cases}$$
     
     The Master Theorem is a powerful tool that simplifies the analysis of divide-and-conquer algorithms, but it has some limitations, and there are many variants of the theorem that are needed to handle specific cases.
     
     \vspace{3mm}
-    In the course, we will cover the standard version of the Master Theorem and its most common variants, including the case when the running time of the divide step is $O(n^{\log_b a})$, and the case when the subproblems are not of equal size.
+    In this project, we will prove the standard version of the Master Theorem and its most common variants, including the case when the running time of the divide step is $O(n^{\log_b a})$, and the case when the subproblems are not of equal size. There are also situations where the Master Theorem simply cannot hold, and one must use other techniques to solve recurrences.
     
     \vspace{3mm}
     A couple of possible areas for extension or generalization are as follows:
     \begin{itemize}
-    \item Consider the case when the problem is divided into more than two subproblems, or when the number of subproblems depends on the size of the problem. Analyze the running time of algorithms that divide a problem into multiple subproblems and prove an extended version of the Master Theorem.
     \item Consider the case when the running time of the algorithm depends on additional parameters, such as the size of the input or the solution, or the number of subproblems. Analyze algorithms that involve additional parameters and generalize the Master Theorem to handle these cases.
     \item Consider the case when the subproblems are not solved in a divide-and-conquer manner, but are solved using other techniques, such as dynamic programming or greedy algorithms. Analyze algorithms that involve multiple problem-solving techniques and extend the Master Theorem to handle these cases.
     \end{itemize}
-
+    While this topic may be titled ``Master Theorem", it is also closely related to divide and conquer algorithms, which are widely used in computer algorithms for solving problems in computer graphics, cryptography, and computer networks. Students should find plenty to explore for this project.
+    
 \pagebreak 
 
-\subsection*{Lambda Calculus}
+\section{Lambda Calculus}
 
 Lambda calculus is a mathematical formalism that is used to describe and study computation and algorithms. It was first introduced by Alonzo Church in the 1930s, and has since become an important area of research in theoretical computer science, programming languages, and logic.
 
@@ -123,22 +210,25 @@ Possible areas for extension or generalizations are as follows:
 
 \pagebreak 
 
-\subsection*{Godel's Incompleteness Theorem}
+\section{Godel's Incompleteness Theorem}
 
 Godel's Incompleteness Theorem is one of the most famous results in the foundations of mathematics. It was proved by Kurt Gödel in the early 20th century and states that, within any sufficiently powerful mathematical system, there will always exist statements that are true, but unprovable within the system.
 
 \vspace{3mm}
-To understand the theorem, we first need to understand the idea of Godel numbering. Given a mathematical system, we can assign a unique integer (referred to as a "Godel number") to each mathematical statement, symbol, or proof. This allows us to encode mathematical statements as integers, and perform operations on them using arithmetic. For example, the statement "2 + 2 = 4" can be encoded as the integer 123456. The statement "For all x, the statement 'x + x = 2x' is true" can also be encoded as an integer, say 654321.
+To understand the theorem, we first need to understand the idea of Godel numbering. Given a mathematical system, we can assign a unique integer (referred to as a "Godel number") to each mathematical statement, symbol, or proof. This allows us to encode mathematical statements as integers, and perform operations on them using arithmetic. For example, the statement "$2 + 2 = 4$" can be encoded as the integer 123456. The statement "For all $x$, the statement '$x + x = 2x$' is true" can also be encoded as an integer, say 654321.
 
 \vspace{3mm}
-Once we have assigned Godel numbers to our mathematical statements, we can use these numbers to reason about the statements themselves. For example, we can define the statement "$A$ implies $B$" as the statement "$\neg A \vee B$", where $\neg$ represents negation and $\vee$ represents disjunction. This means that if $A$ is the statement "$x + x = 2x$" and $B$ is the statement "$x = x$", then the statement "$A$ implies $B$" is equivalent to the statement "$\neg(x + x = 2x) \vee (x = x)$". We can then encode this statement as a Godel number, say 7890.
+Once we have assigned Godel numbers to our mathematical statements, we can use these numbers to reason about the statements themselves. For example, we can define the statement "$A$ implies $B$" as the statement "$\neg A \vee B$", where $\neg$ represents negation and $\vee$ represents disjunction. This means that if $A$ is the statement "$x + x = 2x$" and $B$ is the statement "$x = x$", then the statement "$A$ implies $B$" is equivalent to the statement "$\neg(x + x = 2x) \vee (x = x)$". We can even encode this statement as its own Godel number! This encoding is how Godel proved his Incompleteness Theorems.
 
 \vspace{3mm}
-In this project, you'll use computer software to encode propositional statements as Godel numbers, as well as explore and explain Godel's first and second incompleteness theorems.
+Godel's Incompleteness Theorem is significant because it shows that within any sufficiently powerful mathematical system, there will always be statements that are true but cannot be proven within the system itself. This highlights the limits of mathematical systems and the need for a more comprehensive understanding of mathematical truth. The theorem is a crucial contribution to the foundations of mathematics and continues to be a topic of interest and research in the field today. In this project, you'll have the opportunity to further understand the theorem by encoding mathematical statements as Godel numbers and studying the first and second incompleteness theorems in detail.
+
+\vspace{3mm}
+I \textbf{highly} recommend using \href{https://www.quantamagazine.org/how-godels-incompleteness-theorems-work-20200714/}{this} article as a starting point.
 
 \pagebreak 
 
-\subsection*{Combinatorial Games}
+\section{Combinatorial Games}
 A combinatorial game is a two-player game with perfect information, where the players make moves in turn, with the aim of being the last player to make a move. In this course, we will focus on two particular games: Sprouts, and Dots and Boxes.
 
 \vspace{3mm}
@@ -163,11 +253,11 @@ A couple of possible areas for extension or generalizations are as follows:
 \end{itemize}
 
 \pagebreak
-\subsection*{Creating Your Own Math-Based Game}
+\section{Create Your Own Game}
 In this project, you will design, create, and analyze a math-based game. The game must be complex enough to provide a challenge to players, and must involve a significant mathematical component, such as strategy and problem-solving.
 
 \vspace{3mm}
-There are many different types of math-based games to choose from, including strategy games like chess, puzzle games like Sudoku, and combinatorial games like Conway's Game of Life (don't choose this one though!). When selecting a game to create, consider the following questions:
+There are many different types of math-based games to choose from, but yours should be completely unique. When selecting a game to create, consider the following questions:
 
 \begin{itemize}
 \item What mathematical concepts are involved in the game?
@@ -201,7 +291,7 @@ Good luck and have fun creating your math-based game!
 \pagebreak 
 
 
-\subsection*{Monte Carlo Methods}
+\section{Monte Carlo Methods}
 Monte Carlo methods are a family of computational algorithms that rely on repeated random sampling to compute numerical results. They are widely used in fields such as physics, finance, and engineering, among others, where mathematical models are too complex to solve analytically.
 
 
@@ -229,5 +319,58 @@ A couple of possible areas for extension or generalizations are as follows:
     \item Consider the use of parallel and distributed computing techniques to speed up the computation. For example, consider using GPU programming or cloud computing to run large-scale Monte Carlo simulations.
     \item Consider the use of adaptive MCMC methods, which dynamically update the proposal distribution based on the history of the Markov Chain, in order to improve the convergence and efficiency of the simulation.
 \end{itemize}
+
+\pagebreak 
+
+\section{Recommendation Systems (Linear Algebra Required)}
+A \textit{recommendation system} is a system that predicts the "rating" or "preference" a user would give to an item. It is commonly used in a variety of applications such as movie recommendation, product recommendation, etc. They are used everywhere nowadays, from Google advertisements to TikTok videos.
+
+\vspace{3mm}
+In this project, we will consider a specific type of recommendation system, \textit{collaborative filtering}. Collaborative filtering is based on the idea that users who have similar preferences in the past are likely to have similar preferences in the future. 
+
+\vspace{3mm}
+Given a user-item matrix $R$ with entries $r_{ij}$ denoting the rating user $i$ gives to item $j$, the goal of collaborative filtering is to estimate the missing entries in the matrix. One popular method to accomplish this is \textit{matrix factorization}. The idea is to factorize the matrix $R$ into two matrices $U$ and $V$, where $U$ is a user-feature matrix and $V$ is an item-feature matrix. That is, $$R \approx UV^T$$ where $U_{i,:}$ is a feature vector for user $i$ and $V_{j,:}$ is a feature vector for item $j$.
+
+\vspace{3mm}
+The optimization problem of matrix factorization is to minimize the difference between the estimated ratings and the actual ratings:
+$$\min_{U,V} \sum_{(i,j) \in \Omega}(r_{ij} - u_i^T v_j)^2$$ where $\Omega$ is the set of observed entries in the matrix $R$.
+
+\vspace{3mm}
+A couple of possible areas for extension or generalizations are as follows:
+\begin{itemize}
+    \item Consider incorporating additional information such as user demographics or item features into the recommendation system. For example, we can add a bias term for each user and item, and a feature term for each item, resulting in the following equation: $$r_{ij} = u_i^T v_j + b_i + c_j + \sum_{k = 1}^{d} x_{j,k}w_{k}$$ where $b_i$ and $c_j$ are biases for user $i$ and item $j$, and $x_{j,k}$ is a feature of item $j$ and $w_k$ is a feature weight.
+    \item Consider the case where the ratings are not explicit, but instead are binary (e.g., a user either clicked or did not click on an item). One popular method in this case is \textit{matrix completion with implicit feedback}. The idea is to assume that the observed binary feedback can be considered as an implicit rating and use matrix factorization to estimate the missing ratings.
+\end{itemize}
+
+The coding component of this project should be relatively clear: develop a recommendation algorithm, and demonstrate its functionality in some way.
+
+\pagebreak
+
+\section{Unsolved Problems in Mathematics}
+A \textit{mathematical problem} is a statement or question that can be answered through mathematical methods and reasoning. Many of these problems have been solved over time, however, some remain unsolved.
+
+
+\vspace{3mm}
+In this course, we will focus on some of the most famous and important unsolved problems in mathematics. These problems come from a variety of areas such as number theory, geometry, analysis, and combinatorics. 
+
+\vspace{3mm}
+One of the oldest unsolved problems is the \textit{Pell's equation}, which is a Diophantine equation of the form $$x^2 - dy^2 = 1$$ where $d \in \mathbb{N}$ and $d$ is not a perfect square. The aim of this project is to find an algorithm that finds all solutions to Pell's equation, or prove that no such algorithm exists.
+
+\vspace{3mm}
+Another famous problem is the \textit{Riemann Hypothesis}, which states that the non-trivial zeros of the Riemann zeta function $\zeta(s)$ are all located on the critical line of $1/2$. Proving or disproving this hypothesis remains one of the most important open problems in mathematics, and it has significant implications in number theory and prime number distribution. 
+
+\vspace{3mm}
+Another intriguing problem is the \textit{Collatz Conjecture}, which is a conjecture in the field of discrete mathematics. Given any positive integer $n$, we define the following sequence: $$n \rightarrow \frac{n}{2} \text{\quad if $n$ is even},$$ $$n \rightarrow 3n + 1 \text{\quad if $n$ is odd}.$$ The Collatz Conjecture states that this sequence always reaches 1, regardless of the starting value of $n$.
+
+\vspace{3mm}
+Your main task will be to take a close look at some of these problems, read research papers, and try to udnrestand some of the recent developments surrounding the problem. \textbf{In my opinion, this is the most difficult project.}
+
+\vspace{3mm}
+A couple of possible areas for extension or generalizations are as follows:
+\begin{itemize}
+    \item Consider other famous unsolved problems such as the \textit{Goldbach Conjecture} (every even integer greater than 2 can be expressed as the sum of two prime numbers), the \textit{Hodge Conjecture} (compact K\"ahler manifolds are projective), or the \textit{Birch and Swinnerton-Dyer Conjecture} (the rank of an elliptic curve is equal to the order of vanishing at infinity of its L-function). Research these problems, and try to create visualizations.
+    \item Consider a problem from another area of mathematics, such as \textit{Navier-Stokes Equation} (describing the motion of fluids), \textit{Yang-Mills Equation} (describing the behavior of particles in quantum field theory), or the \textit{Mass Gap Conjecture} (massless particles cannot appear in theories of massive particles). Research these problems and attempt to find some significant results.
+\end{itemize}
+
 
 \end{document}
