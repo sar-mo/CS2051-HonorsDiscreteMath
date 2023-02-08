@@ -3,22 +3,53 @@
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{enumitem}
 
-%Highlighting
-\usepackage{xcolor, soul}
-\sethlcolor{lightgray}
+% colored links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    }
 
-%Cases Environment
-\newlist{Cases}{enumerate}{3}
-\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+% Inputting Python code
+\usepackage[dvipsnames]{xcolor}
+\definecolor{textblue}{rgb}{.2,.2,.7}
+\definecolor{textred}{rgb}{0.54,0,0}
+\definecolor{textgreen}{rgb}{0,0.43,0}
+\usepackage{upquote}
+\usepackage{listings}
+\lstset{
+    language=Python, 
+    tabsize=4,
+    basicstyle={\ttfamily},
+    keywordstyle=\color{textblue},
+    commentstyle=\color{textgreen},
+    stringstyle=\color{textred},
+    frame=none,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    xleftmargin=-15mm, % manual adjustment, figure out permanent solution
+}
+
+%Creating algorithms
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,hooks}
+\usetikzlibrary{shadows}
+\usepackage{lipsum}
+
+%Images
+\usepackage{graphicx}
+    \usepackage{subcaption}
+    \usepackage{float}
+    % \usepackage[labelsep=period]{caption}
 
 %Formatting and Spacing
-\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
-\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
-\setlength\parindent{0pt}
-\linespread{1.15}
-
-%Formatting and Spacing
-\usepackage{enumitem}
 \setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
 \setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
 \setlength\parindent{0pt}
@@ -89,5 +120,24 @@
 
 
 \section*{Partially Ordered Sets}
+
+\subsection*{Part 1: Single Processor with Dependency}
+
+\section*{Task Scheduling}
+
+    % title={The title},
+    \begin{tcolorbox}[enhanced,watermark graphics=circuit,
+    watermark opacity=0.9,watermark stretch=1, watermark overzoom = 1.2]
+        \color{white}
+
+        \textbf{Your task is as follows:}
+        
+        
+        \vspace{3mm}
+        \lipsum[4]
+
+        \vspace{3mm}
+        \lipsum[3]
+    \end{tcolorbox}
 
 \end{document}

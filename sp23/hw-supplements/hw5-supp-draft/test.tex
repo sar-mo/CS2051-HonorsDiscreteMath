@@ -1,0 +1,20 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+\usepackage{lipsum}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,hooks}
+\usetikzlibrary{shadows}
+
+\tcbset{colframe=structure,fonttitle=\bfseries,beamer}
+
+\begin{document}
+
+\begin{frame}
+\frametitle{A color box with a background image}
+\begin{tcolorbox}[enhanced,title={The title},watermark graphics=circuit,
+watermark opacity=0.5,watermark color=blue,watermark stretch=1]
+\lipsum[4]
+\end{tcolorbox}
+\end{frame}
+
+\end{document}
