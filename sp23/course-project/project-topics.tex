@@ -63,9 +63,6 @@
 \maketitle
 \pagebreak
 
-
-
-
 \section{Genetic Algorithms}
 
     Genetic Algorithms (GAs) are a type of optimization algorithm inspired by the process of natural selection and genetics. They are used to find an optimal solution to a problem by mimicking the process of evolution.
@@ -375,6 +372,8 @@ I \textbf{highly} recommend using \href{https://www.quantamagazine.org/how-godel
         \item In the same way that vector spaces are defined over fields, modules are defined over rings. Investigate the ways that the properties of vector spaces like the Basis Theorem might extend to modules.
     \end{itemize}
 
+\pagebreak
+
 \section{What does it mean to be irrational? Proofs and extensions.}
 %transcendental numbers!
         %https://mathworld.wolfram.com/LagrangeNumber.html
@@ -395,36 +394,76 @@ I \textbf{highly} recommend using \href{https://www.quantamagazine.org/how-godel
             \item Approximation of algebraic numbers: Thue-Siegel-Roth theorem.
             \item Lonely Runner Conjecture.
         \end{itemize}
-        
-\section{Probability on discrete settings is like counting: Catalan numbers, Dyck's paths and The Semicircle Law (*) }
-    \begin{itemize}
-    \item Catalan numbers: how many ways can you traverse an $n \times n$ grid of lattice points to the top right, only moving up and to the right without crossing over the diagonal? This corresponds to the number of Dyck paths of order $n$.
-    \item Taking a $n \times n$ grid of lattice points, starting from the bottom left corner and going to the top right, how many paths can you take \textit{including moves going down and left as well as right and up}? How might you estimate how many of these paths are there? You can take a random sample of them by generating them fairly, and compute the probability of each given path and then take the reciprocal of that. Because we can expect, if a path has probability $10^{-22}$, then there are $10^{22}$ similar paths. 
-    \item Wigner's Semicircle Law (the spectrum---that is, eigenvalues---of randomly generated matrices tends to appear like a semicircle). Why? Mathematicians have found a theorem of this statement that was first empirically verified.
 
+\pagebreak
+
+\section{The Odds are in Your Favor: Exploring Discrete Probability}
+    A discrete setting is a mathematical model where data takes on a countable number of possible values, such as integers, edges, or paths. Discrete probability is the branch of mathematics that deals with the study of discrete random variables and their distributions. In this project, we will explore the relationship between discrete probability and counting. We will examine several classic examples, including Catalan numbers, Dyck's paths, and the Semicircle Law.
+    
+    \vspace{3mm}
+    Catalan numbers, $C_{n}$, are a sequence of integers that appear in various counting problems. They are often used to count the number of ways to construct objects with certain restrictions. For example, consider the problem of counting the number of ways to parenthesize $n$ pairs of parentheses so that the expression is well-formed. The solution is $C_{n}$. The formula for Catalan numbers is given by the following equation:
+    $$C_{n} = \frac{1}{n+1}\binom{2n}{n}$$ Another way to define Catalan numbers is as follows: how many ways can you traverse an $n \times n$ grid of lattice points to the top right, only moving up and to the right without crossing over the diagonal? This corresponds to the number of \textit{Dyck paths} of order $n$.
+
+    \vspace{2mm}
+    Now consider a similar problem: taking a $n \times n$ grid of lattice points, starting from the bottom left corner and going to the top right, how many paths can you take \textit{including moves going down and left as well as right and up}?. How might you estimate how many of these paths are there? You can take a random sample of them by generating them fairly, and compute the probability of each given path and then take the reciprocal of that. Because we can expect, if a path has probability $10^{-22}$, then there are $10^{22}$ similar paths.
+    
+    \vspace{3mm}
+    Finally, we move on to one more interesting result, the Semicircle Law, which states that the limiting distribution of the eigenvalues of a random matrix is given by the following equation:
+    $$f(x) = \frac{1}{2\pi}\sqrt{4 - x^{2}}$$
+    for $-2 \le x \le 2$ and zero otherwise. Note how this looks like the formula of a semicircle. Why? Mathematicians have found a theorem of this statement that was first empirically verified, and one you should explore in depth.
+    
+    \vspace{3mm}
+    \noindent In the course project, students will consider the following possible areas for extension or generalizations:
+    \begin{itemize}
+        \item Analyze the relationship between the generating function of Catalan numbers and the generating function of Dyck's paths.
+        \item Investigate the distribution of the number of times a random Dyck path returns to the x-axis.
+        \item Consider the case where the steps in a random walk are not symmetric and derive the limiting distribution in this case.
+        \item Develop a method for generating random samples from the Semicircle Law and evaluate its performance.
     \end{itemize}
 
-\section{What is the probability that in an arrangement of Set cards, there is a Set?}
+\pagebreak
+\section{Set: The Pattern-Matching Card Game}
+Set is a pattern-matching card game where the goal is to identify a "set" of three cards from a deck of twelve cards. Each card has four attributes: color, shape, number, and shading. Each attribute can take one of three values, so there are a total of $3^4=81$ possible cards in a deck.
 
-    There are also interesting combinatorics theorems about Set cards (and their $n$-category versions).
-    It turns out that the minimum number of cards for $n$ categories is exponentially small.
-    This problem is known as the ``cap set'' problem, and was recently discovered to be ``exponentially small,'' which is shocking given the lack of success (i.e. gigantic numbers) we see in the field of Ramsey theory: hypothetical, extremely large bounds on otherwise reasonable problems for finite objects like graphs.
-    See \href{https://www.quantamagazine.org/set-proof-stuns-mathematicians-20160531/}{this Quanta Magazine article}
-
-    The probability distribution will also be an interesting investigation, especially in the $n$-category versions, because we don't know much about the behavior of this object.
+    \vspace{3mm}
+    In 2016, with the help of a combinatorics professor right here at Georgia Tech, a major breakthrough in the understanding of the mathematical foundations of the game of Set was made, as described in the article \href{https://www.quantamagazine.org/set-proof-stuns-mathematicians-20160531/}{here}. Try to understand what progress was made, and what techniques were used.
     
-
-\section{Legendre's Conjecture}
+    \vspace{3mm}
+    The study of Set and its mathematical foundations is ongoing, with recent developments exploring the application of group theory and graph theory to the game. In particular, there has been interest in understanding the number of sets in a deck of $n$ cards, for larger values of $n$. A natural extension of the previous result would be to determine the maximum number of sets in a deck of $n$ cards, as a function of $n$.
+    
+    \vspace{3mm}
+    Another area of ongoing research in the mathematical study of Set is the study of strategies for playing the game. Here, one can consider various approaches, including combinatorial and algorithmic approaches, and analyze their efficiency and effectiveness in finding sets. A central question in this area is to determine the minimum number of cards that need to be revealed in order to guarantee the discovery of a set, or to determine the expected number of cards that need to be revealed, given a random distribution of cards.
+    
+    \vspace{3mm}
+    \noindent There are several possible areas for extension or generalization in the mathematical study of Set:
     \begin{itemize}
-        \item Between the number $n^2$ and $(n + 1)^2$ for natural number n, prove there is a prime.
+        \item Consider the case where there are additional rules or constraints on the game, such as restrictions on the order in which cards can be selected, or restrictions on the number of sets that can be selected in a given turn. Analyze the impact of these changes on the game, and determine the new maximum number of sets and the new strategies for finding sets in the deck.
+        \item Analyze the corresponding $n$-category versions of the problems, and especially try to determine the probability distributions occurring in this case.
+    \end{itemize}
+
+\pagebreak
+
+\section{Patterns in Primes}
+    Prime numbers are an important topic in mathematics, with a rich history and numerous famous theorems and conjectures associated with them.
+    \begin{itemize}
+        \item Legendre's conjecture: Between the number $n^2$ and $(n + 1)^2$ for natural number n, prove there is a prime.
         \item Bertram's postulate: prove that there is a prime number in between $n$ and $2n$.
-        \item Ingham: prove that there is a prime between the consecutive cubes $n^3$ and $(n + 1)^3$.
         \item The prime number theorem: the number of primes below $n$ is proportionate to $\frac{n}{\log n}$.
     \end{itemize}
 
+    \vspace{3mm}
+    A couple of possible areas for extension or generalizations are as follows:
+    \begin{itemize}
+        \item Generalized Prime Number Theorem: Study the distribution of prime numbers in various number systems, such as algebraic integers and p-adic integers.
     
+        \item Prime Number Race: Study the distribution of prime numbers in different sequences and find the fastest growing sequence of primes.
+        
+        \item Analytic Number Theory: Apply complex analysis and other advanced mathematical tools to study the distribution of prime numbers.
+    \end{itemize}
+    
+\pagebreak
 
-\section{Sylow's Theorems and the complete categorization of all finite simple groups (*)}
+\section{Sylow's Theorems and the complete categorization of all finite simple groups}
     
     Lagrange's theorem is an important theorem in group theory for a finite group $G$ and its subgroup $H$. The order of $H$ divides the order of $G$, however in order to discover the structure of finite groups in general, Langrange's theorem is not enough, because it's not guaranteed that such a subgroup exists. Sylow's Theorems solve this problem. Every group is guaranteed to have a Sylow p-group, where p is a prime, of the size $p^n$, where $p^n$ is the size of the largest prime power that divides the order of G. This can prove cool theorems like all groups with $15$ elements are commutative (abelian).
     
@@ -432,7 +471,9 @@ I \textbf{highly} recommend using \href{https://www.quantamagazine.org/how-godel
 
     When you're investigating this, talk about the applications of the factorization of groups, the sporadic groups (and the difference between the Happy Family and the 6 outliers).
     Also discuss Lie groups, the methods used to find these groups, and how Sylow's theorems helped this process.
-        
+
+\pagebreak
+
 \section{Integer Partitions}
 
     Let $n$ be a positive integer. A partition of $n$, also called an integer partition, is a way of writing $n$ as a sum of several positive integers. For example, $3$ can be partitioned in 3 ways: $3, 2 + 1$, and $1 + 1 + 1.$ Consider the function $p(n)$, representing the number of possible patitions of a non-negative integer $n$. E.g. $p(3) = 3.$ Things to consider
@@ -446,9 +487,12 @@ I \textbf{highly} recommend using \href{https://www.quantamagazine.org/how-godel
 
         How are they related? Explore these congruences.
     \end{itemize}
-        
+
+\pagebreak
+
 \section{ Carmichael Numbers} (\hyperlink{https://www.quantamagazine.org/teenager-solves-stubborn-riddle-about-prime-number-look-alikes-20221013/}{Quanta Magazine}). How does one test if a number is prime? In contrast to the foolproof methods we have (like checking if every single number less than $n$ divides $n$), we can explore the Fermat Primality Test. This is a way to test if a number is prime using Fermat's Little Theorem. However, it fails an infinite number of times! Certain numbers, known as the Carmichael numbers, pass this test even though they are not prime. Explore these numbers (a good starting point is the research discussed in the Quanta Magazine article).
         
+\pagebreak
 
 \section{Four Color Theorem} (**)
     Graph theory is essential to computer science, networks theory, and the topology of closed connected regions.
@@ -456,7 +500,9 @@ I \textbf{highly} recommend using \href{https://www.quantamagazine.org/how-godel
     Mathematicians were able to show the seven-color theorem---that any graph could be colored with seven colors on each country, proven by mapping it to a ``graph'': nodes representing countries, and edges between them representing borders.
     Theorems in this reduced-complexity system (not having to deal with the detail of coastlines, and being equivalent in all respects) permits the concept of planar graphs.
 
-\section{Unsolved Problems in Mathematics}
+\pagebreak
+
+\section{Famous Unsolved Problems in Mathematics}
     [nithya  I combined your collatz conjecture and riemann hypothesis topics into this one - sarthak]
     
     A \textit{mathematical problem} is a statement or question that can be answered through mathematical methods and reasoning. Many of these problems have been solved over time, however, some remain unsolved.
