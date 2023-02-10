@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Highlighting
+\usepackage{xcolor, soul}
+\sethlcolor{lightgray}
+
+%Cases Environment
+\newlist{Cases}{enumerate}{3}
+\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+%\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.15}
+
+%Formatting and Spacing
+\usepackage{enumitem}
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+%\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+% title
+\title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Homework 4 Supplement}
+\author{Nithya Jayakumar }
+\date{}
+
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+
+\item Let $S$ be the set that contains a set x if the set x does not belong to itself, so that $S = \{x \vert x \not\in x\}.$
+\begin{itemize}
+    \item Show the assumption that $S$ is a member of $S$ leads to a contradiction.
+    \item Show the assumption that $S$ is not a member of $S$ leads to a contradiction.
+\end{itemize}
+
+\item For all the following problems, describe the setup to the solution. I.e. do not just state that it is possible, explain how the hotel goes about accomodating the new guests.
+\begin{enumerate}
+    \item A hotel called the Grand Hotel has a countably infinite number of rooms, each occupied by a guest. How can we accommodate a new guest arriving at the fully occupied hotel without removing any of the current guests?
+    \item Show that a finite group of guests arriving at the Grand Hotel can be given rooms without evicting any current guests.
+    \item Suppose that the Grand Hotel is fully occupied, but the it closes all the even numbered rooms for maintenance. Show that all the guests can remain in the hotel.
+    \item If a countably infinite number of buses, each containing a countably infinite number of guests, arrive at the Grand Hotel, show that the arriving guests can be accommodated without evicting any of the current guests.
+    \end{enumerate}
+
+\end{enumerate}
+
+\end{document}
