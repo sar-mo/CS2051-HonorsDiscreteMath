@@ -1,143 +1,150 @@
-\documentclass{article}
-\usepackage[margin=1in]{geometry}
-\usepackage{amsmath, amssymb, amsthm}
-\usepackage{enumitem}
+% \documentclass{article}
+% \usepackage[margin=1in]{geometry}
+% \usepackage{amsmath, amssymb, amsthm}
+% \usepackage{enumitem}
 
-% colored links
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,      
-    urlcolor=blue,
-    }
-
-
-% Inputting Python code
-\usepackage[dvipsnames]{xcolor}
-\definecolor{textblue}{rgb}{.2,.2,.7}
-\definecolor{textred}{rgb}{0.54,0,0}
-\definecolor{textgreen}{rgb}{0,0.43,0}
-\usepackage{upquote}
-\usepackage{listings}
-\lstset{
-    language=Python, 
-    tabsize=4,
-    basicstyle={\ttfamily},
-    keywordstyle=\color{textblue},
-    commentstyle=\color{textgreen},
-    stringstyle=\color{textred},
-    frame=none,
-    columns=fullflexible,
-    keepspaces=true,
-    showstringspaces=false,
-    xleftmargin=-15mm, % manual adjustment, figure out permanent solution
-}
-
-%Creating algorithms
-\usepackage{algorithm}
-\usepackage[noend]{algpseudocode}
-
-\usepackage{tcolorbox}
-\tcbuselibrary{skins,hooks}
-\usetikzlibrary{shadows}
-\usepackage{lipsum}
-
-%Images
-\usepackage{graphicx}
-    \usepackage{subcaption}
-    \usepackage{float}
-    % \usepackage[labelsep=period]{caption}
-
-%Formatting and Spacing
-\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
-\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
-\setlength\parindent{0pt}
-\linespread{1.1}
-
-% title
-\title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Homework 5 Supplement}
-\author{Sarthak Mohanty }
-\date{}
-
-\begin{document}
-
-\maketitle
+% % colored links
+% \usepackage{hyperref}
+% \hypersetup{
+%     colorlinks=true,
+%     linkcolor=blue,
+%     filecolor=magenta,      
+%     urlcolor=blue,
+%     }
 
 
-\textbf{Overview}
-    Traditionally, computer software has been written for serial computation: instructions corrresponding to a tasks are executed on one processing unit at a time.
+% % Inputting Python code
+% \usepackage[dvipsnames]{xcolor}
+% \definecolor{textblue}{rgb}{.2,.2,.7}
+% \definecolor{textred}{rgb}{0.54,0,0}
+% \definecolor{textgreen}{rgb}{0,0.43,0}
+% \usepackage{upquote}
+% \usepackage{listings}
+% \lstset{
+%     language=Python, 
+%     tabsize=4,
+%     basicstyle={\ttfamily},
+%     keywordstyle=\color{textblue},
+%     commentstyle=\color{textgreen},
+%     stringstyle=\color{textred},
+%     frame=none,
+%     columns=fullflexible,
+%     keepspaces=true,
+%     showstringspaces=false,
+%     xleftmargin=-15mm, % manual adjustment, figure out permanent solution
+% }
+
+% %Creating algorithms
+% \usepackage{algorithm}
+% \usepackage[noend]{algpseudocode}
+
+% \usepackage{tcolorbox}
+% \tcbuselibrary{skins,hooks}
+% \usetikzlibrary{shadows}
+% \usepackage{lipsum}
+
+% %Images
+% \usepackage{graphicx}
+%     \usepackage{subcaption}
+%     \usepackage{float}
+%     % \usepackage[labelsep=period]{caption}
+
+% %Formatting and Spacing
+% \setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+% \setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+% \setlength\parindent{0pt}
+% \linespread{1.1}
+
+% % title
+% \title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Homework 5 Supplement}
+% \author{Sarthak Mohanty }
+% \date{}
+
+% \begin{document}
+
+% \maketitle
+
+% Oultine/Ideas
+% \begin{itemize}
+%     \item Begin by introducing relations and their properties. Introduce partial orders. Make students check properties through code.
+%     \item Make sure to establish connection between relations and functions, perhaps also explain connection between realtions and graphs, or even functions and graphs.
+%     \item Another idea: Introduce dependency graph, make sutdents construct build order: to make more difficult, may be possible to not have build order
+% \end{itemize}
+
+
+% % \textbf{Overview}
+% %     Traditionally, computer software has been written for serial computation: instructions corrresponding to a tasks are executed on one processing unit at a time.
 
 
 
-  computational task consisted of many elementary operations, some of which had to be computed sequentially, while others could be computed in parallel. 
+% %   computational task consisted of many elementary operations, some of which had to be computed sequentially, while others could be computed in parallel. 
 
-  In a distributed computing class, one of the first things you learn is \textbf{Amdahl’s law}, which gives a quantitative measure of the speedup $S$ -i.e., how much faster the task can be performed by using $n$ parallel processors:
-  $$S = \frac{1}{1 - p + \frac{p}{n}}.$$ Here, $p$ is the proportion of operations that can be performed in parallel.
+% %   In a distributed computing class, one of the first things you learn is \textbf{Amdahl’s law}, which gives a quantitative measure of the speedup $S$ -i.e., how much faster the task can be performed by using $n$ parallel processors:
+% %   $$S = \frac{1}{1 - p + \frac{p}{n}}.$$ Here, $p$ is the proportion of operations that can be performed in parallel.
 
-    \vspace{2mm}
-    However, it is not typically the case that we can classify operations simply as “parallel” or “sequential.” Instead, a task might consist of several sub-tasks, some of which need to be completed before others are started. The ordering of these subtasks, as well as computing the speedup, is a much harder problem (comparable in difficulty to the \verb+SAT+ problem encountered previously).
+% %     \vspace{2mm}
+% %     However, it is not typically the case that we can classify operations simply as “parallel” or “sequential.” Instead, a task might consist of several sub-tasks, some of which need to be completed before others are started. The ordering of these subtasks, as well as computing the speedup, is a much harder problem (comparable in difficulty to the \verb+SAT+ problem encountered previously).
 
-    \vspace{2mm}
-    In this supplement, you'll develop the mathematical intuition to formally represent this problem. You've learned about functions, now you'll learn about a specialized version of them known as \textbf{relations}.
+% %     \vspace{2mm}
+% %     In this supplement, you'll develop the mathematical intuition to formally represent this problem. You've learned about functions, now you'll learn about a specialized version of them known as \textbf{relations}.
     
     
-    You'll then apply different techniques to solve and analyze different applications of this problem.
+% %     You'll then apply different techniques to solve and analyze different applications of this problem.
 
 
 
 
 
-\section*{Relations}
+% % \section*{Relations}
 
-    Recall the definition of a relation:
+% %     Recall the definition of a relation:
     
-    \vspace{1.5mm}
-    \textbf{Definition} a \textit{relation} is a subset of the Cartesian product $A\times B$.
+% %     \vspace{1.5mm}
+% %     \textbf{Definition} a \textit{relation} is a subset of the Cartesian product $A\times B$.
     
-    \vspace{1.5mm}
-    We denote relations by $\mathcal{R}$. We write $a\mathcal{R} b$ to indicate that $(a,b)\in \mathcal{R}$ (i.e.: in the subset denoted by $\mathcal{R}$). When $A=B$ we said that $\mathcal{R}$ is a relation on $A$.\\
+% %     \vspace{1.5mm}
+% %     We denote relations by $\mathcal{R}$. We write $a\mathcal{R} b$ to indicate that $(a,b)\in \mathcal{R}$ (i.e.: in the subset denoted by $\mathcal{R}$). When $A=B$ we said that $\mathcal{R}$ is a relation on $A$.\\
     
-    Let $\mathcal{R}_1, \dots, \mathcal{R}_4$ be a relation on $A = \{1, 2, 3, 4\}$.
-    \begin{itemize}
-        \item $\mathcal{R}_1 = \{(a, b) \mid a \le b)\}$
-        \item $\mathcal{R}_2 = \{(a, b) \mid a = b)\}$
-        \item $\mathcal{R}_3 = \{(a, b) \mid a+b \le 2022)\}$
-        \item $\mathcal{R}_4 = \{(a, b) \mid a \text{ divides } b\}$
-    \end{itemize}
-    So why relations? They are more general and allow us to study more complex sets. Elaborate. \\
+% %     Let $\mathcal{R}_1, \dots, \mathcal{R}_4$ be a relation on $A = \{1, 2, 3, 4\}$.
+% %     \begin{itemize}
+% %         \item $\mathcal{R}_1 = \{(a, b) \mid a \le b)\}$
+% %         \item $\mathcal{R}_2 = \{(a, b) \mid a = b)\}$
+% %         \item $\mathcal{R}_3 = \{(a, b) \mid a+b \le 2022)\}$
+% %         \item $\mathcal{R}_4 = \{(a, b) \mid a \text{ divides } b\}$
+% %     \end{itemize}
+% %     So why relations? They are more general and allow us to study more complex sets. Elaborate. \\
     
-\subsection*{Properties}
+% % \subsection*{Properties}
     
-    \begin{itemize}
-        \item \underline{Reflexive:} $(\forall a \in A)(a\mathcal{R}a)$
-        \item \underline{Symmetric:} $(\forall a, b \in A)(a\mathcal{R}b \iff b\mathcal{R}a)$
-        \item \underline{Antisymmetric:} $(\forall a, b\in A)(a\mathcal{R}b \wedge b\mathcal{R}a \rightarrow a=b)$
-        \item \underline{Transitive:} $(\forall a, b, c\in A)(a\mathcal{R}b \wedge b\mathcal{R}c \rightarrow a\mathcal{R}c)$
-    \end{itemize}
+% %     \begin{itemize}
+% %         \item \underline{Reflexive:} $(\forall a \in A)(a\mathcal{R}a)$
+% %         \item \underline{Symmetric:} $(\forall a, b \in A)(a\mathcal{R}b \iff b\mathcal{R}a)$
+% %         \item \underline{Antisymmetric:} $(\forall a, b\in A)(a\mathcal{R}b \wedge b\mathcal{R}a \rightarrow a=b)$
+% %         \item \underline{Transitive:} $(\forall a, b, c\in A)(a\mathcal{R}b \wedge b\mathcal{R}c \rightarrow a\mathcal{R}c)$
+% %     \end{itemize}
 
-    Some examples of relations:
+% %     Some examples of relations:
 
 
-\section*{Partially Ordered Sets}
+% % \section*{Partially Ordered Sets}
 
-\subsection*{Part 1: Single Processor with Dependency}
+% % \subsection*{Part 1: Single Processor with Dependency}
 
-\section*{Task Scheduling}
+% % \section*{Task Scheduling}
 
-    % title={The title},
-    \begin{tcolorbox}[enhanced,watermark graphics=images/circuit,
-    watermark opacity=0.9,watermark stretch=1, watermark overzoom = 1.2]
-        \color{white}
+% %     % title={The title},
+% %     \begin{tcolorbox}[enhanced,watermark graphics=images/circuit,
+% %     watermark opacity=0.9,watermark stretch=1, watermark overzoom = 1.2]
+% %         \color{white}
 
-        \textbf{Your task is as follows:}
+% %         \textbf{Your task is as follows:}
         
         
-        \vspace{3mm}
-        \lipsum[4]
+% %         \vspace{3mm}
+% %         \lipsum[4]
 
-        \vspace{3mm}
-        \lipsum[3]
-    \end{tcolorbox}
+% %         \vspace{3mm}
+% %         \lipsum[3]
+% %     \end{tcolorbox}
 
-\end{document}
+% \end{document}

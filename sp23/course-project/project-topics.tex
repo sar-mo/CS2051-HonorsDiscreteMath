@@ -291,26 +291,27 @@ I \textbf{highly} recommend using \href{https://www.quantamagazine.org/how-godel
 
 \pagebreak 
 
-\section{Recommendation Systems}
-    A \textit{recommendation system} is a system that predicts the "rating" or "preference" a user would give to an item. It is commonly used in a variety of applications such as movie recommendation, product recommendation, etc. They are used everywhere nowadays, from Google advertisements to TikTok videos.
-    
+\section{Association Rule Learning}
+    Association Rule Learning is a data mining technique used to uncover the relationships between items within large datasets. Given a set of items $I = {i_{1}, i_{2}, ..., i_{m}}$ and a set of transactions $T = {t_{1}, t_{2}, ..., t_{n}}$, where each transaction is a set of items, the goal of association rule learning is to find rules of the form $X \rightarrow Y$, where $X$ and $Y$ are subsets of $I$, that are considered to be strongly associated within the transactions.
+
     \vspace{3mm}
-    In this project, we will consider a specific type of recommendation system, \textit{collaborative filtering}. Collaborative filtering is based on the idea that users who have similar preferences in the past are likely to have similar preferences in the future. 
+    One of the most common measures of association strength is support, defined as the fraction of transactions that contain both $X$ and $Y$: $$\text{Support}(X \rightarrow Y) = \frac{|{t \in T \mid X \subseteq t \text{\ and\ } Y \subseteq t}|}{|T|}$$
+
+    Another common measure of association strength is confidence, defined as the fraction of transactions that contain $X$ that also contain $Y$: $$\text{Confidence}(X \rightarrow Y) = \frac{|{t \in T \mid X \subseteq t \text{\ and\ } Y \subseteq t}|}{|{t \in T \mid X \subseteq t}|}$$
     
+    A common approach to finding association rules is to set a minimum threshold for both support and confidence and then use an algorithm to identify all the rules that meet these requirements. A well-known algorithm for this is the Apriori algorithm, which uses the concept of itemset lattices to reduce the number of item combinations that need to be considered.
+
     \vspace{3mm}
-    Given a user-item matrix $R$ with entries $r_{ij}$ denoting the rating user $i$ gives to item $j$, the goal of collaborative filtering is to estimate the missing entries in the matrix. One popular method to accomplish this is \textit{matrix factorization}. The idea is to factorize the matrix $R$ into two matrices $U$ and $V$, where $U$ is a user-feature matrix and $V$ is an item-feature matrix. That is, $$R \approx UV^T$$ where $U_{i,:}$ is a feature vector for user $i$ and $V_{j,:}$ is a feature vector for item $j$.
-    
-    \vspace{3mm}
-    The optimization problem of matrix factorization is to minimize the difference between the estimated ratings and the actual ratings:
-    $$\min_{U,V} \sum_{(i,j) \in \Omega}(r_{ij} - u_i^T v_j)^2$$ where $\Omega$ is the set of observed entries in the matrix $R$.
-    
-    \vspace{3mm}
-    A couple of possible areas for extension or generalizations are as follows:
+    There are several areas for extension or generalization of association rule learning, including:
     \begin{itemize}
-        \item Consider incorporating additional information such as user demographics or item features into the recommendation system. For example, we can add a bias term for each user and item, and a feature term for each item, resulting in the following equation: $$r_{ij} = u_i^T v_j + b_i + c_j + \sum_{k = 1}^{d} x_{j,k}w_{k}$$ where $b_i$ and $c_j$ are biases for user $i$ and item $j$, and $x_{j,k}$ is a feature of item $j$ and $w_k$ is a feature weight.
-        \item Consider the case where the ratings are not explicit, but instead are binary (e.g., a user either clicked or did not click on an item). One popular method in this case is \textit{matrix completion with implicit feedback}. The idea is to assume that the observed binary feedback can be considered as an implicit rating and use matrix factorization to estimate the missing ratings.
+        \item Using alternative measures of association strength, such as lift, conviction, or interestingness.
+        \item Using algorithms that incorporate domain knowledge, such as decision trees, clustering, or Bayesian networks.
+        \item Incorporating additional information, such as transaction timestamps, demographic data, or contextual data.
+        \item Handling missing or noisy data, such as using imputation techniques or data cleaning methods.
+        \item Scalability, such as implementing parallel or distributed algorithms to handle extremely large datasets.
     \end{itemize}
-    The coding component of this project is relatively straightforward: develop a recommendation system, and demonstrate its functionality in some way. \href{https://en.wikipedia.org/wiki/Collaborative_filtering#/media/File:Collaborative_filtering.gif}{This} animation gives a good illustration of how such a system should work.
+    
+    This project may involve exploring one or more of these areas, conducting a comprehensive comparison of different algorithms, or applying association rule learning to a real-world problem and evaluating its results.
 
 \pagebreak
 
