@@ -34,20 +34,41 @@
 \maketitle
 \begin{enumerate}
 
-\item Let $S$ be the set that contains a set x if the set x does not belong to itself, so that $S = \{x \vert x \not\in x\}.$
-\begin{itemize}
-    \item Show the assumption that $S$ is a member of $S$ leads to a contradiction.
-    \item Show the assumption that $S$ is not a member of $S$ leads to a contradiction.
-\end{itemize}
+\item The purpose of this problem is to show how the power set $\mathcal{P}(S)$ of a given set $S$, has always a different cardinality. We have a formula for the case that $S$ is finite, but it is less obvious for the infinite case. To fix ideas, we focus on the case $S=\mathbb{N}$.\\
 
-\item For all the following problems, describe the setup to the solution. I.e. do not just state that it is possible, explain how the hotel goes about accomodating the new guests.
+Show that there does not exist an onto function between $\mathbb{N}$ and its power set, $\mathcal{P}(\mathbb{N})$.\\
+
+ {\it Hint: proceed by contradiction assuming there is such function $f:\mathbb{N} \rightarrow \mathcal{P}(\mathbb{N})$. Let 
+ 
+ \[
+ T=\{n\in \mathbb{N}|~n\notin f(n) \}.
+ \]
+
+Since $f$ is onto, there exist $t\in \mathbb{N}$ such that $f(t)=T$. Argue a contradiction by looking at $t\in T$ and $t\notin T$.}
+
+\item The {\tt Brito-Caribbean-Royal Grand Hotel} has a countable infinite number of rooms, each occupied by a guest, due to its popular demand.
+
 \begin{enumerate}
-    \item A hotel called the Grand Hotel has a countably infinite number of rooms, each occupied by a guest. How can we accommodate a new guest arriving at the fully occupied hotel without removing any of the current guests?
+    \item  How can we accommodate a new guest arriving at the fully occupied hotel without removing any of the current guests?
     \item Show that a finite group of guests arriving at the Grand Hotel can be given rooms without evicting any current guests.
-    \item Suppose that the Grand Hotel is fully occupied, but the it closes all the even numbered rooms for maintenance. Show that all the guests can remain in the hotel.
-    \item If a countably infinite number of buses, each containing a countably infinite number of guests, arrive at the Grand Hotel, show that the arriving guests can be accommodated without evicting any of the current guests.
+    \item Brito, the owner of the hotel, decided to close all the even numbered rooms for maintenance. Show that all the guests can remain in the hotel.
+    \item A countable infinite number of buses, each containing a countable infinite number of guests, arrive at the hotel, show that the arriving guests can be accommodated without evicting any of the current guests.
     \end{enumerate}
+
+To earn full credit, carefully describe in each part how the hotel goes about accommodating the new guests.
 
 \end{enumerate}
 
 \end{document}
+
+
+
+
+****************
+
+
+Let $S$ be the set that contains a set x if the set x does not belong to itself, so that $S = \{x \vert x \not\in x\}.$
+\begin{itemize}
+    \item Show the assumption that $S$ is a member of $S$ leads to a contradiction.
+    \item Show the assumption that $S$ is not a member of $S$ leads to a contradiction.
+\end{itemize}
