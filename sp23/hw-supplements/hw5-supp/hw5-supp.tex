@@ -82,20 +82,18 @@
 \maketitle
 
 \section*{Overview}
-    \textbf{Note: This document and the autograder will be continuously updated until Monday morning, but the fundamentals remain the same.}
+
+   \qquad Traditionally, computer software has been written for serial computation: instructions corresponding to a tasks are executed on one processing unit at a time. However, nowadays many computational tasks consist of many elementary operations, some of which have to be computed sequentially, while others can be computed in parallel.
 
     \vspace{2mm}
-    Traditionally, computer software has been written for serial computation: instructions corresponding to a tasks are executed on one processing unit at a time. However, nowadays many computational tasks consist of many elementary operations, some of which had to be computed sequentially, while others could be computed in parallel. 
-
-    \vspace{2mm}
-    In a distributed or high performance computing course, one of the first things you may learn is \textbf{Amdahl’s law}, which gives a quantitative measure of the speedup $S$ -- i.e., how much faster the task can be performed by using $n$ parallel processors: $$S = \frac{1}{1 - p + \frac{p}{n}}.$$ Here, $p$ is the proportion of operations that can be performed in parallel.
+    \qquad In a distributed or high performance computing course, one of the first things you may learn is \href{https://en.wikipedia.org/wiki/Amdahls_law}{Amdahl’s law}, which gives a quantitative measure of the speedup $S$ -- i.e., how much faster the task can be performed by using $n$ parallel processors: $$S = \frac{1}{1 - p + \frac{p}{n}}.$$ Here, $p$ is the proportion of operations that can be performed in parallel.
 
 
     \vspace{2mm}
-    However, it is not typically the case that we can classify operations simply as “parallel” or “sequential.” Instead, a task might consist of several sub-tasks, some of which need to be completed before others are started. Optimally scheduling these tasks is much trickier, and is currently an area of \href{https://www.cs.umd.edu/~samir/DCscheduling18/slides/Janardhan%20Kulkarni.pdf}{active research}. However, with the right mathematical foundations, we can at least start to understand the complexity of task scheduling, and begin to develop efficient strategies for tackling ``easy" versions of the problem.
+    \qquad However, it is not typically the case that we can classify operations simply as “parallel” or “sequential.” Instead, a task might consist of several sub-tasks, some of which need to be completed before others are started. Optimally scheduling these tasks is much trickier, and is currently an area of \href{https://www.cs.umd.edu/~samir/DCscheduling18/slides/Janardhan Kulkarni.pdf}{active research}. However, with the right mathematical foundations, we can at least start to understand the complexity of task scheduling, and begin to develop efficient strategies for tackling ``easy" versions of the problem.
 
     \vspace{2mm}
-    In this supplement, you learn about a generalized form of functions known as \textbf{relations}, and explore the connection between functions and relations. You'll then learn about two important types of relations, including \textbf{equivalence relations} and \textbf{partial orders}. We'll explore some of the applications of these concepts, and finally return to our original problem of scheduling with multiple processors.
+    \qquad In this supplement, you learn about a generalized form of functions known as \textbf{relations}, and explore the connection between functions and relations. You'll then learn about two important types of relations, including \textbf{equivalence relations} and \textbf{partial orders}. Finally, we'll explore some of the applications of these concepts, including a return to our original problem of multi-processor scheduling.
 
 \section*{Part 1: Generalizing Functions with Relations}
 
@@ -149,7 +147,7 @@
 
     \vspace{3mm}
     \begin{tcolorbox}[colback=yellow!30]
-        In this part, you'll implement the functions \lstinline{isPartialOrder(elements, relation)} and \lstinline{isEquivalenceRelation(elements, relation)}. These functions takes in a relation (represented as a list of tuples) and returns whether or not the relation (taken over the set of elements) is a valid partial order or equivalence relation, respectively. You must use the following helper methods:
+        In this part, you'll implement the functions \lstinline{isPartialOrder(elements, relation)} and \lstinline{isEquivalenceRelation(elements, relation)}. These functions takes in a relation (represented as a set of tuples) and returns whether or not the relation (taken over the set of elements) is a valid partial order or equivalence relation, respectively. You must use the following helper methods:
         \begin{itemize}
             \item \lstinline{isReflexive(elements, relation)}
             \item \lstinline{isSymmetric(elements, relation)}
@@ -164,21 +162,21 @@
 
 
 \section*{Part 2: Partitioning with Equivalence Relations}
-    In the world of computer science, there are two main applications for relations: partitioning and scheduling. In this part, we'll cover partitioning, which is essentially just a reframing of our knowledge about equivalence relations. If any of the concepts introduced in this section feel rather hand-wavy, feel free to consult the textbook, which has rigorous proofs for the theorems.
+    In the world of computer science, there are two main applications for relations: partitioning and scheduling. In this part, we'll cover partitioning, which is essentially just a reframing of our knowledge about equivalence relations.
 
     \vspace{2mm}
     \textbf{Definition}: Given some relation $\mathcal{R}$ over the set $A$, the \textit{equivalence class} of an element $x \in A$ is $$[x] = \{y : x \mathcal{R} y\}$$
 
-    There is a very powerful theorem related to this concept:
+    These equivalencies have a very important theorem
 
+    \begin{tcolorbox}
+        \textbf{Theorem}: The equivalence classes of an equivalence relation on a set $A$ \textit{partition} $A$ into a collection of disjoint, nonempty subsets $A_{1}, A_{2}, \dots, A_{n}$ such that (and this is the important part) $\bigcup _{i = 1}^{n} = A$.
+    \end{tcolorbox}
+    
     \vspace{2mm}
-    \textbf{Important Theorem}: The equivalence classes of an equivalence relation on a set $A$ \textit{partition} $A$ into a collection of disjoint, nonempty subsets $A_{1}, A_{2}, \dots, A_{n}$ such that (and this is the important part) $\bigcup _{i = 1}^{n} = A$.
+    Ok, so this fact is cool and all, but what's the point? Well, if we have say a million elements in a set, but only three equivalence classes, we need only consider the three classes to understand the properties of the entire set. This is where the concept of \textit{canonical forms} comes in, which refers to the standard representation of a set in terms of its equivalence classes, making it easier to analyze and manipulate. The following examples provide more context onto these definitions.
 
-
-    \vspace{2mm}
-    Ok, so this fact is cool and all, but what's the point? Well, if we have say a million elements in a set, but only three equivalence classes, we need only consider those three classes to understand the properties of the entire set. This is where the concept of \textit{canonical forms} comes in, which refers to the standard representation of a set in terms of its equivalence classes, making it easier to analyze and manipulate.
-
-    \subsection*{Example 1: Congruence Relations}
+    \subsection*{Example: Congruence Relations}
         Our first example delves into \textit{number theory}, a field you will become more intimate with in the next few supplements. Informally, define the relation $a\mathcal{R}_{n}b$ over $\mathbb{Z} \times \mathbb{Z}$ if $a$ and $b$ have the same remainder when divided by some number $n$. We usually denote this using $$a \equiv b \pmod{n}.$$ For example, $-10$ and $15$ are related under $\mathcal{R}_{5}$, $$-10 \equiv 15 \pmod{5},$$ since $-10 - 15 = -25$ is a multiple of $5$, or equivalently since both $-10$ and $15$ have the same remainder $0$ when divided by $5$.
         
         \vspace{2mm}
@@ -191,7 +189,7 @@
         The canonical forms for each of these sets are $2$, $1$, and $3$ respectively (try to spot why!)
 
 
-    \subsection*{Example 2: Vector Spaces}
+    \subsection*{Example: Vector Spaces}
         One of the most prominent uses of equivalence classes is in linear algebra. After all, it's very difficult to determine when two vector spaces or matrices are functionally ``identical". 
 
         \vspace{3mm}
@@ -250,7 +248,7 @@
 
     % idea: quotient graph https://networkx.org/documentation/stable/_modules/networkx/algorithms/minors/contraction.html#equivalence_classes
 
-\section*{Part 3: Single Processor Task Scheduling}
+\section*{Part 3: Single-Processor Task Scheduling}
 
     We now delve into partial orderings, or ``posets". We'll cover a nice \textit{graph}ical representation of posets, and then cover their applications in the context of task scheduling. 
     
@@ -260,7 +258,7 @@
     To start, let's consider the following story. 
 
     \begin{tcolorbox}[colback=red!20]
-        You're a recently admitted CS major at Georgia Tech. To save money, you're trying to graduate as early as possible.  You have a lot of course that you can take, but you're not sure which ones to take when. Furthermore, many of the courses are dependent upon completion of other courses (for example, CS 2110 requires CS 1331, which in turn requires CS 1301). How long will it take for you to graduate?
+        You're a recently admitted CS major at Georgia Tech. To save money, you're trying to graduate as early as possible.  You have a lot of course that you can take, but you're not sure which ones to take when. Furthermore, many of the courses are dependent upon completion of other courses (for example, CS 1332 requires CS 1331, which in turn requires CS 1301). How long will it take for you to graduate?
     \end{tcolorbox}
 
     We can represent this problem as a poset $\mathcal{R}$ over the set of courses $A$, where $a \mathcal{R} b$ iff $a$ is a prerequisite to take $b$:
@@ -275,12 +273,12 @@
         \node[state] (1331) [below =of 1301] {1331};  
         \node[state] (1332) [below =of 1331] {1332};
         \node[state] (2051) [right =of 1332] {2051};  
-        \node[state] (2110) [below left =of 1332] {2110};  
+        \node[state] (4641) [below left =of 1332] {4641};  
         \node[state] (3600) [below =of 1332] {3600};  
         \node[state] (3511) [below right =of 1332] {3511};  
         \path (1301) edge (1331); % it is the path of the edge from one node to another  
         \path (1331) edge (1332);
-        \path (1332) edge (2110);
+        \path (1332) edge (4641);
         \path (1332) edge (3600);
         \path (1332) edge (3511);
         \path (2051) edge (3511);
@@ -354,10 +352,10 @@
         \lstinline{topological_sort(poset)}: This method takes in a partially ordered set defined on \lstinline{elements} (in the form of a dependency list) and returns a valid topological sort. We can use it to solve our course scheduling dilemma above:
 
         \begin{lstlisting}[belowskip=-10pt]
-            >>> topological_sort({'1301', '1331', '1332', '2110', '2051', '3600', '3511'},
-                    {('1301', '1331'), ('1331', '1332'), ('1331', '2110'),\
+            >>> topological_sort({'1301', '1331', '1332', '4641', '2051', '3600', '3511'},
+                    {('1301', '1331'), ('1331', '1332'), ('1332', '4641'),\
                      ('2051', '3511'), ('1332', '3511'), ('1332', '3600')})
-                ['2051', '1301', '1331', '2110', '1332', '3511', '3600']
+                ['2051', '1301', '1331', '1332', '4641', '3511', '3600']
         \end{lstlisting}
     \end{tcolorbox}
 
@@ -383,20 +381,27 @@
 
         If, for instance, we could take two courses a semester, we could generate an optimal schedule as follows:
     \begin{lstlisting}[belowskip=-10pt]
-        >>> generate_schedule({'1301', '1331', '1332', '2110', '2051', '3600', '3511'},
-                {('1301', '1331'), ('1331', '1332'), ('1331', '2110'),\
+        >>> generate_schedule({'1301', '1331', '1332', '4641', '2051', '3600', '3511'},
+                {('1301', '1331'), ('1331', '1332'), ('1332', '4641'),\
                  ('2051', '3511'), ('1332', '3511'), ('1332', '3600')}, 2)
-            ['1301', '2051'], ['1331'], ['1332'], ['2110', '3600'], ['3511']]]
+            ['1301', '2051'], ['1331'], ['1332'], ['4641', '3600'], ['3511']]]
     \end{lstlisting}
         \end{itemize}
+        Tip: If you've implemented the previous part correctly, this part should just be a few modifications.
         
     \end{tcolorbox}
 
 
 
-    \section*{(Optional) Processor Optimization}
-    What if we wanted to optimize the number of processors? In other words, what is the minimum number of processors such that increasing the number of processors does not decrease our latency? In the course scheduling example, it was easy to see that the optimal number of processors was $3$ by just looking at the dependency graph above. If we wanted to do this in general, one way would be to run \lstinline{generate_schedule} for all \lstinline{num_processors} from $1$ to \lstinline{len(elements)}, and then return the minimum.
+    \section*{(Optional) Part 5: Processor Optimization}
+    What if we wanted to optimize the number of processors? In other words, what is the minimum number of processors such that increasing the number of processors does not decrease our latency? In the course scheduling example, it was easy to see that the optimal number of processors was $3$ by just looking at the dependency graph above. 
+    
+    
+    \subsection*{Brute Force}
+    If we wanted to do this in general, one way would be to run \lstinline{generate_schedule} for all \lstinline{num_processors} from $1$ to \lstinline{len(elements)}, and then return the minimum.
 
+
+    \subsection*{Improvements and Further Reading}
     \vspace{3mm}
     However, note that this algorithm is not efficient, since there is the possibility that we have to run \lstinline{generate_schedule} many times. It seems natural to assume there is an efficient solution to this problem, and in fact there is! However, the details of the algorithm are far outside the scope of the course. If you really want to know, the details can be found in the \href{https://www.appliedcombinatorics.org/book/s_flowapplications_chain-partition.html}{MATH 3012 textbook}.
     
@@ -433,7 +438,6 @@
         \item The autograder may not reflect your final grade on the assignment. We reserve the right to run additional tests during grading.
         \item Do not import additional packages, as your submission may not pass the test cases or manual review.
     \end{itemize}
-
     
 
 \end{document}
