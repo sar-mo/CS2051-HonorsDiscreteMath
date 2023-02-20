@@ -20,8 +20,8 @@ Returns:
     True if the relation is reflexive, False otherwise.
 
 Example:
-    >>> isReflexive([{1, 2}, (1, 1), (2, 2)])
-    True
+    >>> isReflexive({1, 2, 3}, {(1, 2), (1, 1), (2, 2)})
+    False
 '''
 def isReflexive(elements: set, relation: set) -> bool:
     # YOUR CODE HERE
@@ -39,7 +39,7 @@ Returns:
     True if the relation is symmetric, False otherwise.
 
 Example:
-    >>> isSymmetric({1, 2, 3, 4, 5, 6}, [(1, 2), (2, 4), (3, 4), (4, 5), (5, 6), (6, 1)])
+    >>> isSymmetric({1, 2, 3, 4, 5, 6}, {(1, 2), (2, 4), (3, 4), (4, 5), (5, 6), (6, 1)})
     False
 '''
 def isSymmetric(elements: set, relation: set) -> bool:
@@ -58,7 +58,7 @@ Returns:
     True if the relation is anti-symmetric, False otherwise.
 
 Example:
-    >>> isAntiSymmetric({1, 2, 3, 4, 5, 6}, [(1, 2), (2, 4), (3, 4), (4, 5), (5, 6), (6, 1)])
+    >>> isAntiSymmetric({1, 2, 3, 4, 5, 6}, {(1, 2), (2, 4), (3, 4), (4, 5), (5, 6), (6, 1)})
     True
 '''
 def isAntiSymmetric(elements: set, relation: set) -> bool:
@@ -77,7 +77,7 @@ Returns:
     True if the relation is transitive, False otherwise.
 
 Example:
-    >>> isTransitive({1, 2, 3, 4, 5, 6}, [(1, 2), (2, 4), (3, 4), (4, 5), (5, 6), (6, 1)])
+    >>> isTransitive({1, 2, 3, 4, 5, 6}, {(1, 2), (2, 4), (3, 4), (4, 5), (5, 6), (6, 1)})
     False
 '''
 def isTransitive(elements: set, relation: set) -> bool:
@@ -96,7 +96,7 @@ Returns:
     True if the relation is a partial order, False otherwise.
 
 Example:
-    >>> isPartialOrder({1, 2, 3, 4, 5, 6}, [(1, 2), (2, 4), (3, 4), (4, 5), (5, 6), (6, 1)])
+    >>> isPartialOrder({1, 2, 3, 4, 5, 6}, {(1, 2), (2, 4), (3, 4), (4, 5), (5, 6), (6, 1)})
     False
 '''
 def isPartialOrder(elements: set, relation: set) -> bool:
@@ -115,7 +115,7 @@ Returns:
     True if the relation is an equivalence relation, False otherwise.
 
 Example:
-    >>> isEquivalenceRelation({1, 2}, [(1, 1), (2, 2)])
+    >>> isEquivalenceRelation({1, 2}, {(1, 1), (2, 2)})
     True
 '''
 def isEquivalenceRelation(elements: set, relation: set) -> bool:
