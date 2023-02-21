@@ -433,15 +433,21 @@
     What if we wanted to optimize the number of processors? In other words, what is the minimum number of processors such that increasing the number of processors does not decrease our latency? In the course scheduling example, it was easy to see that the optimal number of processors was $3$ by just looking at the corresponding dependency graph. However, with bigger graphs it's not always so easy.
     
     \subsection*{Brute Force}
-    If we wanted to do this in general, one way would be to run \lstinline{generate_schedule} for all \lstinline{num_processors} from $1$ to \lstinline{len(elements)}, and then return the minimum.
-
+    If we wanted to do this in general, one way would be to run \lstinline{generate_schedule} for all \lstinline{num_processors} from $1$ to \lstinline{len(elements)}, and then return the minimum, like so:
+    \begin{lstlisting}
+        def processor_optimization(elements, poset):
+            return next(i for i in range(1, len(elements)+1)\
+                if generate_schedule(elements, poset, i)\
+                == generate_schedule(elements, poset, i+1))
+    \end{lstlisting}
+    However, note that this algorithm is not considered efficient, since there is the possibility that we have to run \lstinline{generate_schedule} many times. 
 
     \subsection*{Improvements and Further Reading}
-    However, note that this algorithm is not efficient, since there is the possibility that we have to run \lstinline{generate_schedule} many times. It seems natural to assume there is an efficient solution to this problem, and in fact there is! However, the details of the algorithm are far outside the scope of the course. If you really want to know, the details can be found in the \href{https://www.appliedcombinatorics.org/book/s_flowapplications_chain-partition.html}{MATH 3012 textbook}.
+    It seems natural to assume there is an efficient solution to this problem, and in fact there is! However, the details of the algorithm are far outside the scope of the course. If you really want to know, the details can be found in the \href{https://www.appliedcombinatorics.org/book/s_flowapplications_chain-partition.html}{MATH 3012 textbook}.
     
     % \textbf{(warning: even most 3012 professors don't get far enough to cover this topic, so this is really advanced stuff!)}
     
-    \vspace{3mm} This processor optimization problem is also known as the \textit{dual} problem of Part 3. Duality is a fundamental concept in computer science, and you'll encounter it again in your Algorithms courses.
+    \vspace{3mm} This processor optimization problem is also known as the \textit{dual} problem of Part 4. Duality is a fundamental concept in computer science, and you'll encounter it again in your Algorithms courses.
 
 
 %     \subsubsection*{Incorrect Approach for processor optimization}
