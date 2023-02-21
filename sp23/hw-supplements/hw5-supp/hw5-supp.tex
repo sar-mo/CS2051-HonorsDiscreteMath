@@ -7,9 +7,9 @@
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
-    linkcolor=blue,
+    linkcolor=magenta,
     filecolor=magenta,      
-    urlcolor=blue,
+    urlcolor=magenta,
     }
 
 
@@ -59,10 +59,9 @@
 % the settings of tikz is used for the optimization of the graphs  
 \usetikzlibrary{shapes, arrows, calc, arrows.meta, fit, positioning} % these are the parameters passed to the library to create the node graphs  
 \tikzset{  
-    -Latex,auto,node distance =1.5 cm and 1.3 cm, thick,% node distance is the distance between one node to other, where 1.5cm is the length of the edge between the nodes  
+    -Latex,auto,node distance =1.3 cm and 1.1 cm, thick,% node distance is the distance between one node to other, where 1.5cm is the length of the edge between the nodes  
     state/.style ={ellipse, draw, minimum width = 0.9 cm}, % the minimum width is the width of the ellipse, which is the size of the shape of vertex in the node graph  
     point/.style = {circle, draw, inner sep=0.18cm, fill, node contents={}},  
-    bidirected/.style={Latex-Latex,dashed}, % it is the edge having two directions  
     el/.style = {inner sep=2.5pt, align=right, sloped}  
 }  
 
@@ -90,12 +89,12 @@
 
 
     \vspace{2mm}
-    \qquad However, it is not typically the case that we can classify operations simply as “parallel” or “sequential.” Instead, a task might consist of several sub-tasks, some of which need to be completed before others are started. Optimally scheduling these tasks is much trickier, and is currently an area of \href{https://www.cs.umd.edu/~samir/DCscheduling18/slides/Janardhan Kulkarni.pdf}{active research}. However, with the right mathematical foundations, we can at least start to understand the complexity of task scheduling, and begin to develop efficient strategies for tackling ``easy" versions of the problem.
+    \qquad However, it is not typically the case that we can classify operations simply as “parallel” or “sequential.” Instead, a task might consist of several sub-tasks, some of which need to be completed before others are started. Optimally scheduling these tasks is much trickier, and is currently an area of \href{https://www.cs.umd.edu/~samir/DCscheduling18/slides/Janardhan Kulkarni.pdf}{active research}. However, with the right mathematical foundations, we can at least start to understand the complexity of task scheduling, and develop efficient strategies for tackling ``easy" versions of these problems.
 
     \vspace{2mm}
     \qquad In this supplement, you learn about a generalized form of functions known as \textbf{relations}, and explore the connection between functions and relations. You'll then learn about two important types of relations, including \textbf{equivalence relations} and \textbf{partial orders}. Finally, we'll explore some of the applications of these concepts, including a return to our original problem of multi-processor scheduling.
 
-\section*{Part 1: Generalizing Functions with Relations}
+\section*{Part 1: Generalizing Functions with Relations (10 pts)}
 
     This week, you learned about functions. We (informally) defined them as a well-defined mapping between two sets. However, what about mappings that are not well-defined? Is there no way to represent these? As a matter of fact, there is!
     
@@ -147,73 +146,95 @@
 
     \vspace{3mm}
     \begin{tcolorbox}[colback=yellow!30]
-        In this part, you'll implement the functions \lstinline{isPartialOrder(elements, relation)} and \lstinline{isEquivalenceRelation(elements, relation)}. These functions takes in a relation (represented as a set of tuples) and returns whether or not the relation (taken over the set of elements) is a valid partial order or equivalence relation, respectively. You must use the following helper methods:
+        \textbf{In this part, you'll implement the following (one-line) functions:}
+        \begin{itemize}
+            \item \lstinline{isPartialOrder(elements, relation)}: This function takes in a relation (represented as a set of tuples) and returns whether or not the relation (taken over the set of elements) is a valid partial order.
+            \item \lstinline{isEquivalenceRelation(elements, relation)}: This function takes in the same arguments are before, but this time returns whether or not the relation is a valid equivalence relation.
+        \end{itemize}
+        You may also implement the following (self-explanatory) helper methods to assist in your solution, as long as they are also one-liners:
         \begin{itemize}
             \item \lstinline{isReflexive(elements, relation)}
             \item \lstinline{isSymmetric(elements, relation)}
             \item \lstinline{isAntisymmetric(elements, relation)}
             \item \lstinline{isTransitive(elements, relation)}
         \end{itemize}
-        \textbf{All methods (and all helper methods) must be implemented in one line.}
-        
-        Tip: Use the \lstinline{all()} method
+        \textbf{}
+
+        \vspace{2mm}
+        A few tips:
+        \begin{itemize}
+            \item The \lstinline{all(iterable)} method returns true if all elements of the iterable are true (or if the iterable is empty)
+            \item Now may also be a good time to learn (if you haven't already) about \href{https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions}{list comprehension}.
+        \end{itemize}
     \end{tcolorbox}
 
 
-
-\section*{Part 2: Partitioning with Equivalence Relations}
+\section*{Part 2: Partitioning with Equivalence Relations (10 pts)}
     In the world of computer science, there are two main applications for relations: partitioning and scheduling. In this part, we'll cover partitioning, which is essentially just a reframing of our knowledge about equivalence relations.
 
     \vspace{2mm}
-    \textbf{Definition}: Given some relation $\mathcal{R}$ over the set $A$, the \textit{equivalence class} of an element $x \in A$ is $$[x] = \{y : x \mathcal{R} y\}$$
+    \textbf{Definition}: Given some relation $\mathcal{R}$ over the set $A$, the \textit{equivalence class} of an element $x \in A$ is $[x] = \{y : x \mathcal{R} y\}$.
 
-    These equivalencies have a very important theorem
+    \vspace{2mm}
+
+    Equivalence classes are useful because they all us to ``break apart" any set into disjoint, nonempty subsets. The following theorem formalizes this idea.
 
     \begin{tcolorbox}
         \textbf{Theorem}: The equivalence classes of an equivalence relation on a set $A$ \textit{partition} $A$ into a collection of disjoint, nonempty subsets $A_{1}, A_{2}, \dots, A_{n}$ such that (and this is the important part) $\bigcup _{i = 1}^{n} = A$.
     \end{tcolorbox}
     
     \vspace{2mm}
-    Ok, so this fact is cool and all, but what's the point? Well, if we have say a million elements in a set, but only three equivalence classes, we need only consider the three classes to understand the properties of the entire set. This is where the concept of \textit{canonical forms} comes in, which refers to the standard representation of a set in terms of its equivalence classes, making it easier to analyze and manipulate. The following examples provide more context onto these definitions.
+    Ok, so this fact is cool and all, but what's the point? Well, if we have say a million elements in a set, but only three equivalence classes, we need only consider the three classes to understand the properties of the entire set. This is where the concept of \textit{canonical forms} comes in, which refers to the standard representation of a set in terms of its equivalence classes, making it easier to analyze and manipulate. If you're not convinced already, the following examples should illuminate the power of equivalence classes
 
     \subsection*{Example: Congruence Relations}
-        Our first example delves into \textit{number theory}, a field you will become more intimate with in the next few supplements. Informally, define the relation $a\mathcal{R}_{n}b$ over $\mathbb{Z} \times \mathbb{Z}$ if $a$ and $b$ have the same remainder when divided by some number $n$. We usually denote this using $$a \equiv b \pmod{n}.$$ For example, $-10$ and $15$ are related under $\mathcal{R}_{5}$, $$-10 \equiv 15 \pmod{5},$$ since $-10 - 15 = -25$ is a multiple of $5$, or equivalently since both $-10$ and $15$ have the same remainder $0$ when divided by $5$.
+        Our first example delves into basic number theory. Informally, define the relation $a\mathcal{R}_{n}b$ over $\mathbb{Z} \times \mathbb{Z}$ if $a$ and $b$ have the same remainder when divided by some number $n$. We usually denote this using $$a \equiv b \pmod{n}.$$ For example, $-10$ and $15$ are related under $\mathcal{R}_{5}$, $$-10 \equiv 15 \pmod{5},$$ since $-10 - 15 = -25$ is a multiple of $5$, or equivalently since both $-10$ and $15$ have the same remainder $0$ when divided by $5$.
         
         \vspace{2mm}
-        All such relations $\mathcal{R}_{n}$ are equivalence relations, and partition the set of integers into $n$ equivalence classes. For example, the relation $\mathcal{R}_{3}$ partitions the integers like so
+        All such relations $\mathcal{R}_{n}$ are equivalence relations. Thus, they partition the set of integers into $n$ disjoint, nonempty equivalence classes. For example, the relation $\mathcal{R}_{3}$ partitions the integers as
         \begin{gather*}
             \{\dots, -7, -4, -1, 2, 5, 8, \dots\} \\
             \{\dots, -8, -5, -2, 1, 4, 7, \dots\} \\
-            \{\dots, -6, -3, 0, 3, 6, 9, \dots\}
+            \{\dots, -9, -6, -3, 0, 3, 6, \dots\}
         \end{gather*}
-        The canonical forms for each of these sets are $2$, $1$, and $3$ respectively (try to spot why!)
+        The canonical forms for each of these sets are $2$, $1$, and $0$ respectively. An illustration for the congruency classes in general is shown in Figure (\ref{fig:congruency_classes}).
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[scale = .4]{sp23/hw-supplements/hw5-supp/images/congruence_classes.png}
+            \caption{The partition of the set of integers over the congruence relation $\mathcal{R}_{C}$.}
+            \label{fig:congruency_classes}
+        \end{figure}
+        
 
 
     \subsection*{Example: Vector Spaces}
         One of the most prominent uses of equivalence classes is in linear algebra. After all, it's very difficult to determine when two vector spaces or matrices are functionally ``identical". 
 
         \vspace{3mm}
-        If you've taken an introductory linear algebra course, you learned about Gauss's Method to solve a system of equations. In essence, it worked by starting with a matrix and deriving a sequence of other matrices, each \textit{row equivalent} to each other. It turns out that row equivalence is an equivalence relation, and partitions the set of all matrices into corresponding classes, as shown in Figure (\ref{fig:2}).
+        If you've taken an introductory linear algebra course, you learned about Gauss's Method to solve a system of equations. In essence, it worked by starting with a matrix and deriving a sequence of other matrices, each \textit{row equivalent} to each other. It turns out that row equivalence is an equivalence relation, and partitions the set of all matrices into corresponding classes, as shown in Figure (\ref{fig:1}).
 
         \vspace{3mm}
-        We can generalize this one step further with a relation known as \textit{matrix equivalence}. Matrix equivalent matrices represent the same map, with respect to appropriate pairs of bases. Matrix equivalence classes are also characterized by rank: two same-sized matrices are matrix equivalent if and only if they have the same rank. In fact, matrix similarity is a special case of matrix equivalence!
+        We can generalize this one step further with a relation known as \textit{matrix equivalence}. Two matrices are matrix equivalent if they be derived using a combination of row operations \textit{and} column operations. Matrix equivalence classes are also characterized by rank: two same-sized matrices are matrix equivalent if and only if they have the same rank.
+        
+        \vspace{2mm}
+        Looking at these definitions for matrix equivalence, you may notice they are analogous to the definition of matrix similarity you learned in your linear algebra course. This is no coincidence! In fact, matrix similarity is itself an equivalence relation, and is a special case of matrix equivalence! (see Figure (\ref*{fig:3}) for an illustration)
 
         \vspace{3mm}
-         The canonical forms for row equivalence are the Reduced Echelon form matrices, which you may already be familiar with. Meanwhile, the canonical forms for matrix similarity are Jordan Normal forms. (the canonical forms for matrix equivalence are a bit more complicated.)
+         The canonical forms for row equivalence are the Reduced Echelon form matrices, which you may already be familiar with. Meanwhile, the canonical forms for matrix similarity are known as Jordan Normal forms. The canonical forms for matrix equivalence are a bit more complicated, but an example is shown in Figure (\ref*{fig:2}).
         
         \begin{figure}[H]
             \centering
-            \begin{subfigure}{0.45\textwidth}
-                \centering
-                \includegraphics[scale = .22]{sp23/hw-supplements/hw5-supp/images/linalg_reduced_echelon_form_equiv_classes.png}
-                \caption{Two matrices with the same row space.}
-            \end{subfigure}
-            \begin{subfigure}{0.45\textwidth}
-                \centering
-                \includegraphics[scale = .33]{sp23/hw-supplements/hw5-supp/images/linalg_2by2_rank_equivalence_classes.png}
-                \caption{The canonical forms for the set of $2 \times 2$ matrices.}
-            \end{subfigure}
-            \caption{Row equivalence as an equivalence relation.}
+            \captionsetup{width=.6\linewidth}
+            \includegraphics[scale = .3]{sp23/hw-supplements/hw5-supp/images/linalg_reduced_echelon_form_equiv_classes.png}
+            \caption{The two matrices above have the same row rank. Thus under row equivalence, they are partitioned into the same equivalence class.}
+            \label{fig:1}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \captionsetup{width=.6\linewidth}
+            \includegraphics[scale = .4]{sp23/hw-supplements/hw5-supp/images/linalg_2by2_rank_equivalence_classes.png}
+            \caption{The canonical forms of each of the equivalence classes corresponding to matrix equivalence taken over the set of $2 \times 2$ matrices.}
             \label{fig:2}
         \end{figure}
 
@@ -221,14 +242,16 @@
             \centering
             \begin{subfigure}{0.45\textwidth}
                 \centering
-                \includegraphics[scale = .3]{sp23/hw-supplements/hw5-supp/images/linalg_matrix_equivalence_classes.png}
+                \includegraphics[scale = .35]{sp23/hw-supplements/hw5-supp/images/linalg_matrix_equivalence_classes.png}
+                \caption{$H$ and $\hat{H}$ are matrix equivalent.}
             \end{subfigure}
             \begin{subfigure}{0.45\textwidth}
                 \centering
-                \includegraphics[scale = .36]{sp23/hw-supplements/hw5-supp/images/linalg_matrix_similarity_equiv_classes.png}
+                \includegraphics[scale = .4]{sp23/hw-supplements/hw5-supp/images/linalg_matrix_similarity_equiv_classes.png}
+                \caption{The partitions of matrix similarity.}
             \end{subfigure}
-            \caption{Matrix similarity is a finer partition than matrix equivalence}
-            \label{fig:1}
+            \caption{Matrix similarity is a finer partition than matrix equivalence.}
+            \label{fig:3}
         \end{figure}
 
     \vspace{3mm}
@@ -238,7 +261,7 @@
             \item \lstinline{partition(elements, relation)}: This function takes a equivalence relation (this time represented as a boolean function), and returns a partition of the elements into equivalence classes. For example, given the congruence relation described above, the function should return
         \begin{lstlisting}[belowskip=-10pt]
             >>> partition([i for i in range(-8, 8)], lambda x, y: (x - y) % 3 == 0)
-            [{-6, -3, 0, 3, 6}, {-8, -5, -2, 1, 4, 7}, {-7, -4, -1, 2, 5, 8}]
+            [{-6, -3, 0, 3, 6}, {-8, -5, -2, 1, 4, 7}, {-7, -4, -1, 2, 5}]
         \end{lstlisting}
 
         \end{itemize}
@@ -248,7 +271,7 @@
 
     % idea: quotient graph https://networkx.org/documentation/stable/_modules/networkx/algorithms/minors/contraction.html#equivalence_classes
 
-\section*{Part 3: Single-Processor Task Scheduling}
+\section*{Part 3: Single-Processor Task Scheduling (10 pts)}
 
     We now delve into partial orderings, or ``posets". We'll cover a nice \textit{graph}ical representation of posets, and then cover their applications in the context of task scheduling. 
     
@@ -261,7 +284,20 @@
         You're a recently admitted CS major at Georgia Tech. To save money, you're trying to graduate as early as possible.  You have a lot of course that you can take, but you're not sure which ones to take when. Furthermore, many of the courses are dependent upon completion of other courses (for example, CS 1332 requires CS 1331, which in turn requires CS 1301). How long will it take for you to graduate?
     \end{tcolorbox}
 
-    We can represent this problem as a poset $\mathcal{R}$ over the set of courses $A$, where $a \mathcal{R} b$ iff $a$ is a prerequisite to take $b$:
+    Let $\mathcal{R}$ be a relation over the set of courses $A$, where $a \mathcal{R} b$ iff $a$ is a prerequisite to take $b$. We can use this relation to help model the graduation requirements, as follows:
+    $$\mathcal{R} = 
+    \left\{
+    \begin{array}{ccc}
+        (1301, 1301), & (1301, 1331), & (1301, 1332)\\
+        (1331, 1331), & (1331, 1332), & (1301, 4641) \\
+        (1332, 1332), & (2051, 3511), & (1301, 3600) \\
+        (2051, 2051), & (1332, 3511), & (1301, 3511) \\
+        (4641, 4641), & (1332, 3600), & (1331, 4641) \\
+        (3511, 3511), & (1332, 4641), & (1331, 3600) \\
+        (3511, 3600), & (1301, 1301) & (1331, 3511) \\
+    \end{array}
+    \right\}$$
+    However, this doesn't really provide us with much intuition. Since this relation is a partial order, we can visualize it using something called a \textbf{dependency graph}.
 
     \begin{center}
     \begin{tikzpicture}[scale = 0.7, transform shape]  
@@ -292,7 +328,6 @@
           
     \end{tikzpicture}  
     \end{center}
-    This is known as a \textit{dependency graph}.
 
 
 
@@ -308,19 +343,16 @@
         \item no single processor is performing multiple tasks at the same time (i.e., if a processor is assigned $T_{i}$ and $T_{j}$ at times $i, j$, then $i \ne j$) and
         \item for every pair of tasks $T_{i}$ and $T_{j}$ with $T_{i} \prec T_{j}$, task $T_{j}$ is scheduled to start some time after (or at the same time) $T_{i}$ completes. (i.e.\ $T_{i} \prec T_{j} \Rightarrow t_{j} > t_{i}$)
     \end{enumerate}
+    The \textbf{latency} of a schedule is the total time between when the first task is scheduled to when the last task completes. Our goal is to find a schedule with the smallest latency.
 
     \subsection*{Topological Sorting}
-    If we have only one processor, then the answer is fairly simple, just create a topological sorting. 
-    
-    \underline{The proof for this statement will be added in a future update.}
+    If we have only one processor, then constructing an algorithm to do this is fairly simple. Just schedule all the elements one by one in an order such that no element depends on any of the elements scheduled after it. This is also known as a topological sort.
     
     \vspace{3mm}
-    \textbf{Definition}: A topological sorting is a total ordering of a partially ordered set.
+    \textbf{Definition:} A \textit{topological sorting} is a total ordering of a partially ordered set.
 
     \vspace{3mm}
-    We present a common algorithm for finding the topological sort below, known as Kahn's algorithm. (Note: the pseudocode refers to \textit{minimal elements}. These are simply all elements $v$ such that there is no other element $u$ such that $(u, v) \in \mathcal{R}$)
-
-    
+    We present a common algorithm for finding the topological sort below, known as Kahn's algorithm. (Note: the pseudocode refers to \textit{minimal elements}. These are simply all elements $v$ such that there is no other element $u$ such that $(u, v) \in \mathcal{R}$.)
 
     \begin{algorithm}
         \caption{\textsc{KahnsAlgorithm}$(elements, poset)$}\label{alg:cap}
@@ -334,7 +366,7 @@
                 \State $T = T \cup \{u\}$
                 \State $uv\_dependencies = \{(u, v) : v \in elements \text{ and }(u, v) \in poset\}$
                 \For{each $(u, v)$ in $uv\_dependencies$}
-                    \If {v is minimal} insert $v$ in $S$ \EndIf
+                    \If {$v$ is minimal} insert $v$ in $S$ \EndIf
                 \EndFor
 
             \EndWhile
@@ -348,31 +380,35 @@
     \vspace{3mm}
     \begin{tcolorbox}[colback=yellow!30]
         \textbf{In this part, you'll implement the following function:}
-        
-        \lstinline{topological_sort(poset)}: This method takes in a partially ordered set defined on \lstinline{elements} (in the form of a dependency list) and returns a valid topological sort. We can use it to solve our course scheduling dilemma above:
+        \begin{itemize}
+            \item 
+        \lstinline{topological_sort(elements, poset)}: This method takes in a partially ordered set defined on \lstinline{elements} (in the form of a dependency list) and returns a valid topological sort. We can use it to solve our course scheduling dilemma above:
 
-        \begin{lstlisting}[belowskip=-10pt]
-            >>> topological_sort({'1301', '1331', '1332', '4641', '2051', '3600', '3511'},
-                    {('1301', '1331'), ('1331', '1332'), ('1332', '4641'),\
-                     ('2051', '3511'), ('1332', '3511'), ('1332', '3600')})
-                ['2051', '1301', '1331', '1332', '4641', '3511', '3600']
-        \end{lstlisting}
+    \begin{lstlisting}[belowskip=-10pt]
+        >>> topological_sort({'1301', '1331', '1332', '4641', '2051', '3600', '3511'},
+                {('1301', '1331'), ('1331', '1332'), ('1332', '4641'),\
+                 ('2051', '3511'), ('1332', '3511'), ('1332', '3600')})
+            ['2051', '1301', '1331', '1332', '4641', '3511', '3600']
+    \end{lstlisting}
+        \end{itemize}
     \end{tcolorbox}
 
-\section*{Part 4: Multi-Processor Task Scheduling}
+\section*{Part 4: Multi-Processor Task Scheduling (10 pts)}
+    % \textbf{Definition} A \textit{chain} is such that every distinct pair of elements is comparable in $\mathcal{P}$.
 
-    \textbf{Definition} A \textit{chain} is such that every distinct pair of elements is comparable in $\mathcal{P}$.
+    % Note that the time it takes to schedule tasks, even with an unlimited number of processors, is at least the length of the longest chain. Indeed, if we used less time, then two items from a longest chain would have to be done at the same time, which contradicts the precedence constraints. 
 
-    Note that the time it takes to schedule tasks, even with an unlimited number of processors, is at least the length of the longest chain. Indeed, if we used less time, then two items from a longest chain would have to be done at the same time, which contradicts the precedence constraints. 
 
+    % \vspace{2mm}
+    % The nice thing about posets is that this is always possible! In other words, for any poset, there is a legal parallel schedule that runs in $t$ steps, where $t$ is the length of the longest chain. This is known as Mirsky's theorem, and the proof can be found in the textbook.
+
+    Now let's suppose we had infinite processors. Then our previous algorithm is not as efficient as it could be, since we can parallelize our tasks. However, another approach for scheduling tasks with infinite processors is to split the partial order (poset) of the tasks into layers, where each layer contains tasks that can be executed in parallel without any dependencies among them.
 
     \vspace{2mm}
-    The nice thing about posets is that this is always possible! In other words, for any poset, there is a legal paralle schedule that runs in $t$ steps, where $t$ is the length of the longest chain. This is known as Mirsky's theorem:
-    
-    \underline{The proof for this statement will be added in a future update.}
+    In this approach, we would first identify the tasks that have no dependencies and add them to the first layer. Then, we remove these tasks from the poset and identify the next set of tasks that have no dependencies among themselves or with the tasks in the first layer. These tasks are added to the second layer, and the process is repeated until all tasks are assigned to a layer. The number of layers is then the speed at which we complete our task.
 
     \vspace{2mm}    
-    The case where there are a limited number of processors, however, is more useful in practice, as we'll see below.
+    However, it is often the case in practice that we only have a limited number of processors available at our disposal. Our approach in this case is similar, but not identical to the procedure we outline above for infinite processors. You are tasked to implement it below.
 
     \begin{tcolorbox}[colback=yellow!30]
         \textbf{In this part, you'll implement the following function:}
@@ -387,22 +423,20 @@
             ['1301', '2051'], ['1331'], ['1332'], ['4641', '3600'], ['3511']]]
     \end{lstlisting}
         \end{itemize}
-        Tip: If you've implemented the previous part correctly, this part should just be a few modifications.
+        Tip: If you've implemented Part 3 correctly, this task should only be a few modifications.
         
     \end{tcolorbox}
 
 
 
     \section*{(Optional) Part 5: Processor Optimization}
-    What if we wanted to optimize the number of processors? In other words, what is the minimum number of processors such that increasing the number of processors does not decrease our latency? In the course scheduling example, it was easy to see that the optimal number of processors was $3$ by just looking at the dependency graph above. 
-    
+    What if we wanted to optimize the number of processors? In other words, what is the minimum number of processors such that increasing the number of processors does not decrease our latency? In the course scheduling example, it was easy to see that the optimal number of processors was $3$ by just looking at the corresponding dependency graph. However, with bigger graphs it's not always so easy.
     
     \subsection*{Brute Force}
     If we wanted to do this in general, one way would be to run \lstinline{generate_schedule} for all \lstinline{num_processors} from $1$ to \lstinline{len(elements)}, and then return the minimum.
 
 
     \subsection*{Improvements and Further Reading}
-    \vspace{3mm}
     However, note that this algorithm is not efficient, since there is the possibility that we have to run \lstinline{generate_schedule} many times. It seems natural to assume there is an efficient solution to this problem, and in fact there is! However, the details of the algorithm are far outside the scope of the course. If you really want to know, the details can be found in the \href{https://www.appliedcombinatorics.org/book/s_flowapplications_chain-partition.html}{MATH 3012 textbook}.
     
     % \textbf{(warning: even most 3012 professors don't get far enough to cover this topic, so this is really advanced stuff!)}
