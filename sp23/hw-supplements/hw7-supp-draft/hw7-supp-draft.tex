@@ -62,9 +62,37 @@
 
 Title: ECC is the new RSA
 
-See now I think this is going to be \textbf{really interesting} because it's not covered in the textbook at all, and in fact ECC is not really ever taught in a discrete math course because historically we just used RSA / instructors never took the time to introduce it in a number theory context.
+\textbf{Note: only one part should be about full ECC implementation, the other parts should be about number theory in general, since the whole idea is covering mathematical concepts anyway.}
 
-They'll have to download Jupyter Notebook for this one, give instructions or make them use google collab
+\section*{Overview}
+
+Elliptic Curve Cryptography (ECC) is one of the most powerful cryptosystems in use today. Companies are using ECC everything to secure everything from our customers' HTTPS connections to how we pass data between our data centers. In fact, based on currently understood mathematics, ECC provides a significantly more secure foundation than first generation public key cryptography systems like RSA, for reasons we'll explore in detail later.
+
+\vspace{2mm}
+See now I think this supplement is going to be \textbf{really interesting} because it's not covered in the textbook at all, and in fact ECC is not really ever taught in a discrete math course because most people think it's too complicated to teach.
+
+\vspace{2mm}
+For this supplement, you'll be working with a Jupyter Notebook (.ipynb) file. To open it, you can either install Jupyter Notebook locally, or you can use Google Colab to work in the browser.
+
+
+
+
+\subsection*{Part 1: Assymetric Key Exchanges}
+
+
+\subsection*{Generalizing RSA: Trapdoor Functions}
+
+\begin{tcolorbox}
+% [colback=yellow!30]
+    In this part, you'll fully implement the Diffie-Helman key exchange.
+    \end{tcolorbox}
+
+
+\vspace{2mm}
+
+
+
+
 
 
 Spitting ideas:
@@ -94,6 +122,62 @@ Spitting ideas:
     \item aside. make them see in practice (use google to check security of website, any good website should be using ECC like proton or cloudlfare)
     \item aside 2. if really uninspired just make them do something with RSA (maybe something small but imma do mostly new stuff)
 \end{itemize}
+
+
+\section*{Part 2: Enter Elliptic Curves}
+
+After the introduction of RSA and Diffie-Hellman, researchers explored other mathematics-based cryptographic solutions looking for other algorithms beyond factoring that would serve as good Trapdoor Functions. In 1985, cryptographic algorithms were proposed based on an (then) esoteric branch of mathematics called elliptic curves.
+
+
+\subsection*{The Elliptic-curve Discrete Log Function}
+
+% hmm, interesting argument against ECC for public: https://crypto.stackexchange.com/questions/59619/is-there-a-situation-where-rsa-cannot-be-replaced-with-ecc-symmetric-algorithm
+
+
+
+\begin{tcolorbox}
+% [colback=yellow!30]
+    In this part, you'll implement point addition and point multiplication on elliptic curves, as well as over finite fields.
+\end{tcolorbox}
+
+\section*{Part 3: ECC in Action: Elliptic-curve Diffie Helman}
+
+We'll be using the tinyec package for this part.
+
+% https://cryptobook.nakov.com/asymmetric-key-ciphers/ecdh-key-exchange-examples
+
+\begin{tcolorbox}
+% [colback=yellow!30]
+    In this part, you'll fully implement an Elliptic-curve Diffie-Helman key exchange. Of course, not by yourself. We'll be using the tinyec package to handle the elliptic curve generation. Lots of the functions are implemented for you.
+\end{tcolorbox}
+
+
+\subsection*{Conclusion}
+
+Put advantages, 
+
+use fewer memory and CPU resources, important as mobile computing becomes more ubiquitous
+
+
+less storage stuff, More secure
+
+Disadvantages, choosing the right elliptic curve, NIST distrust.
+
+
+Finally, neither ECC nor RSA are secure against quantum computers.
+
+assymetric not often used since takes long time. Instead, key exchange is done using assymetric andthen symmetric is used to send the actual messages.
+
+
+\section*{Submission Instructions (10 pts)}
+    After you fill the appropriate functions, convert the ECC.ipynb file to a .py file and submit it on Gradescope.
+
+    \vspace{3mm}
+    \textbf{Notes}
+    \begin{itemize}
+        \item The autograder may not reflect your final grade on the assignment. We reserve the right to run additional tests during grading.
+        \item Do not import additional packages, as your submission may not pass the test cases or manual review.
+    \end{itemize}
 
     
 

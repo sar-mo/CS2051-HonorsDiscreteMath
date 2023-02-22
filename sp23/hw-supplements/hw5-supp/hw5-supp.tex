@@ -7,11 +7,10 @@
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
-    linkcolor=magenta,
+    linkcolor=blue,
     filecolor=magenta,      
     urlcolor=magenta,
     }
-
 
 
 % Inputting Python code
@@ -34,6 +33,8 @@
     showstringspaces=false,
     xleftmargin=-15mm, % manual adjustment, figure out permanent solution
 }
+
+\newcommand{\gray}[1]{\textcolor{gray}{#1}}
 
 %Creating algorithms
 \usepackage{algorithm}
@@ -59,7 +60,7 @@
 % the settings of tikz is used for the optimization of the graphs  
 \usetikzlibrary{shapes, arrows, calc, arrows.meta, fit, positioning} % these are the parameters passed to the library to create the node graphs  
 \tikzset{  
-    -Latex,auto,node distance =1.3 cm and 1.1 cm, thick,% node distance is the distance between one node to other, where 1.5cm is the length of the edge between the nodes  
+    -Latex,auto,node distance =1.1 cm and 1.1 cm, thick,% node distance is the distance between one node to other, where 1.5cm is the length of the edge between the nodes  
     state/.style ={ellipse, draw, minimum width = 0.9 cm}, % the minimum width is the width of the ellipse, which is the size of the shape of vertex in the node graph  
     point/.style = {circle, draw, inner sep=0.18cm, fill, node contents={}},  
     el/.style = {inner sep=2.5pt, align=right, sloped}  
@@ -103,11 +104,11 @@
 
     \subsection*{Easy Examples}
     
-    Let $\mathcal{R}_1, \dots, \mathcal{R}_4$ be a relation on $A = \{1, 2, 3, 4\}$.
+    The following are all valid relations on $A \times A$, where $A = \{1, 2, 3, 4\}$
     \begin{itemize}
         \item $\mathcal{R}_1 = \{(a, b) \mid a \le b)\}$
         \item $\mathcal{R}_2 = \{(a, b) \mid a = b)\}$
-        \item $\mathcal{R}_3 = \{(a, b) \mid a+b \le 2022)\}$
+        \item $\mathcal{R}_3 = \{(a, b) \mid a+b \le 2023)\}$
         \item $\mathcal{R}_4 = \{(a, b) \mid a \text{ divides } b\}$
     \end{itemize}
 
@@ -184,7 +185,9 @@
     \end{tcolorbox}
     
     \vspace{2mm}
-    Ok, so this fact is cool and all, but what's the point? Well, if we have say a million elements in a set, but only three equivalence classes, we need only consider the three classes to understand the properties of the entire set. This is where the concept of \textit{canonical forms} comes in, which refers to the standard representation of a set in terms of its equivalence classes, making it easier to analyze and manipulate. If you're not convinced already, the following examples should illuminate the power of equivalence classes
+    Ok, so this fact is cool and all, but what's the point? Well, if we have say a million elements in a set, but only three equivalence classes, we need only consider the three classes to understand the properties of the entire set. This is where the concept of \textit{canonical forms} comes in, which refers to the standard representation of a set in terms of its equivalence classes, making it easier to analyze and manipulate.
+    
+    \vspace{2mm}If you're not convinced already, the following examples should illuminate the power of equivalence classes.
 
     \subsection*{Example: Congruence Relations}
         Our first example delves into basic number theory. Informally, define the relation $a\mathcal{R}_{n}b$ over $\mathbb{Z} \times \mathbb{Z}$ if $a$ and $b$ have the same remainder when divided by some number $n$. We usually denote this using $$a \equiv b \pmod{n}.$$ For example, $-10$ and $15$ are related under $\mathcal{R}_{5}$, $$-10 \equiv 15 \pmod{5},$$ since $-10 - 15 = -25$ is a multiple of $5$, or equivalently since both $-10$ and $15$ have the same remainder $0$ when divided by $5$.
@@ -226,7 +229,7 @@
             \centering
             \captionsetup{width=.6\linewidth}
             \includegraphics[scale = .3]{sp23/hw-supplements/hw5-supp/images/linalg_reduced_echelon_form_equiv_classes.png}
-            \caption{The two matrices above have the same row rank. Thus under row equivalence, they are partitioned into the same equivalence class.}
+            \caption{The two matrices above can be row reduced to each other. Thus under row equivalence, they are partitioned into the same equivalence class.}
             \label{fig:1}
         \end{figure}
 
@@ -234,7 +237,7 @@
             \centering
             \captionsetup{width=.6\linewidth}
             \includegraphics[scale = .4]{sp23/hw-supplements/hw5-supp/images/linalg_2by2_rank_equivalence_classes.png}
-            \caption{The canonical forms of each of the equivalence classes corresponding to matrix equivalence taken over the set of $2 \times 2$ matrices.}
+            \caption{The canonical forms of each of the equivalence classes corresponding to matrix equivalence taken over the set of $2 \times 2$ matrices. The matrices have rank $0$, $1$, and $2$ respectively.}
             \label{fig:2}
         \end{figure}
 
@@ -243,14 +246,14 @@
             \begin{subfigure}{0.45\textwidth}
                 \centering
                 \includegraphics[scale = .35]{sp23/hw-supplements/hw5-supp/images/linalg_matrix_equivalence_classes.png}
-                \caption{$H$ and $\hat{H}$ are matrix equivalent.}
+                \caption{The equivalence classes of matrix equivalence.}
             \end{subfigure}
             \begin{subfigure}{0.45\textwidth}
                 \centering
-                \includegraphics[scale = .4]{sp23/hw-supplements/hw5-supp/images/linalg_matrix_similarity_equiv_classes.png}
-                \caption{The partitions of matrix similarity.}
+                \includegraphics[scale = .41]{sp23/hw-supplements/hw5-supp/images/linalg_matrix_similarity_equiv_classes.png}
+                \caption{The equivalence classes of matrix similarity.}
             \end{subfigure}
-            \caption{Matrix similarity is a finer partition than matrix equivalence.}
+            \caption{Matrices $H$ and $\hat{H}$ may be matrix equivalent, but they may not be similar to each other.}
             \label{fig:3}
         \end{figure}
 
@@ -275,7 +278,6 @@
 
     We now delve into partial orderings, or ``posets". We'll cover a nice \textit{graph}ical representation of posets, and then cover their applications in the context of task scheduling. 
     
-
     \subsection*{Dependency Graphs}
     
     To start, let's consider the following story. 
@@ -284,55 +286,47 @@
         You're a recently admitted CS major at Georgia Tech. To save money, you're trying to graduate as early as possible.  You have a lot of course that you can take, but you're not sure which ones to take when. Furthermore, many of the courses are dependent upon completion of other courses (for example, CS 1332 requires CS 1331, which in turn requires CS 1301). How long will it take for you to graduate?
     \end{tcolorbox}
 
-    Let $\mathcal{R}$ be a relation over the set of courses $A$, where $a \mathcal{R} b$ iff $a$ is a prerequisite to take $b$. We can use this relation to help model the graduation requirements, as follows:
+    Let $\mathcal{R}$ be a relation over the set of courses $A$, where $a \mathcal{R} b$ iff $a$ is a prerequisite to take $b$. We can use this relation to help model some sample graduation requirements by creating a \textit{dependency list} as follows:
     $$\mathcal{R} = 
     \left\{
     \begin{array}{ccc}
-        (1301, 1301), & (1301, 1331), & (1301, 1332)\\
-        (1331, 1331), & (1331, 1332), & (1301, 4641) \\
-        (1332, 1332), & (2051, 3511), & (1301, 3600) \\
-        (2051, 2051), & (1332, 3511), & (1301, 3511) \\
-        (4641, 4641), & (1332, 3600), & (1331, 4641) \\
-        (3511, 3511), & (1332, 4641), & (1331, 3600) \\
-        (3511, 3600), & (1301, 1301) & (1331, 3511) \\
+        (1301, 1331), & \gray{(1301, 1301)}, & \gray{(1301, 1332),} \\
+        (1331, 1332), & \gray{(1331, 1331)}, & \gray{(1301, 4641),} \\
+        (2051, 3511),& \gray{(1332, 1332),} & \gray{(1301, 3600),} \\
+        (1332, 3511), & \gray{(2051, 2051),} & \gray{(1301, 3511),} \\
+        (1332, 3600), & \gray{(4641, 4641),} & \gray{(1331, 4641),} \\
+        (1332, 4641), & \gray{(3511, 3511),} & \gray{(1331, 3600),} \\
+        (1301, 1301), & \gray{(3511, 3600),} & \gray{(1331, 3511)} \\
     \end{array}
     \right\}$$
-    However, this doesn't really provide us with much intuition. Since this relation is a partial order, we can visualize it using something called a \textbf{dependency graph}.
-
-    \begin{center}
-    \begin{tikzpicture}[scale = 0.7, transform shape]  
-        % a is the name of the node and A is the text inside the node/vertex  
-        \node[state] (1301) at (0,0) {1301}; % here, state signifies that the shape of the node will be the shape declared in the above state/.style command.  
-      
-        % you can mention any location such as right, left, above, below, etc.  
-         
-        \node[state] (1331) [below =of 1301] {1331};  
-        \node[state] (1332) [below =of 1331] {1332};
-        \node[state] (2051) [right =of 1332] {2051};  
-        \node[state] (4641) [below left =of 1332] {4641};  
-        \node[state] (3600) [below =of 1332] {3600};  
-        \node[state] (3511) [below right =of 1332] {3511};  
-        \path (1301) edge (1331); % it is the path of the edge from one node to another  
-        \path (1331) edge (1332);
-        \path (1332) edge (4641);
-        \path (1332) edge (3600);
-        \path (1332) edge (3511);
-        \path (2051) edge (3511);
-      
-        % % Bidirected edge  
-        % \path[bidirected] (1331) edge[bend left=60] (1332); % this is the basic command in this code. It is used to draw the curved edge with a certain angle. You can change the angle according to the requirements.  
-          
-        % \path (a) edge (c);  
-        %  \path[bidirected] (a) edge[bend right=60] (c);  
-        %  \draw (b) -- (c);  
-          
-    \end{tikzpicture}  
-    \end{center}
-
-
-
-    % We can model these dependencies as a partial ordering. For example, the partial ordering (do one on classes) can be represented as a dependency graph, which in turn can be represented as a dependency list. (show illustration). Note how we
-
+    (the greyed-out tuples are added to ensure the relation is a partial order). However, this doesn't really provide us with much intuition. Since this relation is a partial order, we can alternatively visualize it using something called a \textbf{dependency graph}, an example of which is shown in Figure (\ref{fig:dependency_graph}). While programs can only understand dependency lists, you may find the graphical representation useful for testing and debugging your implementations for the remaining parts.
+    
+    \begin{figure}[htbp]
+            \centering
+            % \captionsetup{width=.7\linewidth}
+            \begin{tikzpicture}[scale = 0.8, transform shape]  
+                % a is the name of the node and A is the text inside the node/vertex  
+                \node[state] (1301) at (0,0) {1301}; % here, state signifies that the shape of the node will be the shape declared in the above state/.style command.  
+              
+                % you can mention any location such as right, left, above, below, etc.  
+                 
+                \node[state] (1331) [below =of 1301] {1331};  
+                \node[state] (1332) [below =of 1331] {1332};
+                \node[state] (2051) [right =of 1332] {2051};  
+                \node[state] (4641) [below left =of 1332] {4641};  
+                \node[state] (3600) [below =of 1332] {3600};  
+                \node[state] (3511) [below right =of 1332] {3511};  
+                \path (1301) edge (1331); % it is the path of the edge from one node to another  
+                \path (1331) edge (1332);
+                \path (1332) edge (4641);
+                \path (1332) edge (3600);
+                \path (1332) edge (3511);
+                \path (2051) edge (3511);
+                  
+            \end{tikzpicture} 
+            \caption{A dependency graph corresponding to some graduation requirements}
+            \label{fig:dependency_graph}
+        \end{figure}
 
     \subsection*{Task Scheduling}
     
@@ -346,10 +340,7 @@
     The \textbf{latency} of a schedule is the total time between when the first task is scheduled to when the last task completes. Our goal is to find a schedule with the smallest latency.
 
     \subsection*{Topological Sorting}
-    If we have only one processor, then constructing an algorithm to do this is fairly simple. Just schedule all the elements one by one in an order such that no element depends on any of the elements scheduled after it. This is also known as a topological sort.
-    
-    \vspace{3mm}
-    \textbf{Definition:} A \textit{topological sorting} is a total ordering of a partially ordered set.
+    If we have only one processor, then constructing an algorithm to do this is fairly simple. Just schedule all the elements one by one in an order such that no element depends on any of the elements scheduled after it. This is also known as a \textit{topological sort}.
 
     \vspace{3mm}
     We present a common algorithm for finding the topological sort below, known as Kahn's algorithm. (Note: the pseudocode refers to \textit{minimal elements}. These are simply all elements $v$ such that there is no other element $u$ such that $(u, v) \in \mathcal{R}$.)
@@ -368,16 +359,11 @@
                 \For{each $(u, v)$ in $uv\_dependencies$}
                     \If {$v$ is minimal} insert $v$ in $S$ \EndIf
                 \EndFor
-
             \EndWhile
-            
-                
             \State \Return{T}
         \end{algorithmic}
     \end{algorithm}
-
-
-    \vspace{3mm}
+    
     \begin{tcolorbox}[colback=yellow!30]
         \textbf{In this part, you'll implement the following function:}
         \begin{itemize}
@@ -391,6 +377,7 @@
             ['2051', '1301', '1331', '1332', '4641', '3511', '3600']
     \end{lstlisting}
         \end{itemize}
+    I'll be reviewing your implementation to ensure that it matches the pseudocode provided above.
     \end{tcolorbox}
 
 \section*{Part 4: Multi-Processor Task Scheduling (10 pts)}
@@ -433,19 +420,21 @@
     What if we wanted to optimize the number of processors? In other words, what is the minimum number of processors such that increasing the number of processors does not decrease our latency? In the course scheduling example, it was easy to see that the optimal number of processors was $3$ by just looking at the corresponding dependency graph. However, with bigger graphs it's not always so easy.
     
     \subsection*{Brute Force}
-    If we wanted to do this in general, one way would be to run \lstinline{generate_schedule} for all \lstinline{num_processors} from $1$ to \lstinline{len(elements)}, and then return the minimum, like so:
+    If we wanted to do this in general, one way would be to run \lstinline{generate_schedule} for all \lstinline{num_processors} from $1$ to \lstinline{len(elements)}. The number of processors that maximizes performance can then be identified by finding the point where increasing \lstinline{num_processors} further no longer yields any improvement in performance:
+    
     \begin{lstlisting}
         def processor_optimization(elements, poset):
             return next(i for i in range(1, len(elements)+1)\
                 if generate_schedule(elements, poset, i)\
                 == generate_schedule(elements, poset, i+1))
     \end{lstlisting}
+    
     However, note that this algorithm is not considered efficient, since there is the possibility that we have to run \lstinline{generate_schedule} many times. 
 
     \subsection*{Improvements and Further Reading}
-    It seems natural to assume there is an efficient solution to this problem, and in fact there is! However, the details of the algorithm are far outside the scope of the course. If you really want to know, the details can be found in the \href{https://www.appliedcombinatorics.org/book/s_flowapplications_chain-partition.html}{MATH 3012 textbook}.
+    It seems natural to assume there is an efficient solution to this problem, and in fact there is! However, the details of the algorithm are far outside the scope of the course. If you really want to know, the details can be found in the \href{https://www.appliedcombinatorics.org/book/s_flowapplications_chain-partition.html}{MATH 3012 textbook}\footnote{Warning: even most sections of MATH 3012 don't get far enough to cover this topic.}.
     
-    % \textbf{(warning: even most 3012 professors don't get far enough to cover this topic, so this is really advanced stuff!)}
+    % \textbf{(, so this is really advanced stuff!)}
     
     \vspace{3mm} This processor optimization problem is also known as the \textit{dual} problem of Part 4. Duality is a fundamental concept in computer science, and you'll encounter it again in your Algorithms courses.
 
