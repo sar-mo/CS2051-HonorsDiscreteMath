@@ -253,7 +253,7 @@
                 \includegraphics[scale = .41]{sp23/hw-supplements/hw5-supp/images/linalg_matrix_similarity_equiv_classes.png}
                 \caption{The equivalence classes of matrix similarity.}
             \end{subfigure}
-            \caption{Matrices $H$ and $\hat{H}$ may be matrix equivalent, but they may not be similar to each other.}
+            \caption{Matrices $H$ and $\hat{H}$ are matrix equivalent, but they may not be similar to each other.}
             \label{fig:3}
         \end{figure}
 
@@ -283,7 +283,7 @@
     To start, let's consider the following story. 
 
     \begin{tcolorbox}[colback=red!20]
-        You're a recently admitted CS major at Georgia Tech. To save money, you're trying to graduate as early as possible.  You have a lot of course that you can take, but you're not sure which ones to take when. Furthermore, many of the courses are dependent upon completion of other courses (for example, CS 1332 requires CS 1331, which in turn requires CS 1301). How long will it take for you to graduate?
+        You're a recently admitted CS major at Georgia Tech. To save money, you're trying to graduate as early as possible.  You have a lot of courses you can take, but you're not sure which ones to take when. Furthermore, many of the courses are dependent upon completion of other courses (for example, CS 1332 requires CS 1331, which in turn requires CS 1301). How long will it take for you to graduate?
     \end{tcolorbox}
 
     Let $\mathcal{R}$ be a relation over the set of courses $A$, where $a \mathcal{R} b$ iff $a$ is a prerequisite to take $b$. We can use this relation to help model some sample graduation requirements by creating a \textit{dependency list} as follows:
@@ -292,7 +292,7 @@
     \begin{array}{ccc}
         (1301, 1331), & \gray{(1301, 1301)}, & \gray{(1301, 1332),} \\
         (1331, 1332), & \gray{(1331, 1331)}, & \gray{(1301, 4641),} \\
-        (2051, 3511),& \gray{(1332, 1332),} & \gray{(1301, 3600),} \\
+        (2051, 3511), & \gray{(1332, 1332),} & \gray{(1301, 3600),} \\
         (1332, 3511), & \gray{(2051, 2051),} & \gray{(1301, 3511),} \\
         (1332, 3600), & \gray{(4641, 4641),} & \gray{(1331, 4641),} \\
         (1332, 4641), & \gray{(3511, 3511),} & \gray{(1331, 3600),} \\
@@ -303,13 +303,8 @@
     
     \begin{figure}[htbp]
             \centering
-            % \captionsetup{width=.7\linewidth}
             \begin{tikzpicture}[scale = 0.8, transform shape]  
-                % a is the name of the node and A is the text inside the node/vertex  
                 \node[state] (1301) at (0,0) {1301}; % here, state signifies that the shape of the node will be the shape declared in the above state/.style command.  
-              
-                % you can mention any location such as right, left, above, below, etc.  
-                 
                 \node[state] (1331) [below =of 1301] {1331};  
                 \node[state] (1332) [below =of 1331] {1332};
                 \node[state] (2051) [right =of 1332] {2051};  
@@ -322,7 +317,6 @@
                 \path (1332) edge (3600);
                 \path (1332) edge (3511);
                 \path (2051) edge (3511);
-                  
             \end{tikzpicture} 
             \caption{A dependency graph corresponding to some graduation requirements}
             \label{fig:dependency_graph}
@@ -381,14 +375,6 @@
     \end{tcolorbox}
 
 \section*{Part 4: Multi-Processor Task Scheduling (10 pts)}
-    % \textbf{Definition} A \textit{chain} is such that every distinct pair of elements is comparable in $\mathcal{P}$.
-
-    % Note that the time it takes to schedule tasks, even with an unlimited number of processors, is at least the length of the longest chain. Indeed, if we used less time, then two items from a longest chain would have to be done at the same time, which contradicts the precedence constraints. 
-
-
-    % \vspace{2mm}
-    % The nice thing about posets is that this is always possible! In other words, for any poset, there is a legal parallel schedule that runs in $t$ steps, where $t$ is the length of the longest chain. This is known as Mirsky's theorem, and the proof can be found in the textbook.
-
     Now let's suppose we had infinite processors. Then our previous algorithm is not as efficient as it could be, since we can parallelize our tasks. However, another approach for scheduling tasks with infinite processors is to split the partial order (poset) of the tasks into layers, where each layer contains tasks that can be executed in parallel without any dependencies among them.
 
     \vspace{2mm}
@@ -400,7 +386,7 @@
     \begin{tcolorbox}[colback=yellow!30]
         \textbf{In this part, you'll implement the following function:}
         \begin{itemize}
-            \item \lstinline{generate_schedule(elements, poset, num_processors)}:  This method will solve the original problem defined in ``Task Scheduling". It should return a valid schedule in the form of a list of lists, where the $i$-th element in the list represents the jobs we should schedule at time $t = i$.
+            \item \lstinline{generate_schedule(elements, poset, num_processors)}:  This method will solve the original problem defined in ``Task Scheduling". It should return an optimal valid schedule in the form of a list of lists, where the $i$-th element in the list represents the jobs we should schedule at time $t = i$.
 
         If, for instance, we could take two courses a semester, we could generate an optimal schedule as follows:
     \begin{lstlisting}[belowskip=-10pt]
@@ -410,7 +396,7 @@
             ['1301', '2051'], ['1331'], ['1332'], ['4641', '3600'], ['3511']]]
     \end{lstlisting}
         \end{itemize}
-        Tip: If you've implemented Part 3 correctly, this task should only be a few modifications.
+        Tip: Make sure your implementation finds the optimal schedules even when we add \lstinline{('1331', '2210')} and \lstinline{('1331', '2340')} to the dependency list above.
         
     \end{tcolorbox}
 
@@ -434,24 +420,7 @@
     \subsection*{Improvements and Further Reading}
     It seems natural to assume there is an efficient solution to this problem, and in fact there is! However, the details of the algorithm are far outside the scope of the course. If you really want to know, the details can be found in the \href{https://www.appliedcombinatorics.org/book/s_flowapplications_chain-partition.html}{MATH 3012 textbook}\footnote{Warning: even most sections of MATH 3012 don't get far enough to cover this topic.}.
     
-    % \textbf{(, so this is really advanced stuff!)}
-    
     \vspace{3mm} This processor optimization problem is also known as the \textit{dual} problem of Part 4. Duality is a fundamental concept in computer science, and you'll encounter it again in your Algorithms courses.
-
-
-%     \subsubsection*{Incorrect Approach for processor optimization}
-
-%     using the previous section, i'm sure many of you are picturing the following approach
-    
-%     apply a topological sort on the DAG
-%     traverse over the nodes by the topological order, calculate the minimum level:
-%     no parents: 0
-%     otherwise: minimum parent level + 1
-%     return the max level width (max num of nodes assigned the same level).
-
-%     However, this approach does not always work. For a salient counterexample, consider a tree.
-
-%     also discuss how bfs wouldnt work\
 
 \section*{Submission Instructions (10 pts)}
     After you fill the appropriate functions, submit the following files to Gradescope and make sure you pass all test cases:
