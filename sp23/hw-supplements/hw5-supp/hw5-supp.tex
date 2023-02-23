@@ -386,7 +386,7 @@
     \begin{tcolorbox}[colback=yellow!30]
         \textbf{In this part, you'll implement the following function:}
         \begin{itemize}
-            \item \lstinline{generate_schedule(elements, poset, num_processors)}:  This method will solve the original problem defined in ``Task Scheduling". It should return an optimal valid schedule in the form of a list of lists, where the $i$-th element in the list represents the jobs we should schedule at time $t = i$.
+            \item \lstinline{generate_schedule(elements, poset, num_processors)}:  This method will solve the original problem defined in ``Task Scheduling". It should return an optimal valid schedule in the form of a list of lists, where the $i$-th element in the list represents the tasks we should schedule at time $t = i$.
 
         If, for instance, we could take two courses a semester, we could generate an optimal schedule as follows:
     \begin{lstlisting}[belowskip=-10pt]
@@ -396,8 +396,17 @@
             ['1301', '2051'], ['1331'], ['1332'], ['4641', '3600'], ['3511']]]
     \end{lstlisting}
         \end{itemize}
-        Tip: Make sure your implementation finds the optimal schedules even when we add \lstinline{('1331', '2210')} and \lstinline{('1331', '2340')} to the dependency list above.
-        
+        Tips: 
+        \begin{itemize}
+            \item Make sure your implementation finds the optimal schedules even when we add \lstinline{('1331', '2110')} and \lstinline{('1331', '2340')} to the dependency list above.
+            \item You can sort an iterable based on some key using \lstinline{sorted(iterable, key=function)}. For example, you can sort a set of integers by absolute value like so:
+    \begin{lstlisting}[belowskip=-0.8 \baselineskip]
+        >>> sorted({-5, 1, 3, -2, 10}, key=lambda x : abs(x))
+        [1, -2, 3, -5, 10]
+    \end{lstlisting}
+        You might find this useful if you wanted to ``rank" tasks based on some attribute\ldots
+
+        \end{itemize}
     \end{tcolorbox}
 
 
@@ -415,7 +424,7 @@
                 == generate_schedule(elements, poset, i+1))
     \end{lstlisting}
     
-    However, note that this algorithm is not considered efficient, since there is the possibility that we have to run \lstinline{generate_schedule} many times. 
+    However, this algorithm is not considered efficient, since there is the possibility that we have to run \lstinline{generate_schedule} many times. 
 
     \subsection*{Improvements and Further Reading}
     It seems natural to assume there is an efficient solution to this problem, and in fact there is! However, the details of the algorithm are far outside the scope of the course. If you really want to know, the details can be found in the \href{https://www.appliedcombinatorics.org/book/s_flowapplications_chain-partition.html}{MATH 3012 textbook}\footnote{Warning: even most sections of MATH 3012 don't get far enough to cover this topic.}.
