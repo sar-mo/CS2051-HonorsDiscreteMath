@@ -60,7 +60,7 @@
 % the settings of tikz is used for the optimization of the graphs  
 \usetikzlibrary{shapes, arrows, calc, arrows.meta, fit, positioning} % these are the parameters passed to the library to create the node graphs  
 \tikzset{  
-    -Latex,auto,node distance =1.1 cm and 1.1 cm, thick,% node distance is the distance between one node to other, where 1.5cm is the length of the edge between the nodes  
+    auto,node distance =1.1 cm and 1.1 cm, thick,% node distance is the distance between one node to other, where 1.5cm is the length of the edge between the nodes  
     state/.style ={ellipse, draw, minimum width = 0.9 cm}, % the minimum width is the width of the ellipse, which is the size of the shape of vertex in the node graph  
     point/.style = {circle, draw, inner sep=0.18cm, fill, node contents={}},  
     el/.style = {inner sep=2.5pt, align=right, sloped}  
@@ -83,7 +83,7 @@
 
 \section*{Overview}
 
-   \qquad Traditionally, computer software has been written for serial computation: instructions corresponding to a tasks are executed on one processing unit at a time. However, nowadays many computational tasks consist of many elementary operations, some of which have to be computed sequentially, while others can be computed in parallel.
+   \qquad Traditionally, computer software has been written for serial computation: instructions corresponding to a tasks were executed on one processing unit at a time. Nowadays, however, many computational tasks can be broken down into multiple elementary operations, making it possible for programs to be parallelized.
 
     \vspace{2mm}
     \qquad In a distributed or high performance computing course, one of the first things you may learn is \href{https://en.wikipedia.org/wiki/Amdahls_law}{Amdahl’s law}, which gives a quantitative measure of the speedup $S$ -- i.e., how much faster the task can be performed by using $n$ parallel processors: $$S = \frac{1}{1 - p + \frac{p}{n}}.$$ Here, $p$ is the proportion of operations that can be performed in parallel.
@@ -102,19 +102,35 @@
     \vspace{3mm}
     \textbf{Definition.} a \textit{relation} $\mathcal{R}$ over sets $A, B$ is a subset of $A \times B$. The notation $a\mathcal{R}b$ or $a \sim b$ is often used to denote that $(a, b) \in \mathcal{R}$.
 
-    \subsection*{Easy Examples}
+    \subsection*{Examples}
     
-    The following are all valid relations on $A \times A$, where $A = \{1, 2, 3, 4\}$
-    \begin{itemize}
-        \item $\mathcal{R}_1 = \{(a, b) \mid a \le b)\}$
-        \item $\mathcal{R}_2 = \{(a, b) \mid a = b)\}$
-        \item $\mathcal{R}_3 = \{(a, b) \mid a+b \le 2023)\}$
-        \item $\mathcal{R}_4 = \{(a, b) \mid a \text{ divides } b\}$
-    \end{itemize}
+    The following are all relations defined on $A \times A$, where $A = \{1, 2, 3, 4\}$
+        \begin{itemize}
+            \item $\mathcal{R}_1 = \{(a, b) \mid a = b)\}$
+            \item $\mathcal{R}_2 = \{(a, b) \mid a+b \le 2023)\}$
+            \item $\mathcal{R}_3 = \{(a, b) \mid a \text{ divides } b)\}$
+        \end{itemize}
+        Another important example: we discussed in the beginning of the section how functions are a subset of relations. To see this, note that any relation $\mathcal{R} \colon A \rightarrow B$ that satisfies $(\forall x \in A)(\exists! y \in B) \ x \mathcal{R}y$ is a well-defined function.
 
-    \subsection*{Another Example: Functions}
-    Functions are also an example of relations. Specifically, a function is any relation $\mathcal{R}: A \rightarrow B$ with the property that for any $x$ there is exactly one $y$ such that $x\mathcal{R}y$.
-    
+        \vspace{2mm}
+        Even the 2D Cartesian plane we draw our functions upon is a relation, defined on the Cartesian product of integers:
+    $$\mathcal{R} = \{((a_{1}, b_{1}), (a_{2}, b_{2})) : a_{1} \le b_{1} \land  a_{2} \le b_{2}\}$$
+        % \begin{tikzpicture}[rotate=45, scale = .5, circ/.style={shape=circle, draw, node contents= {}, fill = white}, inner sep=1.5pt, transform shape]
+        %     \draw[dotted] (-4.5,-4.5) grid (4.5,4.5);
+        %     \draw (-3, -3) grid (3,3);
+        %     \draw[stealth-stealth, gray!50] (-5,0)--(5,0) node[right]{};
+        %     \draw[stealth-stealth, gray!50] (0,-5)--(0,5) node[above]{};
+        %     \foreach \x in {-3, -2, -1, 0, 1, 2, 3}
+        %           \foreach \y in {-3, -2, -1, 0, 1, 2, 3}
+        %             \draw node at (\x, \y) [circ];
+        %     %Coordinate Bashing
+        %     \draw node at (0, 0) [yshift = -15pt, xshift = 15pt] { \rotatebox{-45}{$(0, 0)$}};
+        %     \draw node at (-3, -3) [yshift = -7pt, xshift = -10pt] {\rotatebox{-45}{$(-3, -3)$}};
+        %     \draw node at (-3, 3) [yshift = 13pt, xshift = -15pt] {\rotatebox{-45}{$(-3, 3)$}};
+        %     \draw node at (3, -3) [yshift = -15pt, xshift = 17pt] {\rotatebox{-45}{$(3, -3)$}};
+        %     \draw node at (3, 3) [yshift = 8pt, xshift = 7pt] {\rotatebox{-45}{$(3, 3)$}};
+        % \end{tikzpicture}
+        Relations are all around us!
     
 \subsection*{Properties of A Relation $\mathcal{R} \colon A \rightarrow A$}
 
@@ -140,7 +156,7 @@
 
         $(\forall a, b, c\in A)(a\mathcal{R}b \wedge b\mathcal{R}c \rightarrow a\mathcal{R}c)$
 
-        ``If $a$ slept with $b$ and $b$ slept with $c$, then $a$ slept with $c$ too."
+        ``If $a$ slept with $b$ and $b$ slept with $c$, then $a$ slept with $c$ too ;)"
     \end{enumerate}
 
     When a relation is reflexive, antisymmetric, and transitive, we call it a \textit{partial order}. When a relation is reflexive, symmetric, and transitive, we call it a \textit{equivalence relation}.
@@ -199,31 +215,30 @@
             \{\dots, -8, -5, -2, 1, 4, 7, \dots\} \\
             \{\dots, -9, -6, -3, 0, 3, 6, \dots\}
         \end{gather*}
-        The canonical forms for each of these sets are $2$, $1$, and $0$ respectively. An illustration for the congruency classes in general is shown in Figure (\ref{fig:congruency_classes}).
+        The canonical forms for each of these sets are $2$, $1$, and $0$ respectively. An illustration for the congruency classes in general is shown in Figure \ref*{fig:congruency_classes}.
 
         \begin{figure}[htbp]
             \centering
+            \captionsetup{width=.8\linewidth}
             \includegraphics[scale = .4]{sp23/hw-supplements/hw5-supp/images/congruence_classes.png}
-            \caption{The partition of the set of integers over the congruence relation $\mathcal{R}_{C}$.}
+            \caption{The partition of the set of integers over the congruence relation $\mathcal{R}_{C}$, adopted from \href{https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/congruence-modulo}{Khan Academy}.}
             \label{fig:congruency_classes}
         \end{figure}
         
-
-
     \subsection*{Example: Vector Spaces}
-        One of the most prominent uses of equivalence classes is in linear algebra. After all, it's very difficult to determine when two vector spaces or matrices are functionally ``identical". 
+        One of the most prominent uses of equivalence classes is in linear algebra. After all, it's very difficult to determine when two vector spaces or matrices are functionally ``identical". Some of the following text and accompanying figures are adopted from the \href{https://hefferon.net/linearalgebra/}{MATH 1564} textbook.
 
         \vspace{3mm}
-        If you've taken an introductory linear algebra course, you learned about Gauss's Method to solve a system of equations. In essence, it worked by starting with a matrix and deriving a sequence of other matrices, each \textit{row equivalent} to each other. It turns out that row equivalence is an equivalence relation, and partitions the set of all matrices into corresponding classes, as shown in Figure (\ref{fig:1}).
+        If you've taken an introductory linear algebra course, you learned about Gauss's Method to solve a system of equations. In essence, it worked by starting with a matrix and deriving a sequence of other matrices, each \textit{row equivalent} to each other. It turns out that row equivalence is an equivalence relation, and partitions the set of all matrices into corresponding classes, as shown in Figure \ref*{fig:1}.
 
         \vspace{3mm}
         We can generalize this one step further with a relation known as \textit{matrix equivalence}. Two matrices are matrix equivalent if they be derived using a combination of row operations \textit{and} column operations. Matrix equivalence classes are also characterized by rank: two same-sized matrices are matrix equivalent if and only if they have the same rank.
         
         \vspace{2mm}
-        Looking at these definitions for matrix equivalence, you may notice they are analogous to the definition of matrix similarity you learned in your linear algebra course. This is no coincidence! In fact, matrix similarity is itself an equivalence relation, and is a special case of matrix equivalence! (see Figure (\ref*{fig:3}) for an illustration)
+        Looking at these definitions for matrix equivalence, you may notice they are analogous to the definition of matrix similarity you learned in your linear algebra course. This is no coincidence! In fact, matrix similarity is itself an equivalence relation, and is a special case of matrix equivalence! (see Figure \ref*{fig:3} for an illustration)
 
         \vspace{3mm}
-         The canonical forms for row equivalence are the Reduced Echelon form matrices, which you may already be familiar with. Meanwhile, the canonical forms for matrix similarity are known as Jordan Normal forms. The canonical forms for matrix equivalence are a bit more complicated, but an example is shown in Figure (\ref*{fig:2}).
+        The canonical forms for row equivalence are the Reduced Echelon form matrices, which you may already be familiar with. Meanwhile, the canonical forms for matrix similarity are known as Jordan Normal forms. The canonical forms for matrix equivalence are a bit more complicated, but an example is shown in Figure \ref*{fig:2}.
         
         \begin{figure}[H]
             \centering
@@ -266,10 +281,8 @@
             >>> partition([i for i in range(-8, 8)], lambda x, y: (x - y) % 3 == 0)
             [{-6, -3, 0, 3, 6}, {-8, -5, -2, 1, 4, 7}, {-7, -4, -1, 2, 5}]
         \end{lstlisting}
-
         \end{itemize}
-
-        Tip: iterating over sets is difficult. Try casting.
+        Tip: iterating over sets is difficult, but iterating over lists isn't as bad.
     \end{tcolorbox}
 
     % idea: quotient graph https://networkx.org/documentation/stable/_modules/networkx/algorithms/minors/contraction.html#equivalence_classes
@@ -279,7 +292,6 @@
     We now delve into partial orderings, or ``posets". We'll cover a nice \textit{graph}ical representation of posets, and then cover their applications in the context of task scheduling. 
     
     \subsection*{Dependency Graphs}
-    
     To start, let's consider the following story. 
 
     \begin{tcolorbox}[colback=red!20]
@@ -299,7 +311,7 @@
         (1301, 1301), & \gray{(3511, 3600),} & \gray{(1331, 3511)} \\
     \end{array}
     \right\}$$
-    (the greyed-out tuples are added to ensure the relation is a partial order). However, this doesn't really provide us with much intuition. Since this relation is a partial order, we can alternatively visualize it using something called a \textbf{dependency graph}, an example of which is shown in Figure (\ref{fig:dependency_graph}). While programs can only understand dependency lists, you may find the graphical representation useful for testing and debugging your implementations for the remaining parts.
+    (the greyed-out tuples are added to ensure the relation is a partial order). However, this doesn't really provide us with much intuition. Since this relation is a partial order, we can alternatively visualize it using something called a \textbf{dependency graph}, an example of which is shown in Figure \ref{fig:dependency_graph}. While programs can only understand dependency lists, you may find the graphical representation useful for testing and debugging your implementations for the remaining parts.
     
     \begin{figure}[htbp]
             \centering
@@ -311,12 +323,12 @@
                 \node[state] (4641) [below left =of 1332] {4641};  
                 \node[state] (3600) [below =of 1332] {3600};  
                 \node[state] (3511) [below right =of 1332] {3511};  
-                \path (1301) edge (1331); % it is the path of the edge from one node to another  
-                \path (1331) edge (1332);
-                \path (1332) edge (4641);
-                \path (1332) edge (3600);
-                \path (1332) edge (3511);
-                \path (2051) edge (3511);
+                \path[-Latex] (1301) edge (1331); % it is the path of the edge from one node to another  
+                \path[-Latex] (1331) edge (1332);
+                \path[-Latex] (1332) edge (4641);
+                \path[-Latex] (1332) edge (3600);
+                \path[-Latex] (1332) edge (3511);
+                \path[-Latex] (2051) edge (3511);
             \end{tikzpicture} 
             \caption{A dependency graph corresponding to some graduation requirements}
             \label{fig:dependency_graph}
@@ -334,29 +346,31 @@
     The \textbf{latency} of a schedule is the total time between when the first task is scheduled to when the last task completes. Our goal is to find a schedule with the smallest latency.
 
     \subsection*{Topological Sorting}
-    If we have only one processor, then constructing an algorithm to do this is fairly simple. Just schedule all the elements one by one in an order such that no element depends on any of the elements scheduled after it. This is also known as a \textit{topological sort}.
+    If we have only one processor, then constructing an optimal schedule is fairly simple. Just schedule all the elements one by one in an order such that no element depends on any of the elements scheduled after it. This is also known as a \textit{topological sort}.
 
     \vspace{3mm}
-    We present a common algorithm for finding the topological sort below, known as Kahn's algorithm. (Note: the pseudocode refers to \textit{minimal elements}. These are simply all elements $v$ such that there is no other element $u$ such that $(u, v) \in \mathcal{R}$.)
+    There is a common procedure for finding the topological sort known as \textit{Kahn's algorithm}. We provide the pseudocode for a slightly modified version of the algorithm below.
 
     \begin{algorithm}
         \caption{\textsc{KahnsAlgorithm}$(elements, poset)$}\label{alg:cap}
         \label{alg:topological_sort}
         \begin{algorithmic}
             \State $T = \emptyset$
-            \State $S = $ all minimal elements in $poset$
+            \State $S = \{ v : \forall u \in elements, (u, v) \notin poset\}$\footnotemark
             \While{$S \ne \emptyset$}
                 \State $u = $ an element in $S$
                 \State $S = S - \{u\}$
                 \State $T = T \cup \{u\}$
-                \State $uv\_dependencies = \{(u, v) : v \in elements \text{ and }(u, v) \in poset\}$
-                \For{each $(u, v)$ in $uv\_dependencies$}
-                    \If {$v$ is minimal} insert $v$ in $S$ \EndIf
+                \State $u\_dependencies = \{(u, v) : v \in elements \text{ and }(u, v) \in poset\}$
+                \For{each $(u, v)$ in $u\_dependencies$}
+                    \If {$(\forall u' \in elements)(u' \in T \lor (u', v) \notin poset$)}
+                    $S = S \cup \{v\}$ \EndIf
                 \EndFor
             \EndWhile
-            \State \Return{T}
+            \State \Return{$T$}
         \end{algorithmic}
     \end{algorithm}
+    \footnotetext{Also known as the set of all \textit{minimal} elements in a poset.}
     
     \begin{tcolorbox}[colback=yellow!30]
         \textbf{In this part, you'll implement the following function:}
@@ -442,7 +456,7 @@
     \textbf{Notes}
 
     \begin{itemize}
-        \item The autograder may not reflect your final grade on the assignment. We reserve the right to run additional tests during grading.
+        \item The autograder may not reflect your final grade on the assignment. We reserve the right to run additional tests during grading. In particular for this assignment, the \textit{validity} of your code is important. Ensure you are not passing the test cases due to luck.
         \item Do not import additional packages, as your submission may not pass the test cases or manual review.
     \end{itemize}
     
