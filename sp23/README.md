@@ -14,9 +14,9 @@ I (Sarthak) will be handling all the coding supplements. Nithya will be handling
 | Week 4        | hw3-supp due Friday,  Project Topics Posted Sunday |   [Homework 3 Supplement](hw-supplements/hw3-supp/): Inference, Satisfiability and Reductions
 | Week 5        | Exam 1 <br> Project Topics Chosen by Sunday  | 
 | Week 6        | hw4-supp due Friday | <br> [Homework 4 Supplement](hw-supplements/hw4-supp/): Infinite Sets (math only)
-| Week 7        | hw5-supp due Friday | [Homework 5 Supplement](hw-supplements/hw5-supp/): Relations and Parallel Task Scheduling
+| Week 7        | hw5-supp due Sunday | [Homework 5 Supplement](hw-supplements/hw5-supp/): Relations and Parallel Task Scheduling
 | Week 8        | Exam 2 | : 
-| Week 9        | hw6-supp due Friday, <br> Project Outline due Sunday March 12 | [Homework 6 Supplement](hw-supplements/hw6-supp/): Big-O + Number theory (math only)
+| Week 9        | hw6-supp due Saturday, <br> Project Outline due Sunday March 12 | [Homework 6 Supplement](hw-supplements/hw6-supp/): Big-O + Number theory (math only)
 | Week 10       | hw7-supp due Friday |  <br> [Homework 7 Supplement](hw-supplements/hw7-supp/): Elliptic Curve Cryptography
 | Week 11       | Spring Break | 
 | Week 12       | Exam 3 <br> hw8-supp due Friday  <br>Project Draft due Sunday after hw8-supp due|  <br> [Homework 8 Supplement](hw-supplements/hw8-supp/): Induction+ (math only)

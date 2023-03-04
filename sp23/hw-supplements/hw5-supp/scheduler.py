@@ -6,7 +6,7 @@
 # collaborators - N/A
 
 
-def topological_sort(elements: set, poset: set):
+def topological_sort(elements: set, poset: set) -> list:
     """Returns a topological sort of the given poset using a modified version of Kahn's algorithm.
     
     Parameters:
@@ -23,7 +23,7 @@ def topological_sort(elements: set, poset: set):
     # YOUR CODE HERE
     return NotImplementedError
 
-def generate_schedule(element: set, poset: set, num_processors: int):
+def generate_schedule(element: set, poset: set, num_processors: int) -> list:
     """Returns an optimal schedule for the given poset using the given number of processors.
     
     Parameters:
