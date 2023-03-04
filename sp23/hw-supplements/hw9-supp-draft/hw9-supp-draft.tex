@@ -1,0 +1,88 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+% colored links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    }
+
+
+
+% Inputting Python code
+\usepackage[dvipsnames]{xcolor}
+\definecolor{textblue}{rgb}{.2,.2,.7}
+\definecolor{textred}{rgb}{0.54,0,0}
+\definecolor{textgreen}{rgb}{0,0.43,0}
+\usepackage{upquote}
+\usepackage{listings}
+\lstset{
+    language=Python, 
+    tabsize=4,
+    basicstyle={\ttfamily},
+    keywordstyle=\color{textblue},
+    commentstyle=\color{textgreen},
+    stringstyle=\color{textred},
+    frame=none,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    xleftmargin=-15mm, % manual adjustment, figure out permanent solution
+}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,hooks}
+\usetikzlibrary{shadows}
+\usepackage{lipsum}
+
+%Images
+\usepackage{graphicx}
+    \usepackage{subcaption}
+    \usepackage{float}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+% title
+\title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Homework 7 Supplement}
+\author{Sarthak Mohanty }
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+Title: Language Building with Recursion
+
+\section*{Overview}
+
+% https://web.stanford.edu/class/archive/cs/cs103/cs103.1234/timeline_of_results
+If you ever peruse an article about important results in discrete math, you'll often see a statement similar to ``Noam Chomsky publishes the book “Syntactic Structures."  Noam Chomsky may be many things, including a world-renowned linguist and psychologist, but it seems difficult to see his correlation to discree mthat.
+
+In 2050, you covered induction, a way to ... . In this supplement, we'll cover recursion, and delve into the intimate counterplay between induction and recursion. we'll introduce computational models. We'll introduce one called a context-free grammar, and attempt to create our own language using one. Finally, we'll discuss the limitations of computational models, and why 
+
+\section*{What is Recursion}
+
+If you already have some knowledge of recursion, you can skip this exposition.
+\subsection*{Induction vs Recursion}
+
+
+\section*{Modeling Computation}
+
+% https://courses.engr.illinois.edu/cs173/fa2016/B-lecture/Lectures/Induction%20proof%20on%20Context%20Free%20Grammars.pdf
+
+\section*{Syntactical Structures}
+
+\section*{Designing English}
+
+\section*{(Optional) Context-Sensitive Grammars}
+
+\end{document}
