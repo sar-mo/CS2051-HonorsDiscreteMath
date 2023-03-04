@@ -1,0 +1,287 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+% colored links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    }
+
+
+
+% Inputting Python code
+\usepackage[dvipsnames]{xcolor}
+\definecolor{textblue}{rgb}{.2,.2,.7}
+\definecolor{textred}{rgb}{0.54,0,0}
+\definecolor{textgreen}{rgb}{0,0.43,0}
+\usepackage{upquote}
+\usepackage{listings}
+\lstset{
+    language=Python, 
+    tabsize=4,
+    basicstyle={\ttfamily},
+    keywordstyle=\color{textblue},
+    commentstyle=\color{textgreen},
+    stringstyle=\color{textred},
+    frame=none,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    xleftmargin=-15mm, % manual adjustment, figure out permanent solution
+}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,hooks}
+\usetikzlibrary{shadows}
+\usepackage{lipsum}
+
+%Images
+\usepackage{graphicx}
+    \usepackage{subcaption}
+    \usepackage{float}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+% title
+\title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Homework 7 Supplement}
+\author{Sarthak Mohanty }
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+Title: ECC is the new RSA
+
+\textbf{Note: only one part should be about full ECC implementation, the other parts should be about number theory in general, since the whole idea is covering mathematical concepts anyway.}
+
+\section*{Overview}
+
+Elliptic Curve Cryptography (ECC) is one of the most powerful cryptosystems in use today. Companies are using ECC everything to secure everything from our customers' HTTPS connections to how we pass data between our data centers. In fact, based on currently understood mathematics, ECC provides a significantly more secure foundation than first generation public key cryptography systems like RSA, for reasons we'll explore in detail later.
+
+\vspace{2mm}
+See now I think this supplement is going to be \textbf{really interesting} because it's not covered in the textbook at all, and in fact ECC is not really ever taught in a discrete math course because most people think it's too complicated to teach.
+
+\vspace{2mm}
+For this supplement, you'll be working with a Jupyter Notebook (.ipynb) file. To open it, you can either install Jupyter Notebook locally, or you can use Google Colab to work in the browser.
+
+
+Title: ECC is the new RSA
+
+
+\section*{Cryptography Primer}
+
+
+\subsection*{Symmetric vs Asymmetric Systems}
+
+In cryptography, there are two main types of encryption algorithms: symmetric and asymmetric. Symmetric encryption uses the same key to both encrypt and decrypt the message, while asymmetric encryption uses different keys for encryption and decryption.
+
+Symmetric encryption algorithms are generally faster and more efficient, but they require the sender and the recipient to share a secret key. The most prominent example is known as AES\footnote{some of your classmates have chosen this as their group project!} Asymmetric encryption algorithms, on the other hand, are slower and less efficient, but they allow the sender to send a message securely to the recipient without sharing a secret key. Examples include RSA, Diffie-Helman, and ECCDH.
+
+\subsection*{Trapdoor Functions: RSA}
+
+Trapdoor functions are an essential component of asymmetric encryption algorithms. A trapdoor function is a function that is easy to compute in one direction, but difficult to compute in the opposite direction without knowledge of additional information, such as a secret key.
+
+RSA (Rivest-Shamir-Adleman) is a commonly used asymmetric encryption algorithm that relies on the mathematical properties of large prime numbers. Here are the steps involved in generating an RSA public and private key pair:
+
+The security of RSA is based on the difficulty of factoring large composite numbers. Factoring is the process of finding the prime factors of a composite number, which is believed to be a computationally difficult problem.
+
+\section*{Part 1: Diffie-Helman}
+
+\subsection*{Diffie-Hellman Key Exchange}
+
+The Diffie-Hellman key exchange is a cryptographic protocol that allows two parties to generate a shared secret key over an insecure communication channel. The protocol is named after its inventors, Whitfield Diffie and Martin Hellman.
+
+Here are the steps involved in the Diffie-Hellman key exchange:
+
+\subsection{Attacks}
+
+\begin{center}
+    \textbf{Brute Force}
+\end{center}
+
+\begin{center}
+    \textbf{BSGS / Pollard rho algorithm}
+\end{center}
+
+\begin{center}
+    \textbf{General Number Field Sieve}
+\end{center}
+
+\begin{center}
+    \textbf{Man in the Middle Attacks}
+\end{center}
+
+\begin{tcolorbox}
+% [colback=yellow!30]
+    In this part, you'll fully implement the Diffie-Helman key exchange and try to break it on small numbers.
+
+    Class Actor:
+    \begin{itemize}
+        \item \lstinline{generate_key(elements, relation)}
+        \item \lstinline{generate_shared_key(elements, relation)}
+    \end{itemize}
+
+    Class BadActor
+    \begin{itemize}
+            \item \lstinline{brute_force(elements, relation)}: This function takes in a relation (represented as a set of tuples) and returns whether or not the relation (taken over the set of elements) is a valid partial order.
+            \item \lstinline{baby_step_giant_step(elements, relation)}: This function takes in the same arguments are before, but this time returns whether or not the relation is a valid equivalence relation.
+        \end{itemize}
+\end{tcolorbox}
+
+
+\section*{Part 2: Enter Elliptic Curves}
+
+After the introduction of RSA and Diffie-Hellman, researchers explored other mathematics-based cryptographic solutions looking for other algorithms beyond factoring that would serve as good Trapdoor Functions. In 1985, cryptographic algorithms were proposed based on an (then) esoteric branch of mathematics called elliptic curves.
+
+These algorithms are faster and less computationally intensive than the naive approach of just guessing pairs of known primes.
+
+These factoring algorithms get more efficient as the size of the numbers being factored get larger. The gap between the difficulty of factoring large numbers and multiplying large numbers is shrinking as the number (i.e. the key's bit length) gets larger. As the resources available to decrypt numbers increase, the size of the keys need to grow even faster. This is not a sustainable situation for mobile and low-powered devices that have limited computational power. The gap between factoring and multiplying is not sustainable in the long term.
+
+All this means is that RSA is not the ideal system for the future of cryptography. In an ideal Trapdoor Function, the easy way and the hard way get harder at the same rate with respect to the size of the numbers in question. We need a public key system based on a better Trapdoor.
+
+
+
+The standard form for an elliptic curve is $$y^{2} = x^{3} + Ax + B,$$ where $A$ and $B$ are constants.  This will be referred to as the Weierstrass
+equation for an elliptic curve. For reasons that will be discussed later, also include the point $\{\infty\}$ in this function.
+
+\subsection*{The Group Law}
+    Starting with two poitns: 
+
+
+
+\begin{tcolorbox}
+    In this part, you'll implement point addition and point multiplication on elliptic curves, as well as over finite fields.
+
+    
+    \textbf{In this part, you'll implement the following (one-line) functions:}
+    \begin{itemize}
+        \item \lstinline{point_addition(elliptic_curve, P, Q)}: This function takes in an elliptic curve 
+        \item \lstinline{point_scalar_multiplication(elliptic_curve, k, P))}: This function takes in an elliptic curve of the form described, a scalar integer $k$, and a point $P$, and repeatedly multiplies this result to output a number.
+    \end{itemize}
+    You can run \lstinline{visualize_addition} and \lstinline{visualize_multiplication} to generate the corresponding visualizations mentioned above. 
+    Notes: This part is just algebra and geometry. Since I know it's been a while since many of you touched this, here's a few steps you get you started.
+    \begin{itemize}
+        \item For point addition
+    \end{itemize}
+    
+\end{tcolorbox}
+
+\section*{Part 3: ECC in Action: Elliptic-curve Diffie Helman}
+
+\subsection*{The Elliptic-curve Discrete Log Function}
+
+\begin{tcolorbox}
+% [colback=yellow!30]
+    In this part, you'll implement a elliptic-curve diffie helman key exchange. You should directly call the methods you constructed in Part 2. You should replicate the methods you created in Part 1, this time accomodating for the elliptic-curve element.
+\end{tcolorbox}
+
+\subsection*{Attacks}
+
+% https://arstechnica.com/information-technology/2015/11/op-ed-how-did-they-break-diffie-hellman/?comments=1&comments-page=1#comment-30128933
+
+\subsection*{Conclusion: RSA and ECC in the real world}
+
+% https://github.com/nakov/Practical-Cryptography-for-Developers-Book/blob/master/asymmetric-key-ciphers/ecc-encryption-decryption.md
+
+\begin{center}
+    \begin{tabular}{c|c}
+        RSA & ECC \\
+        \hline \\
+         & 
+    \end{tabular}
+\end{center}
+
+Put advantages, 
+
+use fewer memory and CPU resources, important as mobile computing becomes more ubiquitous
+
+
+
+less storage stuff, More secure. proper authentication is really tough
+
+Disadvantages, choosing the right elliptic curve, NIST distrust.
+
+
+
+
+faster for public key operations (repeat from fgrieu's answer);
+prolific in many PKI(X) infrastructures, including long term certificates;
+better backward compatibility;
+more implementations available;
+operations that use the keys easier to understand / implement;
+slightly less vulnerable against quantum computers at the same bit strength;
+operations using the keys do not depend (as much) on security of random number generator;
+no domain parameters to agree on or store (there are 3 ways of encoding the parameters using ASN.1 alone);
+fewer pitfalls (such as verifying that the public key is on the curve);
+fewer options such as types of domain parameters, signature formats (flat or ASN.1 encoded) or key formats (compressed or uncompressed);
+fewer IP rights to mull over (I guess most - if not all - patents are expired or not-applicable, but...);
+still efficient enough for most purposes.
+
+
+Finally, neither ECC nor RSA are secure against quantum computers.
+
+assymetric not often used since takes long time. Instead, key exchange is done using assymetric andthen symmetric is used to send the actual messages.
+
+
+\section*{Submission Instructions (10 pts)}
+    After you fill the appropriate functions, submit the following files to Gradescope and make sure you pass all test cases:
+    \begin{itemize}
+        \item \lstinline{diffie_helman.py}
+        \item \lstinline{elliptic_curves.py}
+        \item \lstinline{ECCDH.py}
+    \end{itemize}
+
+    \vspace{3mm}
+    \textbf{Notes}
+    \begin{itemize}
+        \item The autograder may not reflect your final grade on the assignment. We reserve the right to run additional tests during grading.
+        \item Do not import additional packages, as your submission may not pass the test cases or manual review.
+    \end{itemize}
+
+
+
+
+
+
+
+
+Spitting ideas:
+
+\begin{itemize}
+    \item introduce disclaimer that I'm not security expert.
+    \item Talk about RSA (prolly learnt in class that week)
+    \item Talk about vulnerabilities quadratic sieve , look at cloudflare
+    
+    % These factoring algorithms get more efficient as the size of the numbers being factored get larger. The gap between the difficulty of factoring large numbers and multiplying large numbers is shrinking as the number (i.e. the key's bit length) gets larger. As the resources available to decrypt numbers increase, the size of the keys need to grow even faster. This is not a sustainable situation for mobile and low-powered devices that have limited computational power. The gap between factoring and multiplying is not sustainable in the long term.
+    \item Talk about how we need to redefine how we think about about this stuff
+    \item By redefine means we need to back up and look at it from a broader point of view
+    \item Talka bout symmetric key encryption in general
+    \item Talk about trapdoor functions
+
+
+    \item Now finally we introduce ECC. This is part 1
+    \item We introduce elliptic curve graph (weierstrass something something)
+    \item Make them do the scalar addtion and multiplication.
+
+    \item Now move on to part 2. Introduce congruency classes./
+    \item make them do the same thing over gaussian field.
+
+    \item idea, but hard. can make them actually do ecc and fill in the gaps using this. Problem is on my end, actually implementing ecc finna take hella time.
+    \item another idea; introduce it hrough diffie helman key exchange (very intuitive, see youtube video in outline) them students can see one to one relation. maybe cover evne less RSA then I originally thought.
+
+    \item aside. make them see in practice (use google to check security of website, any good website should be using ECC like proton or cloudlfare)
+\end{itemize}
+
+    
+
+\end{document}

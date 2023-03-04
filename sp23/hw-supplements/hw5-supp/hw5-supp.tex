@@ -363,7 +363,7 @@
                 \State $T = T \cup \{u\}$
                 \State $u\_dependencies = \{(u, v) : v \in elements \text{ and }(u, v) \in poset\}$
                 \For{each $(u, v)$ in $u\_dependencies$}
-                    \If {$(\forall u' \in elements)(u' \in T \lor (u', v) \notin poset$)}
+                    \If {$\forall u' \in elements, (u' \in T \lor (u', v) \notin poset)$}
                     $S = S \cup \{v\}$ \EndIf
                 \EndFor
             \EndWhile
