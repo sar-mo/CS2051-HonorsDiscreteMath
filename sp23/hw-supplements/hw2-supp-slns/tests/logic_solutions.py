@@ -80,6 +80,7 @@ def truth_table(proposition: str) -> list:
          ({'p': True, 'q': False}, False), 
          ({'p': False, 'q': True}, False), 
          ({'p': False, 'q': False}, False)]
+    
     """
     variables = extract_variables(proposition)
     truth_table = []
@@ -118,6 +119,11 @@ def count_satisfying(proposition: str) -> int:
         >>> count_satisfying('p or q')
         3
     """
+    num_satisfying = 0
+    for row in truth_table(proposition):
+        if row[1]:
+            num_satisfying += 1
+    return num_satisfying
 
 def are_equivalent(prop1: str, prop2: str) -> bool:
     """Checks if two propositions are logically equivalent.
@@ -135,6 +141,11 @@ def are_equivalent(prop1: str, prop2: str) -> bool:
         >>> are_equivalent('p and q', '(not p) or q')
         False
     """
+    vars1 = extract_variables(prop1)
+    vars2 = extract_variables(prop2)
+    if vars1 != vars2:
+        return False
+    return truth_table(prop1) == truth_table(prop2)
 
 def is_tautology(proposition: str) -> bool:
     """Checks if a proposition is a tautology.
@@ -151,6 +162,8 @@ def is_tautology(proposition: str) -> bool:
         >>> is_tautology('(not p) |implies| (p or (not p))')
         True
     """
+    # do it in one line
+    return all(row[1] for row in truth_table(proposition))
 
 def is_contradiction(proposition: str) -> bool:
     """Checks if a proposition is a contradiction.
@@ -167,6 +180,7 @@ def is_contradiction(proposition: str) -> bool:
         >>> is_contradiction('p and (not p)')
         True
     """
+    return all(not row[1] for row in truth_table(proposition))
 
 def is_contingency(proposition: str) -> bool:
     """Checks if a proposition is a contingency.
@@ -183,6 +197,7 @@ def is_contingency(proposition: str) -> bool:
         >>> is_contingency('p and (not p)')
         False
     """
+    return not (is_tautology(proposition) or is_contradiction(proposition))
 
 def model_fitting(truth_table: list) -> str:
     """Fits a proposition to a truth table.
@@ -200,5 +215,32 @@ def model_fitting(truth_table: list) -> str:
         If the truth table is of the form [({}, True)], then return 'True'. 
         If the truth table is of the form [({}, True)], then return 'False'.
     """
+    # clean but a little advanced solution
+    # assert len(truth_table) > 0
+    if len(truth_table) == 1:
+        return str(truth_table[0][1])
+    collect = lambda clause: " and ".join(key if clause[key] else f"(not {key})" for key in clause)
+    return " or ".join(map(lambda row: f"({collect(row[0])})", # this generates the clauses
+                           filter(lambda row: row[1], truth_table) # for each row that is True
+                           )
+                      )
+
+    # # easier to understand solution
+    # prop = ''
+    # if len(truth_table) == 1:
+    #     return str(truth_table[0][1])
+    # for row in truth_table:
+    #     if row[1]:
+    #         if prop != '':
+    #             prop += ' or '
+    #         prop += '('
+    #         for key, value in row[0].items():
+    #             if value:
+    #                 prop += key + ' and '
+    #             else:
+    #                 prop += '(not ' + key + ') and '
+    #         prop = prop[:-5] # remove last ' and '
+    #         prop += ')'
+    # return prop
 
 # *********************** END ***************************
