@@ -69,7 +69,7 @@ Title: ECC is the new RSA
 Elliptic Curve Cryptography (ECC) is one of the most powerful cryptosystems in use today. Companies are using ECC everything to secure everything from our customers' HTTPS connections to how we pass data between our data centers. In fact, based on currently understood mathematics, ECC provides a significantly more secure foundation than first generation public key cryptography systems like RSA, for reasons we'll explore in detail later.
 
 \vspace{2mm}
-See now I think this supplement is going to be \textbf{really interesting} because it's not covered in the textbook at all, and in fact ECC is not really ever taught in a discrete math course because most people think it's too complicated to teach.
+See now I think this supplement is going to be \textbf{really interesting} because it's not covered in the textbook at all, and in fact ECC is not really ever taught in a discrete math course because most people think it's too complicated to teach. The specific implementations you might leran in this supplement aren't as important as the general framework, understanding, and ideas youll develop.
 
 \vspace{2mm}
 For this supplement, you'll be working with a Jupyter Notebook (.ipynb) file. To open it, you can either install Jupyter Notebook locally, or you can use Google Colab to work in the browser.
@@ -103,7 +103,7 @@ The Diffie-Hellman key exchange is a cryptographic protocol that allows two part
 
 Here are the steps involved in the Diffie-Hellman key exchange:
 
-\subsection{Attacks}
+\subsection{The Discrete Log Program and Attacks}
 
 \begin{center}
     \textbf{Brute Force}
@@ -158,6 +158,8 @@ equation for an elliptic curve. For reasons that will be discussed later, also i
     Starting with two poitns: 
 
 
+    Note the horizonal symmetry
+
 
 \begin{tcolorbox}
     In this part, you'll implement point addition and point multiplication on elliptic curves, as well as over finite fields.
@@ -178,6 +180,10 @@ equation for an elliptic curve. For reasons that will be discussed later, also i
 
 \section*{Part 3: ECC in Action: Elliptic-curve Diffie Helman}
 
+You've devleoped some undrestanding of how elliptic curves work, but it's naturarl to doubt the connection between them. This is where yopu're wrong. Note that... this is called \textit{order independence}. This makes it really easy to modify diffie helman to accomodate our elliptic curves, as follows:
+
+% This order independence also makes it easy to see why ECC takes less storage space than Diffie-Helman, 
+
 \subsection*{The Elliptic-curve Discrete Log Function}
 
 \begin{tcolorbox}
@@ -185,7 +191,6 @@ equation for an elliptic curve. For reasons that will be discussed later, also i
     In this part, you'll implement a elliptic-curve diffie helman key exchange. You should directly call the methods you constructed in Part 2. You should replicate the methods you created in Part 1, this time accomodating for the elliptic-curve element.
 \end{tcolorbox}
 
-\subsection*{Attacks}
 
 % https://arstechnica.com/information-technology/2015/11/op-ed-how-did-they-break-diffie-hellman/?comments=1&comments-page=1#comment-30128933
 
@@ -209,7 +214,7 @@ use fewer memory and CPU resources, important as mobile computing becomes more u
 
 less storage stuff, More secure. proper authentication is really tough
 
-Disadvantages, choosing the right elliptic curve, NIST distrust.
+Disadvantages, choosing the right elliptic curve, NIST distrust. Logjam attack, NSA.
 
 
 
@@ -228,7 +233,7 @@ fewer IP rights to mull over (I guess most - if not all - patents are expired or
 still efficient enough for most purposes.
 
 
-Finally, neither ECC nor RSA are secure against quantum computers.
+Even with all those downsides, with where distributed computing is going, it is the author's opinion that we'll likely ellipt be seeing this implementation more and more. Finally, neither ECC nor RSA are secure against quantum computers.
 
 assymetric not often used since takes long time. Instead, key exchange is done using assymetric andthen symmetric is used to send the actual messages.
 
