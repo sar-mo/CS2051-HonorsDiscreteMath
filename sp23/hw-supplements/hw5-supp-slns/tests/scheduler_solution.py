@@ -1,3 +1,11 @@
+# CS 2051 Spring 2023 - HW3 Supplement Parts 3-4: Scheduling
+# instructor: Gerandy Brito
+# creator - Sarthak Mohanty
+
+# author - Sarthak Mohanty
+# collaborators - N/A
+
+
 def topological_sort(elements: set, poset: set) -> list:
     """Returns a topological sort of the given poset using a modified version of Kahn's algorithm.
     
