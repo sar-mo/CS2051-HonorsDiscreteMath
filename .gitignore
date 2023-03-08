@@ -2,6 +2,7 @@
 .vscode
 .history
 .__pycache__
+__pycache__
 fa21/private/
 sp22/private/
 sp23/private/
