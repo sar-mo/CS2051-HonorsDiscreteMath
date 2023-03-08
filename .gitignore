@@ -3,7 +3,10 @@
 .history
 .__pycache__
 __pycache__
+<<<<<<< HEAD
 .ipynb_checkpoints
+=======
+>>>>>>> 5c3bc9b47d9187f0d4e74916a4362e0722cab2c0
 fa21/private/
 sp22/private/
 sp23/private/
