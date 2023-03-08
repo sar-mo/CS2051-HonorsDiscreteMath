@@ -2,7 +2,10 @@
 
 Welcome to CS2051 Spring 2023! This semester, the course is taught synchronously with CS 2050. Historically, there hasn't been any programming in this class; however, since it is a CS course, we'll be trying out a few programming questions this semester.
 
-I (Sarthak) will be handling all the coding supplements. Nithya will be handling all the math-only supplements. If you have quetsion about the supplements, please redirect them to the correct person.
+Sarthak will be handling all the coding supplements. Nithya will be handling all the math-only supplements. If you have any questions about the supplements, please redirect them to the correct person (emails are in the syllabus)
+
+p.s. sorry for so many commits, right now this repository is connected with overleaf through a bridge that doesn't currently support branching.
+
 
 ## Course Schedule (work in progress)
 
