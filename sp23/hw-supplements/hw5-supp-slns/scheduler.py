@@ -65,6 +65,7 @@ def generate_schedule(elements: set, poset: set, num_processors: int) -> list[li
     for x in topological_sort(elements, poset)[::-1]:
         dependents = [ v for _u, v in poset if _u == x ]
         if dependents:
+            # height of x is 1 + max height of children
             heights[x] = 1 + max(heights[y] for y in dependents)
  
     while(len(scheduled_tasks) != len(elements)):
@@ -72,7 +73,8 @@ def generate_schedule(elements: set, poset: set, num_processors: int) -> list[li
         
         # Look at all elements in the poset and check if they are not in scheduled_tasks
         # and if they are not dependent on any elements in scheduled_tasks
-        tasks = [v for v in elements if v not in scheduled_tasks and all(u in scheduled_tasks for u, _v in poset if _v == v)]
+        tasks = [v for v in elements if v not in scheduled_tasks\
+                 and all(u in scheduled_tasks for u, _v in poset if _v == v)]
 
         # Sort the elements by their depth in the poset
         tasks = sorted(tasks, key=lambda x: heights[x], reverse=True)
