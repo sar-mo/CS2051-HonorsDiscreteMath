@@ -1,49 +1,86 @@
+# CS 2051 Spring 2023 - HW7 Supplement Part 4: Elliptic Curve Diffie-Hellman Key Exchange Algorithm
+# instructor: Gerandy Brito
+# creator - Sarthak Mohanty
+
+# author - your name here
+# collaborators - list collaborators here
+
 import math
-from mathlib import *
-from elliptic_curves_solution import point_addition, point_scalar_multiplication
+from elliptic_curves import point_addition, point_scalar_multiplication
 
 class Actor:
-    def __init__(self, name, p, g, a):
+    def __init__(self, name : str, n : int, P : tuple, k : int):
+        ''' Initialize the actor with a name, a prime number n, a generator g, and a private key k.
+
+        Parameters:
+            name: The name of the actor
+            n : A prime number
+            P : The generator point of the group
+            k : The private key of the actor
+        '''
         self.name = name
-        self.p = p
-        self.g = g
-        self.private_key = a
-        self.public_key = None
-        self.secret_key = None
+        self.n = n
+        self.P = P
+        self.__private_key = k
+        self.__secret_key = None
 
-    def computePublicKey(self):
-        '''
-        Compute the public key using the private key and the generator
+    def computePublicKey(self) -> tuple:
+        '''Compute the public key using the private key and the generator.
+        Should use a doubling algorithm for efficiency
+
+        Parameters: none
+
+        Returns: The public key
         '''
 
-    def computeSecret(self, offer):
-        '''
-        Compute the secret key using the offer and the private key
+    def computeSecret(self, offer : tuple) -> None:
+        '''Compute the secret key using the offer and the private key.
+        Again should use a doubling algorithm for efficiency.
+
+        Parameters:
+            offer: The public key of the other actor
+
+        Returns: none. Should set the __secret_key field of the Actor.
         '''
 
 class BadActor:
     
     def __init__(self, name):
         self.name = name
+        self.__secret_key = None
     
-    def brute(self, g, y, n):
-        '''
-        Brute Force to solve Discrete Log with Elliptic Curves
+    def brute(self, P : tuple, Q : tuple, n : int) -> int:
+        """Brute Force algorithm to solve Discrete Log
 
-        :param g: g of g^x = y (mod n). g > 0.
-        :param y: y of g^x = y (mod n). Non-negative integer.
-        :param n: n of g^x = y (mod n). n > 1.
-        :returns: x of g^x = y (mod n). If not found returns -1.
-        '''
+        Parameters:
+            P : P of k*P = Q (mod n).
+            Q : Q of k*P = Q (mod n).
+            n : n of k*P = Q (mod n). Prime number.
 
-    def bsgs(self, g, y, p, max_power=None, verify: bool = True):
+        Returns: k of k*P = Q (mod n). If not found returns -1.
         """
-        Baby-Step Giant-Step algorithm to solve Discrete Log Problem with Elliptic Curves
 
-        :param g: g of g^x = y (mod n). g > 0.
-        :param y: y of g^x = y (mod n). Non-negative integer.
-        :param p: p of g^x = y (mod p). Prime number.
-        :param max_power: restricts the search of x between [1, max_power). Useful for Pohling_Hellman
-        :param verify: Checks if p is prime when True
-        :returns: x of g^x = y (mod n). If not found returns -1.
-        # """
+    def bsgs(self, P : tuple, Q : tuple, n : int) -> int:
+        """Baby-Step Giant-Step algorithm to solve Discrete Log Problem
+
+        Parameters:
+            P : P of k*P = Q (mod n).
+            Q : Q of k*P = Q (mod n).
+            n : n of k*P = Q (mod n). Prime number.
+
+        Returns: k of k*P = Q (mod n). If not found returns -1.
+        """
+
+    def stealSecret(self, actor1 : Actor, actor2 : Actor, attack : function, P : tuple, n : int) -> None:
+        """Steals secret key from Actor1 and Actor2.
+        Should not use any private fields from Actor1 or Actor2.
+
+        Parameters:
+            actor1: Actor1
+            actor2: Actor2
+            attack: Attack function, either brute_force or bsgs
+            P: P of k*P = Q (mod n).
+            n: n of k*P = Q (mod n). Prime number.
+            
+        Returns: none. Should set the __secret_key field of the BadActor.
+        """

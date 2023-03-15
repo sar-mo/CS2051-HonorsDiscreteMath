@@ -172,4 +172,22 @@ def is_prime(n: int) -> bool:
             return False
         divisor += 6
     return True
-    
+
+def get_generator(p: int) -> int:
+    """
+    Returns a generator of Zp*
+
+    :param p: Prime number
+    :returns: Generator of Zp*
+    """
+    assert is_prime(p), "p must be prime"
+
+    # We use the fact that if p is prime and p = 2q + 1
+    # Then there exists a generator g of Zp* such that
+    # g^q != 1 (mod p) and g^(2q) = 1 (mod p)
+    # We use this fact to generate a generator
+    q = (p - 1) // 2
+    g = 2
+    while (pow(g, q, p) == 1):
+        g += 1
+    return g
