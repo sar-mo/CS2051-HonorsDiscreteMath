@@ -32,6 +32,8 @@ class Actor:
 
         Returns: The public key
         '''
+        ### YOUR CODE HERE ###
+        return NotImplementedError
 
     def computeSecret(self, offer : tuple) -> None:
         '''Compute the secret key using the offer and the private key.
@@ -42,6 +44,8 @@ class Actor:
 
         Returns: none. Should set the __secret_key field of the Actor.
         '''
+        ### YOUR CODE HERE ###
+        return NotImplementedError
 
 class BadActor:
     
@@ -59,6 +63,8 @@ class BadActor:
 
         Returns: k of k*P = Q (mod n). If not found returns -1.
         """
+        ### YOUR CODE HERE ###
+        return NotImplementedError
 
     def bsgs(self, P : tuple, Q : tuple, n : int) -> int:
         """Baby-Step Giant-Step algorithm to solve Discrete Log Problem
@@ -70,6 +76,8 @@ class BadActor:
 
         Returns: k of k*P = Q (mod n). If not found returns -1.
         """
+        ### YOUR CODE HERE ###
+        return NotImplementedError
 
     def stealSecret(self, actor1 : Actor, actor2 : Actor, attack : function, P : tuple, n : int) -> None:
         """Steals secret key from Actor1 and Actor2.
@@ -84,3 +92,5 @@ class BadActor:
             
         Returns: none. Should set the __secret_key field of the BadActor.
         """
+        ### YOUR CODE HERE ###
+        return NotImplementedError
