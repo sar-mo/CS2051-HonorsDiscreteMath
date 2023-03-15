@@ -64,7 +64,7 @@
 
 % title
 \title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Homework 7 Supplement outline}
-\author{Sarthak Mohanty }
+\author{Sarthak Mohanty, \tiny{Anant Gupta} }
 \date{}
 
 \begin{document}
@@ -75,38 +75,41 @@
 Title: ECC is the new RSA
 \section*{Overview}
 
+Over the past few weeks, we've covered number theory, as well as a nice application of it through the use of RSA cryptography.
+
+\vspace{2mm}
 Elliptic Curve Cryptography (ECC) is one of the most powerful cryptosystems in use today. Companies are using ECC everything to secure everything from our customers' HTTPS connections to how we pass data between our data centers. In fact, based on currently understood mathematics, ECC provides a significantly more secure foundation than first generation public key cryptography systems like RSA, for reasons we'll explore in detail later. The specific implementations you might learn in this supplement aren't as important as the general framework, understanding, and ideas you'll develop.
+
+\vspace{2mm}
+\textbf{Note.} As I was making this assignment, I stumbled across \href{https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/}{this} excellent blog post, and realized it covers some of these concepts a lot better than I ever could. For this reason, some of the exposition is adapted from this resource.
 
 
 \section*{Cryptography Primer}
-
+    Before we continue, it is beneficial to take a step back, and discuss cryptography as a whole.
 
 \subsection*{Symmetric vs Asymmetric Systems}
 
-In cryptography, there are two main types of encryption algorithms: symmetric and asymmetric. Symmetric encryption uses the same key to both encrypt and decrypt the message, while asymmetric encryption uses different keys for encryption and decryption.
+    In cryptography, there are two main types of encryption algorithms: symmetric and asymmetric. 
 
-Symmetric encryption algorithms are generally faster and more efficient, but they require the sender and the recipient to share a secret key. The most prominent example is known as AES\footnote{some of your classmates have chosen this as their group project!} 
+    \vspace{3mm}
+    \textbf{Symmetric, or private-key, encryption} uses the same key to both encrypt and decrypt the message. Symmetric encryption algorithms are generally faster and more efficient, but they require the sender and the recipient to share a secret key. The most prominent example is the AES cipher.\footnote{some of your classmates have chosen this as their group project!} 
 
+    \vspace{3mm}
+    On the other hand, \textbf{asymmetric, or public-key encryption} algorithms are slower and less efficient, but they allow the sender to send a message securely to the recipient without sharing a secret key. Examples include RSA, Diffie-Helman, and ECCDH.
 
-Asymmetric, or public-key encryption algorithms, on the other hand, are slower and less efficient, but they allow the sender to send a message securely to the recipient without sharing a secret key. Examples include RSA, Diffie-Helman, and ECCDH.
-
-
-\subsection*{Trapdoor Functions: RSA}
-
-Trapdoor functions are an essential component of asymmetric encryption algorithms. A trapdoor function is a function that is easy to compute in one direction, but difficult to compute in the opposite direction without knowledge of additional information, such as a secret key.
-
-\vspace{2mm}
-As an example, the trapdoor function in RSA encryption is the modular exponentiation function, $c = m^e \mod N$, where $m$ is the plaintext, $e$ is the public exponent, $N$ is the modulus and $c$ is the ciphertext. The trapdoor information is the private key, which consists of the factors of $N$. In the opposite direction, decryption is performed by computing $m = c^d \mod N$, where $d$ is the private exponent derived from the private key.
+\subsection*{Trapdoor Functions}
+    
+    Trapdoor functions are an essential component of asymmetric encryption algorithms. A trapdoor function is a function that is easy to compute in one direction, but difficult to compute in the opposite direction without knowledge of additional information, such as a secret key.
+    
+    \vspace{2mm}
+    As an example, the trapdoor function in RSA encryption is the modular exponentiation function, $c = m^e \mod N$, where $m$ is the plaintext, $e$ is the public exponent, $N$ is the modulus and $c$ is the ciphertext. The trapdoor information is the private key, which consists of the factors of $N$. In the opposite direction, decryption is performed by computing $m = c^d \mod N$, where $d$ is the private exponent derived from the private key.
 
 
 \section*{Part 1: Diffie-Helman}
 
 \subsection*{Diffie-Hellman Key Exchange}
 
-The Diffie-Hellman key exchange is a cryptographic protocol that allows two parties to generate a shared secret key over an insecure communication channel. The protocol is named after its inventors, Whitfield Diffie and Martin Hellman.
-
-There is a classic story of how diffie-helman (and in general) works, of which a modified version is below:
-
+The Diffie-Hellman key exchange is a cryptographic protocol that allows two parties to generate a shared secret key over an insecure communication channel. The protocol is named after its inventors, Whitfield Diffie and Martin Hellman. There is a classic analogy for the DH key exchange, which we presnt below:
 \begin{tcolorbox}
     Professor Brito and Lianet (Brito’s wife!) have a famous Piña Colada recipe that they keep secret from the rest of the world. It is so secret in fact, that neither Brito nor Lianet know the full parts of the recipe! However, using their knowledge on how the Diffie-Helman key exchange algorithm works, they have devised a unique way of making the drink.
 
@@ -120,12 +123,12 @@ There is a classic story of how diffie-helman (and in general) works, of which a
 
     $$\text{Brito: \mixedpineapple \quad Lianet: \mixedrum}$$
     
-    Once they have exchanged their public keys, they each use their own private key to mix with the other party's public key to generate a shared secret key. Finally, they come together and mix the secret amount of the remaining ingredients in a third glass.
+    Once they have exchanged their public keys, they each use their own private key to mix with the other party's public key to generate a shared secret key, in this case the final drink.
 
     $$\text{Brito:} \mixedpineapple + \rum = \pinacolada \quad \text{Lianet:} \mixedrum + \pineapple = \pinacolada$$
 
     \vspace{2mm}
-     This shared secret key can be used to establish a secure communication channel, just like the delicious Piña Colada they have created together.
+     This shared secret key can be used to establish a secure communication channel, just like the delicious Piña Colada they created together.
      % $$\text{Brito}\quad\heart\quad\text{Lianet}$$
 \end{tcolorbox}
     In this analogy, the rum and pineapple juice represent the private keys, while the remaining ingredients represent the public key exchange. The shared secret key is the final product, which can be used for secure communication between the two parties.
@@ -178,7 +181,7 @@ This algorithm trades off space to improve the running time over brute force. Th
 \textbf{General Number Field Sieve (GNFS)}
 \end{center}
 
-The General Number Field Sieve is a factorization algorithm that is particularly efficient for numbers with large prime factors. It is a multi-step process that involves finding a smooth polynomial and then finding the roots of that polynomial.
+The General Number Field Sieve is a factorization algorithm that is particularly efficient for numbers with large prime factors. The implementation It is a multi-step process that involves finding a smooth polynomial and then finding the roots of that polynomial.
 
 \vspace{2mm}
 It first selects a sequence of integers that has a high probability of containing a factor of the number being factored. It then tries to find smooth numbers in this sequence, which are numbers whose prime factors are all below a certain bound. Finally, it uses linear algebra to combine these smooth numbers in a way that allows it to extract non-trivial factors of the number being factored. GNFS is one of the most efficient known factorization algorithms for large integers.
@@ -246,7 +249,7 @@ The standard form for an elliptic curve is $$y^{2} = x^{3} + Ax + B,$$ where $A$
         \item \lstinline{point_addition(elliptic_curve, P, Q)}: This function takes in an elliptic curve 
         \item \lstinline{point_scalar_multiplication(elliptic_curve, k, P))}: This function takes in an elliptic curve of the form described, a scalar integer $k$, and a point $P$, and repeatedly multiplies this result to output a number.
     \end{itemize}
-    You can run \lstinline{visualize_addition} and \lstinline{visualize_multiplication} to generate the corresponding visualizations mentioned above. 
+    You can run \lstinline{visualize_addition} and \lstinline{visualize_multiplication} to generate the corresponding visualizations mentioned above. If you want more examples, there's an interactive tool \href{https://andrea.corbellini.name/ecc/interactive/reals-add.html}{here}
     Notes: This part is just algebra and geometry. Since I know it's been a while since many of you touched this, here's a few steps you get you started.
     \begin{itemize}
         \item For point addition, we assumed that $P \ne Q \ne \infty$. For this reason, we can draw the line $L$ through $P_{1}$ and $P_{2}$. Its slope is $$m = \frac{y_{2} - y_{1}}{x_{2} - x_{1}}.$$ If $x_{1} = x_{2}$, then $L$ is vertical, so the resulting point is just $\infty$. Now let's assume that $x_{1} \ne x_{2}$. The equation of $L$ is then $$y = m(x - x_{1}) + y_{2}.$$ To find the intersection of this line with the elliptic curve, we can substitute the above equation into the formula for an elliptic curve $$y^{2} = x^{3} + ax + b.$$ Finally, we can reflect the above point across the $x$-axis to obtain the point $P_{3} = (x_{3}, y_{3})$.
@@ -260,7 +263,8 @@ The elliptic curve cryptography (ECC) uses elliptic curves over the finite field
 $$y^{2} \equiv x^{3} + 7 \pmod{p}$$
 
 
-Use \href{https://andrea.corbellini.name/2015/06/08/elliptic-curve-cryptography-breaking-security-and-a-comparison-with-rsa/}{this} for part 3
+The group law over $\mathbb{F}_{p}$ is similar, but not identical to in the field of real numbers. It is stated (and proven) in \href{https://arxiv.org/pdf/1710.00214.pdf}{this} research paper.
+
 
 \begin{tcolorbox}
     In this part, you'll visualize elliptic curves over finite fields, as well as implement point addition and point multiplication over these fields
@@ -268,9 +272,9 @@ Use \href{https://andrea.corbellini.name/2015/06/08/elliptic-curve-cryptography-
     
     \textbf{In this part, you'll implement the following functions:}
     \begin{itemize}
-        \item \lstinline{generate_point_cloud(a, b, p)}
-        \item \lstinline{point_addition(P, Q, a, b, p)}: This function takes in an elliptic curve and two points, and adds them
-        \item \lstinline{point_scalar_multiplication(P, n, a, b, p)}: This function takes in an elliptic curve of the form described, a scalar integer $k$, and a point $P$, and repeatedly multiplies this result to output a number.
+        \item \lstinline{generate_point_cloud(a, b, p)}: This takes in an elliptic curve and returns a set of all valid points in the curve over that field. See docs for example.
+        \item \lstinline{point_addition(P, Q, a, b, p)}: This function takes in an elliptic curve and two points, and adds them.
+        \item \lstinline{point_scalar_multiplication(P, n, a, b, p)}: This function takes in an elliptic curve of the form described, a scalar integer $k$, and a point $P$.
     \end{itemize}
     
 \end{tcolorbox}
@@ -369,12 +373,11 @@ Two prominent examples:
 
 \section*{References}
 
+\begin{itemize}
+    \item explanation for group law name is \href{https://www.math.brown.edu/reschwar/M1540B/elliptic.pdf}{here}
+    \item why infinity is added \href{https://crypto.stackexchange.com/questions/70507/in-elliptic-curve-what-does-the-point-at-infinity-look-like}{here}
+    \item This (heavy) textbook is a good resource if you want to explore the mathematics of elliptic curves in further detail.
+\end{itemize}
 
-explanation for group law name is \href{https://www.math.brown.edu/reschwar/M1540B/elliptic.pdf}{here}
-
-
-why infinity is added \href{https://crypto.stackexchange.com/questions/70507/in-elliptic-curve-what-does-the-point-at-infinity-look-like}{here}
-
-Textbook for elliptic curves is here
 
 \end{document}

@@ -303,9 +303,9 @@ This approach works fine for the example given in the docstrings, as shown below
 \end{lstlisting}
 
 \subsection*{Time Complexity}
-    The current implementation of this algorithm yields a time complexity of $\mathcal{O}(\text{\texttt{len(elements)}}^{3})$, where $n$ is the number of elements in the poset. This is because (1) we sort each of the elements, which takes time $\mathcal{O}(\text{\texttt{len(elements)}}\log(\text{\texttt{len(elements)}}))$ at each iteration, and (2) computing each of the minimal elements takes $\mathcal{O}(\text{\texttt{len(elements)}}^{2})$ time at each iteration.
+    The current implementation of this algorithm yields a time complexity of $\mathcal{O}(n^{3})$, where $n$ is the number of elements in the poset. This is because we sort each of the elements (taking time $\mathcal{O}(n\log(\text{n}))$) as well as compute each of the minimal elements (taking time $\mathcal{O}(n^{2})$) time at \textit{each} iteration.
 
     \vspace{2mm}
-    However, by using more efficient representations for our data, as well as external data structures such as priority queues, we can reduce the time complexity to $$\mathcal{O}(\text{\texttt{len(elements)}} \times (\text{\texttt{len(elements)}} + \text{\texttt{num\_processors}} \times \log(\text{\texttt{len(elements)}})))\footnote{I haven't analyzed it too deeply, so it might be able to be improved even further.}.$$ It's a good exercise to determine why this is the case, as well as create such an implementation.
+    However, by using more efficient representations for our data, as well as external data structures such as priority queues, we can reduce the time complexity to $$\textcolor{red}{\mathcal{O}(?)}$$ It's a good exercise to determine why this is the case, as well as create such an implementation.
 
 \end{document}
