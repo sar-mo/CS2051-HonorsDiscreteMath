@@ -9,18 +9,20 @@ import math
 from elliptic_curves import point_addition, point_scalar_multiplication
 
 class Actor:
-    def __init__(self, name : str, n : int, P : tuple, k : int):
-        ''' Initialize the actor with a name, a prime number n, a generator g, and a private key k.
+    def __init__(self, name : str, P : tuple, k : int, a : int, b : int, n : int):
+        ''' Initialize the actor with a name a private key, the public generator point, and the public curve parameters.
 
         Parameters:
             name: The name of the actor
-            n : A prime number
             P : The generator point of the group
             k : The private key of the actor
+            a : The a coefficient of the curve.
+            b : The b coefficient of the curve.
+            n : The prime modulus of a field.
         '''
         self.name = name
-        self.n = n
         self.P = P
+        self.curve = (a, b, n)
         self.__private_key = k
         self.__secret_key = None
 
@@ -48,25 +50,33 @@ class Actor:
         return NotImplementedError
 
 class BadActor:
-    
-    def __init__(self, name):
+    def __init__(self, name : str, P : int, a : int, b : int, n : int):
+        ''' Initialize the actor with a name, the public generator point, and the public curve parameters.
+
+        Parameters:
+            name: The name of the actor
+            P : The generator point of the group
+            a : The a coefficient of the curve.
+            b : The b coefficient of the curve.
+            n : The prime modulus of a field.
+        '''
         self.name = name
+        self.P = P
+        self.curve = (a, b, n)
         self.__secret_key = None
     
-    def brute(self, P : tuple, Q : tuple, n : int) -> int:
+    def brute(self, Q : tuple) -> int:
         """Brute Force algorithm to solve Discrete Log
 
         Parameters:
-            P : P of k*P = Q (mod n).
             Q : Q of k*P = Q (mod n).
-            n : n of k*P = Q (mod n). Prime number.
 
         Returns: k of k*P = Q (mod n). If not found returns -1.
         """
         ### YOUR CODE HERE ###
         return NotImplementedError
 
-    def bsgs(self, P : tuple, Q : tuple, n : int) -> int:
+    def bsgs(self, Q : tuple) -> int:
         """Baby-Step Giant-Step algorithm to solve Discrete Log Problem
 
         Parameters:
@@ -79,7 +89,7 @@ class BadActor:
         ### YOUR CODE HERE ###
         return NotImplementedError
 
-    def stealSecret(self, actor1 : Actor, actor2 : Actor, attack : function, P : tuple, n : int) -> None:
+    def stealSecret(self, actor1 : Actor, actor2 : Actor, attack : function) -> None:
         """Steals secret key from Actor1 and Actor2.
         Should not use any private fields from Actor1 or Actor2.
 

@@ -1,3 +1,10 @@
+# CS 2051 Spring 2023 - HW7 Supplement Parts 2-3: Elliptic Curves
+# instructor: Gerandy Brito
+# creator - Sarthak Mohanty
+
+# author - your name here
+# collaborators - list collaborators here
+
 import math
 from mathlib import *
 import numpy as np
@@ -70,10 +77,10 @@ def point_scalar_multiplication(P : tuple, k : int, a : int, b : int, p = None) 
         The product of the point and the number. return (None, None) if there is no third point
 
     Examples:
-        >>> point_scalar_multiplication((7, 19), 3, -3, 8)
-        (1.496, 2.198)
-        >>> point_scalar_multiplication((31, 29), 4, 23, 3, 91)
-        (73, 85)
+        >>> point_scalar_multiplication((3, 5), 3, -3, 7)
+        (-2.28883, -1.36964)
+        >>> point_scalar_multiplication((55, 36), 4, 23, 3, 61)
+        (21, 29)
     '''
     if p:
         ### YOUR CODE HERE ###
@@ -82,14 +89,13 @@ def point_scalar_multiplication(P : tuple, k : int, a : int, b : int, p = None) 
         ### YOUR CODE HERE ###
         return NotImplementedError
 
-def generate_point_cloud(a : int, b : int, p = None) -> set:
+def generate_point_cloud(a : int, b : int, p : int) -> set:
     '''Generate a point cloud of a curve.
 
     Parameters:
         a : The a coefficient of the curve.
         b : The b coefficient of the curve.
-        p : (optional) The prime modulus of a field. If not provided, assume
-            calculations are over the field of real numbers.
+        p : The prime modulus of a field.
 
     Returns:
         A set of points on the curve over the field F_{p}.
@@ -97,7 +103,7 @@ def generate_point_cloud(a : int, b : int, p = None) -> set:
 
     Example:
         >>> generate_point_cloud(-1, 10, 11)
-        {(6, 2), (2, 7), (6, 5), (2, 0), (1, 4), (1, 3)}
+        {(2, 4), (2, 7), (3, 1), (3, 10), (4, 2), (4, 9), (5, 3), (5, 8), (6, 0), (7, 4), (7, 7), (9, 2), (9, 9)}
     '''
     ### YOUR CODE HERE ###
     return NotImplementedError

@@ -10,7 +10,7 @@ import math
 
 class Actor:
     def __init__(self, name : str, p : int, g : int, a : int):
-        ''' Initialize the actor with a name, a prime number p, a generator g, and a private key a.
+        ''' Initialize the actor with a name, the public parameters p and g, and a private key a.
 
         Parameters:
             name: The name of the actor
@@ -49,37 +49,42 @@ class Actor:
 
 class BadActor:
     
-    def __init__(self, name : str):
+    def __init__(self, name : str, p : int, g : int):
+        ''' Initialize the actor with a name and the public parameters p and g.
+
+        Parameters:
+            name: The name of the actor
+            p: A prime number
+            g: A generator of the group
+        '''
         self.name = name
+        self.p = p
+        self.g = g
         self.__secret_key = None
     
-    def brute(self, g, y, p):
+    def brute(self, y):
         """Brute Force algorithm to solve Discrete Log
 
         Parameters:
-            g : g of g^x = y (mod p). g > 0.
             y : y of g^x = y (mod p). Non-negative integer.
-            p : p of g^x = y (mod p). Prime number.
 
         Returns: x of g^x = y (mod p). If not found returns -1.
         """
         ### YOUR CODE HERE ###
         return NotImplementedError
 
-    def bsgs(self, g : int, y : int, p : int) -> int:
+    def bsgs(self, y : int) -> int:
         """Baby-Step Giant-Step algorithm to solve Discrete Log Problem
 
         Parameters:
-            g : g of g^x = y (mod p). g > 0.
             y : y of g^x = y (mod p). Non-negative integer.
-            p : p of g^x = y (mod p). Prime number.
             
         Returns: x of g^x = y (mod p). If not found returns -1.
         """
         ### YOUR CODE HERE ###
         return NotImplementedError
 
-    def stealSecret(self, actor1 : Actor, actor2 : Actor, attack : function, g : int, p : int) -> None:
+    def stealSecret(self, actor1 : Actor, actor2 : Actor, attack : function) -> None:
         """Steals secret key from Actor1 and Actor2.
         Should not use any private fields from Actor1 or Actor2.
 
@@ -87,8 +92,6 @@ class BadActor:
             actor1: Actor1
             actor2: Actor2
             attack: Attack function, either brute_force or bsgs
-            g : g of g^x = y (mod p). g > 0.
-            p : p of g^x = y (mod p). Prime number.
             
         Returns: none. Should set the __secret_key field of the BadActor.
         """
