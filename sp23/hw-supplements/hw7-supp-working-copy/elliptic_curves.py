@@ -6,7 +6,6 @@
 # collaborators - list collaborators here
 
 import math
-from mathlib import *
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -32,7 +31,7 @@ def f(x : int, a : int, b : int) -> tuple:
     else:
         return (math.sqrt(x**3 + a*x + b), -math.sqrt(x**3 + a*x + b))
     
-def point_addition(P : tuple, Q : tuple, a : int, b : int, p = None) -> tuple:
+def point_addition(P : tuple, Q : tuple, a : int, b : int, p : int = None) -> tuple:
     '''Add two distinct points on an elliptic curve.
 
     Parameters:
@@ -61,7 +60,7 @@ def point_addition(P : tuple, Q : tuple, a : int, b : int, p = None) -> tuple:
         ### YOUR CODE HERE ###
         return NotImplementedError
 
-def point_scalar_multiplication(P : tuple, k : int, a : int, b : int, p = None) -> tuple:
+def point_scalar_multiplication(P : tuple, k : int, a : int, b : int, p : int = None) -> tuple:
     '''Multiply a point on an elliptic curve a given number of times.
 
     Parameters:
@@ -108,16 +107,16 @@ def generate_point_cloud(a : int, b : int, p : int) -> set:
     ### YOUR CODE HERE ###
     return NotImplementedError
 
-###################### Visualization Functions, not finalized yet ######################
+###################### Visualization Functions ######################
 
-def visualize_curve(ax, domain : tuple, a : int, b : int, p = None) -> None:
+def visualize_curve(ax, a : int, b : int, p : int = None, domain : tuple = (-5, 5)) -> None:
     """Visualize an elliptic curve.
 
     Parameters:
     ax : The axis to plot the curve on.
-    domain : The domain of the curve
     a : The a coefficient of the curve.
     b : The b coefficient of the curve.
+    domain : (optional) The domain of the curve. Default is (-5, 5).
     p : (optional) The prime modulus of a field. If not provided, assume
         calculations are over the field of real numbers.
     """ 
@@ -139,9 +138,8 @@ def visualize_curve(ax, domain : tuple, a : int, b : int, p = None) -> None:
         ax.plot(x, y2, 'r')
 
         ax.set_xlim(domain[0], domain[1])
-    return ax
 
-def visualize_addition(ax, P : tuple, Q : tuple, a : int, b : int, p = None) -> None:
+def visualize_addition(ax, P : tuple, Q : tuple, a : int, b : int, p : int = None) -> None:
     """Visualize point addition with two distinct points on an elliptic curve.
 
     Parameters
@@ -156,13 +154,16 @@ def visualize_addition(ax, P : tuple, Q : tuple, a : int, b : int, p = None) -> 
     """ 
     if p:
         R = point_addition(P, Q, a, b, p)
+        visualize_curve(ax, a, b, p, domain = (0, p - 1))
         
     else:
         R = point_addition(P, Q, a, b)
-        ax.plot([P[0], Q[0]], [P[1], Q[1]], color='yellow')
 
-    # change domain to include all three points
-    ax.set_xlim(min(P[0], Q[0], R[0]) - 1, max(P[0], Q[0], R[0]) + 1)
+        # change domain to include P, Q, and R
+        xmin = min(P[0], Q[0], R[0]) - 2
+        xmax = max(P[0], Q[0], R[0]) + 2
+        visualize_curve(ax, a, b, domain = (xmin, xmax))
+
     ax.plot(P[0], P[1], label='P', marker='o')
     ax.annotate('P', P)
     ax.plot(Q[0], Q[1], label='Q', marker='o')
@@ -170,31 +171,30 @@ def visualize_addition(ax, P : tuple, Q : tuple, a : int, b : int, p = None) -> 
     ax.plot(R[0], R[1], label='R', marker='o')
     ax.annotate('R', R)
 
-    return ax
-
-def visualize_multiplication(ax, P : tuple, n : int, a : int, b : int, p = None) -> None:
+def visualize_multiplication(ax, P : tuple, n : int, a : int, b : int, p : int = None) -> None:
     """Visualize point multiplication on an elliptic curve.
 
     Parameters
     ----------
     ax : The axis to plot the curve on.
     P : A point on the curve. if p is provided, P must be in the field.
-    Q : A point on the curve. if p is provided, Q must be in the field.
     a : The a coefficient of the curve.
     b : The b coefficient of the curve.
     p : (optional) The prime modulus of a field. If not provided, assume
         calculations are over the field of real numbers.
     """ 
     if p:
-        R = point_scalar_multiplication(P, n, a, b, p)
-        # to do: add line from P
+        Q = point_scalar_multiplication(P, n, a, b, p)
+        visualize_curve(ax, a, b, p, domain = (0, p - 1))
     else:
-        R = point_scalar_multiplication(P, n, a, b)
-        print(R)
-        # to do: add line from P
-        
-    plt.plot(P[0], P[1], label='P', marker='o')
-    plt.annotate('P', P)
-    plt.plot(R[0], R[1], label='R', marker='o')
-    plt.annotate('R', R)
+        Q = point_scalar_multiplication(P, n, a, b)
+
+        xmin = min(P[0], Q[0]) - 2
+        xmax = max(P[0], Q[0]) + 2
+        visualize_curve(ax, a, b, domain = (xmin, xmax))
+
+    ax.plot(P[0], P[1], label='P', marker='o')
+    ax.annotate('P', P)
+    ax.plot(Q[0], Q[1], label='Q', marker='o')
+    ax.annotate('Q', Q)
 

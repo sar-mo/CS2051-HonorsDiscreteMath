@@ -1,4 +1,4 @@
-# CS 2051 Spring 2023 - HW7 Supplement Part 4: Elliptic Curve Diffie-Hellman Key Exchange Algorithm
+# CS 2051 Spring 2023 - HW7 Supplement Part 4: Elliptic Curve Diffie-Hellman
 # instructor: Gerandy Brito
 # creator - Sarthak Mohanty
 
@@ -6,11 +6,12 @@
 # collaborators - list collaborators here
 
 import math
-from elliptic_curves import point_addition, point_scalar_multiplication
+from elliptic_curves import generate_point_cloud, point_addition, point_scalar_multiplication
 
 class Actor:
     def __init__(self, name : str, P : tuple, k : int, a : int, b : int, n : int):
-        ''' Initialize the actor with a name a private key, the public generator point, and the public curve parameters.
+        ''' Initialize the actor with a name a private key, the public generator point,
+        and the public curve parameters.
 
         Parameters:
             name: The name of the actor
@@ -27,8 +28,7 @@ class Actor:
         self.__secret_key = None
 
     def computePublicKey(self) -> tuple:
-        '''Compute the public key using the private key and the generator.
-        Should use a doubling algorithm for efficiency
+        '''Efficiently computes the public key using the private key and the generator.
 
         Parameters: none
 
@@ -38,8 +38,7 @@ class Actor:
         return NotImplementedError
 
     def computeSecret(self, offer : tuple) -> None:
-        '''Compute the secret key using the offer and the private key.
-        Again should use a doubling algorithm for efficiency.
+        '''Efficiently the secret key using the offer and the private key.
 
         Parameters:
             offer: The public key of the other actor
@@ -51,7 +50,8 @@ class Actor:
 
 class BadActor:
     def __init__(self, name : str, P : int, a : int, b : int, n : int):
-        ''' Initialize the actor with a name, the public generator point, and the public curve parameters.
+        ''' Initialize the actor with a name, the public generator point,
+            and the public curve parameters.
 
         Parameters:
             name: The name of the actor
@@ -66,25 +66,25 @@ class BadActor:
         self.__secret_key = None
     
     def brute(self, Q : tuple) -> int:
-        """Brute Force algorithm to solve Discrete Log
+        """Brute Force algorithm to solve ECDLP
 
         Parameters:
-            Q : Q of k*P = Q (mod n).
+            Q : Q of kP = Q (mod n).
 
-        Returns: k of k*P = Q (mod n). If not found returns -1.
+        Returns: k of kP = Q (mod n). If not found returns -1.
         """
         ### YOUR CODE HERE ###
         return NotImplementedError
 
     def bsgs(self, Q : tuple) -> int:
-        """Baby-Step Giant-Step algorithm to solve Discrete Log Problem
+        """Baby-Step Giant-Step algorithm to solve ECDLP
 
         Parameters:
-            P : P of k*P = Q (mod n).
-            Q : Q of k*P = Q (mod n).
-            n : n of k*P = Q (mod n). Prime number.
+            P : P of kP = Q (mod n).
+            Q : Q of kP = Q (mod n).
+            n : n of kP = Q (mod n). Prime number.
 
-        Returns: k of k*P = Q (mod n). If not found returns -1.
+        Returns: k of kP = Q (mod n). If not found returns -1.
         """
         ### YOUR CODE HERE ###
         return NotImplementedError
@@ -97,8 +97,6 @@ class BadActor:
             actor1: Actor1
             actor2: Actor2
             attack: Attack function, either brute_force or bsgs
-            P: P of k*P = Q (mod n).
-            n: n of k*P = Q (mod n). Prime number.
             
         Returns: none. Should set the __secret_key field of the BadActor.
         """

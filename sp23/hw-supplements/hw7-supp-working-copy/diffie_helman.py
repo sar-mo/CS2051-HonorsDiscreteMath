@@ -5,7 +5,6 @@
 # author - your name here
 # collaborators - list collaborators here
 
-
 import math
 
 class Actor:
@@ -25,8 +24,7 @@ class Actor:
         self.__secret_key = None
 
     def computePublicKey(self) -> int:
-        '''Compute the public key using the private key and the generator.
-        Should use a doubling algorithm for efficiency
+        '''Efficiently computes the public key using the private key and the generator.
 
         Parameters: none
 
@@ -36,8 +34,7 @@ class Actor:
         return NotImplementedError
 
     def computeSecret(self, offer : int) -> None:
-        '''Compute the secret key using the offer and the private key.
-        Again should use a doubling algorithm for efficiency.
+        '''Efficiently computes the secret key using the offer and the private key.
 
         Parameters:
             offer: The public key of the other actor
@@ -63,7 +60,7 @@ class BadActor:
         self.__secret_key = None
     
     def brute(self, y):
-        """Brute Force algorithm to solve Discrete Log
+        """Brute Force algorithm to solve Discrete Log Problem
 
         Parameters:
             y : y of g^x = y (mod p). Non-negative integer.
