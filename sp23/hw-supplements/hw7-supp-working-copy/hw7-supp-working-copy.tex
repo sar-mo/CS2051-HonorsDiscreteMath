@@ -3,6 +3,13 @@
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{enumitem}
 
+% color!
+\usepackage[dvipsnames]{xcolor}
+% \definecolor{mypink1}{rgb}{0.858, 0.188, 0.478}
+% \definecolor{mypink2}{RGB}{219, 48, 122}
+% \definecolor{mypink3}{cmyk}{0, 0.7808, 0.4429, 0.1412}
+% \definecolor{mygray}{gray}{0.6}
+
 % colored links
 \usepackage{hyperref}
 \hypersetup{
@@ -12,14 +19,10 @@
     urlcolor=blue,
     }
 
-
-
-\usepackage[dvipsnames]{xcolor}
-% \definecolor{mypink1}{rgb}{0.858, 0.188, 0.478}
-% \definecolor{mypink2}{RGB}{219, 48, 122}
-% \definecolor{mypink3}{cmyk}{0, 0.7808, 0.4429, 0.1412}
-% \definecolor{mygray}{gray}{0.6}
-
+% Inputting psuedocode
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\renewcommand\algorithmicdo{}
 
 % Inputting Python code
 \definecolor{textblue}{rgb}{.2,.2,.7}
@@ -129,7 +132,7 @@ Elliptic Curve Cryptography (ECC) is one of the most powerful cryptosystems in u
     \textbf{Symmetric, or private-key, encryption} uses the same key to both encrypt and decrypt the message. Symmetric encryption algorithms are generally faster and more efficient, but they require the sender and the recipient to share a secret key. The most prominent example is the AES cipher.\footnote{some of your classmates have chosen this as their group project!} 
 
     \vspace{3mm}
-    On the other hand, \textbf{asymmetric, or public-key encryption} algorithms are slower and less efficient, but they allow the sender to send a message securely to the recipient without sharing a secret key. Examples include RSA, Diffie-Helman, and ECCDH.
+    On the other hand, \textbf{asymmetric, or public-key encryption} algorithms are slower and less efficient, but they allow the sender to send a message securely to the recipient without sharing a secret key. Examples include RSA, Diffie-Hellman, and ECCDH.
 
 \subsection*{Trapdoor Functions}
     
@@ -139,14 +142,14 @@ Elliptic Curve Cryptography (ECC) is one of the most powerful cryptosystems in u
     As an example, the trapdoor function in RSA encryption is the modular exponentiation function, $c = m^e \mod N$, where $m$ is the plaintext, $e$ is the public exponent, $N$ is the modulus and $c$ is the ciphertext. The trapdoor information is the private key, which consists of the factors of $N$. In the opposite direction, decryption is performed by computing $m = c^d \mod N$, where $d$ is the private exponent derived from the private key.
 
 
-\section*{Part 1: Diffie-Helman (10 pts)}
+\section*{Part 1: Diffie-Hellman (10 pts)}
 
 \subsection*{Diffie-Hellman Key Exchange}
 
 There is a classic analogy for the DH key exchange, which we present below: 
 
-\begin{tcolorbox}
-    Professor Brito and Lianet (Brito’s wife!) have a famous Piña Colada recipe that they keep secret from the rest of the world. It is so secret in fact, that neither Brito nor Lianet know the full parts of the recipe! However, using their knowledge on how the Diffie-Helman key exchange algorithm works, they have devised a unique way of making the drink.
+\begin{tcolorbox}[colback = CarnationPink!20]
+    Professor Brito and Lianet (Brito’s wife!) have a famous Piña Colada recipe that they keep secret from the rest of the world. It is so secret in fact, that neither Brito nor Lianet know the full parts of the recipe! However, using their knowledge on how the Diffie-Hellman key exchange algorithm works, they have devised a unique way of making the drink.
 
     \vspace{2mm}
     To make their famous Piña Colada, Brito and Lianet have their own secret ingredients, which they mix separately. Brito mixes a secret amount of rum to a glass, while Lianet mixes a secret amount of pineapple juice to another glass. These individual mixtures represent the private keys of each party:
@@ -158,7 +161,7 @@ There is a classic analogy for the DH key exchange, which we present below:
 
     $$\text{Brito: \mixedpineapple \quad Lianet: \mixedrum}$$
     
-    Once they have exchanged their public keys, they each use their own private key to mix with the other party's public key to generate a shared secret key, in this case the final drink.
+    Once they have exchanged their mixtures (or ``public keys"), they again use their own secret ingredients (or ``private keys") to mix with the others' drink to generate a shared ``secret key", in this case the final drink.
 
     $$\text{Brito:} \mixedpineapple + \rum = \pinacolada \quad \text{Lianet:} \mixedrum + \pineapple = \pinacolada$$
 
@@ -180,7 +183,7 @@ There is a classic analogy for the DH key exchange, which we present below:
     \end{enumerate}
 
 \subsection*{Trapdoor Function: Discrete Log Problem}
-    The security of DH comes from the fact that an attacker, even given $g$, $p$, $g^{k_{1}} \pmod{p}$, and $g^{k_{2}} \pmod{p}$, \underline{cannot} efficiently calculate $g^{k_{1} k_{2}} \pmod{p}$. This leads us to a trapdoor function known as the \textit{discrete log problem}: $$\text{Given $g$, $p$, and $g^{x}\ \text{mod}\ p$, determine $x$}.$$ We will first demonstrate that we can break the discrete log problem if the parameters $x$ and $p$ are too small. Then, we will see through our implementations that as we increase the size of our numbers, the power of our attacks gets weaker. This astonishing fact is hopefully something you will see in your implementations.
+    The security of DH comes from the fact that an attacker, even given $g$, $p$, $g^{k_{1}} \pmod{p}$, and $g^{k_{2}} \pmod{p}$, \underline{cannot} efficiently calculate $g^{k_{1} k_{2}} \pmod{p}$. This leads us to a trapdoor function known as the \textit{discrete log problem}: $$\text{Given $g$, $p$, and $g^{x}\ \text{mod}\ p$, determine $x$}.$$ We will first demonstrate that we can break the discrete log problem if the parameters $x$ and $p$ are too small. Then, we will see through our implementations that as we increase the size of our numbers, the power of our attacks gets weaker. This cool fact is hopefully something you will see in your implementations.
 
     \begin{center}
         \textbf{Brute Force}
@@ -190,17 +193,42 @@ There is a classic analogy for the DH key exchange, which we present below:
     
     \begin{center}
         \textbf{Baby-Step Giant-Step algorithm}
-        \footnote{this section was adapted from the blog post linked at the beginning of this supplement}
+        \footnote{this section was adapted from the blog post linked at the beginning of this supplement.}
     \end{center}
 
     Before we describe the algorithm, first note that any integer $x$ can be written as $x = am + b$, where $a$, $m$, and $b$ are arbitrary integers. For example, we can write $10 = 2 \cdot 3 + 4$. With this knowledge, we can rewrite the equation for the discrete log problem as follows:
     \begin{align*}
-        g^{x} \equiv y \pmod{p} \\
-        g^{ap + b} \equiv y\pmod{p} \\
-        y \equiv g^{ap}g^{b} \pmod{p}
+        g^{x} &\equiv y \pmod{p} \\
+        g^{am + b} &\equiv y\pmod{p} \\
+        g^{b} &\equiv y \cdot g^{-am} \pmod{p}
      \end{align*}
 
-     The baby-step giant-step is a "meet in the middle" algorithm. In essence, instead of computing $g^{x} \pmod{p}$ for all values $x$, we instead calculate a few values for $g^{ap} \pmod{p}$, as well as calculate a few values for $g^{ap} \pmod{p}$
+     The baby-step giant-step is a "meet in the middle" algorithm. In essence, instead of computing $g^{x} \pmod{p}$ for all values $x$, we instead calculate a few values for $g^{am} \pmod{p}$, as well as calculate a few values for $g^{am} \pmod{p}$. The algorithm works as follows:
+
+     \begin{algorithm}
+        \caption{\textsc{BabyStepGiantStep}}
+        \label{alg:bsgs}
+        \begin{algorithmic}
+            \State $m = \lceil \sqrt{p}\ \rceil$
+            \For{each $b$ in $0, \dots, m$}
+                \State Store $g^{b}$ in a certain data structure (which one?)
+            \EndFor
+            \For{each $a$ in $0, \dots, m$}
+                \State Calculate $y \cdot g^{-am}$.
+                \State Check to see if there exists some $g^{b}$ such that $y \cdot g^{-am} = g^{b}$ (in $\mathcal{O}(1)$ time!)
+            \EndFor
+            \Return $x = am + b$
+        \end{algorithmic}
+    \end{algorithm}
+    To understand why this algorithm works, forget the modulo for a second and take the equation $y = g^{am + b}$. Consider what follows:
+    \begin{itemize}
+        \item When $a = 0$ we are checking whether $y$ is equal to $g^{b}$, where $b$ is one of the integers from $0$ to $m$.
+        \item When $a = 1$ we are checking whether $y$ is equal to $g^{m + b}$. We are comparing $y$ against all exponents from $m$ to $2m$.
+        \item When $a = 2$ we are comparing $y$ against all exponents from $2m$ to $3m$.
+        \item \dots
+        \item When $a = m - 1$, we are comparing $y$ against all exponents from $(m - 1)m$ to $m^{2} = p$.
+    \end{itemize}
+    In other words, \textbf{we are checking all exponents from $0$ to $p$}. The time complexity of this algorithm is $\mathcal{O}(\sqrt{p})$.
     
     \begin{center}
     \textbf{General Number Field Sieve (GNFS)}
@@ -215,7 +243,7 @@ There is a classic analogy for the DH key exchange, which we present below:
     All this means is that RSA is not the ideal system for the future of cryptography. In an ideal Trapdoor Function, the easy way and the hard way get harder at the same rate with respect to the size of the numbers in question. For this reason (and a few others discussed later), we need a better public key system. In 1985, such a system was found, revolving around an (then) arcane field known as elliptic curves.
 
     \begin{tcolorbox}[enhanced,interior style={top color=Plum!20,bottom color=Plum!30}]
-        In this part, you'll implement the Actor class, which contains methods to emulate the Diffie-Helman key exchange:
+        In this part, you'll implement the Actor class, which contains methods to emulate the Diffie-Hellman key exchange:
     
     % mix with black
         \begin{mybox}[
@@ -263,11 +291,10 @@ There is a classic analogy for the DH key exchange, which we present below:
 
 \section*{Part 2: Enter Elliptic Curves (8 pts)}
 
-The standard form for an elliptic curve is $$y^{2} = x^{3} + Ax + B,$$ where $A$ and $B$ are constants.  This will be referred to as the Weierstrass equation for an elliptic curve. For reasons that will be discussed later, also include the point $\{\infty\}$ in this function.
+The standard form for an elliptic curve is $$y^{2} = x^{3} + ax + b,$$ where $a$ and $b$ are constants. This is referred to as the Weierstrass equation for an elliptic curve. For reasons that will be discussed later, also include the point $\{\infty\}$ in this function.
 
 \subsection*{The Group Law}
-    One important aspect of elliptic curves is that we can start with two points, or even one point on an elliptic curve, and produce another point.
-
+    One important aspect of elliptic curves is that we can start with two points, or even one point on an elliptic curve, and produce another point. To do this, start with two points $P = (x_{1}, y_{1})$, $Q = (x_{2}, y_{2})$ on an elliptic curve $E$. Now draw a line $L$ through $P$ and $Q$. This line will intersect $E$ at a third point $R'$. (such a point always exists, and you'll prove it when trying to calculate the exact value of this point below!) Finally, reflect $R'$ across the $x$-axis to obtain $R$. We define $$P + Q = R.$$ You can see an example of this addition in Figure (\ref{fig:point_addition}).
 
 \begin{figure}[htbp]
     \centering
@@ -299,7 +326,7 @@ The standard form for an elliptic curve is $$y^{2} = x^{3} + Ax + B,$$ where $A$
     Notes: This part is just algebra and geometry. Since I know it's been a while since many of you touched this, here's a few steps you get you started.
     \begin{itemize}
         \item For point addition, we assumed that $P \ne Q \ne \infty$. For this reason, we can draw the line $L$ through $P_{1}$ and $P_{2}$. Its slope is $$m = \frac{y_{2} - y_{1}}{x_{2} - x_{1}}.$$ If $x_{1} = x_{2}$, then $L$ is vertical, so the resulting point is just $\infty$. Now let's assume that $x_{1} \ne x_{2}$. The equation of $L$ is then $$y = m(x - x_{1}) + y_{1}.$$ To find the intersection of this line with the elliptic curve, we can substitute the above equation into the formula for an elliptic curve $$y^{2} = x^{3} + ax + b.$$ Finally, we can reflect the above point across the $x$-axis to obtain the point $P_{3} = (x_{3}, y_{3})$.
-        \item For point scalar multiplication, we have that $P = Q = (x_{1}, y_{1})$. When two points on a curve are very close to each other, the line through them approximates a tangent line. Therefore, when the two points coincide, we take the line $L$ through them to be the tangent tine. Implicit differentiation allows us to find the slope $m$ of $L$: $$2y \frac{dy}{dx} = 3x^{2} + A,\text{\quad so\quad} m = \frac{dy}{dx} = \frac{3x_{1}^{2} + A}{2y_{1}}.$$ If $y_{1} = 0$ then the line is vertical and we set $P_{1} + P_{2} = \infty$, as before. Otherwise, we plug in values into $L$ and solve as before.
+        \item For point scalar multiplication, we have that $P = Q = (x_{1}, y_{1})$. When two points on a curve are very close to each other, the line through them approximates a tangent line. Therefore, when the two points coincide, we take the line $L$ through them to be the tangent tine. Implicit differentiation allows us to find the slope $m$ of $L$: $$2y \frac{dy}{dx} = 3x^{2} + a,\text{\quad so\quad} m = \frac{dy}{dx} = \frac{3x_{1}^{2} + a}{2y_{1}}.$$ If $y_{1} = 0$ then the line is vertical and we set $P_{1} + P_{2} = \infty$, as before. Otherwise, we plug in values into $L$ and solve as before.
     \end{itemize}
     
 \end{tcolorbox}
@@ -328,11 +355,11 @@ The standard form for an elliptic curve is $$y^{2} = x^{3} + Ax + B,$$ where $A$
         After completing each function, you should be able to run \lstinline{visualize_curve}, \lstinline{visualize_point_addition}, and \lstinline{visualize_point_scalar_multiplication} to check your work.
     \end{tcolorbox}
 
-\section*{Part 4: ECC in Action: Elliptic-curve Diffie Helman (10 pts)}
+\section*{Part 4: ECC in Action: Elliptic-curve Diffie Hellman (10 pts)}
 
-% You've devleoped some undrestanding of how elliptic curves work, but it's naturarl to doubt the connection between them. This is where yopu're wrong. Note that... this is called \textit{order independence}. This makes it really easy to modify diffie helman to accomodate our elliptic curves, as follows:
+% You've devleoped some undrestanding of how elliptic curves work, but it's naturarl to doubt the connection between them. This is where yopu're wrong. Note that... this is called \textit{order independence}. This makes it really easy to modify diffie hellman to accomodate our elliptic curves, as follows:
 
-% This order independence also makes it easy to see why ECC takes less storage space than Diffie-Helman, 
+% This order independence also makes it easy to see why ECC takes less storage space than Diffie-Hellman, 
 
 \subsection*{The Elliptic-curve Discrete Log Function}
 
@@ -460,7 +487,7 @@ Two prominent examples:
 \section*{Submission Instructions (10 pts)}
     After you fill the appropriate functions, submit the following files to Gradescope and make sure you pass all test cases:
     \begin{itemize}
-        \item \lstinline{diffie_helman.py}
+        \item \lstinline{diffie_hellman.py}
         \item \lstinline{elliptic_curves.py}
         \item \lstinline{ECDH.py}
     \end{itemize}
@@ -481,6 +508,7 @@ Two prominent examples:
     \item explanation for group law name is \href{https://www.math.brown.edu/reschwar/M1540B/elliptic.pdf}{here}
     \item why infinity is added \href{https://crypto.stackexchange.com/questions/70507/in-elliptic-curve-what-does-the-point-at-infinity-look-like}{here}
     \item This (heavy) textbook is a good resource if you want to explore the mathematics of elliptic curves in further detail.
+    \item Again, the amazing blog post mentioned above.
 \end{itemize}
 % \begin{mybox}[colbacktitle=green]{My title}
 % \lipsum[2]
