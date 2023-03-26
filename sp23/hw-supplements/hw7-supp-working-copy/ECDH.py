@@ -5,6 +5,7 @@
 # author - your name here
 # collaborators - list collaborators here
 
+from typing import Callable # for type hinting
 import math
 from elliptic_curves import generate_point_cloud, point_addition, point_scalar_multiplication
 
@@ -25,7 +26,7 @@ class Actor:
         self.P = P
         self.curve = (a, b, n)
         self.__private_key = k
-        self.__secret_key = None
+        self._secret_key = None  # single underscore indicates weak privacy (so autograder can access)
 
     def computePublicKey(self) -> tuple:
         '''Efficiently computes the public key using the private key and the generator.
@@ -43,7 +44,7 @@ class Actor:
         Parameters:
             offer: The public key of the other actor
 
-        Returns: none. Should set the __secret_key field of the Actor.
+        Returns: none. Should set the _secret_key field of the Actor.
         '''
         ### YOUR CODE HERE ###
         return NotImplementedError
@@ -63,7 +64,7 @@ class BadActor:
         self.name = name
         self.P = P
         self.curve = (a, b, n)
-        self.__secret_key = None
+        self._secret_key = None
     
     def brute(self, Q : tuple) -> int:
         """Brute Force algorithm to solve ECDLP
@@ -89,7 +90,7 @@ class BadActor:
         ### YOUR CODE HERE ###
         return NotImplementedError
 
-    def stealSecret(self, actor1 : Actor, actor2 : Actor, attack : function) -> None:
+    def stealSecret(self, actor1 : Actor, actor2 : Actor, attack : Callable) -> None:
         """Steals secret key from Actor1 and Actor2.
         Should not use any private fields from Actor1 or Actor2.
 
@@ -98,7 +99,7 @@ class BadActor:
             actor2: Actor2
             attack: Attack function, either brute_force or bsgs
             
-        Returns: none. Should set the __secret_key field of the BadActor.
+        Returns: none. Should set the _secret_key field of the BadActor.
         """
         ### YOUR CODE HERE ###
         return NotImplementedError

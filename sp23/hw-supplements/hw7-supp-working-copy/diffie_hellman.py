@@ -5,6 +5,7 @@
 # author - your name here
 # collaborators - list collaborators here
 
+from typing import Callable # for type hinting
 import math
 
 class Actor:
@@ -21,7 +22,7 @@ class Actor:
         self.p = p
         self.g = g
         self.__private_key = a
-        self.__secret_key = None
+        self._secret_key = None # single underscore indicates weak privacy (so autograder can access)
 
     def computePublicKey(self) -> int:
         '''Efficiently computes the public key using the private key and the generator.
@@ -39,7 +40,7 @@ class Actor:
         Parameters:
             offer: The public key of the other actor
 
-        Returns: none. Should set the __secret_key field of the Actor.
+        Returns: none. Should set the _secret_key field of the Actor.
         '''
         ### YOUR CODE HERE ###
         return NotImplementedError
@@ -57,7 +58,7 @@ class BadActor:
         self.name = name
         self.p = p
         self.g = g
-        self.__secret_key = None
+        self._secret_key = None
     
     def brute(self, y):
         """Brute Force algorithm to solve Discrete Log Problem
@@ -81,7 +82,7 @@ class BadActor:
         ### YOUR CODE HERE ###
         return NotImplementedError
 
-    def stealSecret(self, actor1 : Actor, actor2 : Actor, attack : function) -> None:
+    def steal_secret(self, actor1 : Actor, actor2 : Actor, attack : Callable) -> None:
         """Steals secret key from Actor1 and Actor2.
         Should not use any private fields from Actor1 or Actor2.
 
@@ -90,7 +91,7 @@ class BadActor:
             actor2: Actor2
             attack: Attack function, either brute_force or bsgs
             
-        Returns: none. Should set the __secret_key field of the BadActor.
+        Returns: none. Should set the _secret_key field of the BadActor.
         """
         ### YOUR CODE HERE ###
         return NotImplementedError
