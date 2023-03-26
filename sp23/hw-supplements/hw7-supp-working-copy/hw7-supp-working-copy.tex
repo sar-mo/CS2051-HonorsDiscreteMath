@@ -190,7 +190,7 @@ There is a classic analogy for the DH key exchange, which we present below:
     
     \begin{center}
         \textbf{Baby-Step Giant-Step algorithm}
-        % \footnote{this section was adapted from the blog post linked at the beginning of this supplement}
+        \footnote{this section was adapted from the blog post linked at the beginning of this supplement}
     \end{center}
 
     Before we describe the algorithm, first note that any integer $x$ can be written as $x = am + b$, where $a$, $m$, and $b$ are arbitrary integers. For example, we can write $10 = 2 \cdot 3 + 4$. With this knowledge, we can rewrite the equation for the discrete log problem as follows:
@@ -199,6 +199,8 @@ There is a classic analogy for the DH key exchange, which we present below:
         g^{ap + b} \equiv y\pmod{p} \\
         y \equiv g^{ap}g^{b} \pmod{p}
      \end{align*}
+
+     The baby-step giant-step is a "meet in the middle" algorithm. In essence, instead of computing $g^{x} \pmod{p}$ for all values $x$, we instead calculate a few values for $g^{ap} \pmod{p}$, as well as calculate a few values for $g^{ap} \pmod{p}$
     
     \begin{center}
     \textbf{General Number Field Sieve (GNFS)}
@@ -296,8 +298,8 @@ The standard form for an elliptic curve is $$y^{2} = x^{3} + Ax + B,$$ where $A$
     You can run \lstinline{visualize_addition} and \lstinline{visualize_multiplication} to generate the corresponding visualizations mentioned above. If you want more examples, there's an interactive tool \href{https://andrea.corbellini.name/ecc/interactive/reals-add.html}{here}
     Notes: This part is just algebra and geometry. Since I know it's been a while since many of you touched this, here's a few steps you get you started.
     \begin{itemize}
-        \item For point addition, we assumed that $P \ne Q \ne \infty$. For this reason, we can draw the line $L$ through $P_{1}$ and $P_{2}$. Its slope is $$m = \frac{y_{2} - y_{1}}{x_{2} - x_{1}}.$$ If $x_{1} = x_{2}$, then $L$ is vertical, so the resulting point is just $\infty$. Now let's assume that $x_{1} \ne x_{2}$. The equation of $L$ is then $$y = m(x - x_{1}) + y_{2}.$$ To find the intersection of this line with the elliptic curve, we can substitute the above equation into the formula for an elliptic curve $$y^{2} = x^{3} + ax + b.$$ Finally, we can reflect the above point across the $x$-axis to obtain the point $P_{3} = (x_{3}, y_{3})$.
-        \item For point scalar multiplication, we have that $P = Q = (x_{1}, y_{1})$. When two points on a curve are very close to each other, the line through them approximates a tangent line. Therefore, when the two points coincide, we take the line $L$ through them to be the tangent tine. Implicit differentiation allows us to find the slope $m$ of $L$: $$2y \frac{dy}{dx} = 3x^{2} + A,\text{\quad so\quad} m = \frac{dy}{dx}\frac{3x_{1}^{2} + A}{2y_{1}}.$$ If $y_{1} = 0$ then the line is vertical and we set $P_{1} + P_{2} = \infty$, as before. Otherwise, we plug in values and solve as before.
+        \item For point addition, we assumed that $P \ne Q \ne \infty$. For this reason, we can draw the line $L$ through $P_{1}$ and $P_{2}$. Its slope is $$m = \frac{y_{2} - y_{1}}{x_{2} - x_{1}}.$$ If $x_{1} = x_{2}$, then $L$ is vertical, so the resulting point is just $\infty$. Now let's assume that $x_{1} \ne x_{2}$. The equation of $L$ is then $$y = m(x - x_{1}) + y_{1}.$$ To find the intersection of this line with the elliptic curve, we can substitute the above equation into the formula for an elliptic curve $$y^{2} = x^{3} + ax + b.$$ Finally, we can reflect the above point across the $x$-axis to obtain the point $P_{3} = (x_{3}, y_{3})$.
+        \item For point scalar multiplication, we have that $P = Q = (x_{1}, y_{1})$. When two points on a curve are very close to each other, the line through them approximates a tangent line. Therefore, when the two points coincide, we take the line $L$ through them to be the tangent tine. Implicit differentiation allows us to find the slope $m$ of $L$: $$2y \frac{dy}{dx} = 3x^{2} + A,\text{\quad so\quad} m = \frac{dy}{dx} = \frac{3x_{1}^{2} + A}{2y_{1}}.$$ If $y_{1} = 0$ then the line is vertical and we set $P_{1} + P_{2} = \infty$, as before. Otherwise, we plug in values into $L$ and solve as before.
     \end{itemize}
     
 \end{tcolorbox}
