@@ -35,9 +35,9 @@ def point_addition(P : tuple, Q : tuple, a : int, b : int, p : int = None) -> tu
     '''Add two distinct points on an elliptic curve. *Always represent the point at infinity as (None, None)*
 
     Parameters:
-        P : A point on the curve. Assume values are integers.
+        P : A point on the curve. Assume values are integers. (or point at infinity)
             If over a galois field, assume point is in generated point cloud
-        Q : A point on the curve. Assume values are integers.
+        Q : A point on the curve. Assume values are integers. (or point at infinity)
             If over a galois field, assume point is in generated point cloud
         a : The a coefficient of the curve.
         b : The b coefficient of the curve.
@@ -102,7 +102,7 @@ def generate_point_cloud(a : int, b : int, p : int) -> set:
 
     Example:
         >>> generate_point_cloud(-1, 10, 11)
-        {(2, 4), (2, 7), (3, 1), (3, 10), (4, 2), (4, 9), (5, 3), (5, 8), (6, 0), (7, 4), (7, 7), (9, 2), (9, 9)}
+        {(None, None), (2, 4), (2, 7), (3, 1), (3, 10), (4, 2), (4, 9), (5, 3), (5, 8), (6, 0), (7, 4), (7, 7), (9, 2), (9, 9)}
     '''
     ### YOUR CODE HERE ###
     return NotImplementedError
