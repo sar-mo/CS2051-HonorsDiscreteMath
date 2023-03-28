@@ -60,7 +60,7 @@ class BadActor:
         self.g = g
         self._secret_key = None
     
-    def brute(self, y):
+    def brute_force(self, y):
         """Brute Force algorithm to solve Discrete Log Problem
 
         Parameters:
@@ -82,7 +82,7 @@ class BadActor:
         ### YOUR CODE HERE ###
         return NotImplementedError
 
-    def steal_secret(self, actor1 : Actor, actor2 : Actor, attack : Callable) -> None:
+    def stealSecret(self, actor1 : Actor, actor2 : Actor, attack : Callable) -> None:
         """Steals secret key from Actor1 and Actor2.
         Should not use any private fields from Actor1 or Actor2.
 

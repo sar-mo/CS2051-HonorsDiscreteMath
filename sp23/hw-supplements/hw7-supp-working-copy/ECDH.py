@@ -7,7 +7,7 @@
 
 from typing import Callable # for type hinting
 import math
-from elliptic_curves import generate_point_cloud, point_addition, point_scalar_multiplication
+from elliptic_curves import point_addition, point_scalar_multiplication
 
 class Actor:
     def __init__(self, name : str, P : tuple, k : int, a : int, b : int, n : int):
@@ -66,7 +66,7 @@ class BadActor:
         self.curve = (a, b, n)
         self._secret_key = None
     
-    def brute(self, Q : tuple) -> int:
+    def brute_force(self, Q : tuple) -> int:
         """Brute Force algorithm to solve ECDLP
 
         Parameters:
@@ -81,9 +81,7 @@ class BadActor:
         """Baby-Step Giant-Step algorithm to solve ECDLP
 
         Parameters:
-            P : P of kP = Q (mod n).
             Q : Q of kP = Q (mod n).
-            n : n of kP = Q (mod n). Prime number.
 
         Returns: k of kP = Q (mod n). If not found returns -1.
         """

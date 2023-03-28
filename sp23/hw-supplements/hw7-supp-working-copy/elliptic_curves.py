@@ -32,7 +32,7 @@ def f(x : int, a : int, b : int) -> tuple:
         return (math.sqrt(x**3 + a*x + b), -math.sqrt(x**3 + a*x + b))
     
 def point_addition(P : tuple, Q : tuple, a : int, b : int, p : int = None) -> tuple:
-    '''Add two distinct points on an elliptic curve.
+    '''Add two distinct points on an elliptic curve. *Always represent the point at infinity as (None, None)*
 
     Parameters:
         P : A point on the curve. Assume values are integers.
@@ -45,7 +45,7 @@ def point_addition(P : tuple, Q : tuple, a : int, b : int, p : int = None) -> tu
             calculations are over the field of real numbers.
 
     Returns:
-        The sum of the two points. return (None, None) if there is no third point
+        The sum of the two points.
 
     Examples:
         >>> point_addition((-2, 2), (2, 4), -1, 10)
@@ -61,7 +61,7 @@ def point_addition(P : tuple, Q : tuple, a : int, b : int, p : int = None) -> tu
         return NotImplementedError
 
 def point_scalar_multiplication(P : tuple, k : int, a : int, b : int, p : int = None) -> tuple:
-    '''Multiply a point on an elliptic curve a given number of times.
+    '''Multiply a point on an elliptic curve a given number of times. *Always represent the point at infinity as (None, None)*
 
     Parameters:
         P : A point on the curve. Assume values are integers. 
