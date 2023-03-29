@@ -16,7 +16,7 @@
     colorlinks=true,
     linkcolor=blue,
     filecolor=magenta,      
-    urlcolor=blue,
+    urlcolor=magenta,
     }
 
 % Inputting psuedocode
@@ -43,29 +43,49 @@
     showstringspaces=false,
     xleftmargin=-15mm, % manual adjustment, figure out permanent solution
 }
+
+% tcolorbox
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,hooks}
-\usetikzlibrary{shadows}
-\usepackage{lipsum}
 \usepackage{varwidth}
+\newtcolorbox{mybox}[2][]{enhanced,
+    before skip=2mm,after skip=2mm,
+    colback=black!5,colframe=black!50,boxrule=0.2mm,
+    attach boxed title to top left={xshift=1cm,yshift*=1mm-\tcboxedtitleheight},
+    varwidth boxed title*=-3cm,
+    boxed title style={frame code={
+        \path[fill=tcbcolback!50!black]
+        ([yshift=-1mm,xshift=-1mm]frame.north west)
+        arc[start angle=0,end angle=180,radius=1mm]
+        ([yshift=-1mm,xshift=1mm]frame.north east)
+        arc[start angle=180,end angle=0,radius=1mm];
+        \path[left color=tcbcolback!80!black,right color=tcbcolback!80!black,
+        middle color=tcbcolback!100!black]
+        ([xshift=-2mm]frame.north west) -- ([xshift=2mm]frame.north east)
+        [rounded corners=1mm]-- ([xshift=1mm,yshift=-1mm]frame.north east)
+        -- (frame.south east) -- (frame.south west)
+        -- ([xshift=-1mm,yshift=-1mm]frame.north west)
+        [sharp corners]-- cycle;
+    },interior engine=empty,
+    },
+fonttitle=\bfseries,
+title={#2},#1}
 
 
 %Images
 \usepackage{graphicx}
-    \usepackage{subcaption}
-    \usepackage{float}
-    \newcommand{\glass}{\includegraphics[height=4ex]{images/glass.png}}
-    \newcommand{\rum}{\includegraphics[height=4ex]{images/rum.png}}
-    \newcommand{\mixedrum}{\includegraphics[height=4ex]{images/mixed_rum.png}}
-    \newcommand{\pineapple}{\includegraphics[height=4ex]{images/pineapple.png}}
-    \newcommand{\pinacolada}{\includegraphics[height=4ex]{images/pina_colada.png}}
-    \newcommand{\mixedpineapple}{\includegraphics[height=4ex]{images/mixed_pineapple.png}}
-    \newcommand{\coconut}{\includegraphics[height=4ex]{images/coconut.png}}
-    \newcommand{\juice}{\includegraphics[height=4ex]{images/juice.png}}
-    \newcommand{\heart}{\includegraphics[height=4ex]{images/heart.png}}
+\usepackage{subcaption}
+\usepackage{float}
+\newcommand{\glass}{\includegraphics[height=4ex]{images/glass.png}}
+\newcommand{\rum}{\includegraphics[height=4ex]{images/rum.png}}
+\newcommand{\mixedrum}{\includegraphics[height=4ex]{images/mixed_rum.png}}
+\newcommand{\pineapple}{\includegraphics[height=4ex]{images/pineapple.png}}
+\newcommand{\pinacolada}{\includegraphics[height=4ex]{images/pina_colada.png}}
+\newcommand{\mixedpineapple}{\includegraphics[height=4ex]{images/mixed_pineapple.png}}
+\newcommand{\coconut}{\includegraphics[height=4ex]{images/coconut.png}}
+\newcommand{\juice}{\includegraphics[height=4ex]{images/juice.png}}
+\newcommand{\heart}{\includegraphics[height=4ex]{images/heart.png}}
     
-
-
 %Formatting and Spacing
 \setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
 \setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
@@ -73,8 +93,8 @@
 \linespread{1.1}
 
 % title
-\title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Homework 7 Supplement outline}
-\author{Sarthak Mohanty, \tiny{Anant Gupta} }
+\title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Homework 7 Supplement}
+\author{Sarthak Mohanty}
 \date{}
 
 \begin{document}
@@ -85,29 +105,6 @@
 Title: ECC is the new RSA
 
 
-
-\newtcolorbox{mybox}[2][]{enhanced,
-before skip=2mm,after skip=2mm,
-colback=black!5,colframe=black!50,boxrule=0.2mm,
-attach boxed title to top left={xshift=1cm,yshift*=1mm-\tcboxedtitleheight},
-varwidth boxed title*=-3cm,
-boxed title style={frame code={
-\path[fill=tcbcolback!50!black]
-([yshift=-1mm,xshift=-1mm]frame.north west)
-arc[start angle=0,end angle=180,radius=1mm]
-([yshift=-1mm,xshift=1mm]frame.north east)
-arc[start angle=180,end angle=0,radius=1mm];
-\path[left color=tcbcolback!80!black,right color=tcbcolback!80!black,
-middle color=tcbcolback!100!black]
-([xshift=-2mm]frame.north west) -- ([xshift=2mm]frame.north east)
-[rounded corners=1mm]-- ([xshift=1mm,yshift=-1mm]frame.north east)
--- (frame.south east) -- (frame.south west)
--- ([xshift=-1mm,yshift=-1mm]frame.north west)
-[sharp corners]-- cycle;
-},interior engine=empty,
-},
-fonttitle=\bfseries,
-title={#2},#1}
 
 
 \section*{Overview}
@@ -174,12 +171,12 @@ There is a classic analogy for the DH key exchange, which we present below:
 
     \vspace{3mm}
     Let's now describe any algorithm that can transmit any information, not just piña coladas. The \textbf{Diffie-Hellman key exchange} is a cryptographic protocol that allows two parties to generate a shared secret key over an insecure communication channel. The protocol is named after its inventors, Whitfield Diffie and Martin Hellman, and is performed as follows:\footnote{taken verbatim from the CS 2051 Textbook.}
-    \begin{enumerate}[label = \arabic*]
+    \begin{enumerate}[label = \arabic*.]
         \item Alice and Bob agree to use a prime $p$ and a primitive root $g$ of $p$.
-        \item Alice chooses a secret integer $k_{1}$ and sends $g^{k_{1}} \pmod{p}$ to Bob.
-        \item Bob chooses a secret integer $k_{2}$ and sends $g^{k_{2}} \pmod{p}$ to Alice.
-        \item Alice computes $(g^{k_{2}})^{k_{1}} \pmod{p}$
-        \item Bob computes $(g^{k_{1}})^{k_{2})}\pmod{p}$.
+        \item Alice chooses a secret positive integer $a < p$ and sends $g^{a} \pmod{p}$ to Bob.
+        \item Bob chooses a secret positive integer $b < p$ and sends $g^{b} \pmod{p}$ to Alice.
+        \item Alice computes $(g^{b})^{a} \pmod{p}$
+        \item Bob computes $(g^{a})^{b}\pmod{p}$.
     \end{enumerate}
 
 \subsection*{Trapdoor Function: Discrete Log Problem}
@@ -214,8 +211,8 @@ There is a classic analogy for the DH key exchange, which we present below:
                 \State Store $g^{b}$ in a certain data structure (which one?)
             \EndFor
             \For{each $a$ in $0, \dots, m$}
-                \State Calculate $y \cdot g^{-am}$.
                 \State Check to see if there exists some $g^{b}$ such that $y \cdot g^{-am} = g^{b}$ (in $\mathcal{O}(1)$ time!)
+                \State Else set $y = y \cdot g^{-m} \pmod{p}$
             \EndFor
             \Return $x = am + b$
         \end{algorithmic}
@@ -243,9 +240,8 @@ There is a classic analogy for the DH key exchange, which we present below:
     All this means is that RSA is not the ideal system for the future of cryptography. In an ideal Trapdoor Function, the easy way and the hard way get harder at the same rate with respect to the size of the numbers in question. For this reason (and a few others discussed later), we need a better public key system. In 1985, such a system was found, revolving around an (then) arcane field known as elliptic curves.
 
     \begin{tcolorbox}[enhanced,interior style={top color=Plum!20,bottom color=Plum!30}]
-        In this part, you'll implement the Actor class, which contains methods to emulate the Diffie-Hellman key exchange:
+        In this part, you'll first implement the \lstinline{Actor} class, which contains methods to emulate the Diffie-Hellman key exchange:
     
-    % mix with black
         \begin{mybox}[
             colframe=Cerulean!50!black,
             colback=Cerulean!30,
@@ -261,11 +257,11 @@ There is a classic analogy for the DH key exchange, which we present below:
     
         \end{mybox}
     
-        You'll then try to break this key exchange by implementing the BadActor class, containing the following methods:
+        You'll then try to break this key exchange by implementing the \lstinline{BadActor} class, containing the following methods:
     
         \begin{mybox}[
             colframe=purple!50!black,
-            colback=purple!40,
+            colback=purple!30,
             colbacktitle=purple!50!white,
             % fonttitle=\bfseries,
             coltitle=purple!30!black,
@@ -276,16 +272,25 @@ There is a classic analogy for the DH key exchange, which we present below:
                 \item \lstinline{bsgs(self, y)}: This function solves the discrete log problem using the baby-step giant-step algorithm.
                 \item \lstinline{stealSecret(self, actor1, actor2, attack)}: This method will use the attacks outlined above to intercept the Actors' shared secret.
             \end{itemize}
+            
+        These attacks should be reasonably efficient. For example, with parameters $p = 351416641$, $g = 19$ and $a = 137679007$, the following code took 10-20 seconds to brute-force a solution:
+        \begin{lstlisting}[belowskip=-10pt]
+            alice = Actor("Alice", p, g, a)
+            petty_thief = sol.BadActor("Petty Thief", p, g)
+            petty_thief.brute_force(alice.computePublicKey())
+        \end{lstlisting}
+        On the other hand, the baby-step giant-step algorithm below took less than a millisecond!
+        \begin{lstlisting}[belowskip=-10pt]
+            crime_boss = BadActor("Crime Boss", p, g)
+            crime_boss.bsgs(alice.computePublicKey())
+        \end{lstlisting}
+        
         \end{mybox}
     
         \vspace{2mm}
-
-        To-do: Rewrite this, talk about built in pow method
-
-        % https://github.com/python/cpython/blob/109fc2792a490ee5cd8a423e17d415fbdedec5c8/Objects/longobject.c#L4244-L4447
-
-        Tip: Calculating $g^{a}$ directly and then finding its remainder when divided by $p$ is impractical and will not work with large numbers. This is because $g^{a}$ will be a huge number for large $g, a$. Instead, you should use an algorithm that employs the binary expansion of the exponent $a$. The details of this algorithm can be found in Section 4.2 of the textbook, under ``Modular Expoonentiation".
+        Tip: Calculating $g^{a}$ directly and then finding its remainder when divided by $p$ is impractical and will not work with large numbers. This is because $g^{a}$ will be a huge number for large $g, a$. Instead, you should use an algorithm that employs the binary expansion of the exponent $a$\footnotemark. Luckily, Python provides an inbuilt \lstinline{pow} method that performs this algorithm internally.
     \end{tcolorbox}
+    \footnotetext{The details of this algorithm can be found in Section 4.2 of the textbook, under ``Modular Expoonentiation".}
 
 
 
@@ -322,8 +327,10 @@ The standard form for an elliptic curve is $$y^{2} = x^{3} + ax + b,$$ where $a$
         \item \lstinline{point_addition(elliptic_curve, P, Q)}: This function takes in an elliptic curve 
         \item \lstinline{point_scalar_multiplication(elliptic_curve, k, P))}: This function takes in an elliptic curve of the form described, a scalar integer $k$, and a point $P$, and repeatedly multiplies this result to output a number.
     \end{itemize}
-    You can run \lstinline{visualize_addition} and \lstinline{visualize_multiplication} to generate the corresponding visualizations mentioned above. If you want more examples, there's an interactive tool \href{https://andrea.corbellini.name/ecc/interactive/reals-add.html}{here}
-    Notes: This part is just algebra and geometry. Since I know it's been a while since many of you touched this, here's a few steps you get you started.
+    You can run \lstinline{visualize_addition} and \lstinline{visualize_multiplication} to visualize your points on the curve. I also recommend using \href{https://andrea.corbellini.name/ecc/interactive/reals-add.html}{this} interactive tool as well (which is honestly much better than mine).
+
+    \vspace{3mm}
+    Hint: This part does not require any fanciful coding; just a bit of algebra and calculus. Since I know it's been a while since many of you touched those concepts, here's a few steps you get you started.
     \begin{itemize}
         \item For point addition, we assumed that $P \ne Q \ne \infty$. For this reason, we can draw the line $L$ through $P_{1}$ and $P_{2}$. Its slope is $$m = \frac{y_{2} - y_{1}}{x_{2} - x_{1}}.$$ If $x_{1} = x_{2}$, then $L$ is vertical, so the resulting point is just $\infty$. Now let's assume that $x_{1} \ne x_{2}$. The equation of $L$ is then $$y = m(x - x_{1}) + y_{1}.$$ To find the intersection of this line with the elliptic curve, we can substitute the above equation into the formula for an elliptic curve $$y^{2} = x^{3} + ax + b.$$ Finally, we can reflect the above point across the $x$-axis to obtain the point $P_{3} = (x_{3}, y_{3})$.
         \item For point scalar multiplication, we have that $P = Q = (x_{1}, y_{1})$. When two points on a curve are very close to each other, the line through them approximates a tangent line. Therefore, when the two points coincide, we take the line $L$ through them to be the tangent tine. Implicit differentiation allows us to find the slope $m$ of $L$: $$2y \frac{dy}{dx} = 3x^{2} + a,\text{\quad so\quad} m = \frac{dy}{dx} = \frac{3x_{1}^{2} + a}{2y_{1}}.$$ If $y_{1} = 0$ then the line is vertical and we set $P_{1} + P_{2} = \infty$, as before. Otherwise, we plug in values into $L$ and solve as before.
@@ -357,58 +364,20 @@ The standard form for an elliptic curve is $$y^{2} = x^{3} + ax + b,$$ where $a$
 
 \section*{Part 4: ECC in Action: Elliptic-curve Diffie Hellman (10 pts)}
 
-% You've devleoped some undrestanding of how elliptic curves work, but it's naturarl to doubt the connection between them. This is where yopu're wrong. Note that... this is called \textit{order independence}. This makes it really easy to modify diffie hellman to accomodate our elliptic curves, as follows:
-
-% This order independence also makes it easy to see why ECC takes less storage space than Diffie-Hellman, 
-
 \subsection*{The Elliptic-curve Discrete Log Function}
 
 
 
-    \vspace{3mm}
-    Trapdoor function in Elliptic Curve Cryptography (ECC). In ECC, the trapdoor function is the scalar multiplication operation $Q = kP$, where $P$ is a point on the elliptic curve, $k$ is the scalar and $Q$ is the result of the scalar multiplication. The trapdoor information is the private key, which is the scalar $k$. Decryption is performed by computing $Q = -kP$.
+\vspace{3mm}
+Trapdoor function in Elliptic Curve Cryptography (ECC). In ECC, the trapdoor function is the scalar multiplication operation $Q = kP$, where $P$ is a point on the elliptic curve, $k$ is the scalar and $Q$ is the result of the scalar multiplication. The trapdoor information is the private key, which is the scalar $k$. Decryption is performed by computing $Q = -kP$.
 
 
 For carefully chosen (by cryptographers) finite fields and elliptic curves, the ECDLP problem has no efficient solution.
 
 The multiplication of elliptic curve points in the group $\mathbb{F}_{p}$ is similar to exponentiation of integers in the group $\mathbb{Z}_{p}$ (this is known as multiplicative notation) and this is how the ECDLP problem is similar to the DLP problem (discrete logarithm problem).
 
-See \href{https://www.youtube.com/watch?v=gAtBM06xwaw}{this} video for implementation details
 
 
-% \begin{tcolorbox}[enhanced,interior style={top color=Plum!20,bottom color=Plum!30}]
-    
-
-% % mix with black
-%     \begin{tcolorbox}[title=Actor Class,
-%         colframe=Cerulean!50!black,
-%         colback=Cerulean!50,
-%         arc=1mm,colbacktitle=Cerulean!50!white,
-%         fonttitle=\bfseries,coltitle=Cerulean!50!black,
-%         % attach boxed title to top center=
-%         % {yshift=-2mm,yshifttext=-1mm},
-%         % boxed title style={
-%         % interior style={fill=none,
-%         % top color=green!30!white,
-%         % bottom color=green!20!white}}
-%         ]
-%         \begin{itemize}
-%             \item \lstinline{computePublicKey(self)}: See docs for details
-%             \item \lstinline{computeSecret(self, offer)}: See docs for details
-%         \end{itemize}
-%     \end{tcolorbox}
-
-%     \begin{tcolorbox}[title=Actor Class,
-%         colframe=purple!50!black,
-%         colback=purple!50,
-%         arc=1mm,colbacktitle=purple!50!white,
-%         fonttitle=\bfseries,coltitle=purple!50!black,]
-%     \begin{itemize}
-%         \item \lstinline{brute(self, g, y, n):}: This function takes in the parameters for the discrete log problem, and returns the correct answer using brute force.
-%         \item \lstinline{bsgs(self, g, y, p)}: Same thing as above, but with baby-step giant-step algorithm.
-%     \end{itemize}
-%     \end{tcolorbox}
-% \end{tcolorbox}
 
 \begin{tcolorbox}[enhanced,interior style={top color=Plum!20,bottom color=Plum!30}]
     Finally, the part you've been waiting for. In this part, you'll implement an Elliptic-Curve Diffie Hellman key change algorithm. The functions you will implement are similar to those in Part 1. First, you'll implement the Actor class:
@@ -433,7 +402,7 @@ See \href{https://www.youtube.com/watch?v=gAtBM06xwaw}{this} video for implement
 
     \begin{mybox}[
         colframe=purple!50!black,
-        colback=purple!40,
+        colback=purple!30,
         colbacktitle=purple!50!white,
         % fonttitle=\bfseries,
         coltitle=purple!30!black,
@@ -457,11 +426,9 @@ See \href{https://www.youtube.com/watch?v=gAtBM06xwaw}{this} video for implement
     Since RSA and ECC essentially serve the same purpose, there have been many heated discussions as to which implentation to use. The main pro of using ECC is the fact that it uses fewer memory and CPU resources, important as mobile computing becomes more ubiquitous. However, there are a few flaws with ECC. First, there are only a few curves that work and the NIST is in contorl of most of them, but people distrust NIST. Second, 
 
     \vspace{2mm}
-    Finally, neither ECC nor RSA are secure against quantum computers. 
+    Finally, neither ECC nor RSA are secure against quantum computers. Even if quantum computers are not ready to be deployed at scale yet, lots of information is being stored now with intentions of being decrypted later. This has spurred \href{https://csrc.nist.gov/projects/post-quantum-cryptography}{calls} to create quantum-resistant encyption schemes.
 
-
-
-    \subsubsection*{Real World Application}
+    \subsubsection*{Real World Applications}
 
     Even with all those downsides, more and more companies are using ECC, including
 
@@ -471,18 +438,10 @@ See \href{https://www.youtube.com/watch?v=gAtBM06xwaw}{this} video for implement
         SoundCloud, Spotify, StackOverflow, Tumblr, Twitter, Uber, \\
         Vimeo, Vine, Yahoo, Yelp, YouTube, Wikipedia, Wordpress,\dots
     \end{center}
+    In fact, one very promiment site that is currently using ECC is \href{https://chat.openai.com/chat}{ChatGPT}, which you can check yourself. For example, in Chrome, you can click on the lock in the address bar and go to the connection tab to see which cryptographic protocols were used in establishing the secure connection.
 
-Two prominent examples:
-    \begin{itemize}
-        \item \href{https://chat.openai.com/chat}{ChatGPT}
-        \item \href{https://proton.me/blog/elliptic-curve-cryptography}{ProtonVPN}
-    \end{itemize}
-
-    to do: explain how you can see ecc implentation on website. Click on lock on top left of website, click on ``connection is secure", click on ``certificate is valid", you should see ECC used for certificate
-
-    
-    assymetric not often used since takes long time. Instead, key exchange is done using assymetric andthen symmetric is used to send the actual messages, as can be seen \href{https://github.com/nakov/Practical-Cryptography-for-Developers-Book/blob/master/asymmetric-key-ciphers/ecc-encryption-decryption.md}{here}
-
+    \vspace{3mm}
+    However, as noted in the beginning of this supplement, symmetric encryption schemes are much faster than their asymmetric counterparts. This is why in practice, most information is transferred using symmetric encryption schemes such as AES. This does not mean assymetric schemes are useless; in fact, they are used in almost every webpage you visit. This is because symmetric encryption schemes require a shared key between the two parties, so RSA/ECC is used to first share this key across parties. Then the information can be securely transferred. You can see an example of this hybrid symmetric-asymmetric scheme \href{https://github.com/nakov/Practical-Cryptography-for-Developers-Book/blob/master/asymmetric-key-ciphers/ecc-encryption-decryption.md}{here}.
 
 \section*{Submission Instructions (10 pts)}
     After you fill the appropriate functions, submit the following files to Gradescope and make sure you pass all test cases:
@@ -499,22 +458,12 @@ Two prominent examples:
         \item Do not import additional packages, as your submission may not pass the test cases or manual review.
     \end{itemize}
 
-    
-    % These factoring algorithms get more efficient as the size of the numbers being factored get larger. The gap between the difficulty of factoring large numbers and multiplying large numbers is shrinking as the number (i.e. the key's bit length) gets larger. As the resources available to decrypt numbers increase, the size of the keys need to grow even faster. This is not a sustainable situation for mobile and low-powered devices that have limited computational power. The gap between factoring and multiplying is not sustainable in the long term.
+\begin{thebibliography}{9}
+\bibitem{ec_book}
+    Washington, L. C. (2008). \textit{Elliptic curves: number theory and cryptography (2nd ed.).} Chapman and Hall/CRC.
 
-\section*{References}
-
-\begin{itemize}
-    \item explanation for group law name is \href{https://www.math.brown.edu/reschwar/M1540B/elliptic.pdf}{here}
-    \item why infinity is added \href{https://crypto.stackexchange.com/questions/70507/in-elliptic-curve-what-does-the-point-at-infinity-look-like}{here}
-    \item This (heavy) textbook is a good resource if you want to explore the mathematics of elliptic curves in further detail.
-    \item Again, the amazing blog post mentioned above.
-\end{itemize}
-% \begin{mybox}[colbacktitle=green]{My title}
-% \lipsum[2]
-% \end{mybox}
-% \begin{mybox}[colbacktitle=red]{My title}
-% \lipsum[3]
-% \end{mybox}
+\bibitem{ec_blog}
+Corbellini, A. (2015). \textit{Elliptic Curve Cryptography: a Gentle Introduction.} Retrieved from https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/
+\end{thebibliography}
 
 \end{document}
