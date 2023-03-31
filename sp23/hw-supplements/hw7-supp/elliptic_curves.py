@@ -66,7 +66,7 @@ def point_scalar_multiplication(P : tuple, k : int, a : int, b : int, p : int = 
     '''Multiply a point on an elliptic curve a given number of times. *Always represent the point at infinity as (None, None)*
 
     Parameters:
-        P : Any point on the curve.
+        P : A point on the curve. (including point at infinity)
             If over a galois field, assume point is in generated point cloud
         k : The number of times to multiply the point. Assume positive integer.
         a : The a coefficient of the curve.
