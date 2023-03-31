@@ -35,9 +35,9 @@ def point_addition(P : tuple, Q : tuple, a : int, b : int, p : int = None) -> tu
     '''Add two distinct points on an elliptic curve. *Always represent the point at infinity as (None, None)*
 
     Parameters:
-        P : A point on the curve. Assume values are integers. (or point at infinity)
+        P : Any point on the curve (including point at infinity)
             If over a galois field, assume point is in generated point cloud
-        Q : A point on the curve. Assume values are integers. (or point at infinity)
+        Q : Any point on the curve. (including point at infinity)
             If over a galois field, assume point is in generated point cloud
         a : The a coefficient of the curve.
         b : The b coefficient of the curve.
@@ -53,18 +53,20 @@ def point_addition(P : tuple, Q : tuple, a : int, b : int, p : int = None) -> tu
         >>> point_addition((2, 3), (5, 2), -1, 10, 7)
         (4, 0)
     '''
+    ### You can also put code here ###
     if p:
         ### YOUR CODE HERE ###
         return NotImplementedError
     else:
         ### YOUR CODE HERE ###
         return NotImplementedError
+    ### You can also put code here ###
 
 def point_scalar_multiplication(P : tuple, k : int, a : int, b : int, p : int = None) -> tuple:
     '''Multiply a point on an elliptic curve a given number of times. *Always represent the point at infinity as (None, None)*
 
     Parameters:
-        P : A point on the curve. Assume values are integers. 
+        P : Any point on the curve.
             If over a galois field, assume point is in generated point cloud
         k : The number of times to multiply the point. Assume positive integer.
         a : The a coefficient of the curve.
@@ -81,12 +83,14 @@ def point_scalar_multiplication(P : tuple, k : int, a : int, b : int, p : int = 
         >>> point_scalar_multiplication((55, 36), 4, 23, 3, 61)
         (21, 29)
     '''
+    ### You can also put code here ###
     if p:
         ### YOUR CODE HERE ###
         return NotImplementedError
     else:
         ### YOUR CODE HERE ###
         return NotImplementedError
+    ### You can also put code here ###
 
 def generate_point_cloud(a : int, b : int, p : int) -> set:
     '''Generate a point cloud of a curve.
@@ -113,12 +117,12 @@ def visualize_curve(ax, a : int, b : int, p : int = None, domain : tuple = (-5, 
     """Visualize an elliptic curve.
 
     Parameters:
-    ax : The axis to plot the curve on.
-    a : The a coefficient of the curve.
-    b : The b coefficient of the curve.
-    domain : (optional) The domain of the curve. Default is (-5, 5).
-    p : (optional) The prime modulus of a field. If not provided, assume
-        calculations are over the field of real numbers.
+        ax : The axis to plot the curve on.
+        a : The a coefficient of the curve.
+        b : The b coefficient of the curve.
+        domain : (optional) The domain of the curve. Default is (-5, 5).
+        p : (optional) The prime modulus of a field. If not provided, assume
+            calculations are over the field of real numbers.
     """ 
     if p:
         list_of_points = list(generate_point_cloud(a, b, p))
@@ -142,15 +146,14 @@ def visualize_curve(ax, a : int, b : int, p : int = None, domain : tuple = (-5, 
 def visualize_addition(ax, P : tuple, Q : tuple, a : int, b : int, p : int = None) -> None:
     """Visualize point addition with two distinct points on an elliptic curve.
 
-    Parameters
-    ----------
-    ax : The axis to plot the curve on.
-    P : A point on the curve. if p is provided, P must be in the field.
-    Q : A point on the curve. if p is provided, Q must be in the field.
-    a : The a coefficient of the curve.
-    b : The b coefficient of the curve.
-    p : (optional) The prime modulus of a field. If not provided, assume
-        calculations are over the field of real numbers.
+    Parameters:
+        ax : The axis to plot the curve on.
+        P : A point on the curve. if p is provided, P must be in the field.
+        Q : A point on the curve. if p is provided, Q must be in the field.
+        a : The a coefficient of the curve.
+        b : The b coefficient of the curve.
+        p : (optional) The prime modulus of a field. If not provided, assume
+            calculations are over the field of real numbers.
     """ 
     if p:
         R = point_addition(P, Q, a, b, p)
@@ -174,14 +177,13 @@ def visualize_addition(ax, P : tuple, Q : tuple, a : int, b : int, p : int = Non
 def visualize_multiplication(ax, P : tuple, n : int, a : int, b : int, p : int = None) -> None:
     """Visualize point multiplication on an elliptic curve.
 
-    Parameters
-    ----------
-    ax : The axis to plot the curve on.
-    P : A point on the curve. if p is provided, P must be in the field.
-    a : The a coefficient of the curve.
-    b : The b coefficient of the curve.
-    p : (optional) The prime modulus of a field. If not provided, assume
-        calculations are over the field of real numbers.
+    Parameters:
+        ax : The axis to plot the curve on.
+        P : A point on the curve. if p is provided, P must be in the field.
+        a : The a coefficient of the curve.
+        b : The b coefficient of the curve.
+        p : (optional) The prime modulus of a field. If not provided, assume
+            calculations are over the field of real numbers.
     """ 
     if p:
         Q = point_scalar_multiplication(P, n, a, b, p)
