@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+% title
+\title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Homework 8 Supplement}
+\author{Gerandy Brito, Nithya Jayakumar, Sarthak Mohanty}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Question 1}
+    \textit{(Warm-up)} 
+    The concept of induction is often compared to the domino analogy. It starts with the assumption that the first domino falls, and from there, we can infer that if the $n$th domino falls, then the $(n + 1)$th domino will also fall. This leads to the eventual falling of all the dominoes. But what if the dominoes fell in the opposite direction? 
+    
+    \vspace{2mm}
+    Suppose we have proven the following facts with respect to some predicate $P(n)$:
+    \begin{gather}
+        P(1) \\
+        \forall n \in \mathbb{N}^{+}, P(n) \implies P(n - 1) \\
+        \forall n \in \mathbb{N}, P(n) \implies P(kn)
+    \end{gather}
+    Use induction to prove that $(\forall n,k \in \mathbb{N})(P(n))$.
+
+\section*{Question 2 }
+    \textit{(Brito)} Let $S=\{s_1,s_2,\ldots, s_{2n-1}\}$ natural numbers, where $n=2^k>1$. Show that one can choose a subset $S'\subset S$ of cardinality $|S'|=n$ such that the sum of the elements in $S'$ is a multiple of $n$.
+
+\end{document}

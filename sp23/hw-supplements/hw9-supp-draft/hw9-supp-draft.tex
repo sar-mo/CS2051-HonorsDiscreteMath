@@ -98,12 +98,20 @@ If you already have some knowledge of recursion, you can skip this exposition.
     \textbf{In this part, you'll implement the following functions:}
     \begin{itemize}
         \item \lstinline{generateCFG1}: Let's start easy. This CFG generates all binary strings of the form $1^{n}0^{n}$, where $n \in \mathbb{N}$.
-        \item \lstinline{generateCFG2}: Test.
-        \item \lstinline{generateCFG3}: Test.
-        \item \lstinline{generateCFG4}: Test.
-        \item \lstinline{generateCFG5}: Test.
+        \item \lstinline{generateCFG2}: Ok, what about if order doesn't matter. Try to generate a CFG whose language is the binary strings with the same number of 1's and 0's!
+        \item \lstinline{generateCFG3}: $\{1^{i}b^{j} : i < j < 2i \in \mathbb{N}\}$
+        \item \lstinline{generateCFG4}: $\{1^{i}0^{i} : 2i \ne 3j + 1\}$
+        \item \lstinline{generateCFG5}: $\{xyz \mid |x|=|y|=|z|, x\neq y \lor y \neq z \lor x \neq z\}$
+        $ L = \{w\#x | w, x, \in \{0, 1\}^{*}, |w| = |x|, w \ne x^{R}$
     \end{itemize}
 \end{tcolorbox}
+
+maybes
+$\{a^{n}b^{m} : m \ge n, m - n \text{ is odd}\}$
+
+$\{a^{m}b^{i}c^{n} | m > n, 0 \le i < 3, n \ge 0\}$
+
+$a^{m}b^{i}a^{n} : i = m + n$
 
 
 % https://courses.engr.illinois.edu/cs173/fa2016/B-lecture/Lectures/Induction%20proof%20on%20Context%20Free%20Grammars.pdf
@@ -135,7 +143,7 @@ example parser:
 % https://i.stack.imgur.com/2gOx4.jpg
 
 
-
+t
 \section*{Submission Instructions (10 pts)}
     After you fill the appropriate functions, submit the following files to Gradescope and make sure you pass all test cases:
     \begin{itemize}
@@ -147,7 +155,7 @@ example parser:
     \vspace{3mm}
     \textbf{Notes}
     \begin{itemize}
-        \item The autograder may not reflect your final grade on the assignment. We reserve the right to run additional tests during grading. \textbf{In particular, there are hidden test cases for the generate_CFGs}.
+        \item The autograder may not reflect your final grade on the assignment. We reserve the right to run additional tests during grading. \textbf{In particular, there are hidden test cases for the generate CFGs}.
         \item Do not import additional packages, as your submission may not pass the test cases or manual review.
     \end{itemize}
 
