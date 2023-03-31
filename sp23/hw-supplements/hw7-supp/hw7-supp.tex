@@ -280,7 +280,7 @@ In recent weeks, we have delved into number theory and explored its practical ap
     In this section, we delve into the mathematics behind elliptic curves. The standard form for an elliptic curve is $$y^{2} = x^{3} + ax + b,$$ where $a$ and $b$ are constants. This is referred to as the Weierstrass equation for an elliptic curve. For reasons that will be discussed later, also include the point $\{\infty\}$ in this function.
 
 \subsection*{The Group Law}
-    One important aspect of elliptic curves is that we can start with two points, or even one point on an elliptic curve, and produce another point. To do this, start with two points $P = (x_{1}, y_{1})$, $Q = (x_{2}, y_{2})$ on an elliptic curve $E$. Now draw a line $L$ through $P$ and $Q$. This line will intersect $E$ at a third point $R'$. (such a point always exists, as you'll prove below!) Finally, reflect $R'$ across the $x$-axis to obtain $R$. We define $$P + Q = R.$$ You can see an example of this addition in Figure (\ref{fig:point_addition}).
+    One important aspect of elliptic curves is that we can start with two points, or even one point on an elliptic curve, and produce another point. To do this, start with two points $P = (x_{1}, y_{1})$, $Q = (x_{2}, y_{2})$ on an elliptic curve $E$. Now draw a line $L$ through $P$ and $Q$. This line will intersect $E$ at a third point $R'$. (such a point always exists, as you'll prove below!) Finally, reflect $R'$ across the $x$-axis to obtain $R$. We define $$P + Q = R.$$ You can see an example of such addition in Figure (\ref{fig:group_law}).
 
 \begin{figure}[htbp]
     \centering
@@ -288,17 +288,17 @@ In recent weeks, we have delved into number theory and explored its practical ap
     \begin{subfigure}[t]{.45\textwidth}
         \centering
         \includegraphics[scale = 0.12]{images/point_addition.jpeg}
-        \caption{Point Addition}
+        \caption{Point addition with $P \ne Q$}
         \label{fig:point_addition}
     \end{subfigure}
     \begin{subfigure}[t]{.45\textwidth}
         \centering
         \includegraphics[scale = 0.6]{images/point_scalar_multiplication.png}
-        \caption{Point scalar multiplication}
+        \caption{Point addition with $P = Q$}
         \label{fig:point_multiplication}
     \end{subfigure}
     \caption{Group law visualized.}
-    \label{fig:edge_case}
+    \label{fig:group_law}
 \end{figure}
 
 
@@ -323,7 +323,7 @@ In recent weeks, we have delved into number theory and explored its practical ap
     The simplified curve above is great for visualization and to explain the general concept, but it doesn't really represent how the curves used for cryptography look like. Just like in RSA, we have to restrict ourselves to a fixed range of numbers.
 
     \vspace{3mm}
-    The elliptic curve cryptography (ECC) uses elliptic curves taken over the finite field $\mathbb{F}_{p}$, where $p$ is a prime number. For example, the ``Bitcoin curve" secp256k1 takes the form: $$y^{2} \equiv x^{3} + 7 \pmod{p}.$$ Figure 2 shows an illustration of the curve taken over $\mathbb{R}$ and $\mathbb{F}_{97}$.
+    The elliptic curve cryptography (ECC) uses elliptic curves taken over the finite field $\mathbb{F}_{p}$, where $p$ is a prime number. For example, the ``Bitcoin curve" secp256k1 takes the form: $$y^{2} \equiv x^{3} + 7 \pmod{p}.$$ Figure \ref*{fig:bitcoin_curve} shows an illustration of the curve taken over $\mathbb{R}$ and $\mathbb{F}_{97}$.
 
     \vspace{2mm}
     ECC only works with curves under such fields, so we need to modify our group law to support these. Luckily, the group law is near-identical (with a few changes, both of which are explained in \cite{ec_blog})
@@ -335,16 +335,16 @@ In recent weeks, we have delved into number theory and explored its practical ap
             \centering
             \includegraphics[scale = 0.4]{images/curve.png}
             \caption{The bitcoin curve over $\mathbb{R}$}
-            \label{fig:point_addition}
+            \label{fig:bitcoin_field_real}
         \end{subfigure}
         \begin{subfigure}[t]{.45\textwidth}
             \centering
             \includegraphics[scale = 0.4]{images/curve_over_field.png}
             \caption{The bitcoin curve over $\mathbb{F}_{97}$.}
-            \label{fig:point_multiplication}
+            \label{fig:bitcoin_curve_field}
         \end{subfigure}
         \caption{Visualizing elliptic curves over a field.}
-        \label{fig:edge_case}
+        \label{fig:bitcoin_curve}
     \end{figure}
 
     \begin{tcolorbox}[enhanced,interior style={top color=Plum!20,bottom color=Plum!30}]

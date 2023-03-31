@@ -14,13 +14,14 @@
 \author{Gerandy Brito, Nithya Jayakumar, Sarthak Mohanty}
 \date{}
 
+\usepackage{tcolorbox}
+
 \begin{document}
 
 \maketitle
 
 \section*{Question 1}
-    \textit{(Warm-up)} 
-    The concept of induction is often compared to the domino analogy. It starts with the assumption that the first domino falls, and from there, we can infer that if the $n$th domino falls, then the $(n + 1)$th domino will also fall. This leads to the eventual falling of all the dominoes. But what if the dominoes fell in the opposite direction? 
+    \textit{(Warm-up)} The concept of induction is often compared to the domino analogy. It starts with the assumption that the first domino falls, and from there, we can infer that if the $n$th domino falls, then the $(n + 1)$th domino will also fall. This leads to the eventual falling of all the dominoes. But what if the dominoes fell in the opposite direction? 
     
     \vspace{2mm}
     Suppose we have proven the following facts with respect to some predicate $P(n)$:
@@ -33,5 +34,18 @@
 
 \section*{Question 2 }
     \textit{(Brito)} Let $S=\{s_1,s_2,\ldots, s_{2n-1}\}$ natural numbers, where $n=2^k>1$. Show that one can choose a subset $S'\subset S$ of cardinality $|S'|=n$ such that the sum of the elements in $S'$ is a multiple of $n$.
+
+% \section*{Sample Answer Format}
+
+% \begin{tcolorbox}
+%         Let $P(n)$ be the statement $$\text{insert statement here}.$$ \\
+%         \textsc{Base Case:} We first prove $P(\cdot)$ is true.
+
+%         \vspace{2mm}
+%         \textsc{Inductive Hypothesis:} Now let $n \in \mathbb{N}$ such that $P(n)$\footnote{For strong induction, this would be $P(\cdot), P(\cdot + 1), \dots, P(n)$} is true. \dots. Therefore, $P(n + 1)$ is true as well.
+
+%         \vspace{2mm}
+%         \textsc{Conclusion:} Therefore by induction, for all $n \in \{\mathbb{N}, \mathbb{Z}, \text{etc}\}$, $P(n)$ is true.
+% \end{tcolorbox}
 
 \end{document}
