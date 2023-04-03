@@ -157,7 +157,7 @@ In recent weeks, we have delved into number theory and explored its practical ap
     The Diffie-Hellman (DH) key exchange is a cryptographic protocol that allows two parties to generate a shared secret key over an insecure communication channel. The protocol is named after its inventors, Whitfield Diffie and Martin Hellman, and is performed as follows:
     \begin{enumerate}[label = \arabic*.]
         \item Alice and Bob agree to use a prime $p$ and a primitive root $g$ of $p$.
-        \item Alice chooses a secret positive integer $a < p$ and computes her public key, given by $g^{a} \pmod{p}$. Bob also chooses a secret positive integer $b < p$ and computes his private key, given by $g^{b} \pmod{p}$.
+        \item Alice chooses a secret positive integer $a < p$ and computes her public key, given by $g^{a} \pmod{p}$. Bob also chooses a secret positive integer $b < p$ and computes his public key, given by $g^{b} \pmod{p}$.
         \item Alice and Bob exchange their respective public keys over an (possibly) insecure channel.
         \item Alice calculates $S = (g^{b} \pmod{p})^{a}$ (using her private key and Bob's public key) and Bob calculates $S = (g^{a} \pmod{p})^{b}$ (using his private key and Alice's public key). Note that they have now computed a shared secret, as $$S = (g^{a} \pmod{p})^{b} = g^{ab} \pmod{p}.$$
     \end{enumerate}
@@ -273,8 +273,6 @@ In recent weeks, we have delved into number theory and explored its practical ap
         Tip: Calculating $g^{a}$ directly and then finding its remainder when divided by $p$ is impractical and will not work with large numbers. This is because $g^{a}$ will be a huge number for large $g, a$. Instead, you should use an algorithm that employs the binary expansion of the exponent $a$.\footnotemark Luckily, Python provides an inbuilt \lstinline{pow} method that performs this algorithm internally.
     \end{tcolorbox}
     \footnotetext{The details of this algorithm can be found in Section 4.2 of the textbook, under ``Modular Expoonentiation".}
-
-
 
 \section*{Part 2: Enter Elliptic Curves (8 pts)}
     In this section, we delve into the mathematics behind elliptic curves. The standard form for an elliptic curve is $$y^{2} = x^{3} + ax + b,$$ where $a$ and $b$ are constants. This is referred to as the Weierstrass equation for an elliptic curve. For reasons that will be discussed later, also include the point $\{\infty\}$ in this function.
