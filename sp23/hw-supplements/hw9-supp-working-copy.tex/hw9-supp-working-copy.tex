@@ -130,11 +130,11 @@ Let's motivate this section by recalling some explication from a prior supplemen
     
     \textbf{In this part, you'll implement the following functions:}
     \begin{itemize}
-        \item \lstinline{_parse_prefix(string)}: Implement the missing code for this static method of class \lstinline{Formula}, which takes a string that has a prefix that represents a formula, and returns a formula tree created from the prefix, and a string containing the unparsed remainder of the string (which may be empty, if the parsed prefix is in fact the entire string).
+        % \item \lstinline{_parse_prefix(string)}: Implement the missing code for this static method of class \lstinline{Formula}, which takes a string that has a prefix that represents a formula, and returns a formula tree created from the prefix, and a string containing the unparsed remainder of the string (which may be empty, if the parsed prefix is in fact the entire string).
 
         
 
-        \textbf{Example.} \lstinline{Formula._parse_prefix('(p&q)')} should return a pair whose first element is a \lstinline{Formula} object equivalent to \lstinline{Formula('&', Formula('p'), Formula('q'))} and whose second element is \lstinline{''} (the empty string), while \lstinline{Formula._parse_prefix('p3&q')} should return a pair whose first element is a \lstinline{Formula} object equivalent to \lstinline{Formula('p3')} and whose second element is the string \lstinline{'&q'}, and \lstinline{Formula._parse_prefix('((p&q))')} should return the Python pair \lstinline{(None, 'Unexpected symbol ) ')} (or some other error message in the second entry).
+        % \textbf{Example.} \lstinline{Formula._parse_prefix('(p&q)')} should return a pair whose first element is a \lstinline{Formula} object equivalent to \lstinline{Formula('&', Formula('p'), Formula('q'))} and whose second element is \lstinline{''} (the empty string), while \lstinline{Formula._parse_prefix('p3&q')} should return a pair whose first element is a \lstinline{Formula} object equivalent to \lstinline{Formula('p3')} and whose second element is the string \lstinline{'&q'}, and \lstinline{Formula._parse_prefix('((p&q))')} should return the Python pair \lstinline{(None, 'Unexpected symbol ) ')} (or some other error message in the second entry).
         \item \lstinline{parse}: The function takes in a string, represented as a propositional formula, and parses it to create an appropriate Formula object. You may assume that the input string is valid.
         \item \lstinline{evaluate}: this function takes in a Formula object, equipped with a model (remember that term from hw2-supp!?) and returns the evaluation. 
     \end{itemize}
@@ -181,11 +181,11 @@ Let's motivate this section by recalling some explication from a prior supplemen
         % \footnote{adapted from \href{https://courses.cs.washington.edu/courses/cse311/19sp/hws/homework07.pdf}{here}}
         CFGs were applied successfully to RNA secondary structure prediction in the early 90s. We can get a taste of this application through the following task.
         
-        Each RNA string is a string over the alphabet $\{A, C, G, U\}$. The string ACGUGCCACGAUUCAACGUGGCACAG can fold into a lollipop shape like this:
+        Each RNA string is a string over the alphabet $\{A, C, G, U\}$. The string GUGCCACGAUUCAACGUGGCAC can fold into a lollipop shape like this:
         \begin{center}
             \includegraphics[scale = 0.4]{stem-loop.png}
         \end{center}
-        \qquad The prefix ACGUGCCACG and suffix CGUGGCACAG can together form the handle of the lollipop because they line up in such a manner that As are across from $U$s (or vice versa) and Cs are across from $G$s (or vice versa). The candy part of the lollipop consists of the string AUUCAA, which has length 6.
+        \qquad The prefix GUGCCACG and suffix CGUGGCAC can together form the handle of the lollipop because they line up in such a manner that As are across from $U$s (or vice versa) and Cs are across from $G$s (or vice versa). The candy part of the lollipop consists of the string AUUCAA, which has length 6.
 
         \qquad In general, an RNA string can fold into a lollipop shape if it can be written as $xyz$, where $x$ and $z$ contain at least two characters each, $y$ contains at least four characters, and the characters of $x$ match up with those of $z^{R}$, in the sense that that corresponding pairs of letters fall in the set $\{(A, U), (U, A), (C, G), (G, C)\}$.
 
