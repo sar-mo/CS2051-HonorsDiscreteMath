@@ -119,11 +119,7 @@ def count_satisfying(proposition: str) -> int:
         >>> count_satisfying('p or q')
         3
     """
-    num_satisfying = 0
-    for row in truth_table(proposition):
-        if row[1]:
-            num_satisfying += 1
-    return num_satisfying
+    return sum(row[1] for row in truth_table(proposition))
 
 def are_equivalent(prop1: str, prop2: str) -> bool:
     """Checks if two propositions are logically equivalent.
@@ -162,7 +158,6 @@ def is_tautology(proposition: str) -> bool:
         >>> is_tautology('(not p) |implies| (p or (not p))')
         True
     """
-    # do it in one line
     return all(row[1] for row in truth_table(proposition))
 
 def is_contradiction(proposition: str) -> bool:
