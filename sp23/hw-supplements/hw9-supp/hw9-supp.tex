@@ -32,6 +32,12 @@
     showstringspaces=false,
     xleftmargin=-15mm, % manual adjustment, figure out permanent solution
 }
+
+
+\usepackage{tikz}
+\usetikzlibrary{calc, shapes.symbols}
+
+
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,hooks}
 \usetikzlibrary{shadows}
@@ -40,9 +46,6 @@
 
 \usepackage{epigraph}
 
-
-\usepackage{tikz}
-\usetikzlibrary{shapes.symbols}
 
 %Images
 \usepackage{graphicx}
@@ -85,21 +88,28 @@ The control of a large force is the same principle as the control of a few men: 
 Let's motivate this section by recalling some explication from a prior supplement:
 
     \begin{center}
-    \begin{tikzpicture}
-        \node[cloud,
-    draw =black,
-    fill = gray!10,
-    aspect=3,
-    cloud puffs = 20,
-    cloud puff arc = 90,
-    text width=10cm] (c) at (0,0) {But, how can you evaluate arbitrary expressions without even knowing the names of the variables ahead of time? This question itself could be an entire supplemental, but luckily Python makes the job easy with the \lstinline+eval()+ function.
+        \begin{tikzpicture}
+          \def\H{2.0}     % human height
+          
+          \draw[thick,fill=white] circle (0.15*\H) coordinate (H);
+          \draw[thick] (H)++(-90:0.15*\H) coordinate (N) to[out=-85,in=85]++ (0,-0.40*\H) coordinate (P);
+          \draw[thick,line cap=round] (N)++(-85:0.03) to[out=-110,in=90]++ (-0.08*\H,-0.4*\H);
+          \draw[thick,line cap=round] (N)++(-85:0.03) to[out=-60,in=-110]++ (0.15*\H,-0.12*\H)  to[out=70,in=-70]++ (-0.01*\H,0.24*\H);
+          \draw[thick] (P) to[out=-110,in=85] ($(H)+(-0.08*\H,-\H)$);
+          \draw[thick] (P) to[out=-80,in=108] ($(H)+(0.06*\H,-\H)$);
+
+          \draw[thick,fill=white] (H)++(50:0.6) circle (0.06*\H);
+          \draw[thick,fill=white] (H)++(40:1) circle (0.08*\H);
+          \draw[thick,fill=white] (H)++(45:1.5) circle (0.1*\H);
+
+          \node[cloud, draw =black, fill = gray!10, aspect=3.5, cloud puffs = 15, cloud puff arc = 90, text width=9cm] (c) at (8,1.5) {\small But, how can you evaluate arbitrary expressions without even knowing the names of the variables ahead of time? This question itself could be an entire supplemental, but luckily Python makes the job easy with the \lstinline+eval()+ function.
         \begin{lstlisting}[belowskip=-10pt]
             >>> eval('p and ((not p) or q)', {'p': True, 'q': False})
         \end{lstlisting}};
     \end{tikzpicture}
     \end{center}
 
-    However, suppose we were now creating our own \lstinline+eval()+ function. This problem is not a trivial one, and requires careful consideration of various algorithmic techniques. Initially, one may assume that an iterative approach would suffice to traverse the string representation of the proposition, evaluating sub-expressions and gradually building up to the final evaluation. However, such an approach would quickly lead to convoluted code that would be difficult to maintain and debug. Therefore, we must turn to a more elegant solution: recursion.
+    However, suppose we were now creating our own \lstinline+eval()+ function. This problem is not a trivial one, and requires careful consideration of various algorithmic techniques. Initially, one may assume that an iterative approach would suffice to traverse the string representation of the proposition, evaluating sub-expressions and gradually building up to the final evaluation. However, such an approach would quickly lead to convoluted code that would be difficult to maintain and debug. Therefore, we must turn to a more elegant solution.
 
     \vspace{2mm}
     \textbf{Recursion} is a powerful tool used for solving algorithms, and is loosely given as follows:
@@ -125,16 +135,9 @@ Let's motivate this section by recalling some explication from a prior supplemen
 
 \begin{tcolorbox}[enhanced,interior style={top color=Dandelion!20,bottom color=Dandelion!30}]
     In the very first coding supplement, you were tasked with evaluating a propositional formula given a supposed model. Fortunately, the built-in function \lstinline{eval()} completed this task for us. \textit{Unfortunately}, now you must do so without the use of that function.
-
-    
     
     \textbf{In this part, you'll implement the following functions:}
     \begin{itemize}
-        % \item \lstinline{_parse_prefix(string)}: Implement the missing code for this static method of class \lstinline{Formula}, which takes a string that has a prefix that represents a formula, and returns a formula tree created from the prefix, and a string containing the unparsed remainder of the string (which may be empty, if the parsed prefix is in fact the entire string).
-
-        
-
-        % \textbf{Example.} \lstinline{Formula._parse_prefix('(p&q)')} should return a pair whose first element is a \lstinline{Formula} object equivalent to \lstinline{Formula('&', Formula('p'), Formula('q'))} and whose second element is \lstinline{''} (the empty string), while \lstinline{Formula._parse_prefix('p3&q')} should return a pair whose first element is a \lstinline{Formula} object equivalent to \lstinline{Formula('p3')} and whose second element is the string \lstinline{'&q'}, and \lstinline{Formula._parse_prefix('((p&q))')} should return the Python pair \lstinline{(None, 'Unexpected symbol ) ')} (or some other error message in the second entry).
         \item \lstinline{parse}: The function takes in a string, represented as a propositional formula, and parses it to create an appropriate Formula object. You may assume that the input string is valid.
         \item \lstinline{evaluate}: this function takes in a Formula object, equipped with a model (remember that term from hw2-supp!?) and returns the evaluation. 
     \end{itemize}
@@ -152,13 +155,16 @@ Let's motivate this section by recalling some explication from a prior supplemen
     Let's say we were trying to create a computational model to \textit{decide} the language $L = \{1^{n}0^{n}, n \in \mathbb{N}\}$. What this means is that our computational model should take in a string, and \textit{accept} the string (i.e.\ return \texttt{True}) if the string is in $L$, and \textit{reject} otherwise.
 
     \vspace{2mm}
-    One such model could be represented as follows: we would create a . We can write this down as some sort of ``rule":
+    One such model could be represented as follows: we would start with a temporary variable, call it $S$. Now at every time step, keep splitting up $S$ into $1S0$; in other words,
     \begin{align*}
-        S &\rightarrow 1S0 \mid \epsilon
+        S &\rightarrow 1S0.
     \end{align*}
-    Let's informally illustrate why this model decides the above language. Suppose we were trying to generate the string 111000. To do this, we can tell our machine to execute the following set of steps:
-    $$S \rightarrow 1S0 \rightarrow 11S00 \rightarrow 111S000 \rightarrow 111000.$$
-    As you can see, anytime we move one step to the right, we increase both the number of ones to the left and the number of zeros to the right by 1.
+    Finally, we want to get rid of $S$. Therefore, at every time step, allow the possibility of $S$ to dissapear and be replaced with the empty string, $\epsilon$. We denote this as follows:
+    \begin{align*}
+        S &\rightarrow 1S0 \mid \epsilon.
+    \end{align*}
+    Let's informally illustrate why this model decides the above language. Suppose we were trying to generate the string 111000. To do this, all we have to do is tell our machine to execute the following set of steps:
+    $$S \rightarrow 1S0 \rightarrow 11S00 \rightarrow 111S000 \rightarrow 111000.$$ At every time step, we increase the number of $1$s and $0$s on either side of $S$. Finally, when we have generated the desired string, we tell $S$ to disappear, by replacing it with the empty string $\epsilon$.
 
 \subsection*{Context-Free Grammars}
     We now formalize the above concept. A \textbf{context-free grammar} is a 4-tuple $(V, \Sigma, R, S)$. We now explain each of these elements in detail.
@@ -168,6 +174,7 @@ Let's motivate this section by recalling some explication from a prior supplemen
         \item $R$ is a finite set of \textbf{rules}. The left hand side of a rule is a single variable, and the right hand side can be any combination of variables and terminals.
         \item $S \in V$ is the start variable.
     \end{enumerate}
+    The language of the grammar is $L_{\textsf{CFG}} = \{w \in \Sigma^{*} : S \rightarrow u_{1} \rightarrow u_{2} \rightarrow \dots \rightarrow w\}$
 
 \subsection*{Example 2: Union of Two Languages}
     Let's say we were trying to create a CFG for the language $$L = \underbrace{\{0^{n}1^{n} \mid n \ge 0\}}_{L_{1}} \cup \underbrace{\{1^{n}0^{n} \mid n \ge 0\}}_{L_{2}}.$$ First, let's construct a grammar for $L_{1}$. This is the same as in Example 1: $$S_{1} \rightarrow 0S_{1}1 \mid \epsilon.$$ Similarly, we can generate a grammar for $L_{2}$: $$S_{2} \rightarrow 1S_{2}0 \mid \epsilon.$$ Then we can generate our desired language $L$ with a CFG by `combining' the two grammars, as follows:
@@ -176,7 +183,6 @@ Let's motivate this section by recalling some explication from a prior supplemen
         S_{1} &\rightarrow 0S_{1}1 \mid \epsilon \\
         S_{2} &\rightarrow 1S_{2}0 \mid \epsilon
     \end{align*}
-
 
 \subsection*{Example 3: RNA Secondary Structure}
         % \footnote{adapted from \href{https://courses.cs.washington.edu/courses/cse311/19sp/hws/homework07.pdf}{here}}
@@ -243,13 +249,14 @@ Let's motivate this section by recalling some explication from a prior supplemen
     
     \vspace{2mm}
     Consider the following sentence:$$\text{``The cat sat on the mat."}$$ This simple sentence contains a subject (``cat") and a predicate (``sat on the mat"), which are both necessary components for a complete sentence in English. However, English also allows for more complex structures by using phrases and clauses. For example, $$\text{``The cat, which was jet black, sat on the mat."}$$ In this sentence, we have added a relative clause (``which was jet black") to provide more information about the subject.
-    
+
+    \vspace{2mm}
     Personally, I think one of the strongest examples of CFGs in English arises when combining sentences using conjunctions, as in the following: 
-    $$\underbrace{\text{The cat sat on the mat}}_{\text{sentence}}\text{ and }\underbrace{\text{the dog sat on the log}}_{\text{sentence}}$$ 
+    $$\underbrace{\text{The cat sat on the mat}}_{\text{sentence}}\text{ and }\underbrace{\text{the dog sat on the log}}_{\text{sentence}}.$$ 
     This is a form of “recursion” in English -- enabled by our ability to multiply meanings by a kind of mental recycling of structures.
 
     \vspace{2mm}
-    While these simple examples provide a cursory introduction,  \href{http://www.cs.columbia.edu/~mcollins/cs4705-spring2020/slides/parsing1.pdf}{further} \href{http://faculty.washington.edu/cicero/370syntax.htm}{resources} should be consulted to gain a deeper understanding of the complex syntactical structures needed for the English language (and to complete the implementation requirements).
+    While these simple examples provide a cursory introduction, further resources such as \href{http://www.cs.columbia.edu/~mcollins/cs4705-spring2020/slides/parsing1.pdf}{this} or \href{http://faculty.washington.edu/cicero/370syntax.htm}{this} should be consulted to gain a deeper understanding of the complex syntactical structures needed for the English language (and to complete the implementation requirements).
 
     
 \begin{tcolorbox}[enhanced,interior style={top color=Dandelion!20,bottom color=Dandelion!30}]
