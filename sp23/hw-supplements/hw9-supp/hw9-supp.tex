@@ -142,55 +142,56 @@ Let's motivate this section by recalling some explication from a prior supplemen
     Note: All functions must be implemented recursively, or call other recursive functions.
 \end{tcolorbox}
 
-\section*{Part 2: Context-Free Grammars (10 points)}
-    In this section, we get a taste of \textit{models of computation}. Models of computation are abstract representations of how computation can be performed. They are commonly used to understand the limits and capabilities of computers and other computational devices.
-
-    \vspace{2mm}
-    It is not difficult to make the assumption that models of computation take in \textit{input}, and return \textit{output}. For the purposes, let's assume the input is a string, and the output is a boolean function. In other words, a computational model takes in a string as input, and decides whether or not to \textit{accept} that string.
+\section*{Part 2: Models of Computation (10 points)}
+    In this section, we introduce an abstract representation for computational machines. \textit{Models of computation} are abstract representations of how computation can be performed. They are commonly used to understand the limits and capabilities of computers and other computational devices. A computational model takes in a string as input, and returns a boolean value that represents whether or not to \textit{accept} that string.
 
     \vspace{3mm}
-    There are several models of computation, such as Turing machines, lambda calculus, and finite automata. In this section we present one such model, known as a \textit{context-free-grammar}.
-
-    \vspace{2mm}
-    First, some definitions.
-    \begin{itemize}
-        \item A \textbf{terminal} is a symbol from our alphabet $\Sigma^{*}$. For example, if our alphabet was the set of binary stirngs, then $0$ and $1$ would be our terminals.
-        \item A \textbf{nonterminal}, on the other hand, is any capital letter. For example, $A, B, C$ are all examples of nonterminals.
-        \item The rules of a context-free grammar consist of a set of \textbf{production rules} that describe how to generate strings from a starting symbol. Each production rule has a left-hand side, which is a nonterminal symbol, and a right-hand side, which is a sequence of terminal and nonterminal symbols.
-    \end{itemize}
-    To-do: finish the explanation (but hopefully the examples will make it all clear.)
+    There are several models of computation, such as Turing machines, lambda calculus, and finite automata. In this section we present one such model, known as a \textit{context-free-grammar}. We first introduce the concept through an example, and then formalize the definition.
     
 \subsection*{Example 1: Binary strings}
+    Let's say we were trying to create a computational model to \textit{decide} the language $L = \{1^{n}0^{n}, n \in \mathbb{N}\}$. What this means is that our computational model should take in a string, and \textit{accept} the string (i.e.\ return \texttt{True}) if the string is in $L$, and \textit{reject} otherwise.
 
-    Let's say we were trying to create a context-free grammar for the language $L = \{1^{n}0^{n}, n \in \mathbb{N}\}$. One such grammar is presented below
+    \vspace{2mm}
+    One such model could be represented as follows: we would create a . We can write this down as some sort of ``rule":
     \begin{align*}
         S &\rightarrow 1S0 \mid \epsilon
     \end{align*}
-    Let's informally illustrate why this CFG is correct. Let's say we were trying to generate the string 111000. To do this, we would have the following set of steps:
-    $$S \rightarrow 1S0 \rightarrow 11S00 \rightarrow 111S000 \rightarrow 111000$$
+    Let's informally illustrate why this model decides the above language. Suppose we were trying to generate the string 111000. To do this, we can tell our machine to execute the following set of steps:
+    $$S \rightarrow 1S0 \rightarrow 11S00 \rightarrow 111S000 \rightarrow 111000.$$
     As you can see, anytime we move one step to the right, we increase both the number of ones to the left and the number of zeros to the right by 1.
-    \subsection*{Example 2: Union of Two Languages}
-    Let's say we were trying to create a CFG for the language $$L = \{0^{n}1^{n} \mid n \ge 0\} \cup \{1^{n}0^{n} \mid n \ge 0\}.$$ Using the first example, let's construct a grammar for the first language, given as $$S_{1} \rightarrow 0S_{1}1 \mid \epsilon$$ and the grammar $$S_{2} \rightarrow 1S_{2}0 \mid \epsilon.$$ Then we can generate our desired language $L$ with a CFG as follows:
+
+\subsection*{Context-Free Grammars}
+    We now formalize the above concept. A \textbf{context-free grammar} is a 4-tuple $(V, \Sigma, R, S)$. We now explain each of these elements in detail.
+    \begin{enumerate}[label = \arabic*.]
+        \item $V$ is a finite set called the \textbf{variables}. The elements in $V$ are commonly represented using a capital letter (i.e.\ $A, B, \dots$). In the above example, the only variable was $S$.
+        \item $\Sigma$ is a finite set, disjoint from $V$, called the \textbf{terminals}. These can be any symbol; in Example 1, they were the binary numbers $0, 1$.
+        \item $R$ is a finite set of \textbf{rules}. The left hand side of a rule is a single variable, and the right hand side can be any combination of variables and terminals.
+        \item $S \in V$ is the start variable.
+    \end{enumerate}
+
+\subsection*{Example 2: Union of Two Languages}
+    Let's say we were trying to create a CFG for the language $$L = \underbrace{\{0^{n}1^{n} \mid n \ge 0\}}_{L_{1}} \cup \underbrace{\{1^{n}0^{n} \mid n \ge 0\}}_{L_{2}}.$$ First, let's construct a grammar for $L_{1}$. This is the same as in Example 1: $$S_{1} \rightarrow 0S_{1}1 \mid \epsilon.$$ Similarly, we can generate a grammar for $L_{2}$: $$S_{2} \rightarrow 1S_{2}0 \mid \epsilon.$$ Then we can generate our desired language $L$ with a CFG by `combining' the two grammars, as follows:
     \begin{align*}
         S &\rightarrow S_{1} \mid S_{2} \\
         S_{1} &\rightarrow 0S_{1}1 \mid \epsilon \\
         S_{2} &\rightarrow 1S_{2}0 \mid \epsilon
     \end{align*}
 
+
 \subsection*{Example 3: RNA Secondary Structure}
         % \footnote{adapted from \href{https://courses.cs.washington.edu/courses/cse311/19sp/hws/homework07.pdf}{here}}
         CFGs were applied successfully to RNA secondary structure prediction in the early 90s. We can get a taste of this application through the following task.
         
-        Each RNA string is a string over the alphabet $\{A, C, G, U\}$. The string GUGCCACGAUUCAACGUGGCAC can fold into a lollipop shape like this:
+        \qquad Each RNA string is a string over the alphabet $\{A, C, G, U\}$. The string GUGCCACGAUUCAACGUGGCAC can fold into a lollipop shape like this:
         \begin{center}
-            \includegraphics[scale = 0.4]{stem-loop.png}
+            \includegraphics[scale = 0.4]{images/stem-loop.png}
         \end{center}
         \qquad The prefix GUGCCACG and suffix CGUGGCAC can together form the handle of the lollipop because they line up in such a manner that As are across from $U$s (or vice versa) and Cs are across from $G$s (or vice versa). The candy part of the lollipop consists of the string AUUCAA, which has length 6.
 
-        \qquad In general, an RNA string can fold into a lollipop shape if it can be written as $xyz$, where $x$ and $z$ contain at least two characters each, $y$ contains at least four characters, and the characters of $x$ match up with those of $z^{R}$, in the sense that that corresponding pairs of letters fall in the set $\{(A, U), (U, A), (C, G), (G, C)\}$.
+        \qquad In general, an RNA string can fold into a lollipop shape if it can be written as $xyz$, where $x$ and $z$ contain at least two characters each, $y$ contains at least four characters, and the characters of $x$ match up with those of $z^{R}$, in the sense that that corresponding pairs of letters fall in the set $\{(A, U), (U, A), (C, G), (G, C)\}$. Can you find a CFG to successfully detect if a string can fold into such a shape?
 
 \subsection*{Induction vs Recursion}
-    As a side note, you might be wondering why we introduced recursion in this supplement, when the current focus of the course this week is induction. This is because the two are actually deeply intertwined. \textbf{Induction is often used to prove the validity of recursive algorithms}\footnote{You'll definitely use this fact if you're taking a class such as CS 3511}.
+    As a side note, you might be wondering why we introduced recursion in this supplement, when the current focus of the course this week is induction. This is because the two are actually deeply intertwined. \textbf{Induction is often used to prove the validity of recursive algorithms}\footnote{This fact is super important!}.
 
     \vspace{2mm}
     For example, let's try to prove Example 1 using induction. We wish to prove that $$L = L(G),$$ where $L(G)$ is the language of $G$. We do so in two parts.
@@ -235,14 +236,20 @@ Let's motivate this section by recalling some explication from a prior supplemen
 \end{tcolorbox}
 
 \section*{Part 3: Syntatical Structures (9 points)}
-    Even English can be (at least somewhat) modeled as a context-free grammar. In this section, we give a brief overview of how this modeling works. However, you will need to go out and consult outsitde resources to fully complete the implementation. I recommend, in order
+    This brings us to Noam Chomsky. He proposed that language is innate to humans and that we are born with a universal grammar that allows us to learn and produce language. He argued that this universal grammar consists of a set of \textbf{rules} or principles that are hard-wired into our brains, and that these rules underlie the structure of \underline{all} human languages. Sound familiar? Indeed, Noam Chomsky's rules are formulated in the exact structure of a context-free grammar.
 
-    They also speak in “complex” sentences—sentences which become more capable of expressing our “complex” thoughts by including other sentences inside them.  This is a form of “recursion” in English—enabled by our ability to multiply meanings by a kind of mental recycling of structures.  Consider the following examples: 
+    \vspace{2mm}
+    Even English can be (somewhat) modeled as a context-free grammar. In other words, the English language can be generated by a set of rules that define the relationship between words, phrases, and clauses, without considering the context in which they appear. In this section, we provide a brief overview of how this modeling works.
+    
+    \vspace{2mm}
+    Consider the following sentence:$$\text{``The cat sat on the mat."}$$ This simple sentence contains a subject (``cat") and a predicate (``sat on the mat"), which are both necessary components for a complete sentence in English. However, English also allows for more complex structures by using phrases and clauses. For example, $$\text{``The cat, which was jet black, sat on the mat."}$$ In this sentence, we have added a relative clause (``which was jet black") to provide more information about the subject.
+    
+    Personally, I think one of the strongest examples of CFGs in English arises when combining sentences using conjunctions, as in the following: 
+    $$\underbrace{\text{The cat sat on the mat}}_{\text{sentence}}\text{ and }\underbrace{\text{the dog sat on the log}}_{\text{sentence}}$$ 
+    This is a form of “recursion” in English -- enabled by our ability to multiply meanings by a kind of mental recycling of structures.
 
-    \begin{itemize}
-        \item \href{http://faculty.washington.edu/cicero/370syntax.htm}{1}
-        \item \href{http://aritter.github.io/courses/5525_slides/cfg.pdf}{3}
-    \end{itemize}
+    \vspace{2mm}
+    While these simple examples provide a cursory introduction,  \href{http://www.cs.columbia.edu/~mcollins/cs4705-spring2020/slides/parsing1.pdf}{further} \href{http://faculty.washington.edu/cicero/370syntax.htm}{resources} should be consulted to gain a deeper understanding of the complex syntactical structures needed for the English language (and to complete the implementation requirements).
 
     
 \begin{tcolorbox}[enhanced,interior style={top color=Dandelion!20,bottom color=Dandelion!30}]
@@ -251,49 +258,54 @@ Let's motivate this section by recalling some explication from a prior supplemen
     \begin{itemize}
         \item \lstinline{generate_cfg_logic(atoms)} In Part 1, we created a parser for propositional strings. Since parsers are typically created for context free grammars, it is natural to assume there exists a CFG for the language of propositions, which there is.
         \item
-        \lstinline{generate_cfg_english(parts_of_speech)}: Create a CFG for a reasonable implementation of the english language. \textbf{For full credit, your CFG must be able to generate the sentences given in the test cases.} 
-            Your implementation should cover the main parts of speech: nouns, verbs, adjectives, adverbs, prepositions, articles, pronouns, conjunctions. An example of \lstinline{parts_of_speech} is as follows:
+        \lstinline{generate_cfg_english(parts_of_speech)}: Create a CFG for a reasonable implementation of the english language.
+        Your implementation should cover the main parts of speech: nouns, verbs, adjectives, adverbs, prepositions, articles, pronouns, conjunctions. An example of \lstinline{parts_of_speech} is as follows:
         \begin{lstlisting}[belowskip=-10pt]
         parts_of_speech = {
-            "noun": {"dumbbell", "barbell", "ab roller", "treadmill", "Prahlad", "Dave" ...}
+            "singular_noun": {"dumbbell", "barbell", "ab roller", "treadmill",...}
+            "plural_noun": {"dumbbells", "barbells", "ab rollers", "treadmills",...}
+            "proper_noun": {"Reese", "Paul", "Sofia", "Saloni", "Ananya", "Ron"...}
+            "intransitive verb": {"exercise", "run", "swim", "deadlift", "bench",...}
+            "transitive verb": {"lift", "carry", "deadlift", "bench", ...}
             "adjective": {"fit", "athletic", "healthy", "motivated", "resilient"...}
-            "adverb": {"quickly", "slowly", "eagerly", "steadily", "loudly", ...},
-            "preposition": {"in", "on", "with", "at", "from", "over", "under", ...},
+            "adverb": {"quickly", "slowly", "eagerly", "steadily", "loudly",...},
+            "preposition": {"in", "on", "with", "at", "from", "over", "under",...},
             "article": {"the", "a", "an", ...},
             "pronoun": {"he", "she", "they", "it", ...},
             "conjunction": {"and", "or", "but", ...},
-            "intransitive verb": {"exercise", "run", "swim", "deadlift", "bench", ...}
-            "transitive verb": {"lift", "carry", "deadlift", "bench", ...}
             }
             \end{lstlisting}
-            Your CFG should be able to generate sentences like the following (ignoring punctuation and capitalization):
-            
+            \textbf{For full credit, your CFG must be able to generate sentences of the following structures (ignoring tense, punctuation and capitalization):}
             \begin{itemize}
-                \item The fit athlete lifted the dumbbell slowly.
+                \item The trainer carried the dumbbells.
                 \item She ran on the treadmill quickly and enthusiastically.
                 \item They exercised with the ab roller and the jump rope.
-                \item He pulled the barbell steadily and with great effort.
+                \item The man swims.
+                \item Reese gave her pull-up bar to Paul.
+                \item Ron ate his cold, delicious protein shake.
+                \item The very extremely tall, intelligent woman began to deadlift.
+                \item The motivated fellow lifted the weights, but the unmotivated fellow dropped them.
+                \item With the ab roller, you can strengthen your core.
+                \item A fit and healthy lifestyle is a goal worth pursuing.
             \end{itemize}
-            
-            Note that your CFG does not need to handle complex sentence structures such as relative clauses or embedded clauses, but it should be able to generate a range of simple and compound sentences. Your CFG also does not have to only generate semantically correct sentences, for example since we did not distinguish between common and nouns, it is possible to generate the sentence ``She benched Dave enthusiastically", which doesn't semantically make sense.
 
-            To do: talk about ambiguity, bench can be verb or noun.
-
-            Also note that some verbs can be both intransitive and transitive.
-    \end{itemize}
+            Note: Your CFG also does not have to generate semantically correct sentences, for example since we did not distinguish between common and nouns, it is possible to generate the sentence ``She benched Dave enthusiastically.", which semantically does not make sense.
+        \end{itemize}
 \end{tcolorbox}
 
 
-\section*{(Optional) Part 4: Building a Parser}
-    In Part 1 we built a parser for propositions. However, this can be made more general. A real parser is any component that extracts the meaning (or \textit{semantics}) of a computational model. You may have heard about it in your other computer science classes, since most compilers and interpreters use parsers to generating the compiled code or performing the interpreted execution.
+% \section*{(Optional) Part 4: Building a Parser}
+%     In Part 1 we built a parser for propositions. However, this can be made more general. A real parser is any component that extracts the meaning (or \textit{semantics}) of a computational model. You may have heard about it in your other computer science classes, since most compilers and interpreters use parsers to generating the compiled code or performing the interpreted execution.
 
-    \vspace{2mm} In the context of CFGs, this means a parser can take in a candidate string and check if the string is in the language or not. Indeed, the autograder contains such a parser to do just this.
+%     \vspace{2mm} In the context of CFGs, this means a parser can take in a candidate string and check if the string is in the language or not. Indeed, the autograder contains such a parser to do just this.
 
-    The recursive approach is too inefficient for our purposes, so a good parser uses something called \textit{dynamic programming}. The idea is found \href{https://courses.cs.washington.edu/courses/cse401/16wi/lectures/10-CYK-Earley-Disambig-wi16.pdf}{here}.
+%     The recursive approach is too inefficient for our purposes, so a good parser uses something called \textit{dynamic programming}. The idea is found \href{https://courses.cs.washington.edu/courses/cse401/16wi/lectures/10-CYK-Earley-Disambig-wi16.pdf}{here}.
 
 
-\section*{Conclusion}
+% \section*{Conclusion}
     % However, CFGs are not all-powerful, as there are some languages that are not able to be generated by context-free grammars, such as $L = \{ww, w \in \Sigma^{*}\}$. The most powerful models of computation are known as \href{https://www.google.com/doodles/alan-turings-100th-birthday}{Turing machines}. You'll cover all of this in great detail in CS 4510, we're just going over the necessary parts.
+
+    % The topics we have covered in this supplement also lend themselves nicely to machine learning, especially in the context of natural language processing (NLP). The linked \href{http://www.cs.columbia.edu/~mcollins/cs4705-spring2020/slides/ff3-slides.pdf}{slides} are a good starting point.
 
     
 \section*{Submission Instructions (10 pts)}
@@ -308,7 +320,7 @@ Let's motivate this section by recalling some explication from a prior supplemen
     \bibitem{mathematical_logic_through_python}
     Gonczarowski, Y. A., \& Nisan, N.\ (2022). \textit{Mathematical Logic through Python}. Cambridge University Press.
     \bibitem{syntactic_theory}
-    Sag, I.\ A., Bender, E.\ M., \& Wasow, T.\ (2006). Syntactic theory: A formal introduction. CSLI. 
+    Sag, I.\ A., Bender, E.\ M., \& Wasow, T.\ (2006). \textit{Syntactic theory: A formal introduction}. CSLI. 
 \end{thebibliography}
 
 
