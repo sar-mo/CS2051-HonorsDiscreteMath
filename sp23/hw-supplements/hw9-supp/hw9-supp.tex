@@ -67,24 +67,21 @@
 
 \maketitle
 
-\setlength{\epigraphwidth}{0.6\textwidth}
-\epigraph{
-
-The control of a large force is the same principle as the control of a few men: it is merely a question of dividing up their numbers.}{Sun Tzu, \textit{The Art of War}}
-
+\vspace{-1cm}
 \section*{Overview}
     One day when I was a student taking 2051, I was perusing an \href{https://web.stanford.edu/class/archive/cs/cs103/cs103.1234/timeline_of_results}{article} with all the important results in discrete math. However, I noticed an interesting statement: 
 
-    \begin{tcolorbox}
-        Noam Chomsky invents context-free grammars in his book “Syntactic Structures". At the time, he called them phrase-structure grammars and explored them in the context of modeling the syntax of natural languages.
+    \begin{tcolorbox}[colframe=gray!20]
+        Noam Chomsky invents context-free grammars in his book “\textit{Syntactic Structures}". At the time, he called them \textit{phrase-structure grammars} and explored them in the context of modeling the syntax of natural languages.
     \end{tcolorbox}
     Initially, I was confused. Noam Chomsky may be many things, including a world-renowned linguist and psychologist, but it was difficult to see his correlation to discrete math. However, as I learned more, I realized the importance of that statement. His discovery took an algorithmic approach to language development whose effects are still being seen today.
 
     \vspace{2mm}
-    
-    In this supplement, you'll learn about recursion, computational models, syntactical structures, and more!
+    In this supplement, you'll quickly get up to speed (if you aren't already) with a powerful tool known as recursion. You'll use this tool to develop our first computational model, known as a context-free grammar. Finally, you'll try your hand at computationally expressing the English language. Let's get started!
 
 \section*{Part 1: Way Down We Go (9 points)}
+\setlength{\epigraphwidth}{0.6\textwidth}
+\epigraph{The control of a large force is the same principle as the control of a few men: it is merely a question of dividing up their numbers.}{Sun Tzu, \textit{The Art of War}}
 Let's motivate this section by recalling some explication from a prior supplement:
 
     \begin{center}
@@ -98,11 +95,11 @@ Let's motivate this section by recalling some explication from a prior supplemen
           \draw[thick] (P) to[out=-110,in=85] ($(H)+(-0.08*\H,-\H)$);
           \draw[thick] (P) to[out=-80,in=108] ($(H)+(0.06*\H,-\H)$);
 
-          \draw[thick,fill=white] (H)++(50:0.6) circle (0.06*\H);
-          \draw[thick,fill=white] (H)++(40:1) circle (0.08*\H);
-          \draw[thick,fill=white] (H)++(45:1.5) circle (0.1*\H);
+          \draw[black!40!Dandelion,thick,fill=white] (H)++(50:0.6) circle (0.06*\H);
+          \draw[black!40!Dandelion,thick,fill=white] (H)++(40:1) circle (0.08*\H);
+          \draw[black!40!Dandelion,thick,fill=white] (H)++(45:1.5) circle (0.1*\H);
 
-          \node[cloud, draw =black, fill = gray!10, aspect=3.5, cloud puffs = 15, cloud puff arc = 90, text width=9cm] (c) at (8,1.5) {\small But, how can you evaluate arbitrary expressions without even knowing the names of the variables ahead of time? This question itself could be an entire supplemental, but luckily Python makes the job easy with the \lstinline+eval()+ function.
+          \node[cloud, thick, draw = black!40!Dandelion, top color=Dandelion!70!black!30,bottom color=Dandelion!40!black!10, aspect=3.5, cloud puffs = 15, cloud puff arc = 90, text width=9cm] (c) at (8,1.5) {\small But, how can you evaluate arbitrary expressions without even knowing the names of the variables ahead of time? This question itself could be an entire supplemental, but luckily Python makes the job easy with the \lstinline+eval()+ function.
         \begin{lstlisting}[belowskip=-10pt]
             >>> eval('p and ((not p) or q)', {'p': True, 'q': False})
         \end{lstlisting}};
