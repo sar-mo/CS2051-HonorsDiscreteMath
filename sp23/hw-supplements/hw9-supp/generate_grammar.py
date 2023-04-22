@@ -7,8 +7,7 @@
 
 # NOTE: Use [] to describe the empty string
 
-
-def generate_cfg_example():
+def generate_cfg_example() -> list:
     """Generates a CFG for the language {0^n 1^n : n \in N}"""
     cfg = []
     # S generates 0S1
@@ -17,17 +16,23 @@ def generate_cfg_example():
     cfg.append(('S', []))
     return cfg
 
-def generate_cfg_binary():
+def generate_cfg_binary() -> list:
     """Generates a CFG for the language {s : s has the same number of 1s and 0s}"""
 
-def generate_cfg_tricky():
-    """Generates a CFG for the language {1^i 0^j : 2i != 3j + 1}"""
+def generate_cfg_union() -> list:
+    """Generates a CFG for the language {a^i b^j c^k : i, j, k \in N and (i = j or i = k)}"""
 
-def generate_cfg_rna():
+def generate_cfg_rna() -> list:
     """Generates a CFG for the language {s : s is a valid stem loop rna sequence}"""
 
-def generate_cfg_logic(atoms):
-    """Generates a CFG for the language {s : s is a valid logical expression}"""
+def generate_cfg_tricky() -> list:
+    """Generates a CFG for the language {1^i 0^j : 2i != 3j + 1}"""
 
-def generate_cfg_english(parts_of_speech):
-    """Generates a CFG for (some subset of) the language {s : s is a valid english sentence}"""
+def generate_cfg_logic(atoms : set) -> list:
+    """Generates a CFG for the language {s : s is a valid logical expression}
+        The alphabet is the set of atoms, and the operators are "not", "and", "or", "implies", "iff", "(", ")", 'True', and 'False'
+        See test cases for examples of the atoms set"""
+
+def generate_cfg_english(parts_of_speech : dict) -> list:
+    """Generates a CFG for (some subset of) the language {s : s is a valid english sentence}
+       See test cases for examples of the parts of speech dictionary"""

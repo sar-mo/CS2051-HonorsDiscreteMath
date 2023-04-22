@@ -1,6 +1,10 @@
-"""Syntactic handling of propositional formulas."""
+# CS 2051 Spring 2023 - HW9 Supplement Part 1: (Optional) Introduction to Recursion
+# instructor: Gerandy Brito
+# creator - Sarthak Mohanty
 
-from __future__ import annotations
+# author - your name here
+# collaborators - N/A
+
 from typing import Optional, TypeVar
 
 Formula = TypeVar('Formula')

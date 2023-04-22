@@ -1,0 +1,1 @@
+This folder contains some notes I took while I was a TA for this course. They're pretty rough and unfinished, since I usually wrote them during class.
