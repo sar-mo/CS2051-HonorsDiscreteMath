@@ -129,6 +129,8 @@ class TestGenerateGrammar(unittest.TestCase):
         for sentence in self.sentences:
             grammar = earleyparser.Grammar(cfg)
             parser = earleyparser.Parser(grammar)
+            match_strings = ["the trainer carry the dumbbells"] # enter your own strings here
+            match_strings = [string.replace(" ", "") for string in match_strings]
             parser.run(sentence)
             derivations = parser.get_completes()
             assert len(derivations) > 0, sentence
