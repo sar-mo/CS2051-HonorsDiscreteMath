@@ -9,7 +9,7 @@
     colorlinks=true,
     linkcolor=blue,
     filecolor=magenta,      
-    urlcolor=blue,
+    urlcolor=black!20!BurntOrange,
     }
 
 % Inputting Python code
@@ -33,19 +33,18 @@
     xleftmargin=-15mm, % manual adjustment, figure out permanent solution
 }
 
-
+% Drawing figures
 \usepackage{tikz}
 \usetikzlibrary{calc, shapes.symbols}
 
-
+% Colored Boxes
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,hooks}
 \usetikzlibrary{shadows}
 \usepackage{lipsum}
 
-
+% Quotes
 \usepackage{epigraph}
-
 
 %Images
 \usepackage{graphicx}
@@ -69,11 +68,11 @@
 
 \vspace{-1cm}
 \section*{Overview}
-    One day when I was a student taking 2051, I was perusing an \href{https://web.stanford.edu/class/archive/cs/cs103/cs103.1234/timeline_of_results}{article} with all the important results in discrete math. However, I noticed an interesting statement: 
+    One day when I was a student taking CS 2051, I was perusing an \href{https://web.stanford.edu/class/archive/cs/cs103/cs103.1234/timeline_of_results}{article} with all the important results in discrete math. However, I noticed an interesting statement: 
     \begin{tcolorbox}[colframe=gray!40, sharp corners]
         Noam Chomsky invents context-free grammars in his book \textit{``Syntactic Structures"}. At the time, he called them \textit{phrase-structure grammars} and explored them in the context of modeling the syntax of natural languages.
     \end{tcolorbox}
-    Initially, I was rather confused. Noam Chomsky may be many things, including a world-renowned linguist and psychologist, but it was difficult to see his correlation to discrete mathematics. However, as I looked more into the topic, I realized the true importance of his discoveries, and how they have revolutionized not only the field of linguistics but also computer science as a whole.
+    Initially, I was rather confused. Noam Chomsky may be many things, including a world-renowned linguist and psychologist, but it was difficult to see his correlation to discrete mathematics. However, as I looked more into the topic, I realized the true importance of his discoveries. Chomsky's work has not only transformed the field of linguistics but has also had a significant impact on the entire domain of computer science.
 
     \vspace{2mm}
     In this supplement, you'll quickly get up to speed (if you aren't already) with a powerful tool known as recursion. You'll use this tool to develop an important computational model, known as a context-free grammar. Finally, using this model, you'll try your hand at algorithmically expressing the English language. Let's get started!
@@ -104,8 +103,9 @@ Let's motivate this section by recalling some explication from a prior supplemen
         \end{lstlisting}};
     \end{tikzpicture}
     \end{center}
-
-    However, suppose we were now creating our own \lstinline+eval()+ function. This problem is not a trivial one, and requires careful consideration of various algorithmic techniques. Initially, one may assume that an iterative approach would suffice to traverse the string representation of the proposition, evaluating sub-expressions and gradually building up to the final evaluation. However, such an approach would quickly lead to convoluted code that would be difficult to maintain and debug. Therefore, we turn to a more elegant solution.
+    We now have the opportunity to answer the question we originally posited. How would we go about implementing our own \lstinline+eval()+ function? This problem is not a trivial one, and requires careful consideration of various algorithmic techniques. 
+    
+    \vspace{2mm}Initially, one may assume that an iterative approach would suffice to traverse the string representation of the proposition, evaluating sub-expressions and gradually building up to the final evaluation. However, such an approach would quickly lead to convoluted code that would be difficult to maintain and debug. Therefore, we turn to a more elegant solution.
 
     \vspace{2mm}
     \textbf{Recursion} is a powerful tool used for solving algorithms, and is loosely given as follows:
@@ -115,21 +115,16 @@ Let's motivate this section by recalling some explication from a prior supplemen
     \end{itemize}
     There are many advantages to this approach, the main one lying in the fact that the same code can be used to solve both the original problem and its sub-problems, leading to simpler, more modular code.
 
-    \vspace{3mm}
-    To apply recursion to the task of creating our \lstinline+eval()+ function, we can break the problem down into two parts. First, we must parse the string representation of the proposition into a data structure that can be easily evaluated. Second, we must recursively evaluate this data structure to arrive at the final evaluation of the proposition.
+    \vspace{2mm}
+    To apply recursion to the task of creating our \lstinline+eval()+ function, we can break the problem down into two parts. First, we must parse the string representation of the proposition into a data structure that can be easily evaluated, such as a tree. Second, we must recursively evaluate this data structure to arrive at the final evaluation of the proposition.
 
-    % \begin{enumerate}[label = \arabic*.]
-    %     \item We first recurse on the string itself. The idea is to first read the first token in the string, where a token is a basic “word” of our language: either one of the single-letter tokens \lstinline{'T', 'F', '(', ')', '~', '&', '|'}, or the two/three-letter “implies” and ``iff" tokens \lstinline{'<->', '->'}, or a variable name like \lstinline{'p'} or \lstinline{'q76'}. This first token will tell you in a unique way how to continue reading the rest of the string, where this reading can be done recursively. For example, if the first token is an open parenthesis, \lstinline{'('}, then we know that a formula $\phi$ must follow, which can be read by a recursive call. Once $\phi$ was recursively read, we know that the following token must be one of \lstinline{'&', '|', or '->'}, and once this token is read then a formula $\psi$ must follow, and then a closing parenthesis, \lstinline{')'}. We can use this technique to encode our proposition into a data structure known as a tree, where we start with a root, and then branch off into different subtrees, each with their own roots. This will become concrete as you implement the below tasks.
-    %     \item 
-    %     Once we have constructed the tree data structure, we can move on to the second part of the problem: evaluating the proposition. This involves recursively evaluating the subtrees of the tree data structure, starting from the leaves and working our way up to the root. Each subtree represents a sub-expression of the original proposition, and its evaluation can be determined based on the logical structure of the subtree. Once we have evaluated all the subtrees, we can recombine them in such a way that the entire proposition is evaluated.
-    % \end{enumerate}
     % \textbf{Note that there are two different types of recursion involved in this process}. The first type of recursion involves parsing the string representation of the proposition and constructing the tree data structure, while the second type of recursion involves recursively evaluating the subtrees of the tree data structure.
     
     % \vspace{2mm}
     % These two types of recursion correspond to two different types of data structures: \textit{lists} (in the form of strings) and \textit{trees} (in the form of our constructed data structure). This will be explored in future coursework such as CS 351X.
 
 \begin{tcolorbox}[enhanced,interior style={top color=Dandelion!20,bottom color=Dandelion!30}]
-    Let's build our own \lstinline{eval()} function. \textbf{Implement the following functions:}
+    \textbf{Let's build our own \lstinline{eval()} function. Implement the following functions:}
     \begin{itemize}
         \item \lstinline{parse(proposition)}: The function takes in a string, represented as a propositional formula, and parses it to create an appropriate \lstinline{Formula} object. You may assume that the input string is valid.
         \item \lstinline{evaluate(proposition, model)}: This function takes in a string as well as an assignment of variables and returns the evaluation. The output should be identical to that of the analogous built-in function:
@@ -152,15 +147,15 @@ Let's motivate this section by recalling some explication from a prior supplemen
     Let's say we were trying to create a computational model to \textit{decide} the language $L = \{1^{n}0^{n}, n \in \mathbb{N}\}$. What this means is that our computational model should take in a string, and \textit{accept} the string (i.e.\ return \texttt{True}) if the string is in $L$, and \textit{reject} otherwise.
 
     \vspace{2mm}
-    One such model could be represented as follows: we would start with a temporary variable, call it $S$. Now at every time step, keep splitting up $S$ into $1S0$; in other words,
+    One such model could be represented as follows: we would start with a temporary variable, call it $S$. Now at every time step, keep splitting up $S$ into $1S0$; we can denote this as
     \begin{align*}
         S &\rightarrow 1S0.
     \end{align*}
-    Finally, we want to get rid of $S$. Therefore, at every time step, allow the possibility of $S$ to dissapear and be replaced with the empty string, $\epsilon$. We denote this as follows:
+    Finally, we want to get rid of $S$. Therefore, at every time step, allow the possibility of $S$ to dissapear and be replaced with the empty string, $\epsilon$. We indicate this as follows:
     \begin{align*}
         S &\rightarrow 1S0 \mid \epsilon.
     \end{align*}
-    Let's informally illustrate why this model decides the above language. Suppose we were trying to generate the string 111000. To do this, all we have to do is tell our machine to execute the following set of steps:
+    If we ever generate a string identical to the input we take in, we \textit{accept}, otherwise, we \textit{reject}. Let's informally illustrate why this model decides $L$. Suppose we took in the input string $w = 111000$. Since $w \in L$, our model should accept the string, so our CFG should be able to generate it. To do this, all we have to do is tell our machine to execute the following set of steps:
     $$S \rightarrow 1S0 \rightarrow 11S00 \rightarrow 111S000 \rightarrow 111000.$$ At every time step, we increase the number of $1$s and $0$s on either side of $S$. Finally, when we have generated the desired string, we tell $S$ to disappear, by replacing it with the empty string $\epsilon$.
 
 \subsection*{Context-Free Grammars}
@@ -171,7 +166,7 @@ Let's motivate this section by recalling some explication from a prior supplemen
         \item $R$ is a finite set of \textbf{rules}. The left hand side of a rule is a single variable, and the right hand side can be any combination of variables and terminals.
         \item $S \in V$ is the start variable.
     \end{enumerate}
-    The language of the grammar is then $L_{\textsf{CFG}} = \{w \in \Sigma^{*} : S \rightarrow u_{1} \rightarrow u_{2} \rightarrow \dots \rightarrow w\}$; put another way, it is the set of all valid strings generated by repeated application of our rules containing no variables.
+    The language of the grammar is then $L_{\textsf{CFG}} = \{w \in \Sigma^{*} : S \rightarrow u_{1} \rightarrow u_{2} \rightarrow \dots \rightarrow w\}$\footnote{Here the \href{https://en.wikipedia.org/wiki/Kleene_star}{kleene star} was used.}. Put another way, it is the set of all valid strings generated by repeated application of our rules containing no variables.
 
 \subsection*{Example 2: Union of Two Languages}
     Let's say we were trying to create a CFG for the language $$L = \underbrace{\{0^{n}1^{n} \mid n \ge 0\}}_{L_{1}} \cup \underbrace{\{1^{n}0^{n} \mid n \ge 0\}}_{L_{2}}.$$ First, let's construct a grammar for $L_{1}$. This is the same as in Example 1: $$S_{1} \rightarrow 0S_{1}1 \mid \epsilon.$$ Similarly, we can generate a grammar for $L_{2}$: $$S_{2} \rightarrow 1S_{2}0 \mid \epsilon.$$ Then we can generate our desired language $L$ with a CFG by `combining' the two grammars, as follows:
@@ -194,7 +189,7 @@ Let's motivate this section by recalling some explication from a prior supplemen
         \vspace{3mm}In general, an RNA string can fold into a lollipop shape if it can be written as $xyz$, where $x$ and $z$ contain at least two characters each, $y$ contains at least four characters, and the characters of $x$ match up with those of $z^{R}$ (the reverse of $z$), in the sense that that corresponding pairs of letters fall in the set $\{(A, U), (U, A), (C, G), (G, C)\}$. Can you find a CFG to successfully accept such strings?
 
 \subsection*{Induction vs Recursion}
-    As a side note, you might be wondering why we introduced recursion in this supplement, when the current focus of the course this week is induction. This is because the two are actually deeply intertwined. \textbf{Induction is often used to prove the validity of recursive algorithms}\footnote{This fact is super important!}.
+    As a side note, you might be wondering why we introduced recursion in this supplement, when the current focus of the course this week is induction. This is because the two are actually deeply intertwined. \textbf{Induction is often used to prove the validity of recursive models}.
 
     \vspace{2mm}
     For example, let's try to prove Example 1 using induction. We wish to prove that $$L = L(G),$$ where $L(G)$ is the language of $G$. We do so in two parts.
@@ -218,57 +213,68 @@ Let's motivate this section by recalling some explication from a prior supplemen
     This was an extremely tedious proof. The worst part? This grammar only had one production! Imagine if there were multiple production rules and multiple variable. A formal proof would take forever! For this reason, we try to prove the validity of our CFGs simply through intuition and test cases.
 
 \begin{tcolorbox}[enhanced,interior style={top color=Dandelion!20,bottom color=Dandelion!30}]
-    Let's practice generating CFGs. \textbf{Implement the following functions:}
+    \textbf{Let's practice generating CFGs. Implement the following functions:}
     
     \begin{itemize}
-        \item \lstinline{generate_cfg_binary}: In Example 1 above, we presented a CFG to generate a language of the form $1^{n}0^{n}$. Now let's weaken our restrictions even more. Create a CFG to decide the language $$L_{1} = \{w : w \in \{0, 1\}^{*}, \#1(w) = \#0(w)\};$$ in other words, $L_{1}$ represents all binary strings with the same number of 1's and 0's.
-        
+        \item \lstinline{generate_cfg_binary}: In Example 1 above, we presented a CFG to generate a language of the form $1^{n}0^{n}$. Now let's weaken our restrictions even more. Create a CFG to decide the language $$L_{1} = \{w : w \in \{0, 1\}^{*}, \#1(w) = \#0(w)\};$$ that is to say, $L_{1}$ represents all binary strings with the same number of 1's and 0's.
         \item \lstinline{generate_cfg_union}: In Example 2, you learnt how to create CFGs for the union of multiple languages. Let's put that to the test. Implement a CFG to decide $$L_{2} = \{a^{i}b^{j}c^{k} \mid i, j, k \ge 0, \text{ and } i = j \text{ or } i = k\}$$
         \item \lstinline{generate_cfg_rna}: Create a CFG to decide the set of all RNA secondary structures of the form of a ``stem loop" as described above. Since terminals are typically lowercase characters, use `u, g, c, u' instead of `U, G, C, U'.
         \item \lstinline{generate_cfg_tricky}: This one is tricky. Generate a CFG to decide the language $$L_{4} = \{1^{i}0^{j} : 2i \ne 3j + 1\}$$
     \end{itemize}
+    Note: Make sure to check whether your implementation correctly accepts or rejects the empty string $\epsilon$, which we denote in code as the empty list \lstinline{[]}.
 \end{tcolorbox}
 
 \pagebreak
 \section*{Part 3: Syntatical Structures (10 points)}
     This brings us to Noam Chomsky. He proposed that language is innate to humans and that we are born with a universal grammar that allows us to learn and produce language. He argued that this universal grammar consists of a set of \textbf{rules} or principles that are hard-wired into our brains, and that these rules underlie the structure of \underline{all} human languages. Sound familiar? Indeed, Noam Chomsky's rules were formulated in the exact structure of a context-free grammar.
 
-    \vspace{2mm}
-    Thus English can also be (somewhat) modeled as a context-free grammar. In this section, we provide a brief overview of how this modeling works.
+\subsection*{Syntax vs Semantics}
+    Recall that the entire first part of this course was dedicated to Logic, and how we can translate our human language to logical statements. Thus, Chomsky's hypothesis presented above implies that we can express the language of Logic as a context-free grammar. 
     
-    \vspace{2mm}
-    Consider the following sentence:$$\text{``The cat sat on the mat."}$$ This simple sentence contains a subject (``cat") and a predicate (``sat on the mat"), which are both necessary components for a complete sentence in English. However, English also allows for more complex structures by using phrases and clauses. For example, $$\text{``The cat, which was jet black, sat on the mat."}$$ In this sentence, we have added a relative clause (``which was jet black") to provide more information about the subject.
+    % In Part 1, we created a parser for propositions by recursively splitting them based on the logical operators. We can create a CFG for this set of strings in a similar fashion. You are tasked to do so in this part's implementation.
 
     \vspace{2mm}
-    Personally, I think one of the clearest examples of CFGs in English arises when combining sentences using conjunctions, as in the following: 
+    But wait! What about the logical statement $$T \lor T \lor T$$ Should our context-free grammar generate this sentence? On one hand, it is \textbf{syntactically} valid, in the sense that it follows the rules of well-formed formulae. On the other hand, one could argue it is \textbf{semantically} pointless: it is equivalent to (and should be replaced with) the simplified expression $T$.
+
+    \vspace{2mm}
+    Syntactically, propositional statements are just strings, devoid of meaning. It is our interpretation of them that gives them semantic meaning. Chomsky's argument only applies to the syntax of languages, not semantics, so our CFG should accept such statements. On the other hands, strings such as $((\Rightarrow))$ are not even syntatically valid, so we should reject them.
+
+
+\subsection*{English as a CFG}
+    Even English can be (somewhat) modeled as a context-free grammar. In this section, we provide a brief overview of such a blueprint.
+    
+    \vspace{2mm}
+    Consider the following sentence:$$\text{``The jet black cat sat on the mat."}$$ This simple sentence contains a subject (``cat") and a predicate (``sat on the mat"), which are both necessary components for a complete sentence in English. However, English also allows for more complex structures. For example, $$\text{``The \underline{very} jet black cat sat on the mat."}$$ In this case, we have incorporated the adverb "very" while maintaining the sentence's validity. No worries, right? Simply adding a rule to allow an adverb before adjectives should suffice to handle this situation. However, the situation is more nuanced, as it appears that we can insert an indefinite number of adjectives without compromising the sentence's syntactical integrity. The sentence $$\text{``The very very very very very jet black cat sat on the mat"}$$ is still completely valid, even if it's impractical. This is a form of “recursion” in English -- enabled by our ability to multiply meanings by a kind of mental recycling of structures, and CFGs are a perfect candidate to represent such structures.
+
+    \vspace{2mm}
+    Even entire sentences can be expressed using conjunctions, as in the following: 
     $$\underbrace{\text{The cat sat on the mat}}_{\text{sentence}}\text{ and }\underbrace{\text{the dog sat on the log}}_{\text{sentence}}.$$ 
-    This is a form of “recursion” in English -- enabled by our ability to multiply meanings by a kind of mental recycling of structures.
 
     \vspace{2mm}
-    While these simple examples provide a cursory introduction, further resources should be consulted to gain a deeper understanding of the complex syntactical structures needed for the English language (and to complete the implementation requirements). I believe perusing \href{http://www.cs.columbia.edu/~mcollins/cs4705-spring2020/slides/parsing1.pdf}{this} set of slides or reading \href{http://faculty.washington.edu/cicero/370syntax.htm}{this} introduction should be sufficient.
+    While these simple examples provide a cursory introduction, further resources should be consulted to gain a deeper understanding of the complex syntactical structures needed for the English language (and to complete the implementation requirements). The following set of \href{http://www.cs.columbia.edu/~mcollins/cs4705-spring2020/slides/parsing1.pdf}{slides} and \href{http://faculty.washington.edu/cicero/370syntax.htm}{exposition} should be sufficient.
 
-    
+% \vspace{-2mm}
 \begin{tcolorbox}[enhanced,interior style={top color=Dandelion!20,bottom color=Dandelion!30}]
     \textbf{Implement the following functions:}
 
     \begin{itemize}
-        \item \lstinline{generate_cfg_logic(atoms)} In Part 1, we created a parser for propositions by recursively splitting them based on the logical operators. We can create a CFG for this set of strings in a similar fashion. The alphabet of your grammar should be over $\text{\lstinline{atoms}} \cup \{\land, \lor, \neg, \Rightarrow, \Leftrightarrow, (, )\}$. Here \lstinline{atoms} is a set of lowercase letters representing the propositions over which our language is defined. You may insert more parentheses than necessary. You must generate all syntactically valid regular expressions.
+        \item \lstinline{generate_cfg_logic(atoms)}: Create a CFG for a syntactical representation of the language of Logic. The alphabet of your grammar should be over $\Sigma = \text{\lstinline{atoms}} \cup \{\land, \lor, \neg, \Rightarrow, \Leftrightarrow, (, ), T, F\}$. Here \lstinline{atoms} is a set of lowercase letters representing the propositions over which our language is defined. You may insert more parentheses than necessary.
         \item
         \lstinline{generate_cfg_english(parts_of_speech)}: Create a CFG for a reasonable implementation of the english language.
         Your implementation should cover the main parts of speech: nouns, verbs, adjectives, adverbs, prepositions, articles, pronouns, conjunctions. An example of \lstinline{parts_of_speech} is as follows:
         \begin{lstlisting}[belowskip=-10pt]
         parts_of_speech = {
-            "singular_noun": {"dumbbell", "barbell", "ab roller", "treadmill",...}
-            "plural_noun": {"dumbbells", "barbells", "ab rollers", "treadmills",...}
-            "proper_noun": {"Reese", "Paul", "Sofia", "Saloni", "Ananya", "Ron"...}
-            "intransitive verb": {"exercise", "run", "swim", "deadlift", "bench",...}
-            "transitive verb": {"lift", "carry", "deadlift", "bench", ...}
-            "adjective": {"fit", "athletic", "healthy", "motivated", "resilient"...}
+            "singular_noun": {"dumbbell", "barbell", "ab roller", "treadmill",...},
+            "plural_noun": {"dumbbells", "barbells", "ab rollers", "treadmills",...},
+            "proper_noun": {"Reese", "Paul", "Sofia", "Saloni", "Ananya", "Ron"...},
+            "intransitive verb": {"exercise", "run", "swim", "deadlift", "bench",...},
+            "transitive verb": {"lift", "carry", "deadlift", "bench",...},
+            "adjective": {"fit", "athletic", "healthy", "motivated", "resilient"...},
             "adverb": {"quickly", "slowly", "eagerly", "steadily", "loudly",...},
             "preposition": {"in", "on", "with", "at", "from", "over", "under",...},
-            "article": {"the", "a", "an", ...},
-            "pronoun": {"he", "she", "they", "it", ...},
-            "conjunction": {"and", "or", "but", ...},
+            "article": {"the", "a", "an",...},
+            "pronoun": {"he", "she", "they", "it",...},
+            "conjunction": {"and", "or", "but",...}
             }
             \end{lstlisting}
             \textbf{For full credit, your CFG must be able to generate sentences of the following structures (ignoring tense, spaces, punctuation and capitalization):}
@@ -285,7 +291,7 @@ Let's motivate this section by recalling some explication from a prior supplemen
                 \item A fit and healthy lifestyle is a worthy goal to pursue.
             \end{itemize}
 
-            Note: Your CFG also does not have to generate semantically correct sentences, for example since we did not distinguish between common and nouns, it is possible to generate the sentence ``She benched Dave enthusiastically," which semantically does not make sense.
+            Note: This CFG also does not have to generate semantically correct sentences. For example, since we did not distinguish between common and proper nouns, it is possible to generate the sentence ``She benched Dave enthusiastically," which semantically does not make sense.
         \end{itemize}
 \end{tcolorbox}
 
@@ -306,6 +312,9 @@ Let's motivate this section by recalling some explication from a prior supplemen
     
 \section*{Submission Instructions (10 pts)}
     After you fill the appropriate functions, submit the \lstinline{generate_grammar.py} file to Gradescope. The main structure of the autograder is given to you this time, so you should be able to check your work locally.
+
+    \vspace{2mm}
+    If you want, you can also submit \lstinline{proposition_parser.py} and I will take a look, but it is ungraded.
 
 % \begin{thebibliography}{9}
 %     \bibitem{syntactic_theory}

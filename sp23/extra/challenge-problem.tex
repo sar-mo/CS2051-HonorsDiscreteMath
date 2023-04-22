@@ -1,0 +1,189 @@
+\documentclass{article}
+
+%Basics
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+
+\usepackage{newpxtext} \usepackage{eulerpx}
+
+\newcommand*{\myfont}{\fontfamily{qhv}\selectfont}
+\DeclareTextFontCommand{\blackboardtext}{\myfont}
+% \usepackage{eulerpx}
+
+% \usepackage{fontspec}
+% \newfontfamily{\differenttt}{Courier New}
+% \DeclareTextFontCommand{\textdifferenttt}{\differenttt}
+
+% colored links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=magenta,
+    }
+
+%Creating algorithms
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+% Inputting Python code
+\usepackage[dvipsnames]{xcolor}
+\definecolor{textblue}{rgb}{.2,.2,.7}
+\definecolor{textred}{rgb}{0.54,0,0}
+\definecolor{textgreen}{rgb}{0,0.43,0}
+\usepackage{upquote}
+\usepackage{listings}
+\lstset{
+    language=Python, 
+    tabsize=4,
+    basicstyle={\ttfamily},
+    keywordstyle=\color{textblue},
+    commentstyle=\color{textgreen},
+    stringstyle=\color{textred},
+    frame=none,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    xleftmargin=-15mm, % manual adjustment, figure out permanent solution
+}
+
+% Tcolorbox
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins,hooks}
+\usetikzlibrary{shadows}
+\tcbuselibrary{skins}
+\usetikzlibrary{shadows.blur}
+
+%Images
+\usepackage{graphicx}
+    \usepackage{subcaption}
+    \usepackage{float}
+
+%Creating Figures
+\usepackage{tikz}
+\usetikzlibrary{calc, math, matrix, graphs, positioning}
+\usetikzlibrary{fit}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{hobby}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+%Custom Title Fields
+\newcommand{\hmwkTitle}{Extra Problems}
+\newcommand{\hmwkDueDate}{Friday, April 28}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Professor Gerandy Brito}
+\newcommand{\hmwkSection}{Spring 2023}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{CS 2051}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{\hmwkTitle}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\\ \hmwkTitle} \\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm} \\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkSection}} \\
+    \vspace{1in}
+    
+    \vspace{1in}
+    \author{\textbf{\hmwkAuthorName}}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+
+\section*{Instructions}
+    Each semester, we release a challenge problem. It's ungraded, but your submission/discussion of this problem will be considered if you ever apply to be a TA for this course. You can find the previous years' problems \href{https://github.com/sar-mo/CS2051-HonorsDiscreteMath/blob/main/sp22/extra-credit/Exam 2 Extra Credit.pdf}{here}. 
+
+    \vspace{4mm}
+    \textbf{IMPORTANT:} For these problems, you may NOT collaborate with other students.
+
+\section*{The Problem}
+    In the Homework 5 Supplement, we wished to find a solution to the \texttt{Task Scheduling} problem, which we restate here:
+
+    \begin{tcolorbox}[
+    enhanced, colback={green!40!black}, colupper=white, colframe=brown!70!black,
+    sharp corners,drop fuzzy shadow,
+    underlay={\tcbvignette{size=2mm, inside node=frame, raised color=brown!70!black}}]
+    {
+        \vspace{2mm} We are given a partially ordered set of tasks $T = {T_{1}, T_{2}, \dots, T_{n}}$, where each task $T_{i}$ takes 1 unit of time to complete. The tasks are partially ordered by a binary relation $\prec$, which specifies the dependencies between the tasks. Specifically, if $T_{i} \prec T_{j}$, then $T_{i}$ must be completed before $T_{j}$ can be started.
+    
+        \vspace{3mm}
+        We also have $k$ processors $P_{1}, P_{2}, \dots, P_{k}$ available to perform the tasks. A \textbf{schedule} for $T$ assigns each task $T_{i}$ to a processor $P_{j}$ and a start time $t_{i}$ for $P_{j}$ to begin working on $T_{i}$. If a processor starts working on $T_{i}$ at time $t_{i}$, then $T_{i}$ will be completed at time $t_{i} + 1$.
+    
+        \vspace{3mm} A schedule is \textbf{feasible} if it satisfies the following conditions:
+        \begin{enumerate}[label = \arabic*]
+            \item No single processor performs multiple tasks at the same time. In other words, if a processor is assigned to both $T_{i}$ and $T_{j}$, where $i \ne j$, then the start times for the two tasks must be different.
+            \item For every pair of tasks $T_{i}$ and $T_{j}$ such that $T_{i} \prec T_{j}$, the start time for $T_{j}$ is later than or equal to the completion time for $T_{i}$. In other words, if $T_{i}$ must be completed before $T_{j}$ can start, then the start time for $T_{j}$ must be after or at the same time as the completion time for $T_{i}$.
+        \end{enumerate}
+        The \textbf{latency} of a schedule is defined as the time between the earliest start time for any task and the latest completion time for any task. Our goal is to find a feasible schedule with the smallest possible latency.
+        }
+    \end{tcolorbox}
+    
+    A possible \href{https://github.com/sar-mo/CS2051-HonorsDiscreteMath/blob/main/sp23/hw-supplements/hw5-supp-slns/generate_schedule_sln.pdf}{solution} was presented for this problem, but it was fairly inefficient. Your task is as follows: \textbf{Find an efficient solution for the \texttt{Task Scheduling} problem.} 
+
+    \vspace{2mm}
+    A few notes:
+    \begin{itemize}
+        \item Consider how to best represent the input data, including possibly using external data structures.
+        \item What is the Big-$\mathcal{O}$ time complexity of your solution? What about Big-$\Omega$?
+    \end{itemize}
+
+\pagebreak
+
+\section*{Extra Problem [Spring 2022]}
+    No one solved this problem last year, so we are posing it again.
+    
+    \vspace{2mm}
+    Consider the grid shown below in Figure \ref*{E2}.
+    
+    \vspace{1mm}
+    \setlength{\tabcolsep}{2.7pt}
+    \begin{figure}[hbp]
+        \centering
+        \begin{tabular}{ccccccccccccc}
+            & & & & & & S \\
+            & & & & & S & A & S \\
+            & & & & S & A & R & A & S \\
+            & & & S & A & R & T & R & A & S \\
+            & & S & A & R & T & H & T & R & A & S \\
+            & S & A & R & T & H & A & H & T & R & A & S \\
+            S & A & R & T & H & A & K & A & H & T & R & A & S \\
+            & S & A & R & T & H & A & H & T & R & A & S \\
+            & & S & A & R & T & H & T & R & A & S \\
+            & & & S & A & R & T & R & A & S \\
+            & & & & S & A & R & A & S \\
+            & & & & & S & A & S \\
+            & & & & & & S
+        \end{tabular}
+        \caption{A diamond-shaped, narcissistic grid of letters.}
+        \label{E2}
+    \end{figure}
+    
+    Suppose you start at any $S$, and can move only left, right, down, or up to adjacent letters. In how many ways can the palindrome SARTHAKAHTRAS be read if the same letter \underline{cannot} be used more than one in each sequence? \textbf{Prove your answer.}
+
+    \vspace{2mm}
+    \textit{(Hint): You can program a script to get your answer, and then work backwards to prove it.}
+
+
+\end{document}
