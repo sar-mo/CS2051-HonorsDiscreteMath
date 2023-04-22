@@ -30,8 +30,8 @@ def generate_cfg_tricky() -> list:
 
 def generate_cfg_logic(atoms : set) -> list:
     """Generates a CFG for the language {s : s is a valid logical expression}
-        The alphabet is the set of atoms, and the operators are "not", "and", "or", "implies", "iff", "(", ")", 'True', and 'False'
-        See test cases for examples of the atoms set"""
+        The alphabet is the set of atoms, and the operators are "|", "&", "!", "=>", "<=>", "(", ")", "T", and "F"
+        atoms is a subset of the lowercase alphabet"""
 
 def generate_cfg_english(parts_of_speech : dict) -> list:
     """Generates a CFG for (some subset of) the language {s : s is a valid english sentence}

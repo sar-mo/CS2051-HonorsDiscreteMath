@@ -25,6 +25,8 @@ class TestGenerateGrammar(unittest.TestCase):
             "pronoun": {"he", "she", "they", "it"},
             "conjunction": {"and", "or", "but"}
             }
+        # make proper nouns lowercase for easier matching
+        self.parts_of_speech["proper_noun"] = {name.lower() for name in self.parts_of_speech["proper_noun"]}
     
     def test_generate_cfg_example(self):
         cfg = generate_cfg_example()
@@ -41,7 +43,6 @@ class TestGenerateGrammar(unittest.TestCase):
             parser.run(string)
             derivations = parser.get_completes()
             assert len(derivations) == 0, string
-
 
     def test_generate_cfg_binary(self):
         cfg = generate_cfg_binary()
@@ -111,8 +112,8 @@ class TestGenerateGrammar(unittest.TestCase):
     def test_generate_cfg_logic(self):
         cfg = generate_cfg_logic({'p', 'q'})
         grammar = earleyparser.Grammar(cfg)
-        match_strings = ["(p and q)"] # enter your own strings here
-        non_match_strings = ["()", "(or)"] # enter your own strings here
+        match_strings = ["(p&q)"] # enter your own strings here
+        non_match_strings = ["()", "(|)"] # enter your own strings here
         for string in match_strings:
             parser = earleyparser.Parser(grammar)
             parser.run(string)
