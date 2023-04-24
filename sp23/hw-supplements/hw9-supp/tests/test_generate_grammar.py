@@ -13,8 +13,8 @@ import earleyparser
 class TestGenerateGrammar(unittest.TestCase):
     def setUp(self) -> None:
         self.parts_of_speech = {
-            "singular_noun": {"dumbbell", "barbell", "ab roller", "treadmill"},
-            "plural_noun": {"dumbbells", "barbells", "ab rollers", "treadmills"},
+            "singular_noun": {"dumbbell", "barbell", "ab-roller", "treadmill"},
+            "plural_noun": {"dumbbells", "barbells", "ab-rollers", "treadmills"},
             "proper_noun": {"Reese", "Paul", "Sofia", "Saloni", "Ananya", "Ron"},
             "intransitive verb": {"exercise", "run", "swim", "deadlift", "bench"},
             "transitive verb": {"lift", "carry", "deadlift", "bench"},
