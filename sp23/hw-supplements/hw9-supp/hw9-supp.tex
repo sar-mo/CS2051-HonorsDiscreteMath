@@ -196,7 +196,7 @@ Let's motivate this section by recalling some explication from a prior supplemen
         \vspace{3mm}In general, an RNA string can fold into a lollipop shape if it can be written as $xyz$, where $x$ and $z$ contain at least two characters each, $y$ contains at least four characters, and the characters of $x$ match up with those of $z^{R}$ (the reverse of $z$), in the sense that that corresponding pairs of letters fall in the set $\{(A, U), (U, A), (C, G), (G, C)\}$. Can you find a CFG to successfully accept such strings?
 
 \subsection*{Induction vs Recursion}
-    As a side note, you might be wondering why we introduced recursion in this supplement, when the current focus of the course this week is induction. This is because the two are actually deeply intertwined. \textbf{Induction is often used to prove the validity of recursive models}.
+    As a side note, you might be wondering why we introduced recursion in this supplement, when the current focus of the course this week is induction. This is because the two are actually deeply intertwined. \textbf{Induction is often used to prove the validity of recursive models}\footnote{This is why computer scientists learn induction. Anytime you want to formally prove a recursive algorithm, the default method is to use induction.}.
 
     \vspace{2mm}
     For example, let's try to prove Example 1 using induction. We wish to prove that $$L = L(G),$$ where $L(G)$ is the language of $G$. We do so in two parts.
