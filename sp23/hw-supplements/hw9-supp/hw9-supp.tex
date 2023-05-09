@@ -12,9 +12,6 @@
     urlcolor=black!20!BurntOrange,
     }
 
-% strikethrough
-\usepackage{soul}
-
 % Inputting Python code
 \usepackage[dvipsnames]{xcolor}
 \definecolor{textblue}{rgb}{.2,.2,.7}
@@ -251,14 +248,14 @@ Let's motivate this section by recalling some explication from a prior supplemen
     Even English can be (somewhat) modeled as a context-free grammar. In this section, we provide a brief overview of such a blueprint.
     
     \vspace{2mm}
-    Consider the following sentence:$$\text{``The jet black cat sat on the mat."}$$ This simple sentence contains a subject (``cat") and a predicate (``sat on the mat"), which are both necessary components for a complete sentence in English. However, English also allows for more complex structures. For example, $$\text{``The \underline{very} jet black cat sat on the mat."}$$ In this case, we have incorporated the adverb "very" while maintaining the sentence's validity. No worries, right? Simply adding a rule to allow an adverb before adjectives should suffice to handle this situation. However, the situation is more nuanced, as it appears that we can insert an indefinite number of adjectives without compromising the sentence's syntactical integrity. The sentence $$\text{``The very very very very very jet black cat sat on the mat"}$$ is still completely valid, even if it's impractical. This is a form of “recursion” in English -- enabled by our ability to multiply meanings by a kind of mental recycling of structures, and CFGs are a perfect candidate to represent such structures.
+    Consider the following sentence:$$\text{``The jet black cat sat on the mat."}$$ This simple sentence contains a noun phrase (``The jet black cat") and a predicate (``sat on the mat"), which are both necessary components for a complete sentence in English. However, English also allows for more complex structures. For example, $$\text{``The \underline{very} jet black cat sat on the mat."}$$ In this case, we have incorporated the adverb "very" while maintaining the sentence's validity. No worries, right? Simply adding a rule to allow an adverb before adjectives should suffice to handle this situation. However, the situation is more nuanced, as it appears that we can insert an indefinite number of adjectives without compromising the sentence's syntactical integrity. The sentence $$\text{``The very very very very very jet black cat sat on the mat"}$$ is still completely valid, even if it's impractical. This is a form of “recursion” in English -- enabled by our ability to multiply meanings by a kind of mental recycling of structures, and CFGs are a perfect candidate to represent such structures.
 
     \vspace{2mm}
     Even entire sentences can be expressed using conjunctions, as in the following: 
     $$\underbrace{\text{The cat sat on the mat}}_{\text{sentence}}\text{ and }\underbrace{\text{the dog sat on the log}}_{\text{sentence}}.$$ 
 
     \vspace{2mm}
-    While these simple examples provide a cursory introduction, further resources should be consulted to gain a deeper understanding of the complex syntactical structures needed for the English language (and to complete the implementation requirements). The following set of \href{http://www.cs.columbia.edu/~mcollins/cs4705-spring2020/slides/parsing1.pdf}{slides} and \href{http://faculty.washington.edu/cicero/370syntax.htm}{exposition} should be sufficient.
+    While these simple examples provide a cursory introduction, further resources should be consulted to gain a deeper understanding of the complex syntactical structures needed for the English language (and to complete the implementation requirements). The following set of \href{http://www.cs.columbia.edu/~mcollins/cs4705-spring2020/slides/parsing1.pdf}{slides} and \href{http://faculty.washington.edu/cicero/370syntax.htm}{exposition} should be sufficient. If you are rather fond of visual learning, there are lots of \href{https://www.youtube.com/watch?v=n1zpnN-6pZQ}{videos} and \href{https://www.youtube.com/playlist?list=PLhcpIWud3uA8A-ImaUfWSSE-P-SuTT1Jn}{playlists} on the subject.
 
 % \vspace{-2mm}
 \begin{tcolorbox}[enhanced,interior style={top color=Dandelion!20,bottom color=Dandelion!30}]
@@ -280,22 +277,20 @@ Let's motivate this section by recalling some explication from a prior supplemen
             "adverb": {"quickly", "slowly", "eagerly", "steadily", "loudly",...},
             "preposition": {"in", "on", "with", "at", "from", "over", "under",...},
             "article": {"the", "a", "an",...},
-            "pronoun": {"he", "she", "they", "it",...},
+            "pronoun": {"he", "she", "they", "his",...},
             "conjunction": {"and", "or", "but",...}
             }
             \end{lstlisting}
             \textbf{For full credit, your CFG must be able to generate sentences of the following structures (ignoring tense, spaces, punctuation and capitalization):}
             \begin{itemize}
+                \item The man swims.
                 \item The trainer carried the dumbbells.
                 \item She ran on the treadmill quickly and enthusiastically.
                 \item They exercised with the ab-roller and the jump-rope.
-                \item The man swims.
                 \item Reese gave her bar to Paul.
                 \item Ron ate his cold, delicious protein shake.
                 \item The very extremely tall, intelligent woman deadlifted.
                 \item The motivated fellow lifted the weights, but the unmotivated fellow dropped them.
-                \item \st{With the ab roller, you can strengthen your core.}
-                \item \st{A fit and healthy lifestyle is a worthy goal to pursue.}
             \end{itemize}
 
             Note: This CFG also does not have to generate semantically correct sentences. For example, since we did not distinguish between common and proper nouns, it is possible to generate the sentence ``She benched Saloni enthusiastically," which semantically does not make sense.

@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+% title
+\title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Homework 8 Supplement}
+\author{Sean Peng\footnote{Solutions were published with the permission of the student.}}
+\date{}
+
+\usepackage{tcolorbox}
+
+\begin{document}
+
+\maketitle
+
+\section*{Question 1}
+    \textit{(Warm-up)} The concept of induction is often compared to the domino analogy. It starts with the assumption that the first domino falls, and from there, we can infer that if the $n$th domino falls, then the $(n + 1)$th domino will also fall. This leads to the eventual falling of all the dominoes. But what if the dominoes fell in the opposite direction? 
+    
+    \vspace{2mm}
+    Suppose we have proven the following facts with respect to some predicate $P(n)$:
+    \begin{gather}
+        P(1) \\
+        \forall n \in \mathbb{N}^{+}, P(n) \implies P(n - 1) \\
+        \forall n \in \mathbb{Z}, P(n) \implies P(kn)
+    \end{gather}
+    Let $k$ be an integer such that $|k| > 1$. Prove that $(\forall n \in \mathbb{N})(P(n))$.
+\begin{tcolorbox}
+        I proceed by weak induction to prove that $P(n)$ is true for all $n \in \mathbb{N}$.
+
+        \medskip
+        \textsc{Base Case:} $P(1)$ is true because it is given. $P(0)$ is true because using Fact (2), $P(1) \rightarrow P(0)$. 
+
+        \medskip
+        \vspace{2mm}
+        \textsc{Inductive Hypothesis:} Now let $m \geq 1, m \in \mathbb{N}$ such that $P(m)$ is true. 
+        
+        \medskip
+        \vspace{2mm}
+        \textsc{Inductive Step:} We now show that $P(m + 1)$ is true. \\
+        Since $P(m)$ is true by the Inductive Hypothesis, using Fact (3), $P(km)$ is also true. Using Fact (3) again, $P(k^2m)$ is true. We can rewrite this as $P(m + (k^2 - 1)m)$. 
+
+        \medskip
+       Since $m \geq 1$ and $(k^2 - 1) > 0$, we know that $m + (k^2 - 1)m \in \mathbb{N}^+$. Therefore, we can apply Fact (2), so $P(m + (k^2 - 1)m - 1)$ is true. Using Fact (2) again, we know that $P(m + (k^2 - 1)m - 2)$ is also true, and so on. We continuously apply Fact (2) until we reach the fact that $P(m + (k^2 - 1)m - ((k^2-1)m-1))$ is true, which simplifies to $P(m + 1)$. We have shown that $P(m + 1)$ is true if $P(m)$ is true. This completes the inductive step.
+
+
+        \vspace{2mm}
+        \textsc{Conclusion:} Therefore by induction, for all $n \in \mathbb{N}$, $P(n)$ is true.
+\end{tcolorbox}
+
+\section*{Question 2 }
+    \textit{(Brito)} Let $S=\{s_1,s_2,\ldots, s_{2n-1}\}$ natural numbers, where $n=2^k>1$. Show that one can choose a subset $S'\subset S$ of cardinality $|S'|=n$ such that the sum of the elements in $S'$ is a multiple of $n$.
+    \begin{tcolorbox}
+        Let $P(k)$ be the statement $$\text{Any set $S$ of $2n - 1$ natural numbers has a subset of $n$ elements whose sum is a multiple of $n$}$$
+        where $n = 2^k > 1$. I proceed by weak induction to prove that $P(k)$ is true for all $k \in \mathbb{N}^+$.\\
+        
+        \medskip
+        \textsc{Base Case:} We first prove $P(1)$ is true. \\
+        In this case, $|S|= 2^{1 + 1} - 1 = 3$. For any set with 3 natural numbers, we can pick two with the same parity. Their sum will be a multiple of 2. Therefore, $P(1)$ is true. This completes the base case.
+
+        \medskip
+        \vspace{2mm}
+        \textsc{Inductive Hypothesis:} Now let $j \in \mathbb{N}^{+}$ such that $P(j)$ is true.
+
+        \medskip
+        \vspace{2mm}
+        \textsc{Inductive Step:} We now show that $P(j + 1)$ is true.
+        
+        \medskip
+        First, we split the set with $2^{j+2} - 1$ elements into two sets with $2^{j+1} - 1$ elements and one set with 1 element. By the Inductive Hypothesis, for each of the sets with $2^{j+1} - 1$ elements, we can choose a subset of $2^j$ elements whose sum is a multiple of $2^j$. The number of elements that are not in either of the two chosen subsets is $2^{j+2} - 1 - 2^j - 2^j = 2^{j+1} - 1$. Again, by the Inductive Hypothesis, from these remaining elements, we can choose a subset of $2^j$ elements whose sum is a multiple of $2^j$.
+
+        \medskip
+        A multiple of $2^j$ must be congruent to either 0 or $2^j$ modulo $2^{j+1}$. We have three subsets of $2^j$ elements whose sum is a multiple of $2^j$. This means there must be at least two subsets whose sums are congruent modulo $2^{j+1}$. As stated before, these two subsets have congruent sums that are also either congruent to 0 or $2^j$ modulo $2^{j+1}$. Therefore, the union of these two subsets is a subset with $2^{j + 1}$ elements whose sum is a multiple of $2^{j+1}$, and we choose this as $S'$. We have shown that $P(j + 1)$ is true if $P(j)$ is true. This completes the inductive step.
+
+        \vspace{2mm}
+        \textsc{Conclusion:} Therefore by induction, for all $k \in \mathbb{N}^+$, $P(k)$ is true.
+\end{tcolorbox}
+
+% \section*{Sample Answer Format}
+
+% \begin{tcolorbox}
+%         Let $P(n)$ be the statement $$\text{insert statement here}.$$ \\
+%         \textsc{Base Case:} We first prove $P(\cdot)$ is true.
+
+%         \vspace{2mm}
+%         \textsc{Inductive Hypothesis:} Now let $n \in \mathbb{N}$ such that $P(n)$\footnote{For strong induction, this would be $P(\cdot), P(\cdot + 1), \dots, P(n)$} is true. \dots. Therefore, $P(n + 1)$ is true as well.
+
+%         \vspace{2mm}
+%         \textsc{Conclusion:} Therefore by induction, for all $n \in \{\mathbb{N}, \mathbb{Z}, \text{etc}\}$, $P(n)$ is true.
+% \end{tcolorbox}
+
+\end{document}
