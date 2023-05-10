@@ -1,5 +1,4 @@
-# CS 2051 Spring 2023
-# HW3 Supplement Part 2: Satisfiability
+# CS 2051 Spring 2023 - HW3 Supplement Part 2: Satisfiability
 # author - Sarthak Mohanty
 # collaborators - N/A
 
@@ -22,13 +21,10 @@ def brute_force_SAT_solver(proposition: str) -> dict:
         A satisfying assignment for a given set of clauses, or None if no such assignment exists.
         
     Examples:
-        >>> brute_force_SAT_solver((p or q) and ((not p) or (not q))
+        >>> brute_force_SAT_solver("(p or q) and ((not p) or (not q)")
         {p: True, q: False}
     """
-    for row in truth_table(proposition):
-        if row[1]:
-            return row[0]
-    return None
+    return next((row[0] for row in truth_table(proposition) if row[1]), None)
 
 def walkSAT_solver(proposition: str, p: float, maxFlips: int) -> dict:
     """Finds a satisfying assignment for a given set of clauses using the WalkSAT algorithm (see instructions for details)
@@ -51,10 +47,11 @@ def walkSAT_solver(proposition: str, p: float, maxFlips: int) -> dict:
 
     # perform maxFlips iterations:
     for _ in range(maxFlips):
+        # if the model satisfies the proposition, return the assignment
         if evaluate(proposition, random_assignment.copy()):
             return random_assignment
 
-        # find number of satisfying clauses and unsatisfied clauses
+        # find satisfied clauses and unsatisfied clauses
         unsatisfied_clauses = []
         satisfied_clauses = []
         for clause in proposition.split(' and '):
@@ -72,16 +69,13 @@ def walkSAT_solver(proposition: str, p: float, maxFlips: int) -> dict:
             var = random.choice(clause_vars)
             random_assignment[var] = not random_assignment[var]
 
-        # with probability 1-p, flip a variable in the clause which will result in the fewest previously satisfied clauses to be unsatisfied
+        # otherwise (probability 1-p), flip a variable in the clause which will result in the fewest previously satisfied clauses to be unsatisfied
         else:
             min_num_sat_to_unsat = float('inf')
             min_var = None
             for var in clause_vars:
                 random_assignment[var] = not random_assignment[var] # flip the variable
-                num_sat_to_unsat = 0
-                for clause in satisfied_clauses:
-                    if not evaluate(clause, random_assignment.copy()):
-                        num_sat_to_unsat += 1
+                num_sat_to_unsat = sum(not evaluate(clause, random_assignment) for clause in satisfied_clauses)
                 if num_sat_to_unsat < min_num_sat_to_unsat:
                     min_num_sat_to_unsat = num_sat_to_unsat
                     min_var = var
@@ -107,7 +101,6 @@ def pySAT_solver(proposition: str) -> list:
     from pysat.formula import CNF
     from pysat.solvers import Solver
 
-    # print(parsed)
     cnf = CNF(from_clauses= proposition)
 
     # create a SAT solver for this formula:

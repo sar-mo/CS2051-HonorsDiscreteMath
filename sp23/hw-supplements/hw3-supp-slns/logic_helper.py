@@ -23,7 +23,6 @@ def implies(p, q):
 def iff(p, q):
     return (p |implies| q) and (q |implies| p)
 
-
 def extract_variables(proposition: str):
     """Extracts variables from a proposition.
 

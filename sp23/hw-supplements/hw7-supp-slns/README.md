@@ -1,0 +1,2 @@
+Hi the autograder is not the best for this supplement (There are a lot of numerical nuances for stuff like test_point_multiplication and efficiency is hard to deterministically measure), so I just curved everyone 6 points to compensate.
+In the future, I would make test_point_addition and test_point_multiplication optional.

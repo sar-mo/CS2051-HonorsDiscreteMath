@@ -68,20 +68,18 @@ class TestScheduler(unittest.TestCase):
 
 
     def test_topological_sort(self):
-        with mock.patch('sys.stdout', new = StringIO()) as std_out:
-            for i in range(len(self.posets)):
-                student_topological_sort = topological_sort(*self.posets[i])
-                self.assertTrue(self.is_topological_sort(*self.posets[i], student_topological_sort), msg=f"Topological sort failed")
+        for i in range(len(self.posets)):
+            student_topological_sort = topological_sort(*self.posets[i])
+            self.assertTrue(self.is_topological_sort(*self.posets[i], student_topological_sort), msg=f"Topological sort failed")
 
     def test_generate_schedule(self):
-        with mock.patch('sys.stdout', new = StringIO()) as std_out:
-            for i in range(len(self.posets)):
-                for j in range(1, len(self.posets[i][0])):
-                    student_schedule = generate_schedule(*self.posets[i], j)
-                    flattened_student_schedule = [item for sublist in student_schedule for item in sublist]
+        for i in range(len(self.posets)):
+            for j in range(1, len(self.posets[i][0])):
+                student_schedule = generate_schedule(*self.posets[i], j)
+                flattened_student_schedule = [item for sublist in student_schedule for item in sublist]
 
-                    self.assertTrue(self.is_topological_sort(*self.posets[i], flattened_student_schedule), msg=f"schedule not valid")
-                    self.assertTrue(self.is_optimal_schedule(*self.posets[i], j, student_schedule), msg=f"schedule not optimal")
+                self.assertTrue(self.is_topological_sort(*self.posets[i], flattened_student_schedule), msg=f"schedule not valid")
+                self.assertTrue(self.is_optimal_schedule(*self.posets[i], j, student_schedule), msg=f"schedule not optimal")
 
     def test_generate_schedule_hidden(self):
         with mock.patch('sys.stdout', new = StringIO()) as std_out:

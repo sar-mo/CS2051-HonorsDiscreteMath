@@ -132,9 +132,9 @@ def partition(elements: set, equiv_relation: bool) -> list[set]:
         >>> partition({1, 2, 3, 4, 5, 6}, lambda x, y: x % 2 == y % 2)
         [{1, 3, 5}, {2, 4, 6}]
     '''
-    partitions = [] # Found partitions
+    partitions = []
     for e in elements: # Loop over each element
-        found = False # Note it is not yet part of a know partition
+        found = False # It is not yet part of a known partition
         for p in partitions:
             if equiv_relation(e, list(p)[0]): # Found a partition for it!
                 p.add(e)
@@ -144,5 +144,10 @@ def partition(elements: set, equiv_relation: bool) -> list[set]:
             partitions.append(set([e]))
     return partitions
 
-    # # can also do it in one (messy, unreadable) line using lambda functions
-    # return list(map(set, set(map(frozenset,[set(filter(lambda x: equiv_relation(x, y), elements)) for y in elements]))))
+    # # shorter solution
+    # partitions = []
+    # for e in elements:
+    #     partitions.append(set([x for x in elements if equiv_relation(e, x)]))
+    # return partitions
+
+print(partition({1, 2, 3, 4, 5, 6}, lambda x, y: x % 2 == y % 2))
