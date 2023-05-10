@@ -6,14 +6,14 @@ The following projects were completed by CS 2051 students in Spring 2023, each d
 
 Here are a few selected projects:
 
-1. **Group 2** showcased an excellent physical application of their theoretical concepts. Their dedication was evident, as I even saw them on campus multiple times developing and refining their antennas!
+1. **Group 2** showcased an excellent physical application of their discoveries. Their dedication was evident, as I even saw them on campus multiple times developing and refining their antennas!
 
-2. **Group 8** directly applied topics we learned in class to their project (even if they didn't show their code in the paper :|). Their utilization of multithreading was impressive!
+2. **Group 8** was an example of a more theoretical paper. Their Julia code was impressive (even if they didn't display it in the paper :|)
 
 3. **Group 15's** paper was dense and some sections took considerable time to get through, but taught me a lot in a short amount of space. Also, I finally understand what a Y combinator is!
 
 4. **Group 17's** captivating topic was paired with flawless presentation slides and delivery.
 
-> **Important:** The selection of these projects does not indicate any preferential judgement. All the projects this semester were exceptional, employing distinct methods and offering innovative insights, reinforcing the fact that _**there's no one-size-fits-all solution in computer science**_.
+> **Important:** The selection of these projects does not indicate any preferential judgement. All the projects this semester were exceptional, employing distinct methods and offering innovative insights, _**reinforcing the fact that there's no one-size-fits-all solution in computer science**_.
 
 Again, every presentation this semester was fantastic, and I wish I could highlight all of them! However, to foster creativity in future terms, we must refrain from posting all the projects here.
