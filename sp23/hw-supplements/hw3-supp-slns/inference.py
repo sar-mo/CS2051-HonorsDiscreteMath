@@ -5,8 +5,8 @@
 # author - your name here
 # collaborators - list collaborators here
 
-# NOTE (s):
-# You must use small single letters in [p-z] for your variable names followed by an (optional) number, eg. p, q3, r22
+# NOTE(s):
+# Propostional variables are denoted by a single lowercase letter [a-z] followed by an (optional) number, eg. p, q3, r22
 # We strongly discourage the use of GitHub Copilot or ChatGPT to complete this assignment. It will be considered cheating (at least for this semester).
 
 from logic_helper import *

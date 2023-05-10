@@ -127,11 +127,12 @@ class TestGenerateGrammar(unittest.TestCase):
 
     def test_generate_cfg_english(self):
         cfg = generate_cfg_english(self.parts_of_speech)
-        for sentence in self.sentences:
-            grammar = earleyparser.Grammar(cfg)
+        grammar = earleyparser.Grammar(cfg)
+        parser = earleyparser.Parser(grammar)
+        match_strings = ["the trainer carry the dumbbells"] # enter your own strings here
+        match_strings = [string.replace(" ", "") for string in match_strings]
+        for string in match_strings:
             parser = earleyparser.Parser(grammar)
-            match_strings = ["the trainer carry the dumbbells"] # enter your own strings here
-            match_strings = [string.replace(" ", "") for string in match_strings]
-            parser.run(sentence)
+            parser.run(string)
             derivations = parser.get_completes()
-            assert len(derivations) > 0, sentence
+            assert len(derivations) > 0, string

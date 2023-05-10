@@ -73,7 +73,7 @@ def walkSAT_solver(proposition: str, p: float, maxFlips: int) -> dict:
             # YOUR CODE HERE
             raise NotImplementedError
 
-        # with probability 1-p, flip a variable in the clause which will result in the fewest previously satisfied clauses to be unsatisfied
+        # otherwise (probability 1-p), flip a variable in the clause which will result in the fewest previously satisfied clauses to be unsatisfied
             # YOUR CODE HERE
             raise NotImplementedError
     return None

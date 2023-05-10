@@ -7,7 +7,7 @@ Sarthak will be handling all the coding supplements. Nithya will be handling all
 p.s. sorry for so many commits, right now this repository is connected with overleaf through a bridge that doesn't currently support branching.
 
 
-## Course Schedule (work in progress)
+## Course Schedule
 
 | Week       | Assignments | Relevant Files
 | :------------- |:-------------| :---
@@ -23,7 +23,7 @@ p.s. sorry for so many commits, right now this repository is connected with over
 | Week 10       | hw7-supp due Friday |  <br> [Homework 7 Supplement](hw-supplements/hw7-supp/): Elliptic Curve Cryptography
 | Week 11       | Spring Break | 
 | Week 12       | Exam 3 <br> hw8-supp due Friday  <br>Project Draft due Sunday after hw8-supp due|  <br> [Homework 8 Supplement](hw-supplements/hw8-supp/): Induction+ (math only)
-| Week 13       | hw9-supp due Friday 11:59pm| [Homework 9 Supplement](hw-supplements/hw9-supp/): Linguistic Theory and Context-Free Grammar
-| Week 14       | Exam 4 <br> hw10-supp due Friday 11:59pm <br> Project Paper due Suunday| [Homework 10 Supplement](hw-supplements/hw10-supp/): Combinatorical Games
+| Week 13       | hw9-supp due Friday 11:59pm| [Homework 9 Supplement](hw-supplements/hw9-supp/): Models of Computation, Syntatical Structures
+| Week 14       | Exam 4 <br> hw10-supp due Friday 11:59pm <br> Project Paper due Suunday|
 | Week 15      | Final Project Presentations |
 | Week 16      | All Grades Finalized |

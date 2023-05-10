@@ -31,7 +31,6 @@ def implies(p, q):
 def iff(p, q):
     return (p |implies| q) and (q |implies| p)
 
-
 def extract_variables(proposition: str) -> list:
     """Extracts variables from a proposition.
 
@@ -208,14 +207,14 @@ def model_fitting(truth_table: list) -> str:
     
     Note: 
         If the truth table is of the form [({}, True)], then return 'True'. 
-        If the truth table is of the form [({}, True)], then return 'False'.
+        If the truth table is of the form [({}, False)], then return 'False'.
     """
     # clean but a little advanced solution
     # assert len(truth_table) > 0
     if len(truth_table) == 1:
         return str(truth_table[0][1])
-    collect = lambda clause: " and ".join(key if clause[key] else f"(not {key})" for key in clause)
-    return " or ".join(map(lambda row: f"({collect(row[0])})", # this generates the clauses
+    collect_clause = lambda assignment: " and ".join(var if assignment[var] else f"(not {var})" for var in assignment)
+    return " or ".join(map(lambda row: f"({collect_clause(row[0])})", # this generates the clauses
                            filter(lambda row: row[1], truth_table) # for each row that is True
                            )
                       )
@@ -237,5 +236,3 @@ def model_fitting(truth_table: list) -> str:
     #         prop = prop[:-5] # remove last ' and '
     #         prop += ')'
     # return prop
-
-# *********************** END ***************************

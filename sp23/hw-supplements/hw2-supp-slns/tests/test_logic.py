@@ -3,10 +3,10 @@
 # Instructor: Gerandy Brito
 # author: Sarthak Mohanty
 
-import logic_solutions as sol
 from logic import *
 
 import unittest
+import json
 
 class TestLogic(unittest.TestCase):
     def setUp(self):
@@ -53,8 +53,8 @@ class TestLogic(unittest.TestCase):
         prop27 = 'True and p'
         prop28 = '(False) or q'
         prop29 = '(not v) and (True)'
-        # takes long time for test_model_fitting
-        prop30 = 'p or q or r or s or t or u or v or w or x or y or z'
+
+        prop30 = 'p or q or r or s or t or u or v or w or x'
 
         self.props = [prop1, prop2, prop3, prop4, prop5,
                         prop6, prop7, prop8, prop9, prop10,
@@ -62,28 +62,34 @@ class TestLogic(unittest.TestCase):
                         prop16, prop17, prop18, prop19, prop20,
                         prop21, prop22, prop23, prop24, prop25,
                         prop26, prop27, prop28, prop29, prop30]
+        self.solutions = json.load(open('tests/logic_expected_results.json', 'r'))
         self.longMessage = False
         
     def test_count_satisfying(self):
-        for prop in self.props:
-            self.assertEqual(count_satisfying(prop), sol.count_satisfying(prop), msg='count_satisfying failed')
+        count_satisfying_solution = self.solutions['count_satisfying']
+        for i, prop in enumerate(self.props):
+            self.assertEqual(count_satisfying(prop), count_satisfying_solution[i], msg='count_satisfying failed')
  
     def test_are_equivalent(self):
         pairs = [(prop1, prop2) for i, prop1 in enumerate(self.props) for prop2 in self.props[i + 1:]]
-        for prop1, prop2 in pairs:
-            self.assertEqual(are_equivalent(prop1, prop2), sol.are_equivalent(prop1, prop2), msg='are_equivalent failed')
+        are_equivalent_solution = self.solutions['are_equivalent']
+        for i, (prop1, prop2) in enumerate(pairs):
+            self.assertEqual(are_equivalent(prop1, prop2), are_equivalent_solution[i], msg='are_equivalent failed')
 
     def test_is_tautology(self):
-        for prop in self.props:
-            self.assertEqual(is_tautology(prop), sol.is_tautology(prop), msg='improper tautology evaluation')
+        is_tautology_solution = self.solutions['is_tautology']
+        for i, prop in enumerate(self.props):
+            self.assertEqual(is_tautology(prop), is_tautology_solution[i], msg='improper tautology evaluation')
         
     def test_is_contradiction(self):
-        for prop in self.props:
-            self.assertEqual(is_contradiction(prop), sol.is_contradiction(prop), msg='improper contradiction evaluation')
+        is_contradiction_solution = self.solutions['is_contradiction']
+        for i, prop in enumerate(self.props):
+            self.assertEqual(is_contradiction(prop), is_contradiction_solution[i], msg='improper contradiction evaluation')
     
     def test_is_contingency(self):
-        for prop in self.props:
-            self.assertEqual(is_contingency(prop), sol.is_contingency(prop), msg='improper contingency evaluation')
+        is_contingency_solution = self.solutions['is_contingency']
+        for i, prop in enumerate(self.props):
+            self.assertEqual(is_contingency(prop), is_contingency_solution[i], msg='improper contingency evaluation')
 
     def test_model_fitting(self):
         for prop in self.props:
