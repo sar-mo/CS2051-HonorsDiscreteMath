@@ -2,7 +2,7 @@
 # instructor: Gerandy Brito
 # creator - Sarthak Mohanty
 
-# author - Sartha Mohanty
+# author - Sarthak Mohanty
 # collaborators - N/A
 
 # NOTE: Use [] to describe the empty string
@@ -71,33 +71,37 @@ def generate_cfg_rna():
 def generate_cfg_tricky():
     """Generates a CFG for the language {1^i 0^j : 2i != 3j + 1}"""
     cfg = []
-    cfg.append(('S', ['A']))
-    cfg.append(('S', ['B']))
+
+    # # # See generate_cfg_tricky_sln.pdf for explanation
     
-    # A: 2i < 3j + 1
-    cfg.append(('A', 'E'))
-    cfg.append(('A', 'F'))
-    cfg.append(('A', 'H'))
-    cfg.append(('E', ['1', '1', '1', 'E', '0', '0']))
-    cfg.append(('E', ['E', '0']))
-    cfg.append(('E', []))
-    cfg.append(('F', ['1', '1', '1', 'F', '0', '0']))
-    cfg.append(('F', ['1', '0']))
-    cfg.append(('F', ['F', '0']))
-    cfg.append(('H', ['1', '1', '1', 'H', '0', '0']))
-    cfg.append(('H', ['H', '0']))
-    cfg.append(('H', ['1', '1', '0', '0']))
+    # Part 1 : 2i > 3j + 1
+    cfg.append(('S', ['S1']))
+    cfg.append(('S', ['S2']))
 
+    cfg.append(('S1', ['1', '1', '1', 'S1', '0', '0']))
+    cfg.append(('S1', ['1', 'S1']))
+    cfg.append(('S1', ['1']))
 
-    # B 2i > 3j + 1
-    cfg.append(('B', ['C']))
-    cfg.append(('B', ['D']))
-    cfg.append(('C', ['1', '1', '1', 'C', '0', '0']))
-    cfg.append(('C', ['1', 'C']))
-    cfg.append(('C', ['1']))
-    cfg.append(('D', ['1', '1', '1', 'D', '0', '0']))
-    cfg.append(('D', ['1', 'D']))
-    cfg.append(('D', ['1', '1', '1', '0']))
+    cfg.append(('S2', ['1', '1', '1', 'S2', '0', '0']))
+    cfg.append(('S2', ['1', 'S2']))
+    cfg.append(('S2', ['1', '1', '1', '0']))
+
+    # Part 2: 2i < 3j + 1
+    cfg.append(('S', ['S3']))
+    cfg.append(('S', ['S4']))
+    cfg.append(('S', ['S5']))
+
+    cfg.append(('S3', ['1', '1', '1', 'S3', '0', '0']))
+    cfg.append(('S3', ['S3', '0']))
+    cfg.append(('S3', []))
+
+    cfg.append(('S4', ['1', '1', '1', 'S4', '0', '0']))
+    cfg.append(('S4', ['1', '0']))
+    cfg.append(('S4', ['S4', '0']))
+
+    cfg.append(('S5', ['1', '1', '1', 'S5', '0', '0']))
+    cfg.append(('S5', ['S5', '0']))
+    cfg.append(('S5', ['1', '1', '0', '0']))
     
     return cfg
 
@@ -108,7 +112,7 @@ def generate_cfg_logic(atoms):
     # Generate atoms
     for atom in atoms:
         cfg.append(('S', [atom]))
-    cfg.append(('S', ['T']))
+    cfg.append(('S', ['T'])) # did not use autograder for this function, so not sure if T is a valid nonterminal here
     cfg.append(('S', ['F']))
 
     # Generate operators
@@ -127,10 +131,8 @@ def generate_cfg_logic(atoms):
 def generate_cfg_english(parts_of_speech):
     """Generates a CFG for (some subset of) the language {s : s is a valid English sentence}"""
     cfg = []
-    
-    # # union together singular_noun, plural_noun, proper_noun, pronoun
-    # nouns = parts_of_speech['singular_noun'] | parts_of_speech['plural_noun'] | parts_of_speech['proper_noun'] | parts_of_speech['pronoun']
 
+    # # # See generate_cfg_english_sln.pdf for explanation
 
     # Define a mapping from the part of speech to the abbreviation used in the context-free grammar
     part_of_speech_mapping = {
@@ -184,11 +186,4 @@ def generate_cfg_english(parts_of_speech):
     cfg.append(('PP', ['PREP', 'NP']))
     cfg.append(('PP', []))
 
-    return cfg
-
-
-def generate_cfg_test():
-    cfg = []
-    cfg.append(('S', ['1', '1', '0']))
-    cfg.append(('S', ['1', '1', '1', 'S', '0', '0']))
     return cfg

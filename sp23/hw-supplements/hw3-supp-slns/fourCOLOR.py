@@ -16,7 +16,6 @@ import random
 import SAT
 
 random.seed(2023)
-SIZE = 1
 DUMMY_POINTS = [[999, 999], [-999, 999], [999, -999], [-999, -999]] # used to ensure that all regions are bounded
 
 # ********************** Helper functions, DO NOT MODIFY ********************** #
@@ -24,7 +23,7 @@ DUMMY_POINTS = [[999, 999], [-999, 999], [999, -999], [-999, -999]] # used to en
 def is_point_in_region(point):
     '''Returns True if the point is in the region, False otherwise.'''
     x, y = point
-    return 0 < x < SIZE and 0 < y < SIZE
+    return 0 < x < 1 and 0 < y < 1
 
 def draw_blank_voronoi_diagram(num_points=15):
     '''Draws a blank Voronoi diagram with the given number of points.'''
@@ -37,7 +36,7 @@ def draw_blank_voronoi_diagram(num_points=15):
     for i, point in enumerate(points):
         plt.text(*point, str(i), fontsize=200/len(points))
 
-    plt.xlim([0, SIZE]), plt.ylim([0, SIZE])  # fix the range of axes
+    plt.xlim([0, 1]), plt.ylim([0, 1])  # fix the range of axes
     plt.xticks([]), plt.yticks([])  # remove the axis numbers
 
     return vor
