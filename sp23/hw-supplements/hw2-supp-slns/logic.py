@@ -1,6 +1,8 @@
 # CS 2051 Spring 2023
 # HW2 Supplement - Logic Playground
 # creator - Sarthak Mohanty
+
+# author - Sarthak Mohanty
 # collaborators - N/A
 
 # NOTE (s):

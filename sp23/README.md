@@ -27,3 +27,10 @@ p.s. sorry for so many commits, right now this repository is connected with over
 | Week 14       | Exam 4 <br> hw10-supp due Friday 11:59pm <br> Project Paper due Suunday|
 | Week 15      | Final Project Presentations |
 | Week 16      | All Grades Finalized |
+
+To-do:
+Update readme
+Fix tests for hw5-supp-slns
+proposition_parser solutions
+Fix tests for hw7-supp-slns
+Solve extra problems

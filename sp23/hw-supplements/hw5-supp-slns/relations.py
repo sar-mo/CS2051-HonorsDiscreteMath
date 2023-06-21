@@ -24,7 +24,7 @@ Example:
     False
 '''
 def isReflexive(elements: set, relation: set) -> bool:
-    return elements == {} or all((x, x) in relation for x in elements)
+    return all((x, x) in relation for x in elements)
 
         
 
@@ -42,7 +42,7 @@ Example:
     False
 '''
 def isSymmetric(elements: set, relation: set) -> bool:
-    return elements == {} or all((y, x) in relation for x, y in relation)
+    return all((y, x) in relation for x, y in relation)
 
 
 
@@ -60,7 +60,7 @@ Example:
     True
 '''
 def isAntiSymmetric(elements: set, relation: set) -> bool:
-    return elements == {} or all((y, x) not in relation for x, y in relation if x != y)
+    return all((y, x) not in relation for x, y in relation if x != y)
 
 
 
@@ -78,7 +78,7 @@ Example:
     False
 '''
 def isTransitive(elements: set, relation: set) -> bool:
-    return elements == {} or all((x, z) in relation for x, y in relation for q, z in relation if y == q)
+    return all((x, z) in relation for x, y in relation for q, z in relation if y == q)
 
 
 
@@ -143,11 +143,3 @@ def partition(elements: set, equiv_relation: bool) -> list[set]:
         if not found: # Make a new partition for it.
             partitions.append(set([e]))
     return partitions
-
-    # # shorter solution
-    # partitions = []
-    # for e in elements:
-    #     partitions.append(set([x for x in elements if equiv_relation(e, x)]))
-    # return partitions
-
-print(partition({1, 2, 3, 4, 5, 6}, lambda x, y: x % 2 == y % 2))

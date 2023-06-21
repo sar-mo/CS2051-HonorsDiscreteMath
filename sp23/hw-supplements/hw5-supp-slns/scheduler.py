@@ -20,7 +20,6 @@ def topological_sort(elements: set, poset: set) -> list:
     >>> topological_sort({1, 2, 3, 4, 5, 6}, {(1, 2), (2, 4), (3, 4), (4, 5), (5, 6)})
     [1, 3, 2, 4, 5, 6]
     """
-
     result = []
     
     def is_minimal(element):
@@ -56,7 +55,6 @@ def generate_schedule(elements: set, poset: set, num_processors: int) -> list[li
     >>> optimal_scheduling({1, 2, 3, 4, 5, 6}, {(1, 2), (2, 4), (3, 4), (4, 5), (5, 6)}, 2)
     [[1, 3], [2], [4], [5], [6]]
     """
-
     scheduled_tasks = set()
     schedule = list()
 
