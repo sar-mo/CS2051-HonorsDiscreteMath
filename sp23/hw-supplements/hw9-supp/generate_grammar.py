@@ -18,15 +18,19 @@ def generate_cfg_example() -> list:
 
 def generate_cfg_binary() -> list:
     """Generates a CFG for the language {s : s has the same number of 1s and 0s}"""
+    raise NotImplementedError
 
 def generate_cfg_union() -> list:
     """Generates a CFG for the language {a^i b^j c^k : i, j, k \in N and (i = j or i = k)}"""
+    raise NotImplementedError
 
 def generate_cfg_rna() -> list:
     """Generates a CFG for the language {s : s is a valid stem loop rna sequence}"""
+    raise NotImplementedError
 
 def generate_cfg_tricky() -> list:
     """Generates a CFG for the language {1^i 0^j : 2i != 3j + 1}"""
+    raise NotImplementedError
 
 def generate_cfg_logic(atoms : set) -> list:
     """Generates a CFG for the language {s : s is a valid logical expression}
@@ -34,6 +38,7 @@ def generate_cfg_logic(atoms : set) -> list:
         
         Parameters:
             atoms - the set of atomic propositions in the language. Assume atoms is a subset of the lowercase alphabet"""
+    raise NotImplementedError
 
 def generate_cfg_english(parts_of_speech : dict) -> list:
     """Generates a CFG for (some subset of) the language {s : s is a valid english sentence}
@@ -41,3 +46,4 @@ def generate_cfg_english(parts_of_speech : dict) -> list:
         Parameters:
             parts_of_speech - a dictionary mapping parts of speech to lists of words of that part of speech.
             See test cases for examples of parts_of_speech"""
+    raise NotImplementedError
