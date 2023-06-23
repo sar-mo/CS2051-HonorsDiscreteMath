@@ -1,0 +1,1302 @@
+[
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [7867, 6025],
+        "alice_private_key": 9669,
+        "bob_private_key": 5318,
+        "alice_public_key": [3463, 2481],
+        "bob_public_key": [1665, 2219],
+        "shared_secret_key": [9732, 1946],
+        "time_to_crack": {
+            "brute_force": 0.021760940551757812,
+            "bsgs": 0.0006961822509765625
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [5213, 5427],
+        "alice_private_key": 8366,
+        "bob_private_key": 6222,
+        "alice_public_key": [8607, 10070],
+        "bob_public_key": [9625, 1349],
+        "shared_secret_key": [529, 3219],
+        "time_to_crack": {
+            "brute_force": 0.021368741989135742,
+            "bsgs": 0.0006630420684814453
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [5101, 2397],
+        "alice_private_key": 9739,
+        "bob_private_key": 1601,
+        "alice_public_key": [8604, 7985],
+        "bob_public_key": [7603, 4841],
+        "shared_secret_key": [1353, 1214],
+        "time_to_crack": {
+            "brute_force": 0.016473054885864258,
+            "bsgs": 0.0006129741668701172
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [5274, 932],
+        "alice_private_key": 4159,
+        "bob_private_key": 4513,
+        "alice_public_key": [9584, 6483],
+        "bob_public_key": [6153, 5708],
+        "shared_secret_key": [1819, 5635],
+        "time_to_crack": {
+            "brute_force": 0.012631893157958984,
+            "bsgs": 0.0005817413330078125
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [2099, 2233],
+        "alice_private_key": 4875,
+        "bob_private_key": 7401,
+        "alice_public_key": [9805, 9097],
+        "bob_public_key": [1199, 4012],
+        "shared_secret_key": [8263, 4175],
+        "time_to_crack": {
+            "brute_force": 0.017722129821777344,
+            "bsgs": 0.0006301403045654297
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [9775, 6881],
+        "alice_private_key": 4216,
+        "bob_private_key": 618,
+        "alice_public_key": [717, 8861],
+        "bob_public_key": [1239, 6141],
+        "shared_secret_key": [4112, 7026],
+        "time_to_crack": {
+            "brute_force": 0.007032155990600586,
+            "bsgs": 0.0005049705505371094
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [1280, 6804],
+        "alice_private_key": 4275,
+        "bob_private_key": 8072,
+        "alice_public_key": [645, 142],
+        "bob_public_key": [6182, 8814],
+        "shared_secret_key": [485, 8177],
+        "time_to_crack": {
+            "brute_force": 0.017979860305786133,
+            "bsgs": 0.0006232261657714844
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [9796, 7031],
+        "alice_private_key": 2931,
+        "bob_private_key": 446,
+        "alice_public_key": [677, 9182],
+        "bob_public_key": [7982, 4597],
+        "shared_secret_key": [993, 4604],
+        "time_to_crack": {
+            "brute_force": 0.004988193511962891,
+            "bsgs": 0.00048804283142089844
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [122, 7636],
+        "alice_private_key": 10101,
+        "bob_private_key": 650,
+        "alice_public_key": [9131, 5392],
+        "bob_public_key": [3523, 292],
+        "shared_secret_key": [3559, 3255],
+        "time_to_crack": {
+            "brute_force": 0.0156710147857666,
+            "bsgs": 0.0006010532379150391
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [2283, 4839],
+        "alice_private_key": 5809,
+        "bob_private_key": 4066,
+        "alice_public_key": [1964, 4278],
+        "bob_public_key": [9954, 1449],
+        "shared_secret_key": [2346, 2291],
+        "time_to_crack": {
+            "brute_force": 0.01438593864440918,
+            "bsgs": 0.000591278076171875
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [9689, 689],
+        "alice_private_key": 5385,
+        "bob_private_key": 6627,
+        "alice_public_key": [4676, 773],
+        "bob_public_key": [1808, 7537],
+        "shared_secret_key": [4809, 867],
+        "time_to_crack": {
+            "brute_force": 0.017316102981567383,
+            "bsgs": 0.0006206035614013672
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [3621, 1722],
+        "alice_private_key": 8839,
+        "bob_private_key": 1264,
+        "alice_public_key": [9713, 6439],
+        "bob_public_key": [1563, 1888],
+        "shared_secret_key": [1224, 7911],
+        "time_to_crack": {
+            "brute_force": 0.014529228210449219,
+            "bsgs": 0.0005869865417480469
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [1587, 5778],
+        "alice_private_key": 9140,
+        "bob_private_key": 5281,
+        "alice_public_key": [162, 1375],
+        "bob_public_key": [2490, 4221],
+        "shared_secret_key": [3168, 8063],
+        "time_to_crack": {
+            "brute_force": 0.020843982696533203,
+            "bsgs": 0.0006709098815917969
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [4050, 6076],
+        "alice_private_key": 82,
+        "bob_private_key": 8339,
+        "alice_public_key": [8920, 1799],
+        "bob_public_key": [7256, 4286],
+        "shared_secret_key": [359, 6379],
+        "time_to_crack": {
+            "brute_force": 0.012248039245605469,
+            "bsgs": 0.0005400180816650391
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [4665, 1067],
+        "alice_private_key": 9839,
+        "bob_private_key": 1521,
+        "alice_public_key": [1822, 8647],
+        "bob_public_key": [6505, 9562],
+        "shared_secret_key": [1731, 6006],
+        "time_to_crack": {
+            "brute_force": 0.016715049743652344,
+            "bsgs": 0.0006270408630371094
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [5045, 1182],
+        "alice_private_key": 5713,
+        "bob_private_key": 9919,
+        "alice_public_key": [84, 632],
+        "bob_public_key": [8081, 8906],
+        "shared_secret_key": [2961, 7930],
+        "time_to_crack": {
+            "brute_force": 0.0226290225982666,
+            "bsgs": 0.0006971359252929688
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [4144, 5605],
+        "alice_private_key": 8609,
+        "bob_private_key": 8024,
+        "alice_public_key": [9295, 2405],
+        "bob_public_key": [717, 8861],
+        "shared_secret_key": [2964, 5648],
+        "time_to_crack": {
+            "brute_force": 0.023923158645629883,
+            "bsgs": 0.0007011890411376953
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [8752, 3699],
+        "alice_private_key": 7659,
+        "bob_private_key": 8221,
+        "alice_public_key": [8478, 1455],
+        "bob_public_key": [1344, 8286],
+        "shared_secret_key": [89, 6016],
+        "time_to_crack": {
+            "brute_force": 0.022773027420043945,
+            "bsgs": 0.0006878376007080078
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [6968, 4948],
+        "alice_private_key": 3944,
+        "bob_private_key": 5915,
+        "alice_public_key": [8835, 319],
+        "bob_public_key": [1538, 544],
+        "shared_secret_key": [2139, 1677],
+        "time_to_crack": {
+            "brute_force": 0.014238834381103516,
+            "bsgs": 0.0005991458892822266
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [3199, 6713],
+        "alice_private_key": 1927,
+        "bob_private_key": 1153,
+        "alice_public_key": [1932, 1132],
+        "bob_public_key": [4989, 4867],
+        "shared_secret_key": [651, 6336],
+        "time_to_crack": {
+            "brute_force": 0.004464149475097656,
+            "bsgs": 0.00047779083251953125
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [1474, 9707],
+        "alice_private_key": 8338,
+        "bob_private_key": 2118,
+        "alice_public_key": [2000, 8440],
+        "bob_public_key": [7295, 6538],
+        "shared_secret_key": [9692, 2233],
+        "time_to_crack": {
+            "brute_force": 0.015017986297607422,
+            "bsgs": 0.0005869865417480469
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [8562, 7670],
+        "alice_private_key": 2475,
+        "bob_private_key": 5017,
+        "alice_public_key": [4948, 3486],
+        "bob_public_key": [3097, 6300],
+        "shared_secret_key": [481, 5605],
+        "time_to_crack": {
+            "brute_force": 0.010840892791748047,
+            "bsgs": 0.0005609989166259766
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [2067, 10126],
+        "alice_private_key": 3608,
+        "bob_private_key": 4505,
+        "alice_public_key": [8359, 2659],
+        "bob_public_key": [4820, 4628],
+        "shared_secret_key": [2920, 9015],
+        "time_to_crack": {
+            "brute_force": 0.011651039123535156,
+            "bsgs": 0.0005509853363037109
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [4826, 3925],
+        "alice_private_key": 9412,
+        "bob_private_key": 9744,
+        "alice_public_key": [1217, 8716],
+        "bob_public_key": [4552, 7407],
+        "shared_secret_key": [6187, 8882],
+        "time_to_crack": {
+            "brute_force": 0.027540206909179688,
+            "bsgs": 0.0007340908050537109
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [9206, 546],
+        "alice_private_key": 1147,
+        "bob_private_key": 5435,
+        "alice_public_key": [10075, 753],
+        "bob_public_key": [8834, 2597],
+        "shared_secret_key": [2249, 5326],
+        "time_to_crack": {
+            "brute_force": 0.009518146514892578,
+            "bsgs": 0.0005381107330322266
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [7800, 3798],
+        "alice_private_key": 3143,
+        "bob_private_key": 311,
+        "alice_public_key": [1251, 611],
+        "bob_public_key": [8585, 8033],
+        "shared_secret_key": [6612, 2848],
+        "time_to_crack": {
+            "brute_force": 0.005045890808105469,
+            "bsgs": 0.0004990100860595703
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [7893, 7164],
+        "alice_private_key": 5576,
+        "bob_private_key": 1411,
+        "alice_public_key": [3471, 2809],
+        "bob_public_key": [6343, 5092],
+        "shared_secret_key": [6321, 7531],
+        "time_to_crack": {
+            "brute_force": 0.010178089141845703,
+            "bsgs": 0.0005559921264648438
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [6409, 3255],
+        "alice_private_key": 6618,
+        "bob_private_key": 8880,
+        "alice_public_key": [227, 5008],
+        "bob_public_key": [791, 6388],
+        "shared_secret_key": [2336, 9465],
+        "time_to_crack": {
+            "brute_force": 0.022615909576416016,
+            "bsgs": 0.000701904296875
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [1670, 3831],
+        "alice_private_key": 1108,
+        "bob_private_key": 1755,
+        "alice_public_key": [8447, 8327],
+        "bob_public_key": [9067, 1392],
+        "shared_secret_key": [5196, 6122],
+        "time_to_crack": {
+            "brute_force": 0.004270792007446289,
+            "bsgs": 0.00048089027404785156
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [8832, 8791],
+        "alice_private_key": 2308,
+        "bob_private_key": 10022,
+        "alice_public_key": [7893, 3013],
+        "bob_public_key": [7669, 2458],
+        "shared_secret_key": [915, 551],
+        "time_to_crack": {
+            "brute_force": 0.017972946166992188,
+            "bsgs": 0.0006341934204101562
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [4038, 3685],
+        "alice_private_key": 342,
+        "bob_private_key": 8278,
+        "alice_public_key": [733, 1842],
+        "bob_public_key": [2342, 763],
+        "shared_secret_key": [6190, 7673],
+        "time_to_crack": {
+            "brute_force": 0.012699127197265625,
+            "bsgs": 0.000579833984375
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [1616, 88],
+        "alice_private_key": 3877,
+        "bob_private_key": 1521,
+        "alice_public_key": [9085, 6460],
+        "bob_public_key": [7810, 2518],
+        "shared_secret_key": [8868, 5209],
+        "time_to_crack": {
+            "brute_force": 0.007895708084106445,
+            "bsgs": 0.0005393028259277344
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [5124, 7603],
+        "alice_private_key": 6946,
+        "bob_private_key": 10143,
+        "alice_public_key": [5179, 9790],
+        "bob_public_key": [1200, 4711],
+        "shared_secret_key": [94, 4788],
+        "time_to_crack": {
+            "brute_force": 0.025291919708251953,
+            "bsgs": 0.0007131099700927734
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [4988, 5890],
+        "alice_private_key": 8496,
+        "bob_private_key": 2615,
+        "alice_public_key": [3225, 3222],
+        "bob_public_key": [6294, 7120],
+        "shared_secret_key": [6017, 2218],
+        "time_to_crack": {
+            "brute_force": 0.01624917984008789,
+            "bsgs": 0.00061798095703125
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [10156, 5885],
+        "alice_private_key": 9563,
+        "bob_private_key": 8477,
+        "alice_public_key": [8119, 1246],
+        "bob_public_key": [4902, 9037],
+        "shared_secret_key": [10013, 7902],
+        "time_to_crack": {
+            "brute_force": 0.026121854782104492,
+            "bsgs": 0.0007271766662597656
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [9560, 8783],
+        "alice_private_key": 7486,
+        "bob_private_key": 532,
+        "alice_public_key": [5545, 2823],
+        "bob_public_key": [9725, 440],
+        "shared_secret_key": [3987, 2278],
+        "time_to_crack": {
+            "brute_force": 0.011675119400024414,
+            "bsgs": 0.0005588531494140625
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [7511, 4831],
+        "alice_private_key": 6172,
+        "bob_private_key": 4208,
+        "alice_public_key": [1179, 9542],
+        "bob_public_key": [1120, 592],
+        "shared_secret_key": [2565, 1091],
+        "time_to_crack": {
+            "brute_force": 0.015232086181640625,
+            "bsgs": 0.000598907470703125
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [517, 3957],
+        "alice_private_key": 2561,
+        "bob_private_key": 4627,
+        "alice_public_key": [2649, 4704],
+        "bob_public_key": [4034, 1658],
+        "shared_secret_key": [10040, 9904],
+        "time_to_crack": {
+            "brute_force": 0.010777950286865234,
+            "bsgs": 0.0005497932434082031
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [2211, 5393],
+        "alice_private_key": 7617,
+        "bob_private_key": 6546,
+        "alice_public_key": [167, 739],
+        "bob_public_key": [1129, 8341],
+        "shared_secret_key": [5463, 1430],
+        "time_to_crack": {
+            "brute_force": 0.02094101905822754,
+            "bsgs": 0.0006558895111083984
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [2139, 1677],
+        "alice_private_key": 7897,
+        "bob_private_key": 9483,
+        "alice_public_key": [8562, 2507],
+        "bob_public_key": [1300, 7122],
+        "shared_secret_key": [1266, 8921],
+        "time_to_crack": {
+            "brute_force": 0.02518916130065918,
+            "bsgs": 0.0007238388061523438
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [7819, 7073],
+        "alice_private_key": 8588,
+        "bob_private_key": 643,
+        "alice_public_key": [5699, 464],
+        "bob_public_key": [6137, 375],
+        "shared_secret_key": [6596, 1111],
+        "time_to_crack": {
+            "brute_force": 0.013245820999145508,
+            "bsgs": 0.0005822181701660156
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [1472, 3120],
+        "alice_private_key": 5110,
+        "bob_private_key": 7653,
+        "alice_public_key": [3267, 6279],
+        "bob_public_key": [5511, 3259],
+        "shared_secret_key": [6331, 2244],
+        "time_to_crack": {
+            "brute_force": 0.01836419105529785,
+            "bsgs": 0.0006489753723144531
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [7051, 3869],
+        "alice_private_key": 7989,
+        "bob_private_key": 9648,
+        "alice_public_key": [2108, 5130],
+        "bob_public_key": [3042, 6881],
+        "shared_secret_key": [9967, 7655],
+        "time_to_crack": {
+            "brute_force": 0.02565789222717285,
+            "bsgs": 0.0007159709930419922
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [2084, 7598],
+        "alice_private_key": 1724,
+        "bob_private_key": 9088,
+        "alice_public_key": [7158, 9328],
+        "bob_public_key": [2950, 8350],
+        "shared_secret_key": [5204, 2650],
+        "time_to_crack": {
+            "brute_force": 0.01572895050048828,
+            "bsgs": 0.0005941390991210938
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [311, 4095],
+        "alice_private_key": 3627,
+        "bob_private_key": 19,
+        "alice_public_key": [2751, 4428],
+        "bob_public_key": [8433, 3652],
+        "shared_secret_key": [8012, 754],
+        "time_to_crack": {
+            "brute_force": 0.005415916442871094,
+            "bsgs": 0.0004622936248779297
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [10093, 2084],
+        "alice_private_key": 6634,
+        "bob_private_key": 6717,
+        "alice_public_key": [4147, 4519],
+        "bob_public_key": [7201, 1070],
+        "shared_secret_key": [8360, 8230],
+        "time_to_crack": {
+            "brute_force": 0.019472837448120117,
+            "bsgs": 0.0006499290466308594
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [665, 1986],
+        "alice_private_key": 5081,
+        "bob_private_key": 4157,
+        "alice_public_key": [2827, 5689],
+        "bob_public_key": [3507, 9697],
+        "shared_secret_key": [7771, 6560],
+        "time_to_crack": {
+            "brute_force": 0.013463020324707031,
+            "bsgs": 0.0005850791931152344
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [3420, 2014],
+        "alice_private_key": 2138,
+        "bob_private_key": 5758,
+        "alice_public_key": [2143, 1050],
+        "bob_public_key": [3512, 7914],
+        "shared_secret_key": [9181, 5178],
+        "time_to_crack": {
+            "brute_force": 0.011698007583618164,
+            "bsgs": 0.0005779266357421875
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [6033, 7601],
+        "alice_private_key": 9600,
+        "bob_private_key": 708,
+        "alice_public_key": [5326, 3133],
+        "bob_public_key": [300, 820],
+        "shared_secret_key": [7083, 3654],
+        "time_to_crack": {
+            "brute_force": 0.014999151229858398,
+            "bsgs": 0.0006158351898193359
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [1935, 6697],
+        "alice_private_key": 10061,
+        "bob_private_key": 4827,
+        "alice_public_key": [10010, 6650],
+        "bob_public_key": [7219, 6445],
+        "shared_secret_key": [8496, 5957],
+        "time_to_crack": {
+            "brute_force": 0.021584033966064453,
+            "bsgs": 0.0006918907165527344
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [1050, 9946],
+        "alice_private_key": 2968,
+        "bob_private_key": 10027,
+        "alice_public_key": [3023, 1016],
+        "bob_public_key": [8864, 2881],
+        "shared_secret_key": [3604, 3],
+        "time_to_crack": {
+            "brute_force": 0.018685102462768555,
+            "bsgs": 0.0006508827209472656
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [1499, 7443],
+        "alice_private_key": 2869,
+        "bob_private_key": 8735,
+        "alice_public_key": [4939, 125],
+        "bob_public_key": [7514, 4786],
+        "shared_secret_key": [9897, 3525],
+        "time_to_crack": {
+            "brute_force": 0.016692161560058594,
+            "bsgs": 0.0006189346313476562
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [7701, 6939],
+        "alice_private_key": 5070,
+        "bob_private_key": 6687,
+        "alice_public_key": [7130, 8942],
+        "bob_public_key": [8806, 391],
+        "shared_secret_key": [6804, 944],
+        "time_to_crack": {
+            "brute_force": 0.016894817352294922,
+            "bsgs": 0.0006210803985595703
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [3128, 403],
+        "alice_private_key": 2051,
+        "bob_private_key": 7591,
+        "alice_public_key": [9228, 2270],
+        "bob_public_key": [8956, 1855],
+        "shared_secret_key": [2389, 2011],
+        "time_to_crack": {
+            "brute_force": 0.013884782791137695,
+            "bsgs": 0.0005860328674316406
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [1410, 9751],
+        "alice_private_key": 3278,
+        "bob_private_key": 6959,
+        "alice_public_key": [2794, 598],
+        "bob_public_key": [1842, 4235],
+        "shared_secret_key": [6671, 4636],
+        "time_to_crack": {
+            "brute_force": 0.014961957931518555,
+            "bsgs": 0.0005950927734375
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [2521, 365],
+        "alice_private_key": 2443,
+        "bob_private_key": 2431,
+        "alice_public_key": [818, 4956],
+        "bob_public_key": [2463, 4081],
+        "shared_secret_key": [8840, 5967],
+        "time_to_crack": {
+            "brute_force": 0.007080793380737305,
+            "bsgs": 0.0005099773406982422
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [5019, 3132],
+        "alice_private_key": 1996,
+        "bob_private_key": 1143,
+        "alice_public_key": [1672, 3527],
+        "bob_public_key": [4298, 8734],
+        "shared_secret_key": [932, 2372],
+        "time_to_crack": {
+            "brute_force": 0.004628896713256836,
+            "bsgs": 0.0004892349243164062
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [7830, 2058],
+        "alice_private_key": 6779,
+        "bob_private_key": 9662,
+        "alice_public_key": [1444, 1101],
+        "bob_public_key": [1732, 1220],
+        "shared_secret_key": [643, 5283],
+        "time_to_crack": {
+            "brute_force": 0.02364802360534668,
+            "bsgs": 0.0007069110870361328
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [847, 7897],
+        "alice_private_key": 8998,
+        "bob_private_key": 3469,
+        "alice_public_key": [2827, 5689],
+        "bob_public_key": [2799, 5290],
+        "shared_secret_key": [1542, 8803],
+        "time_to_crack": {
+            "brute_force": 0.01800084114074707,
+            "bsgs": 0.0006330013275146484
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [5175, 7707],
+        "alice_private_key": 8938,
+        "bob_private_key": 1310,
+        "alice_public_key": [7294, 8353],
+        "bob_public_key": [8688, 4600],
+        "shared_secret_key": [2576, 9070],
+        "time_to_crack": {
+            "brute_force": 0.014927148818969727,
+            "bsgs": 0.0005939006805419922
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [9400, 5508],
+        "alice_private_key": 9496,
+        "bob_private_key": 2201,
+        "alice_public_key": [6262, 9865],
+        "bob_public_key": [1531, 6214],
+        "shared_secret_key": [3848, 2886],
+        "time_to_crack": {
+            "brute_force": 0.016986846923828125,
+            "bsgs": 0.0006272792816162109
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [77, 5338],
+        "alice_private_key": 6925,
+        "bob_private_key": 10176,
+        "alice_public_key": [3536, 1808],
+        "bob_public_key": [5587, 809],
+        "shared_secret_key": [3633, 8991],
+        "time_to_crack": {
+            "brute_force": 0.024924278259277344,
+            "bsgs": 0.0007069110870361328
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [8630, 765],
+        "alice_private_key": 7922,
+        "bob_private_key": 3752,
+        "alice_public_key": [4623, 6627],
+        "bob_public_key": [7865, 8341],
+        "shared_secret_key": [4660, 6146],
+        "time_to_crack": {
+            "brute_force": 0.017008066177368164,
+            "bsgs": 0.0006546974182128906
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [7602, 7176],
+        "alice_private_key": 7410,
+        "bob_private_key": 1165,
+        "alice_public_key": [2254, 6700],
+        "bob_public_key": [8349, 3968],
+        "shared_secret_key": [3944, 4645],
+        "time_to_crack": {
+            "brute_force": 0.012633085250854492,
+            "bsgs": 0.0005648136138916016
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [799, 352],
+        "alice_private_key": 4135,
+        "bob_private_key": 2681,
+        "alice_public_key": [3231, 4768],
+        "bob_public_key": [3748, 3222],
+        "shared_secret_key": [1873, 4333],
+        "time_to_crack": {
+            "brute_force": 0.010032176971435547,
+            "bsgs": 0.0005388259887695312
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [7873, 2870],
+        "alice_private_key": 3329,
+        "bob_private_key": 2170,
+        "alice_public_key": [5329, 969],
+        "bob_public_key": [561, 5060],
+        "shared_secret_key": [7108, 4179],
+        "time_to_crack": {
+            "brute_force": 0.008243799209594727,
+            "bsgs": 0.0005381107330322266
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [4505, 5655],
+        "alice_private_key": 3428,
+        "bob_private_key": 2557,
+        "alice_public_key": [7340, 5764],
+        "bob_public_key": [8393, 9555],
+        "shared_secret_key": [7986, 6069],
+        "time_to_crack": {
+            "brute_force": 0.009089946746826172,
+            "bsgs": 0.0005619525909423828
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [3905, 2427],
+        "alice_private_key": 2495,
+        "bob_private_key": 5041,
+        "alice_public_key": [5114, 4209],
+        "bob_public_key": [8755, 8629],
+        "shared_secret_key": [9486, 332],
+        "time_to_crack": {
+            "brute_force": 0.011627912521362305,
+            "bsgs": 0.0005598068237304688
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [7478, 1086],
+        "alice_private_key": 6541,
+        "bob_private_key": 4762,
+        "alice_public_key": [6853, 6885],
+        "bob_public_key": [1422, 5178],
+        "shared_secret_key": [4685, 2805],
+        "time_to_crack": {
+            "brute_force": 0.01661372184753418,
+            "bsgs": 0.0006289482116699219
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [9069, 1221],
+        "alice_private_key": 23,
+        "bob_private_key": 1440,
+        "alice_public_key": [3396, 10054],
+        "bob_public_key": [8974, 2585],
+        "shared_secret_key": [4366, 2438],
+        "time_to_crack": {
+            "brute_force": 0.002179861068725586,
+            "bsgs": 0.0004191398620605469
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [1047, 8336],
+        "alice_private_key": 7456,
+        "bob_private_key": 6793,
+        "alice_public_key": [9304, 6620],
+        "bob_public_key": [6458, 1887],
+        "shared_secret_key": [1670, 3831],
+        "time_to_crack": {
+            "brute_force": 0.02156996726989746,
+            "bsgs": 0.0007479190826416016
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [6232, 5960],
+        "alice_private_key": 5181,
+        "bob_private_key": 1201,
+        "alice_public_key": [3666, 8017],
+        "bob_public_key": [6932, 7808],
+        "shared_secret_key": [8700, 4782],
+        "time_to_crack": {
+            "brute_force": 0.009809255599975586,
+            "bsgs": 0.00060272216796875
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [2651, 9324],
+        "alice_private_key": 7569,
+        "bob_private_key": 1175,
+        "alice_public_key": [9150, 2325],
+        "bob_public_key": [6197, 1810],
+        "shared_secret_key": [8527, 7675],
+        "time_to_crack": {
+            "brute_force": 0.0135040283203125,
+            "bsgs": 0.0006389617919921875
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [7785, 9523],
+        "alice_private_key": 6821,
+        "bob_private_key": 7725,
+        "alice_public_key": [8256, 9817],
+        "bob_public_key": [1801, 2282],
+        "shared_secret_key": [5752, 9183],
+        "time_to_crack": {
+            "brute_force": 0.023586034774780273,
+            "bsgs": 0.0007138252258300781
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [6901, 1015],
+        "alice_private_key": 6400,
+        "bob_private_key": 5188,
+        "alice_public_key": [607, 7627],
+        "bob_public_key": [6313, 9695],
+        "shared_secret_key": [3052, 2740],
+        "time_to_crack": {
+            "brute_force": 0.0171658992767334,
+            "bsgs": 0.0006241798400878906
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [7203, 3617],
+        "alice_private_key": 272,
+        "bob_private_key": 5520,
+        "alice_public_key": [1038, 711],
+        "bob_public_key": [3204, 3222],
+        "shared_secret_key": [2686, 5449],
+        "time_to_crack": {
+            "brute_force": 0.008545875549316406,
+            "bsgs": 0.0005168914794921875
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [5855, 115],
+        "alice_private_key": 7731,
+        "bob_private_key": 3142,
+        "alice_public_key": [1250, 9353],
+        "bob_public_key": [5774, 5214],
+        "shared_secret_key": [7203, 3617],
+        "time_to_crack": {
+            "brute_force": 0.01689004898071289,
+            "bsgs": 0.0006451606750488281
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [2347, 8175],
+        "alice_private_key": 10063,
+        "bob_private_key": 5218,
+        "alice_public_key": [5467, 1874],
+        "bob_public_key": [5235, 9316],
+        "shared_secret_key": [6813, 7962],
+        "time_to_crack": {
+            "brute_force": 0.02391982078552246,
+            "bsgs": 0.0007028579711914062
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [8019, 1616],
+        "alice_private_key": 7785,
+        "bob_private_key": 1488,
+        "alice_public_key": [8891, 2293],
+        "bob_public_key": [2576, 9070],
+        "shared_secret_key": [7404, 8125],
+        "time_to_crack": {
+            "brute_force": 0.013676881790161133,
+            "bsgs": 0.0005900859832763672
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [4021, 6920],
+        "alice_private_key": 6351,
+        "bob_private_key": 7887,
+        "alice_public_key": [9709, 7846],
+        "bob_public_key": [4800, 6089],
+        "shared_secret_key": [1365, 8037],
+        "time_to_crack": {
+            "brute_force": 0.021064043045043945,
+            "bsgs": 0.0007457733154296875
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [1689, 4040],
+        "alice_private_key": 8068,
+        "bob_private_key": 442,
+        "alice_public_key": [9888, 7038],
+        "bob_public_key": [3816, 5192],
+        "shared_secret_key": [9942, 4574],
+        "time_to_crack": {
+            "brute_force": 0.012991905212402344,
+            "bsgs": 0.0005691051483154297
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [2926, 9137],
+        "alice_private_key": 8014,
+        "bob_private_key": 5521,
+        "alice_public_key": [4946, 3185],
+        "bob_public_key": [8428, 84],
+        "shared_secret_key": [7327, 9731],
+        "time_to_crack": {
+            "brute_force": 0.020415067672729492,
+            "bsgs": 0.0007181167602539062
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [3453, 8374],
+        "alice_private_key": 8498,
+        "bob_private_key": 9220,
+        "alice_public_key": [8790, 6526],
+        "bob_public_key": [7209, 965],
+        "shared_secret_key": [340, 7850],
+        "time_to_crack": {
+            "brute_force": 0.030447006225585938,
+            "bsgs": 0.0008077621459960938
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [8939, 981],
+        "alice_private_key": 2990,
+        "bob_private_key": 6535,
+        "alice_public_key": [9844, 1378],
+        "bob_public_key": [9174, 7227],
+        "shared_secret_key": [8577, 9804],
+        "time_to_crack": {
+            "brute_force": 0.016775131225585938,
+            "bsgs": 0.0007407665252685547
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [3990, 5833],
+        "alice_private_key": 8836,
+        "bob_private_key": 983,
+        "alice_public_key": [9316, 1169],
+        "bob_public_key": [7043, 4386],
+        "shared_secret_key": [844, 2414],
+        "time_to_crack": {
+            "brute_force": 0.016659021377563477,
+            "bsgs": 0.0006308555603027344
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [8424, 5434],
+        "alice_private_key": 2424,
+        "bob_private_key": 8879,
+        "alice_public_key": [9632, 4606],
+        "bob_public_key": [2729, 7653],
+        "shared_secret_key": [9418, 6312],
+        "time_to_crack": {
+            "brute_force": 0.019022226333618164,
+            "bsgs": 0.0006678104400634766
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [2209, 7270],
+        "alice_private_key": 1421,
+        "bob_private_key": 3791,
+        "alice_public_key": [1407, 186],
+        "bob_public_key": [4934, 603],
+        "shared_secret_key": [8676, 7329],
+        "time_to_crack": {
+            "brute_force": 0.008566856384277344,
+            "bsgs": 0.000576019287109375
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [6948, 7084],
+        "alice_private_key": 6688,
+        "bob_private_key": 1329,
+        "alice_public_key": [8968, 4748],
+        "bob_public_key": [1414, 2491],
+        "shared_secret_key": [8738, 5733],
+        "time_to_crack": {
+            "brute_force": 0.012607812881469727,
+            "bsgs": 0.00060272216796875
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [2375, 6444],
+        "alice_private_key": 279,
+        "bob_private_key": 2012,
+        "alice_public_key": [855, 4148],
+        "bob_public_key": [3620, 893],
+        "shared_secret_key": [6984, 8786],
+        "time_to_crack": {
+            "brute_force": 0.0037240982055664062,
+            "bsgs": 0.0004999637603759766
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [4888, 4308],
+        "alice_private_key": 2018,
+        "bob_private_key": 6788,
+        "alice_public_key": [2815, 6206],
+        "bob_public_key": [5455, 4439],
+        "shared_secret_key": [5508, 8475],
+        "time_to_crack": {
+            "brute_force": 0.013260126113891602,
+            "bsgs": 0.000598907470703125
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [4665, 9110],
+        "alice_private_key": 5584,
+        "bob_private_key": 8916,
+        "alice_public_key": [340, 7850],
+        "bob_public_key": [22, 1724],
+        "shared_secret_key": [7963, 2654],
+        "time_to_crack": {
+            "brute_force": 0.02152395248413086,
+            "bsgs": 0.0006818771362304688
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [9796, 3146],
+        "alice_private_key": 7014,
+        "bob_private_key": 5659,
+        "alice_public_key": [2306, 9],
+        "bob_public_key": [9500, 7450],
+        "shared_secret_key": [4349, 9782],
+        "time_to_crack": {
+            "brute_force": 0.018990278244018555,
+            "bsgs": 0.0006918907165527344
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [7277, 9699],
+        "alice_private_key": 1857,
+        "bob_private_key": 7023,
+        "alice_public_key": [6412, 8404],
+        "bob_public_key": [4225, 6132],
+        "shared_secret_key": [9940, 9036],
+        "time_to_crack": {
+            "brute_force": 0.013394832611083984,
+            "bsgs": 0.0006573200225830078
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [6901, 9162],
+        "alice_private_key": 2027,
+        "bob_private_key": 1294,
+        "alice_public_key": [7792, 8850],
+        "bob_public_key": [9109, 8127],
+        "shared_secret_key": [7882, 5541],
+        "time_to_crack": {
+            "brute_force": 0.00528407096862793,
+            "bsgs": 0.0005328655242919922
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [6542, 8831],
+        "alice_private_key": 7920,
+        "bob_private_key": 8927,
+        "alice_public_key": [631, 2943],
+        "bob_public_key": [6927, 2596],
+        "shared_secret_key": [6364, 4697],
+        "time_to_crack": {
+            "brute_force": 0.025333881378173828,
+            "bsgs": 0.0007350444793701172
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [5393, 3801],
+        "alice_private_key": 3782,
+        "bob_private_key": 2141,
+        "alice_public_key": [7673, 6962],
+        "bob_public_key": [4999, 3128],
+        "shared_secret_key": [6591, 2974],
+        "time_to_crack": {
+            "brute_force": 0.008979082107543945,
+            "bsgs": 0.0005700588226318359
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [837, 7129],
+        "alice_private_key": 50,
+        "bob_private_key": 386,
+        "alice_public_key": [6668, 5993],
+        "bob_public_key": [6381, 1457],
+        "shared_secret_key": [6188, 6591],
+        "time_to_crack": {
+            "brute_force": 0.0007040500640869141,
+            "bsgs": 0.0004088878631591797
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [8246, 1516],
+        "alice_private_key": 709,
+        "bob_private_key": 803,
+        "alice_public_key": [825, 3142],
+        "bob_public_key": [5398, 8423],
+        "shared_secret_key": [6188, 6591],
+        "time_to_crack": {
+            "brute_force": 0.002379894256591797,
+            "bsgs": 0.0004661083221435547
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [4527, 4355],
+        "alice_private_key": 9877,
+        "bob_private_key": 168,
+        "alice_public_key": [465, 9697],
+        "bob_public_key": [9218, 67],
+        "shared_secret_key": [6098, 3764],
+        "time_to_crack": {
+            "brute_force": 0.01482391357421875,
+            "bsgs": 0.0005800724029541016
+        }
+    },
+    {
+        "curve_parameters": {"a": 1, "b": -1, "p": 10177},
+        "generator": [3538, 1868],
+        "alice_private_key": 7434,
+        "bob_private_key": 8241,
+        "alice_public_key": [2663, 1120],
+        "bob_public_key": [7263, 1796],
+        "shared_secret_key": [5168, 10170],
+        "time_to_crack": {
+            "brute_force": 0.022790908813476562,
+            "bsgs": 0.0006911754608154297
+        }
+    }
+]

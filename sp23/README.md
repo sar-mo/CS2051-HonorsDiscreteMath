@@ -30,7 +30,4 @@ p.s. sorry for so many commits, right now this repository is connected with over
 
 To-do:
 Update readme
-Fix tests for hw5-supp-slns
-proposition_parser solutions
-Fix tests for hw7-supp-slns
 Solve extra problems

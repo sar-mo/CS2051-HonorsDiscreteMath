@@ -1,0 +1,214 @@
+{
+    "easy_problems": [
+        {
+            "prime": 5,
+            "generator": 2,
+            "alice_private_key": 2,
+            "bob_private_key": 2,
+            "alice_public_key": 4,
+            "bob_public_key": 4,
+            "shared_secret_key": 1,
+            "time_to_crack": {
+                "brute_force": 9.059906005859375e-06,
+                "bsgs": 1.9073486328125e-05
+            }
+        },
+        {
+            "prime": 7,
+            "generator": 3,
+            "alice_private_key": 4,
+            "bob_private_key": 5,
+            "alice_public_key": 4,
+            "bob_public_key": 5,
+            "shared_secret_key": 2,
+            "time_to_crack": {
+                "brute_force": 4.0531158447265625e-06,
+                "bsgs": 7.867813110351562e-06
+            }
+        },
+        {
+            "prime": 11,
+            "generator": 2,
+            "alice_private_key": 3,
+            "bob_private_key": 7,
+            "alice_public_key": 8,
+            "bob_public_key": 7,
+            "shared_secret_key": 2,
+            "time_to_crack": {
+                "brute_force": 5.0067901611328125e-06,
+                "bsgs": 8.106231689453125e-06
+            }
+        },
+        {
+            "prime": 73,
+            "generator": 14,
+            "alice_private_key": 14,
+            "bob_private_key": 34,
+            "alice_public_key": 38,
+            "bob_public_key": 54,
+            "shared_secret_key": 41,
+            "time_to_crack": {
+                "brute_force": 7.867813110351562e-06,
+                "bsgs": 1.0967254638671875e-05
+            }
+        },
+        {
+            "prime": 151,
+            "generator": 15,
+            "alice_private_key": 58,
+            "bob_private_key": 45,
+            "alice_public_key": 11,
+            "bob_public_key": 143,
+            "shared_secret_key": 59,
+            "time_to_crack": {
+                "brute_force": 1.0967254638671875e-05,
+                "bsgs": 1.621246337890625e-05
+            }
+        },
+        {
+            "prime": 157,
+            "generator": 80,
+            "alice_private_key": 77,
+            "bob_private_key": 148,
+            "alice_public_key": 104,
+            "bob_public_key": 154,
+            "shared_secret_key": 52,
+            "time_to_crack": {
+                "brute_force": 1.7881393432617188e-05,
+                "bsgs": 1.3113021850585938e-05
+            }
+        },
+        {
+            "prime": 251,
+            "generator": 97,
+            "alice_private_key": 65,
+            "bob_private_key": 128,
+            "alice_public_key": 2,
+            "bob_public_key": 214,
+            "shared_secret_key": 243,
+            "time_to_crack": {
+                "brute_force": 1.621246337890625e-05,
+                "bsgs": 1.2159347534179688e-05
+            }
+        },
+        {
+            "prime": 283,
+            "generator": 183,
+            "alice_private_key": 177,
+            "bob_private_key": 106,
+            "alice_public_key": 43,
+            "bob_public_key": 24,
+            "shared_secret_key": 163,
+            "time_to_crack": {
+                "brute_force": 2.3126602172851562e-05,
+                "bsgs": 1.1682510375976562e-05
+            }
+        },
+        {
+            "prime": 503,
+            "generator": 68,
+            "alice_private_key": 92,
+            "bob_private_key": 297,
+            "alice_public_key": 122,
+            "bob_public_key": 478,
+            "shared_secret_key": 379,
+            "time_to_crack": {
+                "brute_force": 3.409385681152344e-05,
+                "bsgs": 1.9073486328125e-05
+            }
+        },
+        {
+            "prime": 311,
+            "generator": 69,
+            "alice_private_key": 108,
+            "bob_private_key": 286,
+            "alice_public_key": 108,
+            "bob_public_key": 139,
+            "shared_secret_key": 294,
+            "time_to_crack": {
+                "brute_force": 3.123283386230469e-05,
+                "bsgs": 1.4781951904296875e-05
+            }
+        },
+        {
+            "prime": 797,
+            "generator": 331,
+            "alice_private_key": 793,
+            "bob_private_key": 27,
+            "alice_public_key": 354,
+            "bob_public_key": 116,
+            "shared_secret_key": 769,
+            "time_to_crack": {
+                "brute_force": 6.914138793945312e-05,
+                "bsgs": 1.7881393432617188e-05
+            }
+        },
+        {
+            "prime": 811,
+            "generator": 616,
+            "alice_private_key": 70,
+            "bob_private_key": 539,
+            "alice_public_key": 230,
+            "bob_public_key": 540,
+            "shared_secret_key": 600,
+            "time_to_crack": {
+                "brute_force": 5.1021575927734375e-05,
+                "bsgs": 1.811981201171875e-05
+            }
+        }
+    ],
+    "hard_problems": [
+        {
+            "prime": 351416641,
+            "generator": 19,
+            "alice_private_key": 121404103,
+            "bob_private_key": 130164405,
+            "alice_public_key": 279137931,
+            "bob_public_key": 8136565,
+            "shared_secret_key": 61346566,
+            "time_to_crack": {
+                "brute_force": 23.41216206550598,
+                "bsgs": 0.007218837738037109
+            }
+        },
+        {
+            "prime": 388737889,
+            "generator": 13,
+            "alice_private_key": 131239888,
+            "bob_private_key": 167535080,
+            "alice_public_key": 229573757,
+            "bob_public_key": 124325359,
+            "shared_secret_key": 211949228,
+            "time_to_crack": {
+                "brute_force": 27.76545214653015,
+                "bsgs": 0.007920026779174805
+            }
+        },
+        {
+            "prime": 535619719,
+            "generator": 6,
+            "alice_private_key": 228756475,
+            "bob_private_key": 265563493,
+            "alice_public_key": 74859546,
+            "bob_public_key": 474814178,
+            "shared_secret_key": 220999309,
+            "time_to_crack": {
+                "brute_force": 45.49750232696533,
+                "bsgs": 0.009299278259277344
+            }
+        },
+        {
+            "prime": 735890717,
+            "generator": 2,
+            "alice_private_key": 280874494,
+            "bob_private_key": 287637258,
+            "alice_public_key": 594339328,
+            "bob_public_key": 372077794,
+            "shared_secret_key": 301176692,
+            "time_to_crack": {
+                "brute_force": 46.68487310409546,
+                "bsgs": 0.010709047317504883
+            }
+        }
+    ]
+}
