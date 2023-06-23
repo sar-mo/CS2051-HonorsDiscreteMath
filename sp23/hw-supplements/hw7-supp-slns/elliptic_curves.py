@@ -32,7 +32,7 @@ def f(x : int, a : int, b : int) -> tuple:
         return (math.sqrt(x**3 + a*x + b), -math.sqrt(x**3 + a*x + b))
     
 def point_addition(P : tuple, Q : tuple, a : int, b : int, p : int = None) -> tuple:
-    '''Add two distinct points on an elliptic curve.
+    '''Add two points on an elliptic curve.
 
     Parameters:
         P : A point on the curve. Assume values are integers.
@@ -153,7 +153,7 @@ def generate_point_cloud(a : int, b : int, p = None) -> set:
 
 ###################### Visualization Functions ######################
 
-def visualize_curve(ax, a : int, b : int, p = None, domain = (-5, 5)) -> None:
+def visualize_curve(ax, a : int, b : int, p : int = None, domain = (-5, 5)) -> None:
     """Visualize an elliptic curve.
 
     Parameters:
@@ -170,112 +170,27 @@ def visualize_curve(ax, a : int, b : int, p = None, domain = (-5, 5)) -> None:
         y = [i[1] for i in list_of_points]
 
         ax.grid(True, which='both')
-        ax.set_xlim(domain[0], domain[1])
         ax.scatter(x, y, s=30)
     else:
-        x = np.linspace(domain[0], domain[1], 1000)
-        y1 = [ f(i, a, b)[0] for i in x]
-        y2 = [ f(i, a, b)[1] for i in x]
+        x = np.linspace(domain[0], domain[1], 10000)
+        y1 = [f(i, a, b)[0] for i in x]
+        y2 = [f(i, a, b)[1] for i in x]
 
         ax.grid(True, which='both')
         ax.plot(x, y1, 'r')
         ax.plot(x, y2, 'r')
 
         ax.set_xlim(domain[0], domain[1])
-
-def visualize_addition(ax, P : tuple, Q : tuple, a : int, b : int, p : int = None) -> None:
-    """Visualize point addition with two distinct points on an elliptic curve.
-
-    Parameters
-    ----------
-    ax : The axis to plot the curve on.
-    P : A point on the curve. if p is provided, P must be in the field.
-    Q : A point on the curve. if p is provided, Q must be in the field.
-    a : The a coefficient of the curve.
-    b : The b coefficient of the curve.
-    p : (optional) The prime modulus of a field. If not provided, assume
-        calculations are over the field of real numbers.
-    """ 
-    if p:
-        R = point_addition(P, Q, a, b, p)
-        visualize_curve(ax, a, b, p, domain = (0, p - 1))
-        
-    else:
-        print(R)
-        R = point_addition(P, Q, a, b)
-
-    ax.plot(P[0], P[1], label='P', marker='o', color='orange')
-    ax.annotate('P', P)
-    ax.plot(Q[0], Q[1], label='Q', marker='o', color='orange')
-
-    # draw lines
-    if R == None:
-
-        # change domain to include P, Q, and R
-        xmin = min(P[0], Q[0]) - 2
-        xmax = max(P[0], Q[0]) + 2
-        visualize_curve(ax, a, b, domain = (xmin, xmax))
-
-
-        ax.axvline(P[0], color='orange')
-    else:
-
-        # change domain to include P, Q, and R
-        xmin = min(P[0], Q[0], R[0]) - 2
-        xmax = max(P[0], Q[0], R[0]) + 2
-        visualize_curve(ax, a, b, domain = (xmin, xmax))
-
-
-        ax.annotate('Q', Q)
-        ax.plot(R[0], R[1], label='R', marker='o', color='blue')
-
-        m = (P[1] - Q[1]) / (P[0] - Q[0])
-        b = P[1] - m * P[0]
-        x = np.linspace(xmin, xmax, 1000)
-        y = m * x + b
-        ax.plot(x, y, color='orange')
-        # draw dotted line from R to line
-        ax.plot([R[0], R[0]], [R[1], m*R[0] + b], color='blue', linestyle='dashed')
-    
-    ax.annotate('R', R)
-
-def visualize_multiplication(ax, P : tuple, n : int, a : int, b : int, p = None) -> None:
-    """Visualize point multiplication on an elliptic curve.
-
-    Parameters
-    ----------
-    ax : The axis to plot the curve on.
-    P : A point on the curve. if p is provided, P must be in the field.
-    a : The a coefficient of the curve.
-    b : The b coefficient of the curve.
-    p : (optional) The prime modulus of a field. If not provided, assume
-        calculations are over the field of real numbers.
-    """ 
-    if p:
-        Q = point_scalar_multiplication(P, n, a, b, p)
-        visualize_curve(ax, a, b, p, domain = (0, p - 1))
-    else:
-        Q = point_scalar_multiplication(P, n, a, b)
-
-        xmin = min(P[0], Q[0]) - 1
-        xmax = max(P[0], Q[0]) + 1
-        visualize_curve(ax, a, b, domain = (xmin, xmax))
-
-    ax.plot(P[0], P[1], label='P', marker='o')
-    ax.annotate('P', P)
-    ax.plot(Q[0], Q[1], label='Q', marker='o')
-    ax.annotate('Q', Q)
     
 if __name__ == '__main__':
     # sample curve
-    curve = (-3, 3)
-
-    # visualize point addition
+    curve = {"a": 0, "b": 7}
     fig, ax = plt.subplots()
-    P = (2, f(2, *curve)[0])
-    Q = (2, f(2, *curve)[1])
-    visualize_addition(ax, P, Q, *curve)
+    visualize_curve(ax, *curve.values())
+
+    # sample curve over prime field
+    curve = {"a": 0, "b": 7, "p": 97}
+    fig, ax = plt.subplots()
+    visualize_curve(ax, *curve.values())
+
     plt.show()
-
-
-
