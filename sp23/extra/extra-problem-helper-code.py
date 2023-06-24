@@ -1,3 +1,7 @@
+# CS 2051 Spring 2023 - Extra Problem Helper Code
+# instructor: Gerandy Brito
+# creator - Sarthak Mohanty
+
 def create_diamond(pattern : str) -> list:
     pattern_length = len(pattern)
     grid_size = 2 * pattern_length - 1
