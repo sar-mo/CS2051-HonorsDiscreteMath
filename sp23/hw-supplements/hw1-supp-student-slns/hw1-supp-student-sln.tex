@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+\newenvironment{solution}
+{
+\medskip
+\par
+\color{blue}
+\textbf{Solution:}
+}
+{
+\medskip
+\par
+}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+%\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.15}
+
+%Formatting and Spacing
+\usepackage{enumitem}
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+%\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+% title
+\title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Homework 1 Supplement \\ Student Solutions}
+\author{Sean Peng\footnote{Solutions were published with the permission of the student.}}
+\date{}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+    \item Five people of different mythical species and with different jobs live in con- secutive houses along a street. These houses are painted different colors. They have different pets and have different favorite drinks. Determine who owns a cat and whose favorite drink is soda given these clues: The Hobbit lives in the red house. The Dwarf owns a dog. The Human is an artist. The Maia drinks tea. The Elf lives on the first house on the left. The green house is immediately to the right of the white one. The harpist breeds snails. The ranger lives in the yellow house. Milk is drunk in the middle house. The owner of the green house drinks coffee. The Elf’s house is next to the blue one. The pianist drinks orange juice. The fox is in a house next to that of the physician. The horse is in a house next to that of the ranger.
+
+    \begin{solution}
+        The connected groups are color coded, the subscript shows which step the cell is determined:
+        \begin{center}
+            \begin{tabular}{|c|c|c|c|c|c|} 
+                 \hline
+                 House & 1 & 2 & 3 & 4 & 5 \\
+                 \hline
+                 Color & Yellow$_b$ & Blue$_a$ &\color{red}Red &\color{cyan}White & \color{cyan}Green\\
+                 \hline
+                 Species & Elf$_a$ & \color{magenta}Maia &\color{red}Hobbit &\color{orange}Dwarf & \color{teal}Human\\
+                 \hline
+                 Pet & \color{olive}Fox& Horse$_c$ & \color{violet}Snail &\color{orange}Dog &\\
+                 \hline
+                 Job & Ranger$_c$ & \color{olive}Physician& \color{violet}Harpist &\color{brown} Pianist &\color{teal}Artist\\
+                 \hline
+                 Drink & & \color{magenta}Tea & Milk$_a$ &\color{brown}Orange Juice & \color{cyan}Coffee \\
+                 \hline
+            \end{tabular}
+        \end{center}
+        \begin{enumerate}
+            \item The Elf is in the leftmost house. Milk is in the middle house. The blue house is next to the Elf.
+            \item The green house is connected to the white house, meaning House 1 is either yellow or red. But the Hobbit is in the red house, meaning House 1 is yellow.
+            \item The ranger lives in the yellow house. The horse is next to the ranger.
+            \item There are two possible spots for the cyan group. If it is placed in Houses 3 and 4, then the red group and the brown group must be in House 5. The purple, orange, and green groups will not be able to fit in the remaining space. So, the cyan group must occupy Houses 4 and 5, and the rest can be filled in.
+            \item The remaining empty cells are the answer. The Human owns the cat and the Elf drinks soda.
+        \end{enumerate}
+    \end{solution}
+
+    \item In this course, we have defined Boolean functions as being constructed from propositional variables (such as $p$ and $q$) as well as the logical operators $\land$, $\lor$ $\neg$, $\Rightarrow$, and $\Leftrightarrow$.
+
+    \vspace{1.5mm}
+    A set of logical operators is \textbf{functionally complete} if every Boolean function can be expressed using only the operators in the set.
+    
+    \vspace{1.5mm}
+    Show that $\neg$ and $\land$ form a functionally complete collection of logical operators.
+    
+    \begin{solution}
+        We first show that every $\vee$ can be represented by $\lnot$ and $\land$:
+        \begin{align*}
+            \lnot(\lnot p \land \lnot q) &\equiv 
+            \lnot(\lnot p) \vee \lnot(\lnot q) &\text{(De Morgan's law)} \\ &\equiv
+            p \vee q &\text{(Double negation law)}
+        \end{align*}
+        For any truth table with $n$ variables, there exists a compound proposition $S$ with the same truth table. $S$ can be formed by taking the disjunction of conjunctions of the variables of the truth table or their negation: 
+        \begin{equation*}
+            S=P_1 \vee P_2 \vee \ldots \vee P_n
+        \end{equation*}
+        where each $P_i$ is:
+        \begin{equation*}
+            P_i=Q_1 \land Q_2 \land \ldots \land Q_n
+        \end{equation*}
+        where every $Q_i$ is a literal. Each group of conjunctions $P_i$ correspond to one row where the truth table evaluates to true. Therefore, all propositional formulas can be represented by $\lnot$, $\land$, and $\vee$, and they form a functionally complete set of operators.
+
+        Since every $\vee$ can be represented by $\lnot$ and $\land$, $\lnot$ and $\land$ form a functionally complete set.
+    \end{solution}
+
+\end{enumerate}
+
+\end{document}

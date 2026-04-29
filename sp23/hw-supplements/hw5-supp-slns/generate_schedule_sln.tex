@@ -133,25 +133,6 @@ This approach works fine for the example given in the docstrings, as shown below
     \begin{figure}[htbp]
         \captionsetup{width=.7\linewidth}
         \centering
-        % % To do: make this graph consistent with rest of design
-        % \begin{tikzpicture}
-        %     [level distance=15mm,
-        %     every node/.style={ellipse, draw, minimum width = 0.9 cm},
-        %     level 1/.style={sibling distance=20mm,nodes={fill=red!45}},
-        %     level 2/.style={sibling distance=10mm,nodes={fill=red!30}},
-        %     level 3/.style={sibling distance=5mm,nodes={fill=red!25}}]
-        %     ]
-        %     \node(root) [draw] {root} [grow=up]
-        %         child[level distance=25mm] {node(4641) [draw,fill=red!25] {2} }
-        %         child[level distance=25mm] {node(1) [draw,fill=red!25] {1} }
-        %     \node(5) [draw] {3600};
-        %     \node(5) [draw] {3511};
-                
-        %     \draw[densely dashed] ($(1)!0.5!(2)$) circle [x radius=1.8cm, y radius=0.6cm];
-        %     \draw[densely dashed] (3) circle[radius=0.5cm];
-        %     \draw[densely dashed] (4) circle[radius=0.5cm];
-        %     \draw[densely dashed] (5) circle[radius=0.5cm];
-        % \end{tikzpicture}
         \begin{tikzpicture}[scale = 0.8, transform shape
         ,every node/.style ={ellipse, draw, minimum width = 0.9 cm},]  
             \node[fill=yellow!30] (1301) at (0,0) {1301};

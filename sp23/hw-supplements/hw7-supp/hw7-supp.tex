@@ -21,6 +21,7 @@
     linkcolor=blue,
     filecolor=magenta,      
     urlcolor=magenta,
+    citecolor=Green,
     }
 
 % Inputting psuedocode
@@ -274,7 +275,7 @@ In recent weeks, we have delved into number theory and explored its practical ap
     \end{tcolorbox}
     \footnotetext{The details of this algorithm can be found in Section 4.2 of the textbook, under ``Modular Expoonentiation".}
 
-\section*{Part 2: Enter Elliptic Curves (8 pts)}
+\section*{Part 2: Enter Elliptic Curves (8 pts)\footnote{If I were to do this over again, I would make this section optional, as grading was difficult due to numerical instability.}}
     In this section, we delve into the mathematics behind elliptic curves. The standard form for an elliptic curve is $$y^{2} = x^{3} + ax + b,$$ where $a$ and $b$ are constants. This is referred to as the Weierstrass equation for an elliptic curve. For reasons that will be discussed later, also include the point $\{\infty\}$ in this function.
 
 \subsection*{The Group Law}
@@ -414,7 +415,7 @@ In recent weeks, we have delved into number theory and explored its practical ap
 
     \subsubsection*{RSA vs ECC}
 
-    Since RSA and ECC essentially serve the same purpose, there have been many heated discussions as to which implementation to use. The main pro of using ECC is the fact that it uses fewer memory and CPU resources, important as mobile computing becomes more ubiquitous. However, there are a few flaws with ECC.
+    Since RSA and ECC essentially serve the same purpose, there have been many heated discussions as to which implementation to use. The main pro of using ECC is the fact that it uses fewer memory and CPU resources, important as mobile computing becomes more ubiquitous. However, there are still quite a few flaws with ECC, as discussed in \href{https://www.isaca.org/-/media/files/isacadp/project/isaca/articles/journal/2016/volume-3/can-elliptic-curve-cryptography-be-trusted_joa_eng_0516.pdf}{this} article.
     
     \vspace{2mm}
     Finally, neither ECC nor RSA are secure against quantum computers. Even if quantum computers are not ready to be deployed at scale yet, lots of information is being stored now with intentions of being decrypted later. This has spurred \href{https://csrc.nist.gov/projects/post-quantum-cryptography}{calls} to create quantum-resistant encyption schemes.

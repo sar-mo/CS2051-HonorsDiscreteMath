@@ -1,0 +1,207 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+% colored links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=magenta,
+    }
+
+%Creating algorithms
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+
+% Inputting Python code
+\usepackage[dvipsnames]{xcolor}
+\definecolor{textblue}{rgb}{.2,.2,.7}
+\definecolor{textred}{rgb}{0.54,0,0}
+\definecolor{textgreen}{rgb}{0,0.43,0}
+\usepackage{upquote}
+\usepackage{listings}
+\lstset{
+    language=Python, 
+    tabsize=4,
+    basicstyle={\ttfamily},
+    keywordstyle=\color{textblue},
+    commentstyle=\color{textgreen},
+    stringstyle=\color{textred},
+    frame=none,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    xleftmargin=-15mm, % manual adjustment, figure out permanent solution
+}
+
+% Tcolorbox
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,hooks}
+\usetikzlibrary{shadows}
+
+%Images
+\usepackage{graphicx}
+    \usepackage{subcaption}
+    \usepackage{float}
+
+%Creating Figures
+\usepackage{tikz}
+\usetikzlibrary{calc, math, matrix, graphs, positioning}
+\usetikzlibrary{fit}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{hobby}
+
+% the settings of tikz is used for the optimization of the graphs  
+\usetikzlibrary{shapes, arrows, arrows.meta} % these are the parameters passed to the library to create the node graphs  
+\tikzset{  
+    auto,node distance =1.1 cm and 1.1 cm,% node distance is the distance between one node to other, where 1.5cm is the length of the edge between the nodes  
+} 
+
+% macros for cfg
+\newcommand{\CONJ}{\text{CONJ}}
+\newcommand{\ART}{\text{ART}}
+
+\newcommand{\NPs}{\text{NPs}}
+\newcommand{\NP}{\text{NP}}
+\newcommand{\NN}{\text{NN}}
+
+\newcommand{\VP}{\text{VP}}
+\newcommand{\Vi}{\text{Vi}}
+\newcommand{\Vt}{\text{Vt}}
+
+\newcommand{\ADVs}{\text{ADVs}}
+\newcommand{\ADV}{\text{ADV}}
+\newcommand{\ADJs}{\text{ADJs}}
+\newcommand{\ADJ}{\text{ADJ}}
+
+\newcommand{\PP}{\text{PP}}
+\newcommand{\PREP}{\text{PREP}}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+% title
+\title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 \texttt{generate\_cfg\_english} Solution}
+\author{Sarthak Mohanty }
+\date{}
+
+\begin{document}
+
+\maketitle
+
+This document aims to cover the solution to the \lstinline{generate_cfg_english} function. As a refresher, the function asked us to create a context-free grammar (CFG) capable of generating a few english sentences. To do this, we will go through each of the sentences one by one, and continually add / update our production rules to fit our requirements.
+
+\vspace{2mm}
+To simplify our CFG, we use the following abbreviations:
+\begin{center}
+\begin{tabular}{l@{\hskip 1cm}l}
+    ART & Article \\
+    CONJ & Conjunction \\
+    NP & Noun Phrase \\
+    ADV & Adverb \\
+    ADJ & Adjective \\
+    NN & Noun \\
+    Vi & Intransitive Verb \\
+    Vt & Transitive Verb.
+\end{tabular}
+\end{center}
+Here, to simplify notation, we have combined four categories into one: $$\text{Noun = Singular Noun $\cup$ Plural Noun $\cup$ Proper Noun $\cup$ Pronoun}.$$ Now that we have defined our parts of speech, we can begin to develop our CFG:
+
+\begin{enumerate}[label = \textbf{\arabic*.}]
+    \item 
+     \textbf{The man swims.} The sentence consists of a subject, an article, and an intransitive verb. We use the traditional notation of splitting sentences up into Noun Phrases (NP) and Verb Phrases (VP), leading to the following structure:
+     $$\begin{array}{r@{ {}\rightarrow{} }lll}
+        S & \NP & \VP \\
+        \NP & (\ART) & \NN \\
+        \VP & \Vi
+    \end{array}$$
+    \item \textbf{The trainer carried the dumbbells.} We now introduce transitive verbs. In this sentence, ``the dumbells" is an example of a direct object, the recipient of a transitive verb. We modify our verb phrase as follows:
+    $$\begin{array}{r@{ {}\rightarrow{} }lll}
+        \VP & \Vt & \NP
+    \end{array}$$
+    \item \textbf{Ron ate his cold, delicious protein shake} and \textbf{The very extremely tall, intelligent woman deadlifted}. I mentioned this one in the intructions, but we can add a potentially infinite number of adjectives to modify our direct object without any fault:
+    $$\begin{array}{r@{ {}\rightarrow{} }lll}
+        \NP & (\ART) & (\ADJs) & \NN \\
+        \ADJs & \ADJ & (\ADJs)
+    \end{array}$$
+    \item \textbf{Reese gave her bar to Paul.} Again we must modify our verb phrase. We do so using prepositional phrases. We modify our rules as follows:
+    $$\begin{array}{r@{ {}\rightarrow{} }lll}
+        \VP & \Vi & (\PP) \\
+        \VP & \Vt & \NP & (\PP) \\
+        \PP & \PREP & \NP
+    \end{array}$$
+    Again the parentheses around $\PP$ means it is optional.
+
+    \vspace{2mm} In addition, note that ``her" is a possessive noun, not an article. As a hack, we can add the rule
+    $$\begin{array}{r@{ {}\rightarrow{} }lll}
+        \ART & \NN
+    \end{array}$$
+    However, this is not too elegant, and could be improved by differentiating possessive nouns in the \lstinline{parts_of_speech} dictionary (see `Final Remarks' section below).
+    \item \textbf{She ran on the treadmill quickly and enthusiastically.} Adverbs are the verbal equivalent to adjectives. However, in this case we must also include a conjunction between each adverb.
+    $$\begin{array}{r@{ {}\rightarrow{} }llll}
+        \VP & \Vi & (\PP) & (\ADVs_{1}) \\
+        \VP & \Vt & \NP & (\PP) & (\ADVs_{1}) \\
+        \ADVs_{1} & \ADV & (\ADVs_{2}) \\
+        \ADVs_{2} & \CONJ & \ADVs_{1}
+    \end{array}$$
+    Note that adverbs can also be placed before the prepositional phrase, i.e.\ the phrase ``She quickly and enthusiastically ran on the treadmill" would be perfectly valid.
+    \item \textbf{They exercised with the ab-roller and the jump-rope.} Here two noun phrases are being combined with a conjunction. We accommodate this change by allowing noun phrases to split into multiple noun phrases.
+    $$\begin{array}{r@{ {}\rightarrow{} }llll}
+        \NP & (\ART) & (\ADJs) & \NN & (\NPs) \\
+        \NPs & \CONJ & \NP
+    \end{array}$$
+    \item \textbf{The motivated fellow lifted the weights, but the unmotivated fellow dropped them.} We can combine sentences using conjunctions like so:
+    $$\begin{array}{r@{ {}\rightarrow{} }lll}
+        S & S & \CONJ & S
+    \end{array}$$
+\end{enumerate}
+    The final CFG is shown below:
+    \begin{tcolorbox}[enhanced,colback=Dandelion!30, colframe=Dandelion!50!black,
+    width=10cm,
+    center,
+    drop fuzzy shadow,]
+    % enhanced,title=Correct Approach,
+    %     colback=Dandelion!30,
+    % colframe=Dandelion!50!black
+    %     arc=1mm,colbacktitle=Dandelion!10,
+    %     fonttitle=\bfseries,coltitle=Dandelion!50!black,
+    %     attach boxed title to top center=
+    %     {yshift=-2mm,yshifttext=-1mm},
+    %     boxed title style={
+    %     interior style={fill=none,
+    %     top color=Dandelion!30!white,
+    %     bottom color=Dandelion!20!white}}]
+    $$\begin{array}{r@{ {}\rightarrow{} }llll}
+        S & S & \CONJ & S \\
+        S  & \NP & \VP \\
+        \NP & (\ART) & (\ADJs) & \NN & (\NPs) \\
+        \ART & \NN \\
+        \ADJs & \ADJ & (\ADJs) \\
+        \NPs & \CONJ & \NP \\
+        \VP & \Vi & (\PP) & (\ADVs_{1}) \\
+        \VP & \Vt & \NP & (\PP) & (\ADVs_{1}) \\
+        \ADVs_{1} & \ADV & (\ADVs_{2}) \\
+        \ADVs_{2} & \CONJ & \ADVs_{1} \\
+        \PP & \PREP & \NP
+    \end{array}$$
+\end{tcolorbox}
+
+Testing it with the appropriate \lstinline{parts_of_speech} and the sentences yields favorable results.
+
+\subsection*{Final Remarks}
+    If I were to do it again, I would do a few things differently.
+    \begin{enumerate}[label = \arabic*.]
+        \item I would split nouns into `possessive nouns' and ``common nouns", just like verbs were split up into `transitive verbs" and '`intransitive verbs". This would allow for better differentiation for parts of speech such as pronouns (``her" vs ``she").
+        \item I would modify some of the test cases. The original goal was for each test case to test a different structure, but some either tested the same structure or were exceedingly difficult to implement (the latter ones were removed).
+        \item Finally, I would make the exposition a bit more detailed. It's always a bit of a time crunch to make these with school and everything.
+    \end{enumerate}
+
+
+\end{document}

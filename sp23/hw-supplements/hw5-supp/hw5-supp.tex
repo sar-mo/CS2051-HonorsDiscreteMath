@@ -102,7 +102,7 @@
     This week, you learned about functions. We (informally) defined them as a well-defined mapping between two sets. However, what about mappings that are not well-defined? Is there no way to represent these? As a matter of fact, there is!
     
     \vspace{3mm}
-    \textbf{Definition.} a \textit{relation} $\mathcal{R}$ over sets $A, B$ is a subset of $A \times B$. The notation $a\mathcal{R}b$ or $a \sim b$ is often used to denote that $(a, b) \in \mathcal{R}$.
+    \textbf{Definition.} A \textit{relation} $\mathcal{R}$ over sets $A, B$ is a subset of $A \times B$. The notation $a\mathcal{R}b$ or $a \sim b$ is often used to denote that $(a, b) \in \mathcal{R}$.
 
     \subsection*{Examples}
     
@@ -196,7 +196,7 @@
 
     \vspace{2mm}
 
-    Equivalence classes are useful because they all us to ``break apart" any set into disjoint, nonempty subsets. The following theorem formalizes this idea.
+    Equivalence classes are useful because they all us to ``break apart" any set into disjoint, nonempty subsets. The following theorem (not proven here) formalizes this idea.
 
     \begin{tcolorbox}
         \textbf{Theorem}: The equivalence classes of an equivalence relation on a set $A$ \textit{partition} $A$ into a collection of disjoint, nonempty subsets $A_{1}, A_{2}, \dots, A_{n}$ such that (and this is the important part) $\bigcup _{i = 1}^{n} = A$.
@@ -234,7 +234,7 @@
         If you've taken an introductory linear algebra course, you learned about Gauss's Method to solve a system of equations. In essence, it worked by starting with a matrix and deriving a sequence of other matrices, each \textit{row equivalent} to each other. It turns out that row equivalence is an equivalence relation, and partitions the set of all matrices into corresponding classes, as shown in Figure \ref*{fig:1}.
 
         \vspace{3mm}
-        We can generalize this one step further with a relation known as \textit{matrix equivalence}. Two matrices are matrix equivalent if they be derived using a combination of row operations \textit{and} column operations. Matrix equivalence classes are also characterized by rank: two same-sized matrices are matrix equivalent if and only if they have the same rank.
+        We can generalize this one step further with a relation known as \textit{matrix equivalence}. Two matrices are matrix equivalent if they can be derived using a combination of row operations \textit{and} column operations. Matrix equivalence classes are also characterized by rank: two same-sized matrices are matrix equivalent if and only if they have the same rank.
         
         \vspace{2mm}
         Looking at these definitions for matrix equivalence, you may notice they are analogous to the definition of matrix similarity you learned in your linear algebra course. This is no coincidence! In fact, matrix similarity is itself an equivalence relation, and is a special case of matrix equivalence! (see Figure \ref*{fig:3} for an illustration)
@@ -427,7 +427,7 @@
 
 
 
-    \section*{(Optional) Part 5: Processor Optimization}
+    \section*{(Extra) Part 5: Processor Optimization}
     What if we wanted to optimize the number of processors? In other words, what is the minimum number of processors such that increasing the number of processors does not decrease our latency? In the course scheduling example, it was easy to see that the optimal number of processors was $3$ by just looking at the corresponding dependency graph. However, with bigger graphs it's not always so easy.
     
     \subsection*{Brute Force}
@@ -439,11 +439,10 @@
                 if generate_schedule(elements, poset, i)\
                 == generate_schedule(elements, poset, i+1))
     \end{lstlisting}
-    
-    However, this algorithm is not considered efficient, since there is the possibility that we have to run \lstinline{generate_schedule} many times. 
+    However, this algorithm is not considered efficient, as \lstinline{generate_schedule} may be forced to run many times. 
 
     \subsection*{Improvements and Further Reading}
-    It seems natural to assume there is an efficient solution to this problem, and in fact there is! However, the details of the algorithm are far outside the scope of the course. If you really want to know, the details can be found in the \href{https://www.appliedcombinatorics.org/book/s_flowapplications_chain-partition.html}{MATH 3012 textbook}\footnote{Warning: even most sections of MATH 3012 don't get far enough to cover this topic.}.
+    It seems natural to assume there is an efficient solution to this problem, and in fact there is! However, the details of the algorithm are far outside the scope of the course. If you really want to know, the approach can be found in the \href{https://www.appliedcombinatorics.org/book/s_flowapplications_chain-partition.html}{MATH 3012 textbook}\footnote{Warning: even most sections of MATH 3012 don't get far enough to cover this topic.}.
     
     \vspace{3mm} This processor optimization problem is also known as the \textit{dual} problem of Part 4. Duality is a fundamental concept in computer science, and you'll encounter it again in your Algorithms courses.
 
