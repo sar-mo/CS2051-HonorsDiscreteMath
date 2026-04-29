@@ -18,6 +18,9 @@ class Test4COLOR(unittest.TestCase):
 
     def setUp(self) -> None:
         # a list of 50 sample fourCOLOR problems, with the i-th elememt corresponding to a problem with i points
+        # NOTE: JSON formatting was changed to make it more readable
+        # (see https://stackoverflow.com/questions/42710879/write-two-dimensional-list-to-json-file)
+        # this should not affect loading or functionality
         self.fourCOLOR_problems = json.load(open('tests/fourCOLOR_sample_problems.json', 'r'))
 
     def test_fourCOLOR_to_SAT(self):
@@ -38,6 +41,8 @@ class Test4COLOR(unittest.TestCase):
             # Test 1: test that proposition fails when when making two regions the same color
             neighbors = self.fourCOLOR_problems[i]['neighbors']
             neighbors_of_region = neighbors[region][1]
+            # if i == 3:
+            #     self.assertTrue(False, msg=f"neighbors of region {region} are {neighbors_of_region} with neighbors {neighbors}")
             random_neighbor = random.choice(neighbors_of_region)
             model[color + str(random_neighbor)] = True
             colors = ['r', 'g', 'b', 'y']
