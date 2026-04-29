@@ -1,0 +1,192 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[left=3cm, right=3cm, top=2cm, bottom=2cm]{geometry}
+\usepackage[linesnumbered,boxed]{algorithm2e}
+\usepackage[noend]{algpseudocode}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{authblk}
+\usepackage{comment}
+\usepackage{mdframed}
+\usepackage{graphicx}
+
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+
+\title{Homework 1}
+\author{CS 2051, Spring 2022}
+\affil{Georgia Tech\\~\\{\bf Due Wed. Jan 26}}
+\date{}
+\maketitle
+
+\paragraph{Reminder:} You may collaborate with other students in this
+class, but (1) you must write up your own solutions in your own words, and (2) 
+you must write down everyone you worked with at the top of the page, or ``no 
+collaborators'' if you did it all on your own. Additionally, if you used any outside websites or textbooks besides the course text, please cite them here. You may not use question-answer sites like Chegg or MathOverflow. \\
+
+You may assume the following definitions and anything we have defined in class:
+
+\begin{definition}[Even numbers]
+A natural number $N$ is called even if there is an natural number $K$ such that $2K = N$.
+\end{definition}
+
+\begin{definition}[Odd numbers]
+A natural number $N$ is called odd if there is an natural number $K$ such that $2K + 1 = N$.
+\end{definition}
+
+\begin{definition}[Divisibility]
+An integer $Z$ is said to divide $N$ if there exists an integer $K$ such that $ZK = N$.
+\end{definition}
+
+\hrulefill
+
+\begin{enumerate}
+    \setcounter{enumi}{-1}
+    \item About how many hours did you spend on this homework in total? (not graded)
+    \item A common mistake in proof writing is to assume that the converse of a proposition, $q \rightarrow p$, is equivalent to the original proposition, $p \rightarrow q$. On the other hand, a common (and valid) proof technique is to prove the contrapositive of a statement, $\neg q \rightarrow \neg p$, to indirectly show that $p \rightarrow q$ is true.
+    \begin{enumerate}
+        \item By constructing a truth table for $p \rightarrow q$, its converse, and its contrapositive, show that the converse is not equivalent to $p \rightarrow q$ while the contrapositive is logically equivalent. \\
+        \textbf{ANS:}  \\
+        
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+p & q & $p \rightarrow q$ & $q  \rightarrow p$ & $\neg q \rightarrow \neg p$ \\ \hline
+T & T & T                              & T                              & T                                                                      \\ \hline
+T & F & F                              & T                              & F                                                                      \\ \hline
+F & T & T                              & F                              & T                                                                      \\ \hline
+F & F & T                              & T                              & T                                                                      \\ \hline
+\end{tabular}
+
+
+        \item Then, write a compound proposition in English ($p, q$) where $p \rightarrow q$ (and therefore $\neg q \rightarrow \neg p$) is true, but $q \rightarrow p$ is not. \\
+        \textbf{ANS: } There are (countably) infinite correct answers to this. One of them is: \\
+        $p = $ "I am outside in the summer, $q = $ "I am hot". Then $p \rightarrow q = $ "If I am outside in the summer, then I am hot", $q \rightarrow p = $ "If I am hot, then I am outside in the summer", and $\neg q \rightarrow \neg p = $ "If I am not hot, then I am not outside in the summer."
+        
+    \end{enumerate}
+    \item Rewrite each of the following propositions/predicates using logical symbols ($\neg, \lor, \land, \rightarrow$) and quantifiers ($\forall, \exists$), clearly stating any variables you define ($p, q, r, s$, etc). Then, write the negation of each proposition using both logical symbols/quantifiers and plain English. (Hint: see section 1.2 of the textbook) \\
+    \textit{\textbf{Note:} There are multiple correct answers to these based on how one sets $p$ and $q$. E.g. $q = $ "We do not have CS 2051 class" and $q = $ "We have CS 2051" class are both valid assuming the rest of the problem is correct.} \\
+    \begin{enumerate}
+        \item If one attends Georgia Tech, then they live in Atlanta. \\
+        \textbf{ANS: } \\
+        $p = $ "one attends Georgia Tech", $q = $ "one lives in Atlanta". \\
+        Statement: $p \rightarrow q$ \\
+        Negation (logic): $\neg (p \rightarrow q) = \neg (\neg p \lor q) = p \land \neg q$. \\
+        Negation (English): "One attends Georgia Tech and does not live in Atlanta.
+        
+        \item If it is Wednesday, then we do not have CS 2051 class. \\
+        \textbf{ANS: } \\
+        $p = $ "It is Wednesday", $q = $ "We have CS 2051 class". \\
+        Statement: $p \rightarrow \neg q$ \\
+        Negation (logic): $\neg (p \rightarrow \neg q) = \neg (\neg p \lor \neg q) = p \land q$. \\
+        Negation (English): "It is Wednesday and we have CS 2051 class. \\
+        
+        \item If $a = b$ and $b = c$, then $a = c$. \\
+        \textbf{ANS: } \\
+        $p = $ "a = b", $q = $ "b = c", $r = $ "a = c". \\
+        Statement: $(p \land q) \rightarrow r$ \\
+        Negation (logic): $\neg ((p \land q) \rightarrow r) = \neg (\neg (p \land q) \lor r) = ((p \land q) \land \neg r)$. \\
+        Negation (English): "$a = b$ and $b = c$ and $a \neq c$. \\
+        \textit{Also can use a predicate: e.g. $P(x, y) = (x = y)$; $P(a, b) \land P(b, c) \rightarrow P(a, c)$}
+        
+        \item There exists an integer $n \in \mathbb{Z}$ such that 2 divides $n$ but 4 does not divide $n$. \\
+        \textbf{ANS: } \\
+        $p(n) = $ "2 divides n", $q(n) = $ 4 divides n". \\
+        Statement: $\exists (n \in \mathbb{Z})(p(n) \land \neg q(n))$ \\
+        Negation (logic): $\forall (n \in \mathbb{Z})(\neg p(n) \lor q(n))$. \\
+        Negation (English): "For all $n \in \mathbb{Z}$, 2 does not divide n and 4 divides n" \\
+
+        \item All integers greater than 1 can be factored uniquely into a product of prime numbers. \\
+        \textbf{ANS: } \\
+        $p(n) = $ "n is an integer greater than 1", $q(n) = $ "n can be factored unique into a product of prime numbers". \\
+        Statement: $\forall (n \in \mathbb{Z})(p(n) \rightarrow q(n))$ \\
+        Negation (logic): $\exists (n \in \mathbb{Z})\neg (p(n) \rightarrow q(n)) = \exists (n \in \mathbb{Z})(p(n) \land \neg q(n))$. \\
+        Negation (English): "There exists an integer $n$ where $n > 1$ where $n$ cannot be factored unique into a product of prime numbers." \\
+        \textit{An AND instead of IMPLIES here is ok since this is technically "if and only if"}
+
+        
+    \end{enumerate}
+    \item Prove or refute each of the following propositions:
+    \begin{enumerate}
+        \item If $N, M$ are odd integers, then $N + M$ is odd. \\
+        \textbf{ANS: } We can refute this with a counterexample. $N = 5, M = 3$, then $N + M = 5 + 3 = 8$. \\ 
+        Can also show directly: $N = 2k + 1, M = 2j + 1$, then $N + M = 2k + 2j + 2 = 2(k + j + 1)$ is even.
+        \item If $N$ and $M$ are both odd, then $NM$ is odd. Otherwise, $NM$ is even. \\
+        \textbf{ANS: } \\
+        We need to show both that $NM$ is odd when $N$ and $M$ are both odd and that $NM$ is even with either $N$ is odd/$M$ is even, $N$ is even/$M$ is odd, or $N$ is even/$M$ is even: \\
+        $N$ and $M$ are both odd: $N = 2k + 1, M = 2j + 1$: Then $NM = (2k + 1)(2j + 1) = 4kj + 2j + 2k + 1 = 2(2kj + j + k) + 1$, which is odd. \\
+        $N$ is even but $M$ is odd: $N = 2k$, $M = 2k + 1$. Then $NM = 2k(2k + 1) = 4k^2 + 2k = 2(2k^2 + k)$, which is even. The same argument applies for the case where $N$ is odd but $M$ is even. \\
+        $N, M$ are both even: $N = 2k, M = 2j$. Then $NM = 4jk$, which is even.
+        \item If a natural number $N$ is odd, $N^2 - 1$ is divisible by 4. \\
+        \textbf{ANS:} $N$ is said to be odd, so $N = 2k + 1$. Then $N^2 - 1 = (2k + 1)^2 - 1 = 4k^2 + 4k + 1 - 1 = 4(k^2 + k)$, so by the given definition of divisibility, $4$ divides $N^2 - 1$.
+        
+        \item If $N$ is an natural number and $N^3$ is not even, then $N$ is not even (Hint: try using the contrapositive) \\
+        \textbf{ANS}: The contrapositive of this statement is: If $N$ is even, then $N^3$ is even. $N$ is even, so $N = 2k$ by definition. Then $N^3 = (2k)^3 = 8k^3 = 2(4k^3)$. $4k^3$ is a natural number, so $2(4k^3)$ is even.
+    \end{enumerate}
+    \item Construct a truth table for the following compound proposition:
+    \begin{gather*}
+        p \rightarrow \neg (q \lor r)
+    \end{gather*}
+    \textbf{ANS: } \\
+    
+    \begin{tabular}{|l|l|l|l|}
+\hline
+p & q & r & $p \rightarrow \neg (q \lor r)$ \\ \hline
+T & T & T & F                          \\ \hline
+T & T & F & F                          \\ \hline
+T & F & T & F                          \\ \hline
+T & F & F & T                          \\ \hline
+F & T & T & T                          \\ \hline
+F & T & F & T                          \\ \hline
+F & F & T & T                          \\ \hline
+F & F & F & T                          \\ \hline
+\end{tabular}
+
+    \item Write each of the following predicates using quantifiers. Then, write the negation of each statement using both quantifiers and plain English.
+    \begin{enumerate}
+        \item Let the domain be all students at GT. \\ 
+            Let $P(x) = $ "x is a student in CS 2051" \\ 
+            Let $Q(x) = $ "x is a Computer Science major" \\
+            "There is a student in CS 2051 that is a computer science major." \\
+        \textbf{ANS:} \\
+        Predicate: $\exists x(P(x) \land Q(x))$ \\
+        Negation (quantifiers): $\forall x(\neg P(x) \lor \neg Q(x))$ \\
+        Negation (English): All students in CS 2051 are not computer science majors. \\
+        
+        \item Let the domain be all animals. \\ 
+            Let $P(x) = $ "x is a cat" \\ 
+            Let $Q(x) = $ "x can swim" \\
+            Let $R(x) = $ "x likes to get wet" \\
+            "Every cat can swim and at least one cat does not like to get wet." \\
+        \textbf{ANS:} \\
+            Predicate: $\forall x(P(x) \rightarrow Q(x)) \land \exists x(P(x) \land \neg R(x))$ \\
+            Negation (quantifiers): $\exists x(P(x) \lor \neg Q(x)) \lor \forall x(P(x) \rightarrow R(x))$ \\
+            Negation (English): There exists a cat that does not like to swim or all cats like to get wet. \\
+
+        \item Let the domain be all real numbers. \\ 
+            Let $P(x, y) = $ $x > y$ \\ 
+            "For every $x, y$ where $x > y$, there is some $z$ such that $x > z > y$." \\
+        \textbf{ANS:} \\
+            Predicate: $\forall x(\forall y(\exists z(P(x, y) \rightarrow (P(x, z) \land P(z, y)))$ \\
+            Negation (quantifiers): $\exists x(\exists y(\forall z(P(x, y) \land (\neg P(x, z)) \lor \neg P(z, y)))$ \\
+            Negation (English): There exists $x, y$ such that $x > y$ and for all $z$, $x \leq z$ or $z \leq y$. \\
+
+            
+            
+    \end{enumerate}
+    \item Determine the truth value of the following quantifications. If the answer is true, briefly explain why (one sentence, does not have to be rigorous). If the answer is false, give a counterexample. The domain of each variable consists of all real numbers.
+    \begin{enumerate}
+        \item $\forall x, \exists y (x^2 + x + 1 = y)$ \\
+        \textbf{ANS: } This is true. For any $x$, we can directly set $y$ to $x^2 + x + 1$ and the statement is true.
+        \item $\forall x, \exists y (x = y^2 + y + 1)$ \\
+        \textbf{ANS:} This is false, let $x = -1$. Consider all the points below the parabola created by the equation.
+        \item $\exists x, \exists y (xy \neq yx)$ \\
+        \textbf{ANS:} This is false because multiplication is communative.
+    \end{enumerate}
+\end{enumerate}
+
+
+
+\end{document}

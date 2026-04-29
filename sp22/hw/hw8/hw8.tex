@@ -1,0 +1,133 @@
+\documentclass{article}
+
+%Basics
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Fixes issues with underline wrapping, don't worry about it
+\usepackage{soul}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+%Easy Numbering
+\newcounter{counter}
+\newcommand{\Exercise}{Exercise \stepcounter{counter}\thecounter}
+
+%Cases Environment (Messy)
+\newlist{Cases}{enumerate}{3}
+\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+%Custom Title Fields
+\newcommand{\hmwkTitle}{Homework 8}
+\newcommand{\hmwkDueDate}{April 19, 2022}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Gerandy Brito}
+\newcommand{\hmwkSection}{Spring 2022}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{Homework 8}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{1in}
+    \textbf{\hmwkClass:\\ \hmwkTitle} \\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm} \\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkSection}} \\
+    \vspace{1in}
+    \begin{minipage}[t]{0.5\columnwidth}
+    {\footnotesize You may collaborate with other students in this class, but (1) you must write up your own solutions in your own words, and (2) you must write down everyone you worked with at the top of the page, or ``no collaborators'' if you did it all on your own. Additionally, if you used any outside websites or textbooks besides the course text, please cite them here. You may not use question-answer sites like Chegg or MathOverflow.}
+    \end{minipage}
+    \vspace{1in}
+    \author{\textbf{\hmwkAuthorName}}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\subsection*{\Exercise}
+    \textit{(Combinations with Repetition) } For each part, use the ``stars and bars" method discussed in class.
+    \begin{enumerate}
+        \item How many integer-valued solutions are there to the equation $$x_{1} + x_{2} + x_{3} + x_{4} + x_{5} = 47$$ given that $x_{1}, x_{2} > 0$ and $x_{3}, x_{4}, x_{5} \ge 10$?
+        \item Consider the two sets $X = \{1, 2, 3, 4, 5\}$ and $Y = \{6, 7, 8, 9, 10\}$. How many possible functions $f : X \rightarrow Y$ are there such that if $i < j$ then $f(i) \le f(j)$?
+        \item Stefan throws a fair six-sided die five times. Letting the outcome of the $n$th throw be $a_{n}$, how many cases are there such that $a_{1} < a_{2} < a_{3} \le a_{4} \le a_{5}$?
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    \textit{(Twelve Knights of the Round Table)} In this story, we focus on a $13$ person round table, composed of King Arthur and his twelve knights. Show your work for each part.
+    \begin{enumerate}
+        \item King Arthur calls for an urgent meeting with his knights. They are about to sit around the round table, when the king mentions that he will like to sit next to Sir Lancelot. In how many ways can they all sit? Two sittings are considered different if at least one knight has a different neighbor to the left or a different neighbor to the right.
+        \item The king and his knights have all taken their seats. However, one of King Arthur's $12$ knights, the traitorous Sir Mordred, plans to poison four others at the table. To avoid suspicion, he will not poison two people adjacent to each other on the table. How many ways can he poison the others?
+        
+        \vspace{1mm}\textit{Note: Sir Mordred would prefer not to poison himself.}
+        \item King Arthur discovers Mordred's treachery, and strips him of his title. \ul{There are now $11$ knights (plus King Arthur) sitting around a $12$ person round table.}
+        
+        \vspace{1.5mm} \qquad Now, King Arthur is holding a piece of gold. For simplicity, let us label him $+1$. As the other knights are not holding gold, we will label them $-1$. Merlin, the magician, has the power to switch the sign of the numbers in any $k$ consecutive sequence of people. Is it possible to ``shift'' the only piece of gold to a knight adjacent to King Arthur if 
+        \begin{enumerate}[label = \roman*.]
+            \item $k = 4$?
+            \item $k = 5$?
+        \end{enumerate}
+        
+        \vspace{1mm}\textit{Hint: This problem does not require much combinatorical knowledge. Furthermore, we briefly covered a topic known as \textbf{invariants} early on in the semester...}
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    \textit{(PHP: Introduction)} In your explanations for this problem, clearly state your pigeons and your pigeonholes.
+    \begin{enumerate}
+        \item Fifteen girls ate 100 berries. Prove that some pair of girls ate an identical number of berries.
+        \item There are 82 berries of various types. Prove that you can either pick ten berries, each of different types, or ten berries of the same type.
+        \item You are given 11 different natural numbers, none greater than 20. Prove that two of these can be chosen, one of which divides the other.
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    \textit{(PHP: Visualizations) } Include drawings to support your answer.
+    \begin{enumerate}
+        \item Given seven points inside a hexagon with side length 1 prove that there exists two points with distance at most 1. 
+        \item In a cube of side lengths 9 there are 1500 points. Prove that there exist two points situated at distance at most 1 from each other.
+        
+        \vspace{1mm} \textit{Note: Your drawing for this part just needs to get the main idea across.}
+        \item Six points are chosen inside a $3 \times 4$ rectangle. Prove that a pair of them can be chosen such that the distance between them is at most $\sqrt{5}$.
+        
+        \vspace{1mm} \textit{Note: This one is tough. Don't be discouraged if it takes a long time!}
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    \textit{(PHP: Dogfighting Tactics) } These problems are a bit more tricky. When we say `plane', we mean a flat, two-dimensional surface, not an airplane ;) Again, show your work.
+    \begin{enumerate}
+        \item A plane is colored using four colors. Prove that there exist two identically colored points on this plane that are an integer number of inches apart.
+        \item Place six circles in the plane so that no one of them contains the center of another. Prove that the six circles cannot have a point in common.
+        
+        \vspace{1mm} \textit{Hint: Suppose there is such a point. Consider drawing lines from the centers to this shared point.}
+        \item There are eight lines on the plane. If every line must intersect every other line, prove that some pair of lines forms an angle less than $23^{\circ}$.
+        
+        \vspace{1mm} \textit{Hint: Try drawing different configurations by hand. What changes if you translate any line in a given configuration?}
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    \textit{(Swing for the Fences) } You return to The Farm to visit your favorite cow, Pomarrosa. Unfortunately, the farmer informs you that Pomarrosa has escaped, and is now running through the farmland! Luckily, you devise a plan to catch Pomarrosa. 
+    
+    \vspace{1.5mm}
+    Let $m, n, p, q, x, y$ be positive integers. 
+    \begin{itemize}
+        \item The total farmland can be represented as a $m \times n$ grid.
+        \item Pomarrosa is currently eating grass inside the box that is situated at the intersection of the $p$-th row and $q$-th column of the farmland.
+        \item While Pomarrosa is eating grass, you and the farmer will quickly enclose her inside an $x \times y$ rectangular fence, where $1 \le x \le m$ and $1 \le y \le n$.
+    \end{itemize}
+    How many possible fences can you and the farmer build that will enclose Pomarrosa?
+
+\end{document}

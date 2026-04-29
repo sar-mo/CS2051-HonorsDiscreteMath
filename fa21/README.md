@@ -1,0 +1,1 @@
+This section of CS 2051 was taught completely separate from CS 2050. There are no homework solutions posted for this folder, as I was a student for this semester, not a TA.

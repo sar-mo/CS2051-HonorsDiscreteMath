@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Coloring Digits
+\usepackage{xcolor}
+
+%Formatting and Spacing
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setenumerate[2]{label = \roman*.}
+\setlength\parindent{0pt}
+\linespread{1.10}
+
+%Cases Environment
+\newlist{Cases}{enumerate}{3}
+\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+% \newlist{SubCases}{enumerate}{4}
+% \setlist[SubCases]{leftmargin = 1cm, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+%Custom Commands
+\newcommand{\hmwkTitle}{Exam 2 Extra Credit}
+\newcommand{\hmwkDueDate}{December 1, 2021}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Professor Gerandy Brito}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Fancy Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{\hmwkTitle}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\ \hmwkTitle}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+    \vspace{3in}
+    \author{\textbf{\hmwkAuthorName} \\ \\ \small No Collaborators, No Outside Sources}
+    \date{}
+}
+
+\begin{document}
+
+%Fix cases environment
+%Center Example for prompt on question 1?
+\maketitle
+\pagebreak
+
+\subsection*{Question 1}
+    (\textit{Power of two initial digits}) Let $N$ be a natural number, written in base 10. Show that there is a power of two such that its first digits are exactly those in $N$, in the same order. For example, \\
+    for $N = \textcolor{red}{3}$ we have $2^{5} = \textcolor{red}{3}2$; \\
+    for $N = \textcolor{blue}{12}$ we have $2^{7} = \textcolor{blue}{12}8$; \\
+    for $N = \textcolor{cyan}{102}$ we have $2^{10} = \textcolor{cyan}{102}4$.
+
+\subsection*{Solution}
+    In other words, we must prove the proposition $$(\forall N \in \mathbb{N}^{+})(\exists n \in \mathbb{N}^{+})(\exists! d \in \mathbb{N}^{+})(N \times 10^{d} \le 2^{n} < (N + 1) \times 10^{d}).$$ Taking the logarithm of base 10 of the predicate, we get $$d + \log_{10}N \le n \log_{10}2 < d + \log_{10}(N + 1).$$
+    %or $$\log_{10}N \le n \log_{10}2 - m < \log_{10}(N + 1)$$
+    
+    Note that the number of digits in $2^{n}$ is given by $d_{2^{n}} = 1 + \lfloor \log_{10}2^{n} \rfloor = 1 + \lfloor n\log_{10}2 \rfloor$. Likewise, the number of digits in $N$ is given by $d_{N} = 1 + \lfloor \log_{10}N \rfloor$. Hence $d = d_{2^{n}} - d_{N} = \lfloor n\log_{10}2 \rfloor - \lfloor \log_{10}N \rfloor$, and the original proposition becomes $$(\forall N \in \mathbb{N}^{+})(\exists n \in \mathbb{N}^{+}) (\log_{10}N - \lfloor \log_{10}N \rfloor \le n \log_{10}2 - \lfloor n\log_{10}2 \rfloor  < \log_{10}(N + 1) - \lfloor \log_{10}N \rfloor).$$ Let $\{x\}$ be the fractional part of $x$. (in other words, $\{x\} = x - \lfloor x \rfloor$.) Then the predicate becomes 
+    \begin{equation}
+        \{\log_{10}N\} \le \{n \log_{10}2\} < \log_{10}(N + 1) - \lfloor \log_{10}N \rfloor.
+    \end{equation}
+    Before concluding our proof, we first state a few facts:
+    \begin{enumerate}[label = Fact \arabic*:, leftmargin = *]
+        \item $\log_{10} 2$ is irrational. Suppose not. Then there exists some $p \in \mathbb{Z}$ and some $q \in \mathbb{N^{+}}$ such that $\log_{10}2 = \frac{p}{q}$. Then $10^{p/q} = 2$, so $10^{q} = 2^{p}$, i.e.\ $2^{q} \cdot 5^{q} = 2^{p}$. By the Fundamental Theorem of Arithmetic, this means $q = 0$. This is a contradiction, therefore $\log_{10}2$ is irrational.
+        \item  Let $\alpha$ be an irrational number. For any $i, j \in \mathbb{Z}$ such that $i \ne j$, we must have $\{i\alpha\} \ne \{j\alpha\}$. Suppose not. Then $i\alpha - \lfloor i\alpha \rfloor =  \{i\alpha\} = \{j\alpha\} = j\alpha - \lfloor j\alpha \rfloor$, so $\alpha = \frac{\lfloor i\alpha \rfloor - \lfloor j\alpha \rfloor}{i- j} \in \mathbb{Q}$, which is a contradiction.
+    \end{enumerate}
+    Let $\epsilon$ be any real number and choose an integer $m$ such that $\frac{1}{\epsilon} < m$. Now divide the unit interval $[0, 1]$ into $m$ subintervals, each of length $\frac{1}{m}$. By the pigeonhole principle and Fact 2, some two of the numbers $\{\alpha\}, \{2\alpha\}, \dots, \{m\alpha\}, \{(m + 1\}\alpha\}$ must be in the same subinterval, so there exist some $i, j \in \mathbb{Z}$ satisfying $1 \le i < j \le m + 1$ such that $|\{i\alpha\} - \{j\alpha\}| < \frac{1}{m}$. 
+    
+    \vspace{1.5mm}
+    Note that $|\{i\alpha\} - \{j\alpha\}| = \{(j - i) \alpha\}$, so $\{(j - i) \alpha\} \in \left[0, \frac{1}{m}\right]$. Then there exists some scalar integer $q$ such that for some $0 \le k \le m - 1$, $$q\{(j - i) \alpha\} = \{q(j - i) \alpha\} \in \left[\frac{k}{m}, \frac{k + 1}{m}\right].$$ It follows that every $x \in [0, 1]$ is within $1/m < \epsilon$ of some $\{n\alpha\}$, for any $\epsilon$. This means every interval $(a, b)$ with $0 \le a < b \le 1$ contains at least one of the values in the set  $\{\{n\alpha\} : n \in \mathbb{N}^{+}\}$. Formally, 
+    \begin{equation}
+        (\forall a \in [0, 1])(\forall b \in [0, 1] > a)(\exists n \in \mathbb{N}^{+})(a < \{n\alpha\} < b).
+    \end{equation}
+    Let $a = \{\log_{10}N\}$ and $b = \log_{10}(N + 1) - \lfloor \log_{10}N \rfloor$. Then by Equation 2 and Fact 1, Equation 1 is true, and thus our original proposition is true as well.
+
+\subsection*{Question 3}
+    Prof.\ Brito is decorating his baby's room. He draws points $A_{1}, A_{2}, \dots, A_{2n}$ on a line. Then he paints $n$ circumferences such that: 
+    \begin{itemize}[parsep = 1pt, topsep = 5pt]
+        \item Every circumference has diameter $A_{i}A_{j}$ for some $1 \le i < j \le 2n$.
+        \item Every $A_{k}$ belongs to exactly one circumference.
+        \item Any two circumferences are disjoint.
+    \end{itemize}
+    Finally, Brito uses two colors, green and orange, to paint the points such that pairs of points on the same circumference get the same color. In how many ways can Brito decorate the room?
+
+\subsection*{Solution \textcolor{red}{(Incorrect)}}
+    Let $T(n)$ denote the number of ways Prof.\ Brito can paint $n$ circumferences. Let $D(n)$ denote the number of ways he can decorate the room.
+    
+    \vspace{1.5mm}
+    \textsc{Base Case}: Suppose $n = 1$. In this case, the only circumference Prof.\ Brito can paint is $A_{1}A_{2}$, so $T(1) = 1$. He can paint the two points either green or orange, so $D(1) = 2$. 
+    
+    \vspace{1.5mm}
+    \textsc{Recursive Case}: Now suppose $n > 1$. All combinations of circumferences must contain one circumference of the form $A_{1}A_{j}$. In order to keep all circumferences disjoint, $j$ must be even. Therefore, $j \in \{2, 4, \dots, 2n - 2, 2n\}$.
+    
+    \begin{Cases}
+        \item Suppose $j = 2$. Then the number of ways to draw circumferences on the remaining points $A_{3}, A_{4}, \dots, A_{2n}$ is $T\left(\frac{(2n) - (3) + 1}{2}\right) = T(n - 1)$.
+        \item Suppose $j \in \{4, 6, \dots, 2n - 2\}$. Then the number of ways to draw circumferences on the points $A_{2}, A_{3}, \dots, A_{j - 1}$ is given by $T\left(\frac{(j - 1) - (2) + 1}{2}\right) = T(\frac{j}{2} - 1)$. Furthermore, the number of ways to draw circumferences on the points $A_{j + 1}, A_{j + 2}, \dots, A_{2n}$ is given by $T\left(\frac{(2n) - (j + 1) + 1}{2}\right) = T(n - \frac{j}{2})$. Therefore, the number of ways to draw circumferences is given by $T(\frac{j}{2} - 1)T(n - \frac{j}{2}).$
+        \item Suppose $j = 2n$. Then the number of ways to draw circumferences on the remaining points $A_{2}, A_{3}, \dots, A_{2n - 1}$ is $T\left(\frac{(2n - 1) - (2) + 1}{2}\right) = T(n - 1)$.
+    \end{Cases}
+    Thus the total number of ways to paint $n$ circumferences for all $j$ is given by $$T(n) = 2T(n - 1) + \sum_{j = 2}^{n - 1} T(j - 1)T(n - j).$$ Now for each pair of points, there are $2$ colors we can choose, so there are $2^{n}$ ways to colors all $n$ pairs of points. Hence $D(n) = 2^{n}T(n)$.
+    
+    \vspace{1.5mm}
+    \textsc{Conclusion}: Therefore, for all $n \in \mathbb{N}^{+}$, the number of ways Brito can decorate the room is $$D(n) = 2 \left(2D(n - 1) + \sum_{j = 2}^{n - 1} D(j - 1)D(n - j)\right) \text{ for $n > 1$},$$ where $D(1) = 2$.
+\end{document}

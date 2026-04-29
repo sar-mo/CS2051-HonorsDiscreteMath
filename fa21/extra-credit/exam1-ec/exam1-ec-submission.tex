@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Formatting and Spacing
+\usepackage{setspace}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setenumerate[2]{label = \roman*.}
+\setlength\parindent{0pt}
+\linespread{1.10}
+
+\newlist{Cases}{enumerate}{3}
+\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+%Custom Commands
+\newcommand{\hmwkTitle}{Exam 1 Extra Credit}
+\newcommand{\hmwkDueDate}{October 13, 2021}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Professor Gerandy Brito}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Fancy Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{\hmwkTitle}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\ \hmwkTitle}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+    \vspace{3in}
+    \author{\textbf{\hmwkAuthorName} \\ \\ \small No Collaborators, No Outside Sources}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\subsection*{Question 1}
+    \textit{(Hilbert's Grand Hotel)} The Grand Hotel has countable many rooms, numbered 1, 2, 3, \dots, and it is fully occupied.
+    \begin{enumerate}
+        \item Suppose that $k$ guests arrive at the hotel. Show how you can accommodate all new guests without removing any of the current guests.
+        \item Suppose that a countable infinite number of guests arrive. Show how you can accommodate all new guests without removing any of the current guests.
+        \item Suppose Hilbert (the owner of the Grand Hotel) expands the property to a second building, also with infinite rooms numbered $1, 2, 3, \dots$. Show how you can spread the current guests to fill every room in both buildings.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item Shift all existing guests $k$ rooms over, and place the $k$ guests in the rooms $1, \dots k$.
+        \item Move all existing guests in room $n$ to room $2n + 1$. This frees all rooms that can be expressed as $2n$ for the countably infinite number of guests to occupy.
+        \item Take every guest with an odd room number $2k - 1$, where $k \in \mathbb{N}$ and move them into room number $k$ in the second building.
+        
+        \vspace{1.5mm}
+        Now take the remaining guests in the original building. Since their room numbers are even, we can represent their room number as $m = 2l$, where $l \in \mathbb{N}$. Move these guests into room number $l$ in the first building.
+    \end{enumerate}
+
+\subsection*{Exercise 2}
+    Prove that any positive integer can be written as the sum of two or more distinct Fibonacci numbers.
+
+\subsection*{Solution}
+    \textsc{Base Case}:  $P(1)$ is true, since $0$ and $1$ are both Fibonacci numbers and $0 + 1 = 1$. \\
+    \textsc{Inductive Step}: Now let $n \in \mathbb{N}$ such that $P(1), P(2), \dots P(n)$ are all true. We wish to prove that $P(n + 1)$ is true. Let $f_{n}$ be the largest Fibonacci number such that $n + 1 = f_{n} + r_{n}$, where $0 \le r_{n} < n + 1$.
+    \begin{Cases}
+        \item Suppose $n + 1 = f_{n}$. Then $n + 1 = f_{n} + 0$, and thus $n + 1$ can be written as the sum of two distinct Fibonacci numbers.
+        \item Suppose $n + 1 \ne f_{n}$. Then $P(r_{n})$ is true by the inductive hypothesis, so $n + 1$ can be written as the sum of two or more Fibonacci numbers.
+    \end{Cases}
+    Since $f_{n} > r_{n}$, we have that $n + 1$ is distinct. Hence $P(n + 1)$ is true. \\
+    \textsc{Conclusion}: Therefore by strong induction, for all $n \in \mathbb{N}$, $P(n)$ is true.
+
+\subsection*{Exercise 3}
+    Let $n$ be a positive integer and $[n] = 1, \dots, n$. Show that $$\sum_{S \in P([n]) \, \mid \, S \ne \emptyset} \: \prod_{i \in S} \frac{1}{i} = n.$$ Here, $P([n])$ is the power set of $[n]$ and summation is over all the non-empty subsets of $[n]$.
+
+\subsection*{Solution}
+    Let $T(n)$ be the sentence $$\sum_{S \in P([n]) \, \mid \, S \ne \emptyset} \: \prod_{i \in S} \frac{1}{i} = n.$$ 
+    \textsc{Base Case}:  $T(1)$ is true, since the only non-empty subset of $[n]$ is $\{1\}$ and $\frac{1}{1}$ = 1. \\
+    \textsc{Inductive Step}: Now let $n \in \mathbb{N}$ such that $T(n)$ is true. We wish to show that $T(n + 1)$ is true, in other words, we wish to show that $$\sum_{S \in P([n + 1]) \, \mid \, S \ne \emptyset} \: \prod_{i \in S} \frac{1}{i} = n + 1 \quad\text{ or }\quad \left(\sum_{S \in P([n + 1]) \setminus P([n])} \: \prod_{i \in S} \frac{1}{i}\right) + \left(\sum_{S \in P([n]) \, \mid \, S \ne \emptyset} \: \prod_{i \in S} \frac{1}{i}\right) = n + 1.$$ Now from the inductive hypothesis, we reduce this problem to $$\sum_{S \in P([n + 1]) \setminus P([n])} \: \prod_{i \in S} \frac{1}{i} = 1.$$ The set $P([n + 1]) \setminus P([n])$ can be alternatively defined: take the power set $P([n])$ and add the element $n + 1$ to every set in this power set. Hence 
+    \begin{align*}
+        \sum_{S \in P([n + 1]) \setminus P([n])} \: \prod_{i \in S} \frac{1}{i} &= \frac{1}{n + 1}\sum_{S \in P([n])} \: \prod_{i \in S} \frac{1}{i} \\
+        &= \frac{1}{n + 1}\left(\sum_{S \in P([n]) \, \mid \, S \ne \emptyset} \: \prod_{i \in S} \frac{1}{i}\right) + \frac{1}{n + 1}.
+    \end{align*}
+    Once again from the inductive hypothesis, we know the above expression is equivalent to the value $\frac{n}{n + 1} + \frac{1}{n + 1}= \frac{n + 1}{n + 1} = 1$. Hence $T(n + 1)$ is true as well. \\
+    \textsc{Conclusion}: Therefore by induction, for all $n \in \mathbb{N}$, $T(n)$ is true.
+
+\end{document}

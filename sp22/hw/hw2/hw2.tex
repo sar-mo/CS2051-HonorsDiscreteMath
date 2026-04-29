@@ -1,0 +1,97 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[left=3cm, right=3cm, top=2cm, bottom=2cm]{geometry}
+\usepackage[linesnumbered,boxed]{algorithm2e}
+\usepackage[noend]{algpseudocode}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{authblk}
+\usepackage{comment}
+\usepackage{mdframed}
+\usepackage{graphicx}
+
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+
+\title{Homework 2}
+\author{CS 2051, Spring 2022}
+\affil{Georgia Tech\\~\\{\bf Due Thurs. Feb 3}}
+\date{}
+\maketitle
+
+\paragraph{Reminder:} You may collaborate with other students in this
+class, but (1) you must write up your own solutions in your own words, and (2) 
+you must write down everyone you worked with at the top of the page, or ``no 
+collaborators'' if you did it all on your own. Additionally, if you used any outside websites or textbooks besides the course text, please cite them here. You may not use question-answer sites like Chegg or MathOverflow. \\
+
+You may assume the following definitions and anything we have defined in class:
+
+\begin{definition}[Even numbers]
+An integer $N$ is called even if there is an integer $K$ such that $2K = N$.
+\end{definition}
+
+\begin{definition}[Odd numbers]
+An integer $N$ is called odd if there is an integer $K$ such that $2K + 1 = N$.
+\end{definition}
+
+\begin{definition}[Divisibility]
+An integer $Z$ is said to divide $N$ if there exists an integer $K$ such that $ZK = N$.
+\end{definition}
+
+
+\hrulefill
+
+\begin{enumerate}
+    \setcounter{enumi}{-1}
+    \item About how many hours did you spend on this homework in total? (not graded)
+    
+    \item For each argument below, label each of the statements and write the premises and the conclusion using propositional variables and connectives. Then, check the validity of the arguments. You should properly label the rule of inference you use on each step along with the lines to which you apply it. 
+    \begin{enumerate}
+        \item "Chris, a Georgia Tech graduate, knows how to write proofs. Everyone who can write proofs can get a high-paying job. Therefore, there exists a person who graduates from Georgia Tech who can get a high paying job." 
+        \item "Someone in this class enjoys whale watching. Every person who enjoys whale watching cares about ocean pollution. Therefore, there is a person in this class who cares about ocean pollution."
+    \end{enumerate}
+    
+    \item Show that the following argument is valid:
+    
+\begin{align*}
+& (1) \quad ~(p \wedge t) \rightarrow (r \vee s)\\
+& (2) \quad ~q \rightarrow (u\wedge t)\\
+& (3) \quad ~u \rightarrow  p\\
+& (4) \quad ~\neg ~ s\\
+&\noindent\rule{4cm}{0.4pt}\\
+& \therefore \quad ~ q\rightarrow r
+\end{align*}    
+
+    \item Prove the \textbf{triangle inequality}, which states that if $x, y \in \mathbb{R}$, then $|x| + |y| \geq |x + y|$. Here, $|x|$ is the absolute value of $x$ defined as
+\[
+|x|=\begin{cases}
+& x, \mbox{ if $x\geq 0$}\\
+& -x \mbox{ if $x< 0$}
+\end{cases}
+\]
+\textit{Hint: break the proof up into cases, considering all possible choices of $x$ and $y$ being positive, negative, or zero.}
+    
+    \item Show that if $n$ is an integer and $3(n + 4)^2 + 2$ is even, then $n$ is even.
+    \begin{enumerate}
+        \item using a proof by contradiction
+        \item using a proof by contrapositive
+    \end{enumerate}
+
+    \item In this problem, you will prove that $\sqrt{3}$ is irrational.
+    \begin{enumerate}
+        \item Prove the following lemma: if $a \in \mathbb{Z}$ and $a = 3k + 1$ for some $k \in \mathbb{Z}$, then $a^2 = 3j + 1$ for some integer $j$.
+        \item Prove the following lemma: if $a \in \mathbb{Z}$ and $a = 3k + 2$ for some $k \in \mathbb{Z}$, then $a^2 = 3j + 1$ for some integer $j$.
+        \item Prove the following lemma: if $a^2$ is an integer and $a^2$ is divisible by 3, then $a$ is also divisible by 3. (Hint: use the fact that exactly one of the following statements is true: there is an integer $k$ such that $a = 3k$, there is an integer $k$ such that $a = 3k + 1$, or there is an integer $k$ such that $a = 3k + 2$).
+        \item Use the previous lemma to prove that $\sqrt{3}$ is irrational. (Hint: use a proof by contradiction. Assume that $\sqrt{3}$ is rational, let $k$ be the smallest positive integer such that $k\sqrt{3}$ is an integer, then arrive at a contradiction by proving that some other integer $j < k$ also works). 
+        \item 4 is clearly rational because $\sqrt{4} = 2$. Explain which step goes wrong in your above proof on $\sqrt{4}$ instead of $\sqrt{3}$.
+    \end{enumerate}
+        
+    
+\end{enumerate}
+
+
+
+\end{document}

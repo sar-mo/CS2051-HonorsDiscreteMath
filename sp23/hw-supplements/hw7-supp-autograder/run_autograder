@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Set up autograder files
+
+cp /autograder/submission/diffie_hellman.py /autograder/source/diffie_hellman.py
+cp /autograder/submission/elliptic_curves.py /autograder/source/elliptic_curves.py
+cp /autograder/submission/ECDH.py /autograder/source/ECDH.py
+
+cd /autograder/source
+python3 run_tests.py

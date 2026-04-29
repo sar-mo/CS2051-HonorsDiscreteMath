@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Set up autograder files
+
+cp /autograder/submission/relations.py /autograder/source/relations.py
+cp /autograder/submission/scheduler.py /autograder/source/scheduler.py
+
+cd /autograder/source
+
+python3 run_tests.py

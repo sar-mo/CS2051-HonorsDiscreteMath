@@ -1,0 +1,177 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Multiple Columns
+\usepackage{multicol}
+
+%Formatting and Spacing
+\usepackage{setspace}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setenumerate[2]{label = \roman*.}
+\setlength\parindent{0pt}
+\linespread{1.10}
+
+\newcommand{\hmwkTitle}{Homework 1}
+\newcommand{\hmwkDueDate}{September 6, 2021}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Professor Gerandy Brito}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Fancy Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{\hmwkTitle}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\ \hmwkTitle}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+    \vspace{3in}
+    \author{\textbf{\hmwkAuthorName} \\ \\
+    Collaborators: Parth Adhia, Adil Farooq, Abhinav Sattiraju, Sanjay Srihari}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\subsection*{Question 1}
+    Are the following statements propositions? Answer $Y$ for yes and $N$ for no, you do not have to justify your answers.
+    \begin{enumerate}
+        \item ``Prof Brito is the only Cuban professor at GaTech."
+        \item ``I am inevitable."
+        \item ``If $1 + 1 = 2$, then horses can fly."
+        \item ``We, the people."
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{multicols}{2}
+    \begin{enumerate}
+        \item Y
+        \item N
+        \item Y
+        \item N
+    \end{enumerate}
+    \end{multicols}
+
+\subsection*{Question 2}
+    Negate the following statements (you can use any format you like): 
+    \begin{enumerate}
+        \item If it is Wednesday, then we do not have CS 2051 class.
+        \item For all odd integers $n \in \mathbb{Z}$, $n$ can be written as the sum of two consecutive integers.
+        \item If $n$ is not an even integer, then it is not divisible by 2.
+        \item There exists an integer $n \in \mathbb{Z}$ such that 2 divides $n$ but 4 does not divide $n$.
+        \item $(p \Rightarrow q) \lor (q \Rightarrow p)$
+        \item $\neg(p \lor \neg q)$.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item It is Wednesday and we have CS 2051 class.
+        \item There exists some odd integer $n \in \mathbb{Z}$ such that $n$ cannot be written as the sum of two consecutive integers.
+        \item $n$ is not an even integer and is divisible by 2.
+        \item For all integers $n \in \mathbb{Z}$, either 2 does not divide $n$ or 4 divides $n$.
+        \item $(p \land \neg q) \land (q \land \neg p)$
+        \item $p \lor \neg q$.
+    \end{enumerate}
+
+\subsection*{Question 3}
+    Let $p$ and $q$ be the following propositions:
+    \begin{enumerate}[label = , itemsep = 2pt, parsep = 0pt]
+        \item $p$: You buy a lottery ticket
+        \item $q$: You win the lottery
+    \end{enumerate}
+    Write the following propositions using $p$ and $q$ and logical connectives $(\neg, \land, \lor, \Rightarrow)$. For example, ``you bought a lottery ticket or won the lottery" becomes ``$p \lor q$."
+    \begin{enumerate}
+        \item You do not buy a lottery ticket.
+        \item You will win the lottery if you buy a lottery ticket.
+        \item You buy a lottery ticket, but do not win the lottery. 
+        \item If you do not buy a lottery ticket, you will not win the lottery. 
+        \item Whenever you win the lottery, you bought a lottery ticket.
+        \item You win the lottery, but you did not buy a lottery ticket.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{multicols}{2}
+    \begin{enumerate}
+        \item $\neg p$
+        \item $p \Rightarrow q$
+        \item $p \land \neg q$
+        \item $\neg p \Rightarrow \neg q$
+        \item $q \Rightarrow p$
+        \item $q \land \neg p$
+    \end{enumerate}
+    \end{multicols}
+
+\subsection*{Question 4}
+    Write each of the following statements using quantifiers. Next, write the negation of your statements both using quantifiers and in plain English.
+    \begin{enumerate}
+        \item Let the domain be all students at GT. \\
+        Let $P(x)$: ``$x$ is a student in CS2051." \\
+        Let $Q(x)$: ``$x$ is a computer science major."  \\
+        ``There is a student in CS2051 that is a computer science major."
+        \item Let the domain be all animals. \\
+        Let $P(x)$: ``$x$ is a cat." \\
+        Let $Q(x)$: ``$x$ can swim." \\
+        Let $R(x)$: ``$x$ likes to get wet." \\
+        ``Every cat can swim and at least one cat does not like to get wet."
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item The statement is equivalent to $(\exists x)(P(x) \land Q(x))$. The negation of this statement is $(\forall x)(\neg P(x) \lor \neg Q(x))$. In plain English, ``Every student at GT is either not a student in CS2051, or not a computer science major."
+        \item The statement is equivalent to $(\forall x)(\exists y)[(P(x) \Rightarrow Q(x)) \land (P(y) \Rightarrow \neg R(y)]$. The negation of this statement is $(\exists x)(\forall y)[(P(x) \land \neg Q(x)) \lor (P(y) \land R(y)]$. In plain English, ``At least one cat cannot swim or all cats do not like to get wet."
+    \end{enumerate}
+
+\subsection*{Question 5}
+    Determine the truth value of each of the following quantifications. If you answer is \textbf{True}, briefly explain why (your explanation should not be a proof and no longer than one sentence!). If your answer is \textbf{False}, give a counterexample. The domain of each variable consists of all real numbers.
+    \begin{enumerate}
+        \item $(\forall x)(\exists y)(x^2 + x + 1 = y)$
+        \item $(\forall x)(\exists y)(x = y^2 + y + 1)$
+        \item $(\exists x)(\exists y)(xy \ne yx)$
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item True, if we let $f(x) = x^2 + x + 1$, we see that $f(x)$ is defined for all $x$. 
+        \item False, letting $x$ be any negative number, we see that this statement cannot be true, as the RHS is equivalent to $(y + \frac{1}{2}) + \frac{1}{2}$, which is always positive.
+        \item False, the commutative property of multiplication holds for all real numbers.
+    \end{enumerate}
+
+\subsection*{Question 6}
+    Construct a truth table for the compound proposition $$(p \land q) \lor \neg r$$
+
+\subsection*{Solution}
+    $$\begin{array}{|c|c|c|c|c|c|}
+        \hline
+        p & q & r & p \land q & \neg r & (p \land q) \lor \neg r \\
+        \hline
+        T & T & T & T & F & T \\
+        T & T & F & T & T & T \\
+        T & F & T & F & F & F \\
+        T & F & F & F & T & T \\
+        F & T & T & F & F & F \\
+        F & T & F & F & T & T \\
+        F & F & T & F & F & F \\
+        F & F & F & F & T & T \\
+        \hline
+    \end{array}$$
+
+\subsection*{Question 7}
+    A natural number $N$ is \textit{odd} if there is a natural number $K$ such that $N = 2K + 1$. We said 4 divides $N$ if there is a natural number $K$ such that $N = 4K$. Use a direct proof strategy to show that if a natural number $n$ is odd, then 4 divides $n^2 - 1$.
+
+\subsection*{Solution}
+    Suppose $n \in \mathbb{N}$ is odd. Then there exists some $k \in \mathbb{N}$ such that $n = 2k + 1$. Then $n^2 = 4k^2 + 4k + 1$, so $n^2 - 1 = 4(k^2 + 4k)$. Hence 4 divides $n^2 - 1$.
+
+\end{document}

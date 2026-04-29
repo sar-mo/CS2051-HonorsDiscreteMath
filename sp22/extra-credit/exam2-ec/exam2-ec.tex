@@ -1,0 +1,115 @@
+\documentclass{article}
+
+%Basics
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+%Links
+\usepackage[colorlinks]{hyperref}
+
+%Colored Strikethrough
+\usepackage{soul}
+\setstcolor{red}
+
+%Coloring Digits
+\usepackage{xcolor}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+%Easy Numbering
+\newcounter{counter}
+\newcommand{\Exercise}{Exercise \stepcounter{counter}\thecounter}
+
+%Custom Title Fields
+\newcommand{\hmwkTitle}{Exam 2 Extra Credit}
+\newcommand{\hmwkDueDate}{Sunday, April 24, 2022}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Professor Gerandy Brito}
+\newcommand{\hmwkSection}{Spring 2022.}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{CS 2051}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{Exam 2 EC}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\\ \hmwkTitle} \\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm} \\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkSection}} \\
+    \vspace{1in}
+    \begin{minipage}[t]{0.5\columnwidth}
+    {\footnotesize \textbf{IMPORTANT:} For this assignment, you may NOT collaborate with other students, nor use resources outside the ones from class. Think of it as a take-home exam that is open book, open notes.}
+    \end{minipage}
+    \vspace{1in}
+    \author{\textbf{\hmwkAuthorName}}
+    \date{}
+}
+
+\begin{document}
+    
+\maketitle
+\pagebreak
+
+\subsection*{\Exercise \ {\bf [1 pt]}}
+    Every time you visited The Farm, you went to the barn to get some fresh milk. To milk the cows, the farmer brings in $23$ distinct cows from the pasture into the barnyard and lines them up.
+
+    \vspace{1.5mm}
+    You notice that two adjacent cows never both give milk on the same day, but no more that two adjacent cows ever give no milk on the same day. On a given day, how many different ways can the farmer get milk? (An example would be ``Cow 1 gives milk, Cow 2 does not, Cow 3 does not, etc.")
+
+\subsection*{\Exercise \ {\bf [1 pt]}}
+    Consider the grid shown below in Figure \ref{E2}.
+    
+    \vspace{1mm}
+    \setlength{\tabcolsep}{2.7pt}
+    \begin{figure}[hbp]
+        \centering
+        \begin{tabular}{ccccccccccccc}
+            & & & & & & S \\
+            & & & & & S & A & S \\
+            & & & & S & A & R & A & S \\
+            & & & S & A & R & T & R & A & S \\
+            & & S & A & R & T & H & T & R & A & S \\
+            & S & A & R & T & H & A & H & T & R & A & S \\
+            S & A & R & T & H & A & K & A & H & T & R & A & S \\
+            & S & A & R & T & H & A & H & T & R & A & S \\
+            & & S & A & R & T & H & T & R & A & S \\
+            & & & S & A & R & T & R & A & S \\
+            & & & & S & A & R & A & S \\
+            & & & & & S & A & S \\
+            & & & & & & S
+        \end{tabular}
+        \caption{A diamond-shaped, narcissistic grid of letters.}
+        \label{E2}
+    \end{figure}
+    
+    Suppose you start at any $S$, and can move only left, right, down, or up to adjacent letters. In how many ways can the palindrome SARTHAKAHTRAS be read if
+    \begin{enumerate}
+        \item the same letter can be used more than once in each sequence?
+        \item \st{the same letter cannot be used more than one in each sequence?}
+    \end{enumerate}
+
+\subsection*{\Exercise \ {\bf [1 pt, Challenge]}}
+    Let $\mathcal{P}$ be the set of all prime numbers. Let $M$ be a subset of $\mathcal{P}$ with at least $3$ elements. Choose any proper subset $A$ of $M$. Consider the number $$n_{A} = -1 + \prod_{p \in A} p.$$ Suppose that any prime divisor of $n_{A}$ lies in $M$ for all $A \subseteq M$. Show that $M = \mathcal{P}$.
+
+\subsection*{\Exercise \ [0 pts, Fall '21 Challenge]}
+    Let $N$ be a natural number, written in base 10. Show that there is a power of two such that its first digits are exactly those in $N$, in the same order. For example,
+    
+    \vspace{1.5mm}
+    for $N = \textcolor{red}{3}$ we have $2^{5} = \textcolor{red}{3}2$; \\
+    for $N = \textcolor{blue}{12}$ we have $2^{7} = \textcolor{blue}{12}8$; \\
+    for $N = \textcolor{cyan}{102}$ we have $2^{10} = \textcolor{cyan}{102}4$.
+
+\end{document}

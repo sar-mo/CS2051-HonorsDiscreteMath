@@ -57,6 +57,10 @@ def traverse_grid(coord: tuple, path: str, trajectory: list = None) -> int:
     sum += traverse_grid((coord[0] - 1, coord[1]), path, trajectory) # traverse up
     sum += traverse_grid((coord[0] + 1, coord[1]), path, trajectory) # traverse down
 
+    # important backtracking step
+    if trajectory != None:
+        trajectory.pop()
+
     return sum
 
 # Brute force method to count the number of paths from every coordinate

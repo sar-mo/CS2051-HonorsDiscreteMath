@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[left=3cm, right=3cm, top=2cm, bottom=2cm]{geometry}
+\usepackage[linesnumbered,boxed]{algorithm2e}
+\usepackage[noend]{algpseudocode}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{authblk}
+\usepackage{comment}
+\usepackage{mdframed}
+\usepackage{graphicx}
+
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+
+\title{Homework 1}
+\author{CS 2051, Spring 2022}
+\affil{Georgia Tech\\~\\{\bf Due Wed. Jan 26}}
+\date{}
+\maketitle
+
+\paragraph{Reminder:} You may collaborate with other students in this
+class, but (1) you must write up your own solutions in your own words, and (2) 
+you must write down everyone you worked with at the top of the page, or ``no 
+collaborators'' if you did it all on your own. Additionally, if you used any outside websites or textbooks besides the course text, please cite them here. You may not use question-answer sites like Chegg or MathOverflow. \\
+
+You may assume the following definitions and anything we have defined in class:
+
+\begin{definition}[Even numbers]
+A natural number $N$ is called even if there is an natural number $K$ such that $2K = N$.
+\end{definition}
+
+\begin{definition}[Odd numbers]
+A natural number $N$ is called odd if there is an natural number $K$ such that $2K + 1 = N$.
+\end{definition}
+
+\begin{definition}[Divisibility]
+An integer $Z$ is said to divide $N$ if there exists an integer $K$ such that $ZK = N$.
+\end{definition}
+
+\hrulefill
+
+\begin{enumerate}
+    \setcounter{enumi}{-1}
+    \item About how many hours did you spend on this homework in total? (not graded)
+    \item A common mistake in proof writing is to assume that the converse of a proposition, $q \rightarrow p$, is equivalent to the original proposition, $p \rightarrow q$. On the other hand, a common (and valid) proof technique is to prove the contrapositive of a statement, $\neg q \rightarrow \neg p$, to indirectly show that $p \rightarrow q$ is true.
+    \begin{enumerate}
+        \item By constructing a truth table for $p \rightarrow q$, its converse, and its contrapositive, show that the converse is not equivalent to $p \rightarrow q$ while the contrapositive is logically equivalent.
+        \item Then, write a compound proposition in English ($p, q$) where $p \rightarrow q$ (and therefore $\neg q \rightarrow \neg p$) is true, but $q \rightarrow p$ is not.
+    \end{enumerate}
+    \item Rewrite each of the following propositions/predicates using logical symbols ($\neg, \lor, \land, \rightarrow$) and quantifiers ($\forall, \exists$), clearly stating any variables you define ($p, q, r, s$, etc). Then, write the negation of each proposition using both logical symbols/quantifiers and plain English. (Hint: see section 1.2 of the textbook)
+    \begin{enumerate}
+        \item If one attends Georgia Tech, then they live in Atlanta.
+        \item If it is Wednesday, then we do not have CS 2051 class.
+        \item If $a = b$ and $b = c$, then $a = c$.
+        \item There exists an integer $n \in \mathbb{Z}$ such that 2 divides $n$ but 4 does not divide $n$.
+        \item All integers greater than 1 can be factored uniquely into a product of prime numbers.
+    \end{enumerate}
+    \item Prove or refute each of the following propositions:
+    \begin{enumerate}
+        \item If $N, M$ are odd integers, then $N + M$ is odd.
+        \item If $N$ and $M$ are both odd, then $NM$ is odd. Otherwise, $NM$ is even.
+        \item If a natural number $N$ is odd, $N^2 - 1$ is divisible by 4.
+        \item If $N$ is an natural number and $N^3$ is not even, then $N$ is not even (Hint: try using the contrapositive)
+    \end{enumerate}
+    \item Construct a truth table for the following compound proposition:
+    \begin{gather*}
+        p \rightarrow \neg (q \lor r)
+    \end{gather*}
+    \item Write each of the following predicates using quantifiers. Then, write the negation of each statement using both quantifiers and plain English.
+    \begin{enumerate}
+        \item Let the domain be all students at GT. \\ 
+            Let $P(x) = $ "x is a student in CS 2051" \\ 
+            Let $Q(x) = $ "x is a Computer Science major" \\
+            "There is a student in CS 2051 that is a computer science major."
+        \item Let the domain be all animals. \\ 
+            Let $P(x) = $ "x is a cat" \\ 
+            Let $Q(x) = $ "x can swim" \\
+            Let $R(x) = $ "x likes to get wet" \\
+            "Every cat can swim and at least one cat does not like to get wet."
+        \item Let the domain be all real numbers. \\ 
+            Let $P(x, y) = $ $x > y$ \\ 
+            "For every $x, y$ where $x > y$, there is some $z$ such that $x > z > y$."
+    \end{enumerate}
+    \item Determine the truth value of the following quantifications. If the answer is true, briefly explain why (one sentence, does not have to be rigorous). If the answer is false, give a counterexample. The domain of each variable consists of all real numbers.
+    \begin{enumerate}
+        \item $\forall x, \exists y (x^2 + x + 1 = y)$
+        \item $\forall x, \exists y (x = y^2 + y + 1)$
+        \item $\exists x, \exists y (xy \neq yx)$
+    \end{enumerate}
+\end{enumerate}
+
+
+
+\end{document}

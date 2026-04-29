@@ -1,0 +1,192 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Multiple Columns
+\usepackage{multicol}
+
+%Formatting and Spacing
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setenumerate[2]{label = \roman*.}
+\setlength\parindent{0pt}
+\linespread{1.10}
+
+%Custom Commands
+\newcommand{\hmwkTitle}{Homework 5}
+\newcommand{\hmwkDueDate}{November 5, 2021}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Professor Gerandy Brito}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Fancy Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{\hmwkTitle}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\ \hmwkTitle}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+    \vspace{3in}
+    \author{\textbf{\hmwkAuthorName} \\ \\ \small No Collaborators, No Outside Sources}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\subsection*{Question 1}
+    Let $a \equiv 4 \pmod{13}$ and $b \equiv 9 \pmod{13}$. Find the smallest positive value of $c$ such that
+    \begin{multicols}{2}
+    \begin{enumerate}
+        \item $c \equiv 9a \pmod{13}$.
+        \item $c \equiv 11b \pmod{13}$.
+        \item $c \equiv ab \pmod{13}$.
+        \item $c \equiv 2a + 3b \pmod{13}$.
+        \item $c \equiv a^{2} + b^{2} \pmod{13}$.
+        \item $c \equiv a^{3} - b^{3} \pmod{13}$.
+        \item $c \equiv b^{-1} \pmod{13}$.
+        \item $c \equiv a^{12} \pmod{13}$.
+        \item $c \equiv a^{2021} \pmod{13}$.
+        \item $c \equiv (a - b)^{2021} \pmod{13}$.
+    \end{enumerate}
+    \end{multicols}
+    \textit{You do not need to justify your work.}
+
+\subsection*{Solution}
+    \begin{multicols}{2}
+    \begin{enumerate}
+        \item $c = 10$.
+        \item $c = 8$.
+        \item $c = 10$.
+        \item $c = 9$.
+        \item $c = 6$.
+        \item $c = 11$.
+        \item $c = 3$.
+        \item $c = 1$.
+        \item $c = 10$.
+        \item $c = 8$.
+    \end{enumerate}
+    \end{multicols}
+
+\subsection*{Question 2}
+    Run the Euclidean algorithm to find
+    \begin{enumerate}
+        \item $\gcd(123, 277)$.
+        \item $\gcd(1529, 14038).$
+        \item $\gcd(k, k - 1)$, where $k > 1$ is an integer.
+    \end{enumerate}
+    For each part, outline each step of the algorithm, including the updates of $x$ and $y$ (see Algorithm 1, p284).
+
+\subsection*{Solution}
+    Using the Euclidean algorithm, we have for $x_{i}, y_{i} \in \mathbb{N}$, $$\gcd(x_{i}, y_{i}) = \gcd(y_{i}, x_{i} \text{ mod }y_{i}).$$ For each part, we are given $x_{1}$ and $y_{1}$. Then, for lines $i \ge 2$, we set $x_{i} = y_{i-1}$ and $y_{i} = x_{i-1} \text{ mod }y_{i-1}$ and apply the Euclidean algorithm shown above.
+    \begin{enumerate}
+        \item We have $x_{1} = 277$ and $y_{1} = 123$, so
+        $$\begin{aligned}
+            \gcd(277, 123) &= \gcd(123, 31) \\
+            \gcd(123, 31) &= \gcd(31, 30) \\
+            \gcd(31, 30) &= \gcd(30, 1) \\
+            \gcd(30, 1) &= \gcd(1, 0) = 1.
+        \end{aligned}$$
+        \item We have $x_{1} = 14038$ and $y_{1} = 1529$, so
+        $$\begin{aligned}
+            \gcd(14038, 1529) &= \gcd(1529, 277) \\
+            \gcd(1529, 277) &= \gcd(277, 144) \\
+            \gcd(277, 144) &= \gcd(144, 133) \\
+            \gcd(144, 133) &= \gcd(133, 11) \\
+            \gcd(133, 11) &= \gcd(12, 1) \\
+            \gcd(12, 1) &= \gcd(1, 0) = 1.
+        \end{aligned}$$
+        \item We have $x_{1} = k$ and $y_{1} = k - 1$, so
+        $$\begin{aligned}
+            \gcd(k, k - 1) &= \gcd(k - 1, 1) \\
+            \gcd(k - 1, 1) &= \gcd(1, 0) = 1. \\
+        \end{aligned}$$
+    \end{enumerate}
+
+\subsection*{Question 3}
+    Let $a, b \in \mathbb{N}^{*}$ with $a \ge b$.
+    \begin{enumerate}
+        \item Show that, if $a$ and $b$ are odd, $2\gcd(a, b) = \gcd(a + b, a - b)$.
+        \item Give a counterexample to show that the equality $2\gcd(a, b) = \gcd(a + b, a - b)$ is not always true.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item 
+        % Let $d = 2\gcd(a, b)$. Then $d = \gcd(2a, 2b)$, so $d \mid 2a$ and $d \mid 2b$, so $d \mid 2(a + b)$ and $d \mid 2(a - b)$. Now $a + b$ and $a - b$ are both even, but $d$  
+        
+        Let $d = 2\gcd(a, b)$. Then $\frac{d}{2} = \gcd(a, b)$, so $\frac{d}{2} \mid a$ and $\frac{d}{2} \mid b$, so $\frac{d}{2} \mid a + b = \frac{2(a + b)}{2}$ and $\frac{d}{2} \mid a - b = \frac{2(a - b)}{2}$. But $\frac{d}{2}$ and $2$ are coprime, so $\frac{d}{2} \mid \frac{a + b}{2}$ and $\frac{d}{2} \mid \frac{a - b}{2}$. Therefore $\frac{d}{2} \mid \gcd\left(\frac{a + b}{2}, \frac{a - b}{2}\right) = \frac{1}{2}\gcd(a + b, a - b)$, so $d \mid \gcd(a + b, a - b)$.
+        
+        \vspace{1.5mm}
+        Now let $d' = \gcd(a + b, a - b)$. Then $d' \mid (a + b)$ and $d' \mid (a - b)$. Then $d' \mid 2a$ and $d' \mid 2b$, so $d' \mid \gcd(2a, 2b)$, so $d' \mid 2\gcd(a, b)$.
+        
+        \vspace{1.5mm}
+        Now $d \mid d'$ and $d' \mid d$. Hence $d = d'$.
+        \item Let $a = 2$ and $b = 4$. Then $2\gcd(a, b) = 4$, but $\gcd(a + b, a - b) = 2$.
+    \end{enumerate}
+
+\subsection*{Question 4}
+    Following the strategy presented in class for the divisibility of 9, state and prove a rule of divisibility
+    \begin{enumerate}
+        \item by 3.
+        \item by 4.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item We can represent any number $n = a_{0}\dots a_{k}$ as $a_{0}, a_{1} \cdot 10^{k} + \dots + a_{k} \cdot 10^{0}$. For any integers $a$ and $k \ge 0$, we have $10^{k} \equiv 1 \pmod{3}$, so $a \cdot 10^{k} \equiv a \pmod{3}$. Hence $n \equiv a_{1} + \dots + a_{k} \pmod{3}$, and thus $n$ is divisible by $3$ iff the sum of its digits is divisible by $3$.
+        \item We can represent any number $n = a_{1}a_{2}\dots a_{k}$ as $a_{1} \cdot 100^{k - 1} + \dots + a_{k-1}a_{k} \cdot 100^{0}$. For any integers $a$ and $k \ge 2$, we have $10^k \equiv 0 \pmod{4}$, so  $a \cdot 10^k \equiv 0 \pmod{4}$. Hence $n \equiv a_{k-1}a_{k} \pmod{4}$, and thus $n$ is divisible by $4$ iff its last two digits is divisible by $4$.
+    \end{enumerate}
+
+\subsection*{Question 5}
+    Find the last digit of $17^{17^{17}}$. \\
+    \textit{Hint: the last digit is the remainder (mod $m$) for an adequate choice of $m$.}
+
+\subsection*{Solution}
+        Finding the last digit of $17^{17^{17}}$ is equivalent to finding $17^{17^{17}} \pmod{10}$. 
+        
+        \vspace{1.5mm}
+        First note that $17^{17} \equiv 1^{17} \equiv 1 \pmod 4$. Hence $17^{17} = 4k + 1$ for some $k \in \mathbb{Z}$. 
+        
+        Now using Euler's Theorem, we have that $$17^{17^{17}} = 17^{4k + 1} \equiv (17^{4k})(17) \equiv (17^{4})^{k}(17) \equiv (17^{\phi(10)})^{k}(17) \equiv 1^{k}(17) \equiv 7 \pmod{10}.$$ Hence the last digit of $17^{17^{17}}$ is 7.
+    \vspace{1.5pt}
+
+\subsection*{Question 6}
+    Find the last two digits of $1987^{1987}$. \\
+    (\textit{Hint: probably the easiest way is to use the CRT.})
+    
+\subsection*{Solution}
+    Finding the last two digits of $1987^{1987}$ is equivalent to finding $1987^{1987} \pmod{100}$. Using CRT, this is equivalent to solving the system 
+    $$\begin{aligned}[t]
+        x &\equiv 1987^{1987} \pmod{4} \\
+        x &\equiv 1987^{1987} \pmod{25}.
+    \end{aligned}$$
+    Now 
+    $\begin{aligned}[t]
+        1987^{1987} &\equiv 3^{1987} \equiv 3 \cdot 3^{1986} \equiv 3 \cdot (3^{2})^{993} \equiv 3 \cdot (3^{\phi(4)})^{993} \equiv 3 \cdot 1^{993} \equiv 3 \pmod{4} \text{\quad and} \\
+        1987^{1987} &\equiv 12^{1987} \equiv 12^{7} \cdot (12^{20})^{99} \equiv 12^{7} \cdot (12^{\phi(25)})^{99} \equiv 12^{7} \cdot 1^{99} \equiv 12^{7} \equiv 12 \cdot (12^{3})^{2} \equiv 8 \pmod{25}.
+    \end{aligned}$
+    
+    \vspace{1.5mm}
+    Hence our system can be reduced to
+    $$\begin{aligned}[t]
+        x &\equiv 3 \pmod{4} \\
+        x &\equiv 8 \pmod{25}.
+    \end{aligned}$$
+    Due to the first constraint, $x$ must be of the form $x = 4k + 3$ for some integer $k$. Substituting this into the second constraint, we get $4k + 3 \equiv 8 \pmod{25}$, equivalent to $k \equiv 20 \pmod{25}$.
+    
+    \vspace{1.5mm}
+    It follows that the smallest positive number fulfilling both constraints (and thus the last two digits of $1987^{1987}$) is given by $x = 4(20) + 3 = 83$.
+    
+\end{document}

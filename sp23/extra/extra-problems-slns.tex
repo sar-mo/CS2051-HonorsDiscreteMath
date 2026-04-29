@@ -1,0 +1,380 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+% Fonts
+\usepackage{newpxtext} 
+\usepackage{eulerpx}
+
+% Colored links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=magenta,
+}
+
+% Creating algorithms
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+% Inputting Python code
+\usepackage[dvipsnames]{xcolor}
+\definecolor{textblue}{rgb}{.2,.2,.7}
+\definecolor{textred}{rgb}{0.54,0,0}
+\definecolor{textgreen}{rgb}{0,0.43,0}
+\usepackage{upquote}
+\usepackage{listings}
+\lstset{
+    language=Python, 
+    tabsize=4,
+    basicstyle={\ttfamily\small},
+    keywordstyle=\color{textblue},
+    commentstyle=\color{textgreen},
+    stringstyle=\color{textred},
+    frame=none,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+}
+
+% Tcolorbox
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins,hooks,breakable}
+\usetikzlibrary{shadows}
+\usetikzlibrary{shadows.blur}
+
+% Images & Figures
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{float}
+
+% TikZ
+\usepackage{tikz}
+\usetikzlibrary{calc, math, matrix, graphs, positioning, fit, backgrounds, hobby, shapes, arrows, arrows.meta}
+\tikzset{  
+    auto,node distance =1.1 cm and 1.1 cm,
+} 
+
+% Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+% Title
+\title{\vspace{-1cm}CS 2051: Honors Discrete Mathematics \\Spring 2023 Additional Problems Solution}
+\author{Sarthak Mohanty}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Challenge Problem}
+    \subsection*{The Problem}
+    In the Homework 5 Supplement, we wished to find a solution to the \texttt{Task} \texttt{Scheduling} problem, which we restate here:
+
+    \begin{tcolorbox}[
+    enhanced, colback={green!40!black}, colupper=white, colframe=brown!70!black,
+    sharp corners,drop fuzzy shadow,
+    underlay={\tcbvignette{size=2mm, inside node=frame, raised color=brown!70!black}}]
+    {
+        \vspace{2mm} We are given a partially ordered set of tasks $T = \{T_{1}, T_{2}, \dots, T_{n}\}$, where each task $T_{i}$ takes 1 unit of time to complete. The tasks are partially ordered by a binary relation $\prec$, which specifies the dependencies between the tasks. Specifically, if $T_{i} \prec T_{j}$, then $T_{i}$ must be completed before $T_{j}$ can be started.
+    
+        \vspace{3mm}
+        We also have $k$ processors $P_{1}, P_{2}, \dots, P_{k}$ available to perform the tasks. A \textbf{schedule} for $T$ assigns each task $T_{i}$ to a processor $P_{j}$ and a start time $t_{i}$ for $P_{j}$ to begin working on $T_{i}$. If a processor starts working on $T_{i}$ at time $t_{i}$, then $T_{i}$ will be completed at time $t_{i} + 1$.
+    
+        \vspace{3mm} A schedule is \textbf{feasible} if it satisfies the following conditions:
+        \begin{enumerate}[label = \arabic*]
+            \item No single processor performs multiple tasks at the same time. In other words, if a processor is assigned to both $T_{i}$ and $T_{j}$, where $i \ne j$, then the start times for the two tasks must be different.
+            \item For every pair of tasks $T_{i}$ and $T_{j}$ such that $T_{i} \prec T_{j}$, the start time for $T_{j}$ is later than or equal to the completion time for $T_{i}$. In other words, if $T_{i}$ must be completed before $T_{j}$ can start, then the start time for $T_{j}$ must be after or at the same time as the completion time for $T_{i}$.
+        \end{enumerate}
+        The \textbf{latency} of a schedule is defined as the time between the earliest start time for any task and the latest completion time for any task. Our goal is to find a feasible schedule with the smallest possible latency.
+        }
+    \end{tcolorbox}
+    
+    In the solutions for this supplement, we presented and implemented a successful algorithm for this problem. However, it was fairly inefficient, and could be much improved. Your task is as follows: \textbf{Describe an efficient solution for the \texttt{Task} \texttt{Scheduling} problem.}
+
+    \vspace{2mm}
+    A few notes:
+    \begin{itemize}
+        \item Consider how to best represent the input data, including possibly using external data structures.
+        \item What is the Big-$\mathcal{O}$ time complexity of your solution? What about Big-$\Omega$? What input structures bottleneck your complexity?
+    \end{itemize}
+
+\subsection*{Solution}
+
+To improve the $\mathcal{O}(n^3)$ time complexity of the original Kahn's Algorithm implementation, we can utilize external data structures to efficiently track dependencies and prioritize tasks based on their distance to the end of the dependency chain.
+
+\vspace{2mm}
+\textbf{Data Representation \& Algorithm}
+\begin{enumerate}
+    \item \textbf{Adjacency List \& In-Degrees:} Instead of iteratively scanning the entire poset, we represent the graph using an adjacency list (a hash map of lists) and maintain an \texttt{in\_degree} map to track the number of unmet prerequisites for each task.
+    \item \textbf{DFS with Memoization:} We calculate the ``height'' of each task (its maximum distance to a sink node) using Depth-First Search with memoization. This gives us the priority of each task.
+    \item \textbf{Max-Heap (Priority Queue):} We maintain a Max-Heap of available tasks (tasks with an \texttt{in\_degree} of 0), prioritized by their height. At each time step, we pop up to $k$ (number of processors) tasks from the heap. Once these tasks are scheduled, we decrement the \texttt{in\_degree} of their dependents. If a dependent's \texttt{in\_degree} reaches 0, it is pushed onto the heap.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced, breakable, title=Optimal Approach,
+    colframe=green!50!black,colback=green!10!white,
+    arc=1mm,colbacktitle=green!10!white,
+    fonttitle=\bfseries,coltitle=green!50!black,
+    attach boxed title to top center=
+    {yshift=-2mm,yshifttext=-1mm},
+    boxed title style={
+    interior style={fill=none,
+    top color=green!30!white,
+    bottom color=green!20!white}}]
+    \begin{lstlisting}[belowskip=-10pt]
+import heapq
+from collections import defaultdict
+
+class TaskPriority:
+    """Custom comparator to simulate a Max-Heap for both height and value tie-breakers."""
+    def __init__(self, height, val):
+        self.height = height
+        self.val = val
+        
+    def __lt__(self, other):
+        # 1st Priority: Sort by height descending (higher height comes first)
+        if self.height != other.height:
+            return self.height > other.height
+        # 2nd Priority (Tie-Breaker): Sort by value descending (matches reverse=True)
+        return self.val > other.val
+
+def generate_schedule(elements: set, poset: set, num_processors: int) -> list[list]:
+    # Phase 1: Build Adjacency List and In-Degrees
+    graph = defaultdict(list)
+    in_degree = {u: 0 for u in elements}
+
+    for u, v in poset:
+        graph[u].append(v)
+        in_degree[v] += 1
+
+    # Phase 2: Compute Heights using DFS + Memoization
+    heights = {}
+    def get_height(u):
+        if u in heights:
+            return heights[u]
+        if not graph[u]:
+            heights[u] = 0
+        else:
+            heights[u] = 1 + max(get_height(v) for v in graph[u])
+        return heights[u]
+
+    for u in elements:
+        get_height(u)
+
+    # Phase 3: Schedule using Max-Heap
+    schedule = []
+    available = []
+    
+    # Initialize heap with tasks that have 0 prerequisites
+    for u in elements:
+        if in_degree[u] == 0:
+            heapq.heappush(available, TaskPriority(heights[u], u))
+
+    while available:
+        current_time_step_tasks = []
+        
+        # Pop up to 'num_processors' tasks for the current layer
+        for _ in range(min(num_processors, len(available))):
+            task_obj = heapq.heappop(available)
+            current_time_step_tasks.append(task_obj.val)
+            
+        schedule.append(current_time_step_tasks)
+        
+        # Unlock dependents ONLY AFTER all tasks in the current time step finish
+        for u in current_time_step_tasks:
+            for v in graph[u]:
+                in_degree[v] -= 1
+                if in_degree[v] == 0:
+                    heapq.heappush(available, TaskPriority(heights[v], v))
+                    
+    return schedule
+    \end{lstlisting}
+\end{tcolorbox}
+
+\vspace{2mm}
+\textbf{Complexity Analysis}
+\begin{itemize}
+    \item \textbf{Big-$\mathcal{O}$ Time Complexity:} $\mathcal{O}(|V| \log |V| + |E|)$. Building the adjacency list and computing the heights takes $\mathcal{O}(|V| + |E|)$ time. The heap stores at most $|V|$ elements, and each insertion or extraction operation takes $\mathcal{O}(\log |V|)$ time. Therefore, the scheduling phase takes $\mathcal{O}(|V| \log |V|)$ time, making the overall complexity dominated by graph traversal and heap sorting.
+    \item \textbf{Big-$\Omega$ Time Complexity:} $\Omega(|V| + |E|)$. In the best-case scenario, we still must process every task (vertex) and every dependency (edge) at least once to build the schedule.
+    \item \textbf{Bottlenecks:} The bottleneck lies in the priority queue operations. For highly disconnected graphs with many parallel tasks ready at the same time, the heap operations ($\mathcal{O}(|V| \log |V|)$) dominate the execution time.
+\end{itemize}
+
+\pagebreak
+
+\section*{Extra Problem [Spring 2022]}
+    No one solved this problem last year, so we are posing it again.
+    
+    \vspace{2mm}
+    Consider the grid shown below in Figure \ref*{E2}.
+    
+    \vspace{1mm}
+    \setlength{\tabcolsep}{2.7pt}
+    \begin{figure}[hbp]
+        \centering
+        \begin{tabular}{ccccccccccccc}
+            & & & & & & G \\
+            & & & & & G & E & G \\
+            & & & & G & E & R & E & G \\
+            & & & G & E & R & A & R & E & G \\
+            & & G & E & R & A & N & A & R & E & G \\
+            & G & E & R & A & N & D & N & A & R & E & G \\
+            G & E & R & A & N & D & Y & D & N & A & R & E & G \\
+            & G & E & R & A & N & D & N & A & R & E & G \\
+            & & G & E & R & A & N & A & R & E & G \\
+            & & & G & E & R & A & R & E & G \\
+            & & & & G & E & R & E & G \\
+            & & & & & G & E & G \\
+            & & & & & & G
+        \end{tabular}
+        \caption{A diamond-shaped, narcissistic grid of letters.}
+        \label{E2}
+    \end{figure}
+    
+    Suppose you start at any $G$, and can move only left, right, down, or up to adjacent letters. In how many ways can the palindrome GERANDYDNAREG be read if the same letter \underline{cannot} be used more than once in each sequence? \textbf{Prove your answer.}
+
+       \vspace{2mm}
+    \textit{(Hint): You can program a script to get your answer, and then work backwards to discover its origins.}
+
+\subsection*{Solution}
+
+Place the center $Y$ at the coordinate $(0,0)$. Then the diamond consists of all lattice points satisfying
+\[
+|x|+|y|\le 6.
+\]
+The letters depend only on the distance from the center:
+\[
+\begin{array}{c|ccccccc}
+|x|+|y| & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+\hline
+\text{letter} & Y & D & N & A & R & E & G
+\end{array}
+\]
+So reading
+\[
+\text{GERANDYDNAREG}
+\]
+means that the path must move inward from distance $6$ to distance $0$, then outward from distance $0$ to distance $6$. Thus each full path is equivalent to an ordered pair of inward paths ending at $Y$. The ``no repeated letter'' condition means these two inward paths may intersect only at $Y$.
+
+\vspace{2mm}
+Now every inward path enters $Y$ through one of the four adjacent $D$'s:
+\[
+E=(1,0),\quad W=(-1,0),\quad N=(0,1),\quad S=(0,-1).
+\]
+Call this the path's final direction. First, count how many inward paths enter through a fixed direction, say $E$. Reverse the path. Starting at $(1,0)$, it must move outward for $5$ steps. It can go into the northeast quadrant in $2^5$ ways, or into the southeast quadrant in $2^5$ ways. The straight east path was counted twice, so the number is
+\[
+2^5+2^5-1=63.
+\]
+So each direction has $63$ inward paths. Now classify ordered pairs of inward paths by their final directions.
+
+\vspace{2mm}
+\textbf{Case 1: Same final direction} \\
+If both paths enter $Y$ through the same $D$, then they share that $D$-cell. This is forbidden. So this contributes
+\[
+0.
+\]
+
+\textbf{Case 2: Opposite final directions} \\
+If one path enters through $E$ and the other through $W$, they lie on opposite sides of the diamond, except for the center. So they cannot intersect before $Y$. Same for $(N,S)$. There are $4$ ordered opposite-direction pairs:
+\[
+(E,W),(W,E),(N,S),(S,N).
+\]
+Each contributes $63^2$, so this case contributes
+\[
+4\cdot 63^2.
+\]
+
+\textbf{Case 3: Adjacent final directions} \\
+Now consider one representative adjacent case, say $E$ and $N$. There are $63^2$ total ordered pairs. We subtract the bad ones. The only place such paths can intersect is the northeast quadrant. In that quadrant, each path has $2^5$ possible choices, so there are
+\[
+2^5\cdot 2^5=2^{10}
+\]
+pairs to worry about. We need the number of nonintersecting northeast pairs. Here is the key lemma.
+
+\vspace{2mm}
+\textbf{Lemma.} \textit{The number of nonintersecting pairs of northeast lattice paths of length $n$, one starting at $(1,0)$ and the other starting at $(0,1)$, is}
+\[
+\binom{2n+1}{n}.
+\]
+For this problem, $n=5$, so this number is
+\[
+\binom{11}{5}=462.
+\]
+
+\textit{Proof of lemma.} Suppose the lower path has $i$ upward moves and the upper path has $j$ upward moves. For the paths to be nonintersecting, we must have $i\le j$. Without the nonintersection condition, there are
+\[
+\binom{n}{i}\binom{n}{j}
+\]
+such pairs. The bad pairs are those where the lower path first crosses the upper path. By the standard reflection trick, swapping the two paths up to the first crossing gives a bijection between bad pairs and pairs counted by
+\[
+\binom{n}{i-1}\binom{n}{j+1}.
+\]
+Thus the number of good pairs is
+\[
+\sum_{0\le i\le j\le n}
+\left[
+\binom{n}{i}\binom{n}{j} - \binom{n}{i-1}\binom{n}{j+1}
+\right].
+\]
+Most terms cancel. The first sum counts all pairs $(i,j)$ with $j\ge i$, while the second sum removes all pairs with $j\ge i+2$. Therefore only the cases $j=i$ and $j=i+1$ remain:
+\[
+\sum_{i=0}^{n}\binom{n}{i}^{2}
++
+\sum_{i=0}^{n-1}\binom{n}{i}\binom{n}{i+1}.
+\]
+By Vandermonde's identity,
+\[
+\sum_{i=0}^{n}\binom{n}{i}^{2} = \binom{2n}{n},
+\]
+and
+\[
+\sum_{i=0}^{n-1}\binom{n}{i}\binom{n}{i+1} = \binom{2n}{n-1}.
+\]
+So the total is
+\[
+\binom{2n}{n}+\binom{2n}{n-1} = \binom{2n+1}{n}.
+\]
+This proves the lemma.
+
+\vspace{2mm}
+Returning to the problem, in one adjacent direction pair, the number of bad pairs is
+\[
+2^{10}-\binom{11}{5} = 1024-462 = 562.
+\]
+Therefore each adjacent direction pair contributes
+\[
+63^2-562.
+\]
+There are $8$ ordered adjacent direction pairs, so the adjacent contribution is
+\[
+8(63^2-562).
+\]
+Therefore the final answer is
+\[
+4\cdot 63^2+8(63^2-562).
+\]
+Equivalently,
+\[
+12\cdot 63^2-8\cdot 562.
+\]
+Since
+\[
+63^2=3969,
+\]
+we get
+\[
+12\cdot 3969-8\cdot 562 = 47628-4496 = \mathbf{43132}.
+\]
+The most compact final form is:
+\[
+\boxed{
+12(2^6-1)^2 - 8\left(2^{10}-\binom{11}{5}\right) = 43132
+}.
+\]
+
+\end{document}

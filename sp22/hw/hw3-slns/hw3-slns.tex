@@ -1,0 +1,287 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[left=3cm, right=3cm, top=2cm, bottom=2cm]{geometry}
+\usepackage[linesnumbered,boxed]{algorithm2e}
+\usepackage[noend]{algpseudocode}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{authblk}
+\usepackage{comment}
+\usepackage{mdframed}
+\usepackage{graphicx}
+
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+
+\title{Homework 3}
+\author{CS 2051, Spring 2022}
+\affil{Georgia Tech\\~\\{\bf Due February 12}}
+\date{}
+\maketitle
+
+
+\paragraph{Reminder:} You may collaborate with other students in this
+class, but (1) you must write up your own solutions in your own words, and (2) 
+you must write down everyone you worked with at the top of the page, or ``no 
+collaborators'' if you did it all on your own. Additionally, if you used any outside websites or textbooks besides the course text, please cite them here. You may not use question-answer sites like Chegg or MathOverflow. \\
+
+\hline
+
+\subsection*{Question 1}
+Let $A, B \subseteq U$ where $U$ is the universe. 
+\begin{enumerate}
+    \item Prove that $(A \cup B)^C = A^C \cap B^c$.
+        \begin{mdframed}
+                        $(A \cup B)^c$ can be written as $\{x | x \in U \wedge x \notin A \cup B \}$ by the definition of complement:
+                \begin{equation}
+                    \{x | x \in U \wedge x \notin A \cup B\}
+                \end{equation}
+                \begin{equation}
+                    \{x | x \in U \wedge \neg (x \in A \cup B)\}\text{, by definition of negation of sets}
+                \end{equation}
+                \begin{equation}
+                    \{x | x \in U \wedge \neg (x \in A \vee x \in B)\}\text{, by definition of union}
+                \end{equation}
+                \begin{equation}
+                    \{x | x \in U \wedge \neg (x \in A) \wedge \neg (x \in B)\}\text{, by DeMorgan's law for logical equivalences}
+                \end{equation}
+                \begin{equation}
+                    \{x | x \in U \wedge x \notin A \wedge x \notin B\}\text{, by definition of negation}
+                \end{equation}
+                \begin{equation}
+                    \{x | x \in U \wedge x \in A^c \wedge x \in B^c\}\text{, by definition of complement}
+                \end{equation}
+                \begin{equation}
+                    \{x | x \in U \wedge x \in (A^c \cap B^c)\}\text{, by definition of intersection}
+                \end{equation}
+                Thus, $(A \cup B)^c=A^c \cap B^c$.
+        \end{mdframed}
+
+    \item Prove that $(A \cap B)^C = A^C \cup B^C$.
+            \begin{mdframed}
+                $(A \cup B)^c$ can be written as $\{x | x \in U \wedge x \notin A \cap B$ by the definition of complement:
+                \begin{equation}
+                    \{x | x \in U \wedge x \notin A \cap B\}
+                \end{equation}
+                \begin{equation}
+                    \{x | x \in U \wedge \neg (x \in A \cap B)\}\text{, by definition of negation of sets}
+                \end{equation}
+                \begin{equation}
+                    \{x | x \in U \wedge \neg (x \in A \wedge x \in B)\}\text{, by definition of intersection}
+                \end{equation}
+                \begin{equation}
+                    \{x | x \in U \wedge \neg (x \in A) \vee \neg (x \in B)\}\text{, by DeMorgan's law for logical equivalences}
+                \end{equation}
+                \begin{equation}
+                    \{x | x \in U \wedge x \notin A \vee x \notin B\}\text{, by definition of negation}
+                \end{equation}
+                \begin{equation}
+                    \{x | x \in U \wedge x \in A^c \vee x \in B^c\}\text{, by definition of complement}
+                \end{equation}
+                \begin{equation}
+                    \{x | x \in U \wedge x \in (A^c \cup B^c)\}\text{, by definition of union}
+                \end{equation}
+                Thus, $(A \cup B)^c=A^c \cap B^c$.
+            \end{mdframed}
+    
+    \item Prove that
+    \begin{gather*}
+            (X \cap Y \cap Z) \cup (X \cup Y \cup Z)^C \\
+            \text{and} \\
+            (X \cup Y^C) \cap (X \cup Z^C) \cap (Y \cup X^C) \cap (Y \cup Z^C) \cap (Z \cup X^C) \cap (Z \cup Y^C) \\
+            \text{are equal.}
+    \end{gather*}
+            \begin{mdframed}
+            We can rewrite the LHS (left-hand side) as: \\
+            \begin{gather*}
+            (\{ x | x \in X \} \wedge \{ x | x \in Y \} \wedge \{ x | x \in Z \}) \vee \neg ((\{ x | x \in X \} \vee \{ x | x \in Y \} \vee \{ x | x \in Z \})
+            \end{gather*} using its membership function.
+            Then we can DeMorgan it:
+            \begin{gather*}
+                (\{ x | x \in X \} \wedge \{ x | x \in Y \} \wedge \{ x | x \in Z \}) \vee ((\neg\{ x | x \in X \} \wedge \neg\{ x | x \in Y \} \wedge \neg\{ x | x \in Z \})
+            \end{gather*}
+            And then we can distribute it:
+            \begin{gather*}
+                (\{ x | x \in X \} \vee \neg\{ x | x \in X \}) \wedge (\{ x | x \in X \} \vee \neg\{ x | x \in Y \}) \wedge (\{ x | x \in X \} \vee \neg\{ x | x \in Z \}) \wedge \\
+                (\{ x | x \in Y \} \vee \neg\{ x | x \in X \}) \wedge (\{ x | x \in Y \} \vee \neg\{ x | x \in Y \}) \wedge (\{ x | x \in Y \} \vee \neg\{ x | x \in Z \}) \wedge \\
+                (\{ x | x \in Z \} \vee \neg\{ x | x \in X \}) \wedge (\{ Z | x \in X \} \vee \neg\{ x | x \in Y \}) \wedge (\{ x | x \in Z \} \vee \neg\{ x | x \in Z \})
+            \end{gather*}
+            By the law of the excluded middle ($p \vee \neg p$ is true), we can reduce this to the RHS by definition of the membership function:
+            \begin{gather*}
+                (\{ x | x \in X \} \vee \neg\{ x | x \in Y \}) \wedge (\{ x | x \in X \} \vee \neg\{ x | x \in Z \}) \wedge \\
+                (\{ x | x \in Y \} \vee \neg\{ x | x \in X \}) \wedge (\{ x | x \in Y \} \vee \neg\{ x | x \in Z \}) \wedge \\
+                (\{ x | x \in Z \} \vee \neg\{ x | x \in X \}) \wedge (\{ Z | x \in X \} \vee \neg\{ x | x \in Y \}) \\
+                = (X \cup Y^C) \cap (X \cup Z^C) \cap (Y \cup X^C) \cap (Y \cup Z^C) \cap (Z \cup X^C) \cap (Z \cup Y^C)
+            \end{gather*}
+            \end{mdframed}
+
+\end{enumerate}
+
+
+\subsection*{Question 2}
+For each of the following parts, determine if each of the following are true: $A \subseteq B$, $B \subseteq A$, $A = B$. Prove your answers. 
+\begin{enumerate}
+    \item $A = \{2n : n \in \mathbb{Z} \}, B = \{4n : n \in \mathbb{Z} \}$
+    \begin{mdframed}
+        \begin{enumerate}
+            \item $A \not\subseteq B$: Consider 2. $2 \in A$ because $2(1) = 2$, but $2 = 4(1/2)$ and $1/2 \notin \mathbb{Z}$, so $2 \notin B$.
+            \item $B \subseteq A$: Let $y \in B$. so $y = 4k$ for some $k \in \mathbb{Z}$. $4k = 2(2k) = 2p$ for some $p \in \mathbb{Z}$. $2p \in A$ by definition, so $B \subset A$.
+        \end{enumerate}
+    \end{mdframed}
+    \item $A = \mathbb{Q}, B = \{7n : n \in \mathbb{Q}\}$
+    \begin{mdframed}
+        \begin{enumerate}
+            \item $A \subseteq B$: Consider $y \in A$. $y = \frac{p}{q}$ where $p, q \in \mathbb{Z}, q \neq 0$. Then multiply by $\frac{7}{7}$ to get $\frac{7p}{7q} \in A$. Let $a = 7q$, then $\frac{7p}{a}$, so $y \in B$ by definition.
+            \item $B \subseteq A$: Consider $x \in B$. Then $x = 7n, n \in \mathbb{Q}$. Therefore, $x = 7\frac{p}{q}, p, q\in \mathbb{Z}, q \neq 0$ and $x = \frac{a}{q}$ if $a = 7p$. $a, q \in \mathbb{Z}$ and $q \neq 0$, so $x \in A$.
+            \item $A = B$. Because $A \subseteq B$ and $B \subseteq A$, $A = B$.
+        \end{enumerate}
+    \end{mdframed}
+
+    \item $A = \{2n : n \in \mathbb{Z}\}$, $B = \{n = 2k + 1 \text{ for some k in }\mathbb{Z} : n \in \mathbb{R} \}^C$
+    \begin{mdframed}
+        \begin{enumerate}
+            \item $A \subseteq B$: Let $y \in A$. Then $y = 2k$ for $k \in \mathbb{Z}$. Assume towards contradiction that $y \notin B$, then there exists some $j \in \mathbb{Z}$ such that $2j + 1 = y$. This would mean that $2j + 1 = 2k$, which contradicts that $k$ is an integer becuase $k = \frac{2j + 1}{2} = j + \frac{1}{2}$. Therefore, $y \in B$ and so $A \subseteq B$.
+            \item $B \not\subseteq A$: Observe that the universe of $B$ is $\mathbb{R}$, so the complement of "odd integers" is "all real numbers that are not odd integers". Therefore, $\pi \in B$. Because $\pi$ is irrational, there does not exist $k \in \mathbb{Z}$ such that $\pi = 2k$ becuase $\frac{\pi}{2} = k$ is not an integer.
+        \end{enumerate}
+    \end{mdframed}
+\end{enumerate}
+
+\subsection*{Question 3}
+Out of the following four functions, one is a surjection only, one is an injection only, one is neither, and one is a bijection. State which is which and demonstrate your answers by (1) proving
+that it is an injection or naming two distinct elements of the domain that are associated to the
+same element of the target, and (2) proving that it is a surjection or naming an element of the
+target for which there is no corresponding element in the domain.
+\begin{enumerate}
+    \item $f: \mathbb{Z}^2 \mapsto \mathbb{Z}$, $f(m, n) = m^2 + n^2$
+    \begin{mdframed}
+    This is neither.
+    \begin{enumerate}
+        \item Not an injection: $f(0, 1) = f(1, 0) = 1$.
+        \item Not a surjection: Because the range of both $m^2$ and $n^2$ are $[0, +\infty)$, $f(m, n) \geq 0$ for all $m, n$. Therefore, the codomain is not equal to the range. For example, $-1$ is not in the codomain.
+    \end{enumerate}
+    \end{mdframed}
+    \item $f: \mathbb{Z}^2 \mapsto \mathbb{Z}$, $f(m, n) = m$
+    \begin{mdframed}
+    This is a surjection only.
+    \begin{enumerate}
+        \item Not an injection: $f(0, 1) = f(0, 2) = 0$.
+        \item Surjection: For any $z \in \mathbb{Z}$, we have that $f(z, 0) = z$. Therefore, every element in the codomain has at least one element in the domain so it is a surjection by definition.
+    \end{enumerate}
+    \end{mdframed}
+    \item $f: \mathbb{R}^2 \mapsto \mathbb{C}$, $f(m, n) = m - 2ni$
+    \begin{mdframed}
+    This is a bijection.
+    \begin{enumerate}
+        \item Injection: Let $(m, n), (x, y) \in \mathbb{R}^2$ where $f(m, n) = f(x, y)$. For $f$ to be an injection we want to show that, $(m, n) = (x, y)$. \\
+        $m = 2ni = x - 2yi$, so $m = x$ and $-2ni = -2yi \rightarrow ni = yi \rightarrow n = y$. This is because real numbers are closed under addition and multiplication by a real number and imaginary numbers are closed under addition and multiplication by a real number.
+        \item Surjection: Let $a + bi \in \mathbb{C}$ by any member of the range. Then consider $(a, \mathbb{-b}{2} \in \mathbb{R^2}$. Then $f(a, -b/2) = a + bi$, so there exists an element in the domain that maps to $a + bi$ for any $a + bi \in \mathbb{C}$.
+    \end{enumerate}
+    \end{mdframed}
+    \item $f: \mathbb{Z}^2 \mapsto \mathbb{Z}$, $f(m, n) = 2^m3^n$
+    \begin{mdframed}
+    \begin{enumerate}
+        \item Injection: Let $(m, n), (x, y) \in \mathbb{R}^2$ where $f(m, n) = f(x, y)$. Then $2^m3^n = 2^x3^y$ and therefore, $2^{m-x} = 3^{y-n}$. This is possible iff $m - x = y - n = 0$, so $m = x$ and $y = n$. Therefore, $f$ is an injection.
+        \item Not a surjection: $2^m3^n$ is always strictly positive, so there is no $(m, n)$ such that $f(m, n) = 0$.
+    \end{enumerate}
+    \end{mdframed}
+
+\end{enumerate}
+
+
+\subsection*{Question 4}
+Determine whether the relation $\mathcal{R}$ on the set of all people is reflexive, symmetric, antisymmetric, and/or transitive. You do not need to justify your answers.\\
+
+$(a,b)\in \mathcal{R}$ if and only if
+\begin{enumerate}
+\item $a$ is taller than $b$.\\
+$\bigcirc$ \texttt{Reflexive} \quad $\bigcirc$ \texttt{Symmetric} \quad $\bigcirc$ \textcolor{blue}{\texttt{Antisymmetric} \quad $\bigcirc$ \texttt{Transitive}}
+
+\item $a$ and $b$ were born on the same day.\\
+\textcolor{blue}{$\bigcirc$ \texttt{Reflexive} \quad $\bigcirc$ \texttt{Symmetric}} \quad $\bigcirc$ \texttt{Antisymmetric} \quad $\bigcirc$ \textcolor{blue}{\texttt{Transitive}}
+
+\item $a$ has the same first name as $b$.\\
+\textcolor{blue}{$\bigcirc$ \texttt{Reflexive} \quad $\bigcirc$ \texttt{Symmetric}} \quad $\bigcirc$ \texttt{Antisymmetric} \quad $\bigcirc$ \textcolor{blue}{\texttt{Transitive}}
+
+\item $a$ and $b$ have a common grandparent.\\
+\textcolor{blue}{$\bigcirc$ \texttt{Reflexive} \quad $\bigcirc$ \texttt{Symmetric}} \quad $\bigcirc$ \texttt{Antisymmetric} \quad $\bigcirc$ \texttt{Transitive}
+
+\item $a$ and $b$ have met.\\ 
+$\bigcirc$ \texttt{Reflexive} \quad $\bigcirc$ \textcolor{blue}{\texttt{Symmetric}} \quad $\bigcirc$ \texttt{Antisymmetric} \quad $\bigcirc$ \texttt{Transitive}
+
+\end{enumerate}
+\textbf{Note: for \#5, both "reflexive" and "not reflexive" were accepted.}
+
+\subsection*{Question 5}
+The set of rational numbers can be seen as a set of the equivalence classes of a certain relation on $\mathbb{Z} \times \mathbb{Z}$ defined by $(a, b)R(c, d)$ if and only if $ad = bc$. Show that $R$ is an equivalence relation.
+
+\begin{mdframed}
+\begin{enumerate}
+    \item \textbf{Reflexive.} Clearly, $ab=ba$ since multiplication is commutative.
+    \item \textbf{Symmetric.} $(a,b)\mathcal{R} (c,d)$ iff $ad=bc$ and then $cb=da$ which is equivalent to $(c,d)\mathcal{R} (a,b)$.
+    \item \textbf{Transitive.} Let $(a,b)\mathcal{R} (c,d)$ and $(c,d)\mathcal{R} (e,f)$. Then $ad=bc$ and $cf=de$ or, $\frac{a}{b}=\frac{c}{d}=\frac{e}{f}$ yielding $af=be$ or  $(a,b)\mathcal{R} (e,f)$.
+\end{enumerate} \\
+
+\textbf{Note: Technically the transitive case only holds when $b, d \neq 0$. No points were deducted for not observing this.}
+\end{mdframed}
+
+
+
+\subsection*{Question 6 \textit{(Hilbert's Grand Hotel)}}
+     The Grand Hotel has countable many rooms, numbered 1, 2, 3, \dots, and it is fully occupied.
+    \begin{enumerate}
+        \item Suppose that $k$ guests arrive at the hotel. Show how you can accommodate all new guests without removing any of the current guests.
+    \begin{mdframed}
+    Shift all existing guests $k$ rooms over, and place the $k$ guests in the rooms $1, \dots k$.
+    \end{mdframed}
+        \item Suppose that a countable infinite number of guests arrive. Show how you can accommodate all new guests without removing any of the current guests.
+    \begin{mdframed}
+    Move all existing guests in room $n$ to room $2n + 1$. This frees all rooms that can be expressed as $2n$ for the countably infinite number of guests to occupy.
+    \end{mdframed}
+        \item Suppose Hilbert (the owner of the Grand Hotel) expands the property to a second building, also with infinite rooms numbered $1, 2, 3, \dots$. Show how you can spread the current guests to fill every room in both buildings.
+    \begin{mdframed}
+    Take every guest with an odd room number $2k - 1$, where $k \in \mathbb{N}$ and move them into room number $k$ in the second building. \\
+        Now take the remaining guests in the original building. Since their room numbers are even, we can represent their room number as $m = 2l$, where $l \in \mathbb{N}$. Move these guests into room number $l$ in the first building.
+    \end{mdframed}
+    \end{enumerate}
+
+\subsection*{Question 7 (\textit{Cantor's theorem})}
+
+
+
+\begin{enumerate}
+    \item Prove that there does not exist an onto function between $\mathbb{N}$ and its power set, $\mathcal{P}(\mathbb{N})$.\\
+
+ {\it Hint: proceed by contradiction assuming there is such function $f:\mathbb{N} \rightarrow \mathcal{P}(\mathbb{N})$. Let 
+ 
+ \[
+ T=\{n\in \mathbb{N}|~n\notin f(n) \}.
+ \]
+
+Since $f$ is onto, there exist $t\in \mathbb{N}$ such that $f(t)=T$. Argue a contradiction by looking at $t\in T$ and $t\notin T$.}
+
+\begin{mdframed}
+Assume towards contradiction that there exists a surjection $f: \mathbb{N} \mapsto \mathbb{P}(\mathbb{N})$. Let $T = \{n \in \mathbb{N} | n \notin f(n) \}$ $T \in \mathbb{P}(\mathbb{N})$, so there must exist $t \in \mathbb{N}$ such that $f(t) = T$ becuase $f$ is a surjection. \\
+Now, consider two cases, where $t \in f(t)$ and where $t \notin f(t)$:
+\begin{enumerate}
+    \item $t \in T$: Then $t \notin f(t)$, but $f(t) = T$ by definition. But $t \in \mathbb{P}(\mathbb{N})$ becuase the power set contains all possible subsets of $\mathbb{N}$, so $t \in f(t)$, which is a contradiction.
+    \item $t \notin T$: Then $t \in f(t)$, but because $f(t) = T$, $t \in T$, which is a contradiction.
+\end{enumerate} 
+These cover all possible cases of $t$, so we have a contradiction and therefore there is no onto function.
+\end{mdframed}
+
+
+\item Show that the set of all countable sets is uncountable
+
+\begin{mdframed}
+$\mathbb{P}(\mathbb{N})$ is a subset of the set of all countable sets. $\mathbb{P}(\mathbb{N})$ is uncountable, so any supersets of $\mathbb{P}(\mathbb{N})$ must also be uncountable. Therefore, the set of all countable sets is uncountable.
+\end{mdframed}
+
+
+\end{enumerate}
+
+
+
+\end{document}

@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Formatting and Spacing
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.15}
+
+%Titles and Headers Custom Fields
+\newcommand{\lectTitle}{Lecture 1 Notes}
+\newcommand{\lectTime}{August 23, 2021}
+\newcommand{\lectClass}{Honors Discrete Mathematics}
+\newcommand{\lectClassInstructor}{Professor Gerandy Brito}
+\newcommand{\lectSection}{Fall 2021}
+\newcommand{\lectAuthorName}{Sarthak Mohanty}
+
+%Fancy Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{\lectTime}
+\chead{\lectClass \ (\lectClassInstructor)}
+\rhead{\lectTitle}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\lectClass:\\ \lectTitle}\\
+    % \normalsize\vspace{0.1in}\small{Due\ on\ \lectDueDate\ at 11:59pm}\\
+    \vspace{0.1in}\large{\textit{\lectClassInstructor\ \lectSection}}
+    \vspace{3in}
+    \author{\textbf{\lectAuthorName}}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\section{Logic}
+
+The goal of discrete mathematics is to translate our current model of information (English, as an example), into an universal language. We call this language Logic. The precise definition of ``logic" is quite broad. When most people say ``logic", they mean either propositional logic or predicate logic. Let us begin by introducing propositional logic.
+
+\subsection{Propositions}
+    To begin, we have the following definition.
+    
+    \vspace{1.5mm}
+    \textbf{Definition 1.1.1} \textit{A proposition is a statement that can be always either true or false  (never both).}
+    
+    \vspace{1.5mm}
+    A few examples:
+    \begin{itemize}[itemsep = 0.2mm, parsep = 5pt, topsep = 5pt]
+        \item Professor Brito is Cuban. (True)
+        \item 2 + 3 = GT. (False)
+        \item ``If we go to the park, then we play baseball." Both the antecedent and the consequent are propositions, so the entire statement is True.
+    \end{itemize}
+    
+    An example of a statement that is \textit{not} a proposition  is the statement ``CS 2051 is a fun class!", because there is no objective definition for what `fun' is. Let's conclude with one more definition.
+    
+    \vspace{1.5mm}
+    \textbf{Definition 1.1.2}: \textit{A theorem is a proposition that is always true but not immediate to verify.}
+
+\subsection{Logical Operators}
+    First, some notation:
+    \begin{itemize}[itemsep = 0.2mm, parsep = 5pt, topsep = 5pt]
+        \item Propositions will generally be labeled as $p, q, r, \dots$.
+        \item The negation of a proposition is indicated by the $\neg$ symbol. (ex. $\neg p$).
+        \item The conjunction of two propositions is indicated by the symbol $\land$.
+        \item The disjunction of two propositions is indicated by the symbol $\lor$.
+        \item The statement ``If $p$ then $q$" can be represented by the notation $p \Rightarrow q$. This is also known as a conditional statement.
+    \end{itemize}
+    Using this newly defined notation, let's introduce a new proposition. $$ \text{For any natural number $n$, and for any set of integers $x$, $y$, and $z$, we have $x^n + y^n = z^n \Rightarrow xyz = 0$.}$$ The truth value of this proposition is clearly false (choose $n = 1$ and corresponding $x, y, z$). However, restricting the domain of $n$ to $n > 2$, this proposition becomes true (see Fermat's Last Theorem).
+    
+    \vspace{1.5mm}
+    Truth tables can also be used to more easily determine the validity of a propositional statement.
+    $$\begin{array}{|c|c|c|c|c|c|}
+        \hline
+        p & q & \neg p & p \land q & p \lor q & p \Rightarrow q\\
+        \hline
+        T & T & F & T & F & T \\
+        T & F & F & F & T & F \\
+        F & T & T & F & T & T \\
+        F & F & T & F & F & T \\
+        \hline
+    \end{array}$$
+
+\subsection{Direct Proofs}
+    The goal of a direct proof is to determine the truth value of a proposition with as few assumptions as possible.
+
+    \vspace{1.5mm}
+    \textbf{Example}
+    
+    A natural number $n$ is said to be \textit{even} if there is another natural number $k$ such that $n = 2k$. Show that if $n$ and $m$ are even numbers, then $n + m$ is even.
+    
+    \vspace{1.5mm}
+    \textbf{Solution}
+    
+    Suppose $n$ and $m$ are even numbers. Then there exists natural numbers $k$ and $l$ such that $n = 2k$ and $m = 2l$. Now $n + m = 2(k + l)$, so by definition $n + m$ is even.
+
+\end{document}

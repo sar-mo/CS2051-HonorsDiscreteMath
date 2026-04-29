@@ -1,0 +1,201 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Formatting and Spacing
+\usepackage{setspace}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setenumerate[2]{label = \roman*.}
+\setlength\parindent{0pt}
+\linespread{1.10}
+
+%Custom Commands
+\newcommand{\hmwkTitle}{Homework 3}
+\newcommand{\hmwkDueDate}{September 27, 2021}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Professor Gerandy Brito}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Fancy Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{\hmwkTitle}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\ \hmwkTitle}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+    \vspace{3in}
+    \author{\textbf{\hmwkAuthorName} \\ \\ \small No Collaborators, No Outside Sources}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\subsection*{Question 1}
+    Determine whether each of the following statements are \textbf{True} %?
+    or \textbf{False}. You do not have to justify your answers.
+    \begin{enumerate}
+        \item $0 \in \emptyset$.
+        \item $\emptyset \in \{0\}$.
+        \item $\emptyset \subseteq \{0\}$.
+        \item $\{\emptyset\} \subseteq \{\{\emptyset\}\}$.
+        \item $\{\{\emptyset\}\} \subseteq \{\emptyset, \{\emptyset\}\}$.
+    \end{enumerate}
+    
+\subsection*{Solution}
+    \begin{enumerate}
+        \item False
+        \item False
+        \item True
+        \item False
+        \item True
+    \end{enumerate}
+
+\subsection*{Question 2}
+    Prove the following statements (De Morgan's law for sets):
+    \begin{enumerate}
+        \item Let $A, B \subseteq U$ where $U$ is the universe. Prove that $(A \cup B)^{c} = A^{c} \cap B^{c}$.
+        \item Let $A, B \subseteq U$ where $U$ is the universe. Prove that $(A \cap B)^{c} = A^{c} \cup B^{c}$.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item 
+        For each object $x$, we have
+        \begin{align*}
+            & x \in (A \cup B)^{c} \\
+            \text{iff } & x \notin (A \cup B) \tag{\footnotesize definition of complement}\\
+            \text{iff } & \neg (x \in A \lor x \in B) \tag{\footnotesize definition of union and ``does not belong" symbol} \\
+            \text{iff } & x \notin A \land x \notin B \tag{\footnotesize De Morgan's laws for logical equivalences} \\
+            \text{iff } & x \in A^{c} \cap B^{c}. \tag{\footnotesize definition of complement and intersection}
+        \end{align*}
+        Thus the set $(A \cup B)^{c}$ has the same elements as the set $A^{c} \cap B^{c}$, so the two sets are equal.
+        \item z
+        For each object $x$, we have
+        \begin{align*}
+            & x \in (A \cap B)^{c} \\
+            \text{iff } & x \notin (A \cap B) \tag{\footnotesize definition of complement} \\
+            \text{iff } & \neg (x \in A \land x \in B) \tag{\footnotesize definition of intersection and ``does not belong" symbol} \\
+            \text{iff } & x \notin A \lor x \notin B\tag{\footnotesize De Morgan's laws for logical equivalences} \\
+            \text{iff } & x \in A^{c} \cup B^{c}. \tag{\footnotesize definition of complement and union}
+        \end{align*}
+        Thus the set $(A \cap B)^{c}$ has the same elements as the set $A^{c} \cup B^{c}$, so the two sets are equal.
+    \end{enumerate}
+
+\subsection*{Question 3}
+    For each of the following parts determine whether $A \subseteq B$, $B \subseteq A$, $A = B$, or none of these. Prove your answers.
+    \begin{enumerate}
+        \item $A = \{2n : n \in \mathbb{Z}\}$, $B = \{4n : n \in \mathbb{Z}\}$
+        \item $A = \mathbb{Q}$, $B = \{7n : n \in \mathbb{Q}\}$
+        \item $A = \{n : n \text{ is prime}\}$, $B = \{2n + 1 : n \in \mathbb{Z}\}$
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item $B \subseteq A$. Any integer that can be expressed as $4n$ can also be expressed as $2k$, where $k = 2n$ is an integer. Thus if a number belongs to set $B$, it also belongs to set $A$. However, the converse is not true. For example, the number $2$ can be expressed as $2n$, but cannot be expressed as $4n$.
+        \item $A = B$. Any irrational number can be expressed as $7n$, since dividing an irrational number by a nonzero rational number always yields an irrational number. This property holds for multiplication as well, so $7n$ is always irrational.
+        \item $A \subseteq B$. If a number is prime, then it must be odd, because a prime number cannot be divided by two. However, the converse statement is not true, as there exist odd numbers that are not prime (e.g.\ 9).
+    \end{enumerate}
+
+\subsection*{Question 4}
+    We defined the union and intersection of two sets. These definitions can be naturally extended for finitely many sets, recursively adding one new set. The union and intersection of $n$ sets is denoted by $%\displaystyle
+    \bigcup_{i = 1}^{n} A_{i}$ and $%\displaystyle
+    \bigcap_{i = 1}^{n} A_{i}$, respectively.
+    For each collection below, find $$\bigcup_{i = 1}^{n} A_{i} \qquad \bigcap_{i = 1}^{n} A_{i}$$
+    \begin{enumerate}
+        \item for $A_{i} = \{1, 2, \dots i\}$, where $i \in \mathbb{N}$.
+        \item for $A_{i} = \{\dots, -1, 0, 1, 2 \dots, i\}$, where $i \in \mathbb{N}$.
+        \item for $A_{i} = \{-i, \dots, -1, 0, 1, 2, \dots, i\}$, where $i \in \mathbb{N}$.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item $\bigcup_{i = 1}^{n} A_{i} = \{1, 2, \dots, n\}$ and $\bigcap_{i = 1}^{n} A_{i} = \{1\}$.
+        \item $\bigcup_{i = 1}^{n} A_{i} = \{\dots, -1, 0, 1, 2, \dots, n\}$ and $\bigcap_{i = 1}^{n} A_{i} = \{\dots, -1, 0, 1\}$.
+        \item $\bigcup_{i = 1}^{n} A_{i} = \{-n, \dots, -1, 0, 1, 2, \dots, n\}$ and $\bigcap_{i = 1}^{n} A_{i} = \{-1, 0, 1\}$.
+    \end{enumerate}
+
+\subsection*{Question 5}
+    \textit{(Union and intersection of infinitely many sets)} Now extend the previous idea to infinitely many sets!  In this case, a recursive approach won't work, so we use the formal definition instead. The union of a family of sets indexed by $\mathcal{I}$ (finite or infinite) is defined as $$\bigcup_{i \in \mathcal{I}} A_{i} = \{x \mid x \in A_{i} \text{ for some } i \in \mathcal{I}\}.$$ The intersection is defined similarly. This problem explores these definitions through concrete examples. Find $$\bigcup_{i = 1}^{\infty} A_{i} \qquad \bigcap_{i = 1}^{\infty} A_{i}$$
+    \begin{enumerate}
+        \item for $A_{i} = \{1, 2, \dots i\}$, where $i \in \mathbb{N}$.
+        \item for $A_{i} = \{i, i + 1, i + 2, \dots\}$, where $i \in \mathbb{N}$.
+        \item for $A_{i} = \{-i, \dots, -1, 0, 1, 2, \dots, i\}$, where $i \in \mathbb{N}$.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item $\bigcup_{i = 1}^{\infty} A_{i} = \mathbb{N}$ and $\bigcap_{i = 1}^{\infty} A_{i} = \{1\}$.
+        \item $\bigcup_{i = 1}^{\infty} A_{i} = \mathbb{N}$ and $\bigcap_{i = 1}^{\infty} A_{i} = \emptyset$.
+        \item $\bigcup_{i = 1}^{\infty} A_{i} = \mathbb{Z}$ and $\bigcap_{i = 1}^{\infty} A_{i} = \{-1, 0, 1\}$.
+    \end{enumerate}
+
+\subsection*{Question 6}
+    Determine whether the relation $\mathcal{R}$ on the set of all people is reflexive, symmetric, antisymmetric, and/or transitive. You do not need to justify your answers.
+    
+    \vspace{3mm} $(a, b) \in \mathcal{R}$ if and only if 
+    \begin{enumerate}
+        \item $a$ is taller than $b$.
+        \item $a$ and $b$ were born on the same day.
+        \item $a$ has the same first name as $b$.
+        \item $a$ and $b$ have a common grandparent.
+        \item $a$ and $b$ have met.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item Antisymmetric. Transitive.
+        \item Reflexive. Symmetric. Transitive.
+        \item Reflexive. Symmetric. Transitive.
+        \item Reflexive. Symmetric.
+        \item Symmetric.
+    \end{enumerate}
+
+\subsection*{Question 7}
+    \textit{The set of rational numbers can be seen as a set of the equivalence classes of certain relations on $\mathbb{Z} \times \mathbb{Z}$! Here is how.}
+    
+    \vspace{1.5mm}
+    Let $\mathcal{R}$ be a relation in $\mathbb{Z} \times \mathbb{Z}$ defined by $$(a, b) \mathcal{R} (c, d) \text{ if and only if } ad = bc.$$ Show that $\mathcal{R}$ is an equivalence relation.
+
+    \vspace{3mm} (\textit{Not for credit}) Think how each equivalence class is a rational number. Identify those classes representing the integers. Later this semester we will talk about operating on the set of equivalence classes and how we can ``lift" operations from the set below, like addition and multiplication.
+
+\subsection*{Solution}
+    To show that $\mathcal{R}$ is an equivalence relation, we must show that the relation is reflexive, symmetric, and transitive.
+    \begin{itemize}
+        \item To show reflexivity, we must show that $(a, b)\mathcal{R}(a, b)$. As $ab = ab$, so $(a, b)\mathcal{R}(a, b)$. Thus reflexive.
+        \item To show symmetry, we must show that if $(a, b)\mathcal{R}(c, d)$, then $(c, d)\mathcal{R}(a, b)$. Suppose $(a, b)\mathcal{R}(c, d)$. Then $ad = bc$, so $cb = da$, so $(a, b)\mathcal{R}(c, d)$. Hence $\mathcal{R}$ is symmetric.
+        \item To show transitivity, we must show that if $(a, b)\mathcal{R}(c, d)$ and $(c, d)\mathcal{R}(e, f)$, then $(a, b)\mathcal{R}(e, f)$. Suppose $(a, b)\mathcal{R}(c, d)$ and $(c, d)\mathcal{R}(e, f)$ Then $ad = bc$ and $cf = de$. Substituting these two equations into each other, we obtain the equation $af = be$. Hence $(a, b)\mathcal{R}(e, f)$, and thus $\mathcal{R}$ is transitive.
+    \end{itemize}
+    Since $\mathcal{R}$ is reflexive, symmetric, and transitive, we conclude that $\mathcal{R}$ is an equivalence relation.
+
+\subsection*{Question 8}
+    Let $A$ be a nonempty set.
+    \begin{enumerate}
+        \item Let $f : A \rightarrow B$ be a function with domain $A$. Show that the relation $\mathcal{R}$ defined by $x\mathcal{R}y$ if and only if $f(x) = f(y)$ is an equivalence relation.
+        \item Let $\mathcal{R}$ be an equivalence relation on $A$. Show that there is a function $f$ whose domain is $A$ such that $x\mathcal{R}y$ if and only if $f(x) = f(y)$. (\textit{Hint: the simplest way to do this is by constructing such a function $f$.})
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item 
+        \begin{itemize}
+            \item $\mathcal{R}$ is reflexive, since $f(x) = f(x)$ by definition.
+            \item By definition of equality, if $f(x) = f(y)$, then $f(y) = f(x)$. Hence $\mathcal{R}$ is symmetric.
+            \item Again by definition of equality, if $f(x) = f(y)$ and $f(y) = f(z)$, then $f(x) = f(z)$. Hence $\mathcal{R}$ is transitive.
+        \end{itemize}
+        We can now conclude that the relation $\mathcal{R}$ is an equivalence relation.
+        \item For some $x \in A$, let $E_{X}$ be the equivalence class of $x$. Then the function $f(x) = E_{X}$ completes our requirements, as $x\mathcal{R}y$ if and only if $x$ and $y$ belong to the same equivalence class, which occurs if and only if $E_{X} = E_{Y}$.
+    \end{enumerate}
+\end{document}

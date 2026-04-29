@@ -1,0 +1,149 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Multiple Columns
+\usepackage{multicol}
+
+%Formatting and Spacing
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setenumerate[2]{label = \roman*.}
+\setlength\parindent{0pt}
+\linespread{1.10}
+
+%Cases Environment
+\newlist{Cases}{enumerate}{3}
+\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+%Custom Commands
+\newcommand{\hmwkTitle}{Homework 7}
+\newcommand{\hmwkDueDate}{November 22, 2021}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Professor Gerandy Brito}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Fancy Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{\hmwkTitle}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\ \hmwkTitle}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+    \vspace{3in}
+    \author{\textbf{\hmwkAuthorName} \\ \\ \small No Collaborators, No Outside Sources}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\subsection*{Question 1}
+    For each of the following problems, explicitly mention the rule you are using and briefly explain how you deduce your answer.
+    \begin{enumerate}
+        \item There are $28$ Math majors and $30$ CS majors in this class, in how many ways can we choose a committee of two students, one representing each major?
+        \item A multiple choice test has $10$ questions, with four choices and exactly one correct answer for each question. In how many ways can a student answer the exam, if they are allowed to leave answers blank?
+        \item How many four letter words are there containing the letter $G$ in it? (assume that any string of letters is a word.)
+        \item How many positive integers less than $2021$ are divisible by $5$ but not by $6$?
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item Rule of product: $28 \times 30 = 840$.
+        \item Rule of product: $10 \times 5 = 50$.
+        \item Rule of subtraction: $26^{4} - 25^{4} = 66351$.
+        \item \# divisible by 5 and not divisible by 6: $\lfloor 2020/5 \rfloor - (\lfloor 2020 / 30 \rfloor) = 404 - 67 = 337$
+        % \# divisible by 5: $\lfloor 2020/5 \rfloor = 404$.
+        %$A \cap B^{c} = A \setminus (A \cap B) proof by definition$
+        % \# not divisible by 6: $2020 - (\lfloor 2020 / 6 \rfloor) = 2020 - 336 = 1684$.
+    \end{enumerate}
+
+\subsection*{Question 2}
+    A \textbf{palindrome} is a string whose reversal is identical to the string. How many bit strings of length $n$ are palindromes? Justify your answer.
+
+\subsection*{Solution}
+    Let $S = \{a_{1}, a_{2}, \dots, a_{n}\}$ represent a bit string of length $n$, with $a_{i}$ representing the $i$th digit of the string.
+    \begin{Cases}
+        \item Suppose $n$ is even. Then there exists some $k \in \mathbb{N}^{+}$ such that $n = 2k$. We can now partition $S$ into two sets $S_{1} = \{a_{1}, \dots, a_{k}\}$ and $S_{2} = \{a_{k + 1}, \dots, a_{n}\}$. Now if $S$ is a palindrome, then there exists two choices for each $a_{i} \in S_{1}$. Furthermore, by the definition of a palindrome, $S_{2}$ will have to be dependent on $S_{1}$, so there only exists one choice for each $a_{i} \in S_{2}$. By the rule of product, this leads us to $2^{k} = 2^{\frac{n}{2}}$ palindromes.
+        \item Suppose $n$ is odd. Then there exists some $k \in \mathbb{N}^{+}$ such that $n = 2k - 1$. We now partition $S$ into three sets: $S_{1} = \{a_{1}, \dots, a_{k - 1}\}$, $S_{2} = \{a_{k}\}$, and $S_{3} = \{a_{k + 1}, \dots, a_{n}\}$. Since $S_{2}$ represents the ``middle" digit, its value has no impact on whether $S$ is a palindrome. Hence there are $2$ choices for $S_{2}$. Furthermore, $S_{1}$ and $S_{3}$ have the same restrictions as in Case 1. By the rule of product, this leads us to $2 \cdot 2^{k - 1} = 2^{k} = 2^{\frac{n + 1}{2}}$ palindromes.
+    \end{Cases}
+
+\subsection*{Question 3}
+    In how many ways can a photographer at a wedding arrange six people in a row, including the bride and the groom if 
+    \begin{enumerate}
+        \item the bride must be next to the groom?
+        \item the bride is not next to the groom?
+        \item the bride is positioned somewhere to the left of the groom?
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item $2 \cdot 5!$
+        \item $6! - 2 \cdot 5!$
+        \item $4! + 2 \cdot 4! + 3 \cdot 4! + 4 \cdot 4! + 5 \cdot 4! = 4!(1 + 2 + 3 + 4 + 5) = 4!(15)$
+    \end{enumerate}
+
+\subsection*{Question 4}
+    Every student in CS 2051 is either a CS major or a Math major or a joint major in these two subjects. How many students are in the class if there are $38$ CS majors (including joint majors), $23$ Math majors (including joint majors), and $7$ joint majors? Justify your answer.
+    
+\subsection*{Solution}
+    Let $A$ be the number of CS majors, and let $B$ be the number of Math majors. By the inclusion-exclusion principle, we have that 
+    $|A \cup B| = |A| + |B| - |A \cap B| = 38 + 23 - 7 = 54$. Hence there are 54 total students in the class.
+
+\subsection*{Question 5}
+    A drawer contains a dozen brown socks and a dozen black socks, all unmatched. You take socks out at random, in the dark, one at a time (once a sock has been taken, you cannot place it back).
+    \begin{enumerate}
+        \item How many socks must you take out to be sure you have at least two socks of the same color? Justify your answer.
+        \item How many socks must you take out to be sure you have at least two black socks? Justify your answer.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item Let $n$ represent the number of items; in this case, the number of socks we pull out. Let $m$ represent the number of containers; in this case, the number of sock colors. The pigeonhole principle states that if $n > m$, then one of the containers contains more than one item; in other words, we will have two socks of the same color. Hence, we must pull out $3$ socks.
+        \item By the pigeonhole principle, fourteen socks must be taken out.
+    \end{enumerate}
+
+\subsection*{Question 6} 
+    Let $(x_{i}, y_{i})$, for $1 \le i \le 5$ be a set of five distinct points with integer coordinates in the $xy$-plane. Prove that the midpoint of the segment joining at least one pair of these points has integer coordinates.
+
+\subsection*{Solution}
+    If the midpoint of $(x_{i}, y_{i})$ and $(x_{j}, y_{j})$ has integer coordinates, then $\frac{x_{i} + x_{j}}{2}$ and/or $\frac{y_{i} + y_{j}}{2}$ are both integers, so the parity of $(x_{i}, y_{i})$ and $(x_{j}, y_{j})$ are the same. There are only four possible choices for the parity of $(x_{i}, y_{i})$, but there are five coordinates. Hence by the pigeonhole, principle, two of the coordinates must have the same parity, and thus the midpoint of the segment joining those two points has integer coordinates.
+
+\subsection*{Question 7} 
+    For each part below, briefly explain your reasoning.
+    \begin{enumerate}
+        \item How many possibilities are there for the medals (first, second, and third positions) in a race with eight competitors?
+        \item How many ways are there to arrange $n$ wolves and $n$ sheep in a line, if the wolves and sheep alternate?
+        \item How many strings of length $10$ contain exactly four $1$s?
+        \item How many strings of length $10$ contain more $0$s than $1$s?
+        \item How many permutations of the letters GEORGIA contain the string GA?
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item We are choosing without replacement, in a system where order matters. Hence there are ${}^8P_{3} = \frac{8!}{(8 - 3)!}$ possibilities. \\
+        Alternative Solution: There are eight possibilities for the first place position, seven possibilities for the second place position, and six possibilities for the third place position.
+        \item If the wolves and sheep were unordered, then there are only two ways to divide them up into wolf-sheep pairs. We then arrange the wolf-sheep pairs, giving us $2^{n/2 + 1}$ total combinations
+        \item We choose $4$ of the $10$ digits to be $1$s. The remaining digits will then be zero. This is given by $\binom{10}{4} = 210$.
+        \item There are three types of strings of length $10$:
+        \begin{enumerate}[label = \arabic*.]
+            \item Those with more zeros than ones.
+            \item Those with more ones than zeros.
+            \item Those with the same amount of ones and zeroes.
+        \end{enumerate}
+        1. and 2. have the same number of elements in them, as there exists a bijection between them. 3. is given by $\binom{10}{5} = 252$. Hence $|S| = 2|S_{1}| + |S_{3}|$, so $|S_{1} = (|S| - |S_{3}|)/2 = (1024 - 252)/2 = 386$.
+        \item We treat $GA$ as one letter. Then all permutations of GEORGIA contain the letters GA, E, O, R, G, I. We wish to find all permutations of six letters, from a sample space of six letters. This is given by ${}^6P_{6} = 6!$.
+    \end{enumerate}
+
+\end{document}

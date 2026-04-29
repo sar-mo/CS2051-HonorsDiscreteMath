@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Set up autograder files
+
+cp /autograder/submission/inference.py /autograder/source/inference.py
+cp /autograder/submission/SAT.py /autograder/source/SAT.py
+cp /autograder/submission/fourCOLOR.py /autograder/source/fourCOLOR.py
+
+cd /autograder/source
+
+python3 run_tests.py

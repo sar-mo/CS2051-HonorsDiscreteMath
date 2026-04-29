@@ -1,0 +1,94 @@
+\documentclass{article}
+
+%Basics
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+%Easy Numbering
+\newcounter{counter}
+\newcommand{\Exercise}{Exercise \stepcounter{counter}\thecounter}
+
+%Custom Title Fields
+\newcommand{\hmwkTitle}{Exam 1 Extra Credit}
+\newcommand{\hmwkDueDate}{Sunday, February 27, 2022.}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Professor Gerandy Brito}
+\newcommand{\hmwkSection}{Spring 2022.}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{CS 2051}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{Exam 1 EC}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\\ \hmwkTitle} \\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm} \\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkSection}} \\
+    \vspace{1in}
+    \begin{minipage}[t]{0.5\columnwidth}
+    {\footnotesize \textbf{IMPORTANT:} For this assignment, you may NOT collaborate with other students, nor use resources outside the ones from class. Think of it as a take-home exam that is open book, open notes.}
+    \end{minipage}
+    \vspace{1in}
+    \author{\textbf{\hmwkAuthorName}}
+    \date{}
+}
+
+\begin{document}
+    
+\maketitle
+\pagebreak
+
+\subsection*{\Exercise}
+    {\bf [0.5 points]} Let $n$ be a positive integer and $[n] = \{1, \dots, n\}$. Show that $$\sum_{S \in \mathcal{P}([n]) \, \mid \, S \ne \emptyset} \: \prod_{i \in S} \frac{1}{i} = n.$$ Here, $\mathcal{P}([n])$ is the power set of $[n]$.
+
+\subsection*{\Exercise}
+    In this question, we deal with \textit{nested radicals}, an expression where radical expressions are nested within each other. The first part serves as an introduction to this concept.
+    
+    \begin{enumerate}
+        \item {\bf [0.5 points]} Prove $$\sqrt{1 + \sqrt{1+ \sqrt{1 + \cdots}}} = \sqrt{2 + \sqrt{2 - \sqrt{2 + \sqrt{2 - \cdots}}}}$$
+        \item {\bf [0.5 points]} Determine the validity of the following proof, and explain your answer.
+        
+        \vspace{1.5mm}
+        \textsc{Claim}: For all $n \in \mathbb{N}$, the following sentence $P(n)$, is true.
+        $$\sqrt{1+n\sqrt{1+(n+1)\sqrt{1+(n+2)\sqrt{1+(n+3)\sqrt{\ldots}}}}}=n+1.$$
+        \textsc{Base Case}: $P(0)$ is true, since $\sqrt{1 + 0 \cdot \sqrt{\dots}} = 1 = 0 + 1$. \\
+        \textsc{Inductive Step}: Now let $n \in \mathbb{N}$ such that $P(n)$ is true. Squaring both sides, we obtain
+        $$1+n\sqrt{1+(n+1)\sqrt{1+(n+2)\sqrt{1+(n+3)\sqrt{\ldots}}}}=n^2+2n+1.$$ Subtracting $1$ and dividing by $n$, we obtain $$\sqrt{1+(n+1)\sqrt{1+(n+2)\sqrt{1+(n+3)\sqrt{\ldots}}}}=n+2,$$
+        Hence $P(n + 1)$ is true as well. \\
+        \textsc{Conclusion}: Therefore by strong induction, for all $n \ge 0$, $P(n)$ is true.
+        \item {\bf [1.5 points]} Let $\gamma \in \mathbb{N}$. Prove that for all $n \in \mathbb{N^{+}}$, $$\underbrace{\sqrt{\gamma + \sqrt{\gamma + \sqrt{\gamma + \dots + \sqrt{\gamma}}}}}_{\text{$n$ square roots}} < \frac{1 + \sqrt{4\gamma + 1}}{2}.$$
+    \end{enumerate}
+
+%Question from USAMO
+
+% Let $n$ be a positive integer. For every sequence of integers $$A = (a_{0}, a_{1}, a_{2}, \dots, a_{n})$$ satisfying $0 \le a_{i} \le i$, for $i = 0, \dots, n$, we define another sequence $$t(A) = (t(a_{0}), t(a_{1}), t(a_{2})), \dots, t(a_{n})).$$ by setting $t(a_{i})$ to be the number of terms in the sequence $A$ that precede the term $a_{i}$ and are different from $a_{i}$. Show that, starting from any sequence $A$ as above, fewer than $n$ applications of the transformation $t$ lead to a sequence $B$ such that $t(B) = B$.
+
+%Possible question for next year.
+\subsection*{\Exercise \ (Challenge)}
+    Let $P_1, \ldots, P_{2n}$ be $2n$ distinct points on the unit circle $x^2 + y^2 = 1$ other than $(1,0)$. Each point is colored either red or blue, with exactly $n$ of them red and exactly $n$ of them blue. Let $R_1, \ldots, R_n$ be any ordering of the red points. Let $B_1$ be the nearest blue point to $R_1$ traveling counterclockwise around the circle starting from $R_1$. Then let $B_2$ be the nearest of the remaining blue points to $R_2$ traveling counterclockwise around the circle from $R_2$, and so on, until we have labeled all the blue points $B_1, \ldots, B_n$. Show that the number of counterclockwise arcs of the form $R_i \rightarrow B_i$ that contain the point $(1,0)$ is independent of the way we chose the ordering $R_1, \ldots, R_n$ of the red points.
+
+% Note that, if, in a move, $B_n$ appears to the left of $R_n$, then $\stackrel{\frown}{R_nB_n}$ intersects $(1,0)$
+
+% Now, I define a commencing $B$ to be a $B$ which appears to the left of all $R$s, and a terminating $R$ to be a $R$ which appears to the right of all $B$s. Let the amount of commencing $B$s be $j$, and the amount of terminating $R$s be $k$, I claim that the number of arcs which cross $(1,0)$ is constant, and it is equal to $\text{max}(j,k)$. I will show this with induction.
+
+% Base case is when $n=1$. In this case, there are only two possible sequences - $RB$ and $BR$. In the first case, $\stackrel{\frown}{R_1B_1}$ does not cross $(1, 0)$, but both $j$ and $k$ are $0$, so $\text{max}(j,k)=0$. In the second example, $j=1$, $k=1$, so $\text{max}(j,k)=1$. $\stackrel{\frown}{R_1B_1}$ crosses $(1,0)$ since $B_1$ appears to the left of $R_1$, so there is one arc which intersects. Hence, the base case is proved.
+
+% For the inductive step, suppose that for a positive number $n$, the number of arcs which cross $(1,0)$ is constant, and given by $\text{max}(j, k)$ for any configuration. Now, I will show it for $n+1$.
+
+% Suppose I first choose $R_1$ such that $B_1$ is to the right of $R_1$ in the sequence. This implies that $\stackrel{\frown}{R_1B_1}$ does not cross $(1,0)$. But, neither $R_1$ nor $B_1$ is a commencing $B$ or terminating $R$. These numbers remain constant, and now after this move we have a sequence of length $2n$. Hence, by assumption, the total amount of arcs is $0+\text{max}(j,k)=\text{max}(j,k)$.
+\end{document}

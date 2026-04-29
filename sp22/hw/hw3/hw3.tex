@@ -1,0 +1,143 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[left=3cm, right=3cm, top=2cm, bottom=2cm]{geometry}
+\usepackage[linesnumbered,boxed]{algorithm2e}
+\usepackage[noend]{algpseudocode}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{authblk}
+\usepackage{comment}
+\usepackage{mdframed}
+\usepackage{graphicx}
+
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+
+\title{Homework 3}
+\author{CS 2051, Spring 2022}
+\affil{Georgia Tech\\~\\{\bf Due February 12}}
+\date{}
+\maketitle
+
+
+\paragraph{Reminder:} You may collaborate with other students in this
+class, but (1) you must write up your own solutions in your own words, and (2) 
+you must write down everyone you worked with at the top of the page, or ``no 
+collaborators'' if you did it all on your own. Additionally, if you used any outside websites or textbooks besides the course text, please cite them here. You may not use question-answer sites like Chegg or MathOverflow. \\
+
+\hline
+
+\subsection*{Question 0}
+About how many hours did you spend on this homework in total? Are there any topics that were particularly unclear that we should spend more time on? (not graded)
+
+\subsection*{Question 1}
+Let $A, B \subseteq U$ where $U$ is the universe. 
+\begin{enumerate}
+    \item Prove that $(A \cup B)^C = A^C \cap B^c$.
+    % \sam{de morgans law 1 for sets}
+    \item Prove that $(A \cap B)^C = A^C \cup B^C$.
+    \item Prove that
+    \begin{gather*}
+            (X \cap Y \cap Z) \cup (X \cup Y \cup Z)^C \\
+            \text{and} \\
+            (X \cup Y^C) \cap (X \cup Z^C) \cap (Y \cup X^C) \cap (Y \cup Z^C) \cap (Z \cup X^C) \cap (Z \cup Y^C) \\
+            \text{are equal.}
+    \end{gather*}
+
+    % \sam{ de morgan law 2 for sets}
+\end{enumerate}
+
+
+\subsection*{Question 2}
+For each of the following parts, determine if each of the following are true: $A \subseteq B$, $B \subseteq A$, $A = B$. Prove your answers. 
+\begin{enumerate}
+    \item $A = \{2n : n \in \mathbb{Z} \}, B = \{4n : n \in \mathbb{Z} \}$
+    \item $A = \mathbb{Q}, B = \{7n : n \in \mathbb{Q}\}$
+    \item $A = \{2n : n \in \mathbb{Z}\}$, $B = \{n = 2k + 1 \text{ for some k in }\mathbb{Z} : n \in \mathbb{R} \}^C$
+\end{enumerate}
+
+\subsection*{Question 3}
+Out of the following four functions, one is a surjection only, one is an injection only, one is neither, and one is a bijection. State which is which and demonstrate your answers by (1) proving
+that it is an injection or naming two distinct elements of the domain that are associated to the
+same element of the target, and (2) proving that it is a surjection or naming an element of the
+target for which there is no corresponding element in the domain.
+\begin{enumerate}
+    \item $f: \mathbb{Z}^2 \mapsto \mathbb{Z}$, $f(m, n) = m^2 + n^2$
+    \item $f: \mathbb{Z}^2 \mapsto \mathbb{Z}$, $f(m, n) = m$
+    \item $f: \mathbb{R}^2 \mapsto \mathbb{C}$, $f(m, n) = m - 2ni$
+    \item $f: \mathbb{Z}^2 \mapsto \mathbb{Z}$, $f(m, n) = 2^m3^n$
+\end{enumerate}
+
+
+\subsection*{Question 4}
+Determine whether the relation $\mathcal{R}$ on the set of all people is reflexive, symmetric, antisymmetric, and/or transitive. You do not need to justify your answers.\\
+
+$(a,b)\in \mathcal{R}$ if and only if
+\begin{enumerate}
+\item $a$ is taller than $b$.\\
+$\bigcirc$ \texttt{Reflexive} \quad $\bigcirc$ \texttt{Symmetric} \quad $\bigcirc$ \texttt{Antisymmetric} \quad $\bigcirc$ \texttt{Transitive}
+
+\item $a$ and $b$ were born on the same day.\\
+$\bigcirc$ \texttt{Reflexive} \quad $\bigcirc$ \texttt{Symmetric} \quad $\bigcirc$ \texttt{Antisymmetric} \quad $\bigcirc$ \texttt{Transitive}
+
+\item $a$ has the same first name as $b$.\\
+$\bigcirc$ \texttt{Reflexive} \quad $\bigcirc$ \texttt{Symmetric} \quad $\bigcirc$ \texttt{Antisymmetric} \quad $\bigcirc$ \texttt{Transitive}
+
+\item $a$ and $b$ have a common grandparent.\\
+$\bigcirc$ \texttt{Reflexive} \quad $\bigcirc$ \texttt{Symmetric} \quad $\bigcirc$ \texttt{Antisymmetric} \quad $\bigcirc$ \texttt{Transitive}
+
+\item $a$ and $b$ have met.\\ 
+$\bigcirc$ \texttt{Reflexive} \quad $\bigcirc$ \texttt{Symmetric} \quad $\bigcirc$ \texttt{Antisymmetric} \quad $\bigcirc$ \texttt{Transitive}
+
+\end{enumerate}
+
+\subsection*{Question 5}
+The set of rational numbers can be seen as a set of the equivalence classes of a certain relation on $\mathbb{Z} \times \mathbb{Z}$ defined by $(a, b)R(c, d)$ if and only if $ad = bc$. Show that $R$ is an equivalence relation.
+
+
+\subsection*{Question 6 \textit{(Hilbert's Grand Hotel)}}
+     The Grand Hotel has countable many rooms, numbered 1, 2, 3, \dots, and it is fully occupied.
+    \begin{enumerate}
+        \item Suppose that $k$ guests arrive at the hotel. Show how you can accommodate all new guests without removing any of the current guests.
+        \item Suppose that a countable infinite number of guests arrive. Show how you can accommodate all new guests without removing any of the current guests.
+        \item Suppose Hilbert (the owner of the Grand Hotel) expands the property to a second building, also with infinite rooms numbered $1, 2, 3, \dots$. Show how you can spread the current guests to fill every room in both buildings.
+    \end{enumerate}
+
+% \subsection*{Solution}
+%     \begin{enumerate}
+%         \item Shift all existing guests $k$ rooms over, and place the $k$ guests in the rooms $1, \dots k$.
+%         \item Move all existing guests in room $n$ to room $2n + 1$. This frees all rooms that can be expressed as $2n$ for the countably infinite number of guests to occupy.
+%         \item Take every guest with an odd room number $2k - 1$, where $k \in \mathbb{N}$ and move them into room number $k$ in the second building.
+        
+%         \vspace{1.5mm}
+%         Now take the remaining guests in the original building. Since their room numbers are even, we can represent their room number as $m = 2l$, where $l \in \mathbb{N}$. Move these guests into room number $l$ in the first building.
+%     \end{enumerate}
+
+\subsection*{Question 7 (\textit{Cantor's theorem})}
+
+
+
+\begin{enumerate}
+    \item Prove that there does not exist an onto function between $\mathbb{N}$ and its power set, $\mathcal{P}(\mathbb{N})$.\\
+
+ {\it Hint: proceed by contradiction assuming there is such function $f:\mathbb{N} \rightarrow \mathcal{P}(\mathbb{N})$. Let 
+ 
+ \[
+ T=\{n\in \mathbb{N}|~n\notin f(n) \}.
+ \]
+
+Since $f$ is onto, there exist $t\in \mathbb{N}$ such that $f(t)=T$. Argue a contradiction by looking at $t\in T$ and $t\notin T$.}
+\item Show that the set of all countable sets is uncountable
+
+\end{enumerate}
+
+% There is an easy solution: all sets of the form $\{x\}$ for real values of $x$ are countable, and these is an uncountable subset of the set of countable sets...
+
+% What I would like students to see: all subsets of the natural numbers are countable, but the cardinality of the power set is not countable. Since $\mathcal{P}(\mathbb{N})$ is an uncountable subset of the set of countable sets we are done.
+
+
+
+\end{document}

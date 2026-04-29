@@ -1,0 +1,140 @@
+\documentclass{article}
+
+%Basics
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Extra Math
+\usepackage{mathtools}
+
+%Multiple Columns
+\usepackage{multicol}
+
+%Polynomial Long Division
+\usepackage{polynom}
+
+%Links
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks, urlcolor = Maroon]{hyperref}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+%Easy Numbering
+\newcounter{counter}
+\newcommand{\Exercise}{Exercise \stepcounter{counter}\thecounter}
+
+%Cases Environment
+\newlist{Cases}{enumerate}{3}
+\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+%Custom Title Fields
+\newcommand{\hmwkTitle}{Exam 1 Extra Credit (With Solutions)}
+\newcommand{\hmwkDueDate}{February 27, 2022}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Gerandy Brito}
+\newcommand{\hmwkSection}{Spring 2022}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{EC 1 Solutions}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\\ \hmwkTitle} \\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm} \\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkSection}} \\
+    \vspace{1in}
+    \begin{minipage}[t]{0.5\columnwidth}
+    \end{minipage}
+    \vspace{1in}
+    \author{\textbf{\hmwkAuthorName}}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\subsection*{\Exercise}
+    Let $n$ be a positive integer and $[n] = 1, \dots, n$. Show that $$\sum_{S \in \mathcal{P}([n]) \, \mid \, S \ne \emptyset} \: \prod_{i \in S} \frac{1}{i} = n.$$ Here, $\mathcal{P}([n])$ is the power set of $[n]$.
+
+\subsection*{Solution}
+    Let $T(n)$ be the sentence $$\sum_{S \in \mathcal{P}([n]) \, \mid \, S \ne \emptyset} \: \prod_{i \in S} \frac{1}{i} = n.$$ 
+    \textsc{Base Case}:  $T(1)$ is true, since the only non-empty subset of $[n]$ is $\{1\}$ and $\frac{1}{1}$ = 1. \\
+    \textsc{Inductive Step}: Now let $n \in \mathbb{N}$ such that $T(n)$ is true. We wish to show that $T(n + 1)$ is true, in other words, we wish to show that $$\sum_{S \in \mathcal{P}([n + 1]) \, \mid \, S \ne \emptyset} \: \prod_{i \in S} \frac{1}{i} = n + 1 \quad\text{ or }\quad \left(\sum_{S \in \mathcal{P}([n + 1]) \setminus \mathcal{P}([n])} \: \prod_{i \in S} \frac{1}{i}\right) + \left(\sum_{S \in \mathcal{P}([n]) \, \mid \, S \ne \emptyset} \: \prod_{i \in S} \frac{1}{i}\right) = n + 1.$$ Now from the inductive hypothesis, we reduce this problem to $$\sum_{S \in \mathcal{P}([n + 1]) \setminus \mathcal{P}([n])} \: \prod_{i \in S} \frac{1}{i} = 1.$$ The set $\mathcal{P}([n + 1]) \setminus \mathcal{P}([n])$ can be alternatively defined: take the power set $\mathcal{P}([n])$ and add the element $n + 1$ to every set in this power set. Hence 
+    \begin{align*}
+        \sum_{S \in \mathcal{P}([n + 1]) \setminus \mathcal{P}([n])} \: \prod_{i \in S} \frac{1}{i} &= \frac{1}{n + 1}\left(\sum_{S \in \mathcal{P}([n]) \, \mid \, S \ne \emptyset} \: \prod_{i \in S} \frac{1}{i}\right) + \left(\sum_{S \in \{n + 1\}} \: \prod_{i \in S} \frac{1}{i}\right) \\
+        &= \frac{1}{n + 1}\left(\sum_{S \in \mathcal{P}([n]) \, \mid \, S \ne \emptyset} \: \prod_{i \in S} \frac{1}{i}\right) + \frac{1}{n + 1}.
+    \end{align*}
+    Once again from the inductive hypothesis, we know the above expression is equivalent to the value $\frac{n}{n + 1} + \frac{1}{n + 1}= \frac{n + 1}{n + 1} = 1$. Hence $T(n + 1)$ is true as well.
+    
+    \vspace{1.5mm}
+    \textsc{Conclusion}: Therefore by induction, for all $n \in \mathbb{N}$, $T(n)$ is true.
+
+\subsection*{\Exercise}
+    In this question, we deal with \textit{nested radicals}, an expression where radical expressions are nested within each other. The first part serves as an introduction to this concept.
+    
+    \begin{enumerate}
+        \item Prove $$\sqrt{1 + \sqrt{1+ \sqrt{1 + \cdots}}} = \sqrt{2 + \sqrt{2 - \sqrt{2 + \sqrt{2 - \cdots}}}}$$
+        \item Determine the validity of the following proof, and explain. (1-2 sentences)
+        
+        \vspace{1.5mm}
+        \textsc{Claim}: For all $n \in \mathbb{N}$, the following sentence $P(n)$, is true.
+        $$\sqrt{1+n\sqrt{1+(n+1)\sqrt{1+(n+2)\sqrt{1+(n+3)\sqrt{\ldots}}}}}=n+1.$$
+        \textsc{Base Case}: $P(0)$ is true, since $\sqrt{1 + \sqrt{0}\sqrt{\dots}} = 0 + 1$. \\
+        \textsc{Inductive Step}: Now let $n \in \mathbb{N}$ such that $P(n)$ is true. Squaring both sides, we obtain
+        $$1+n\sqrt{1+(n+1)\sqrt{1+(n+2)\sqrt{1+(n+3)\sqrt{\ldots}}}}=n^2+2n+1.$$ Subtracting $1$ and dividing by $n$, we obtain $$\sqrt{1+(n+1)\sqrt{1+(n+2)\sqrt{1+(n+3)\sqrt{\ldots}}}}=n+2,$$
+        Hence $P(n + 1)$ is true as well. \\
+        \textsc{Conclusion}: Therefore by strong induction, for all $n \ge 0$, $P(n)$ is true.
+        \item Let $\gamma \in \mathbb{N}$. Use induction to prove that for all $n \in \mathbb{N^{+}}$, $$\underbrace{\sqrt{\gamma + \sqrt{\gamma + \sqrt{\gamma + \dots + \sqrt{\gamma}}}}}_{\text{$n$ square roots}} < \frac{1 + \sqrt{4\gamma + 1}}{2}.$$
+        Note: The RHS of the inequality has a similar form to solutions of quadratic equations \dots
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item We first tackle the ``easier" LHS of the equation. Note that $$\phi = \sqrt{1 + \sqrt{1+ \sqrt{1 + \cdots}}} = \sqrt{1 + \phi}.$$ Hence $\phi^{2} - \phi - 1 = 0$. Using the quadratic formula and further verification, we find that $\phi = \frac{1 + \sqrt{5}}{2}$.
+        
+        We now look at the RHS of the equation. Note that $$\phi = \sqrt{2 + \sqrt{2 - \sqrt{2 + \sqrt{2 - \cdots}}}} = \sqrt{2 + \sqrt{2 - \phi}}.$$ Simplifying, we have $\phi^{4} - 4\phi^{2} + \phi + 2 = 0$. Factoring, we have
+            $$\begin{aligned}[t]
+                \phi^{4} - 4\phi^{2} + \phi + 2 &= \phi^{2}(\phi^{2} - 4) + \phi + 2 \\
+                &= \phi^{2}(\phi - 2)(\phi + 2) + (\phi + 2) \\
+                &= (\phi + 2)(\phi^{2}(\phi - 2) + 1) \\
+                &= (\phi + 2)(\phi^{3} - 2\phi^{2} + 1)
+            \end{aligned}$$
+        To factor $\phi^{3} - 2\phi^{2} + 1$, we use the rational roots theorem to guess that either $\phi - 1$ or $\phi + 1$ are factors of this expression. We use polynomial long division to confirm:
+        
+        %FRAGILE
+        \begin{multicols}{2}
+            \polyset{vars=\phi}
+            \begin{center}
+                \polylongdiv{\phi^{3} - 2\phi^{2} + 1}{\phi - 1} \\
+                \hspace{-3cm} \polylongdiv{\phi^{3} - 2\phi^{2} + 1}{\phi + 1}
+            \end{center}
+        \end{multicols}
+        
+        As only $\phi - 1$ leaves a zero remainder, we conclude that our original equation is equivalent to $(\phi + 2)(\phi - 1)(\phi^{2} - \phi - 1) = 0$. We now have four candidates: $\phi = -2, 1, \text{ or } \frac{1 \pm \sqrt{5}}{2}$. Verifying by plugging into the original expression, only one value for $\phi$ remains: $\phi = \frac{1 + \sqrt{5}}{2}$. Hence $$\phi = \sqrt{1 + \sqrt{1+ \sqrt{1 + \cdots}}} = \sqrt{2 + \sqrt{2 - \sqrt{2 + \sqrt{2 - \cdots}}}} = \frac{1 + \sqrt{5}}{2}.$$ Note that these expressions are equal to the golden ratio, a number with very interesting properties.
+        \item Though the argument is rather complex, the flaw is simple: We cannot divide by $n$ in the inductive step because in the base case, we assumed $n = 0$. Hence $P(n)$ is not \textit{necessarily} true for $n \ge 1$.
+        
+        \vspace{2mm}
+        \textbf{Important}: We have only disproved the validity of the proof, not of the claim. In fact, the famous mathematician Srinivasa Ramanujan first formulated this claim in 1911, and it was later proven to be true.
+        \item We will proceed with induction on $n$. Let $P(n)$ be the statement $$\underbrace{\sqrt{\gamma + \sqrt{\gamma + \sqrt{\gamma + \dots + \sqrt{\gamma}}}}}_{\text{$n$ square roots}} < \frac{1 + \sqrt{4\gamma + 1}}{2}.$$
+        \textsc{Base Case}: $P(1)$ is true, as $$\sqrt{\gamma} < \sqrt{\gamma + \tfrac{1}{4}} = \frac{\sqrt{4y + 1}}{2} < \frac{1 + \sqrt{4y + 1}}{2}.$$ \\
+        \textsc{Inductive Step}: Now let $n \in \mathbb{N}$ such that $P(n)$ is true. Let $$\ell_{i} = \underbrace{\sqrt{\gamma + \sqrt{\gamma + \sqrt{\gamma + \dots + \sqrt{\gamma}}}}}_{\text{$i$ square roots}} \text{\quad and\quad} r = \frac{1 + \sqrt{4\gamma + 1}}{2}.$$ By the inductive hypothesis, we have that $$\ell_{n + 1}^{2} = \gamma + \ell_{n} < \gamma + r.$$ Now consider the equation $ar^{2} + br + c = 0.$ Using the quadratic formula, the solution to this equation is $$r = \frac{-b \pm \sqrt{b^{2} - 4ac}}{2a} = \frac{1 + \sqrt{4\gamma + 1}}{2}.$$ Working backwards, we find that $a = 1$, $b = -1$, and $c = -\gamma$. Thus $r^{2} - r - \gamma = 0$, so $$\gamma + r = \gamma + r^{2} - \gamma = r^{2}.$$ In summary, $\ell_{n + 1}^{2} < r^{2}$, implying $\ell_{n + 1} < r$, as desired. \\
+        \textsc{Conclusion}: Therefore by induction, for all $n \in \mathbb{N}^{+}$, $P(n)$ is true.
+    \end{enumerate}
+
+\end{document}

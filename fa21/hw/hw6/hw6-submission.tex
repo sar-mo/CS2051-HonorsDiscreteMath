@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Multiple Columns
+\usepackage{multicol}
+
+%Formatting and Spacing
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setenumerate[2]{label = \roman*.}
+\setlength\parindent{0pt}
+\linespread{1.10}
+
+\newlist{Cases}{enumerate}{3}
+\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+%Custom Commands
+\newcommand{\hmwkTitle}{Homework 6}
+\newcommand{\hmwkDueDate}{November 12, 2021}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Professor Gerandy Brito}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Fancy Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{\hmwkTitle}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\ \hmwkTitle}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+    \vspace{3in}
+    \author{\textbf{\hmwkAuthorName} \\ \\ \small No Collaborators, No Outside Sources}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\subsection*{Question 1}
+    Use Fermat's theorem to compute the following congruencies. Show all your computations and explain in each case how you use Fermat's theorem.
+    \begin{enumerate}
+        \item $2^{18} \pmod{17}$.
+        \item $5^{100} \pmod{11}$.
+        \item $10^{33} \pmod{7}$.
+        \item $2^{p-2} + 3^{p-2} + 6^{p-2} - 1 \pmod{p}$, where $p > 3$ is prime.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item Since $17$ is prime, by Fermat's theorem, $2^{16} \equiv 1 \pmod{17}$. Hence $2^{18} = 2^{2}2^{16} \equiv 2^2 = 4 \pmod{17}$.
+        \item Since $11$ is prime, by Fermat's theorem, $5^{10} \equiv 1 \pmod{11}$. Hence $5^{100} = (5^{10})^{10} \equiv 1 \pmod{11}$.
+        \item Since $7$ is prime, by Fermat's theorem, $10^{6} \equiv 1 \pmod{7}$. Hence $10^{33} = 10^{3}(10^{6})^{5} \equiv 10^{3} \equiv 6 \pmod{7}$.
+        \item Since $p$ is prime, by Fermat's theorem, $2^{p - 1} \equiv 1 \pmod{p}$, $3^{p - 1} \equiv 1 \pmod{p}$, and $6^{p - 1} \equiv 1 \pmod{p}$. Then
+        $$\begin{aligned}[t]
+            &2^{p-2} + 3^{p-2} + 6^{p-2} - 1 \\
+            ={}& (2^{p - 1} \cdot 2^{-1}) + (3^{p - 1} \cdot 3^{-1}) + (6^{p - 1} \cdot 6^{-1}) - 1 \\
+            \equiv{}& 2^{-1} + 3^{-1} + 6^{-1} - 1 \pmod{p}. \\
+        \end{aligned}$$
+        Now $p > 2$, so $p \nmid 2$. As a result, $2 \mid p + 1$, so $\frac{p + 1}{2} \in \mathbb{Z}$, and thus $2^{-1} \equiv \frac{p + 1}{2} \pmod{p}$. Furthermore, since $p > 3$, $p \nmid 3$. Hence $3 \mid p + 1$ or $3 \mid p - 1$.
+        
+        \begin{Cases}
+            \item Suppose $3 \mid p + 1$. Then $\frac{p + 1}{3} \in \mathbb{Z}$, and thus $3^{-1} \equiv \frac{p + 1}{3} \pmod{p}$. Furthermore, since $2 \mid p + 1$, $p + 1$ is divisible by $6$. Then $\frac{p + 1}{6} \in \mathbb{Z}$, and thus $6^{-1} \equiv \frac{p + 1}{6} \pmod{p}$. We conclude that $2^{-1} + 3^{-1} + 6^{-1} - 1 \equiv \frac{p + 1}{2} + \frac{p + 1}{3} + \frac{p + 1}{6} - 1 = 6p \equiv 0 \pmod{p}$.
+            \item Now suppose $3 \mid p - 1$. Then $\frac{p - 1}{3} \in \mathbb{Z}$, and thus $3^{-1} \equiv \frac{p - 1}{3} \pmod{p}$. Furthermore, since $2 \mid p - 1$, $p - 1$ is divisible by $6$. Then $\frac{p - 1}{6} \in \mathbb{Z}$, and thus $6^{-1} \equiv \frac{p - 1}{6} \pmod{p}$. We conclude that $2^{-1} + 3^{-1} + 6^{-1} - 1 \equiv \frac{p + 1}{2} + \frac{p - 1}{3} + \frac{p - 1}{6} - 1 = 6p \equiv 0 \pmod{6}$.
+        \end{Cases}
+        In either case, $2^{p-2} + 3^{p-2} + 6^{p-2} - 1 \equiv 0$.
+    \end{enumerate}
+
+\subsection*{Question 2}
+    In this problem, we use congruency to study the solution set of an equation. In particular, we will show that the equation $$6x + 2y^{2} = 2020$$ has no integer solutions.
+    \begin{enumerate}
+        \item For any $m \in \mathbb{Z}$, we have $6x + 2y^2 \equiv 2020 \pmod{m}$. We will use $m = 3$. Show that $y^{2} \equiv 0$ or $1 \pmod{3}$ for any $y \in \mathbb{Z}$.
+        \item Conclude that $6x + 2y^2 \equiv 0$ or $2 \pmod{3}$ for all pairs $x, y \in \mathbb{Z}$.
+        \item Conclude that the given equation has no solution, by looking at $2020 \pmod{3}$.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item For any $y \in \mathbb{Z}$, either $3 \mid y$ or $3 \nmid y$.
+        
+        \begin{Cases}
+            \item Suppose $3 \mid y$. Then $y \equiv 0 \pmod{3}$, so $y^{2} \equiv 0 \pmod{3}$.
+            \item Suppose $3 \nmid y$. Then $y \equiv 1 \text{ or } 2 \pmod{3}$.
+            
+            \begin{Cases}[label* = \arabic*., itemindent = .6in, topsep = 0.04in]
+                \item Suppose $y \equiv 1 \pmod{3}$. Then $y^{2} \equiv 1^2 \equiv 1 \pmod{3}$. 
+                \item Suppose $y \equiv 2 \pmod{3}$. Then $y^{2} \equiv 2^{2} \equiv 1 \pmod{3}$.
+            \end{Cases}
+            In either subcase, $y^{2} \equiv 1 \pmod{3}$.
+        \end{Cases}
+        In either case, $y^{2} \equiv 0$ or $1 \pmod{3}$.
+        \item For any $y \in \mathbb{Z}$, either $y^{2} \equiv 0 \pmod{3}$ or $y^{2} \equiv 1 \pmod{3}$.
+        
+        \begin{Cases}
+            \item Suppose $y^{2} \equiv 0 \pmod{3}$. Then $6x + 2y^{2} \equiv 6x \equiv 0 \pmod{3}$ for all $x \in \mathbb{Z}$.
+            \item Suppose $y^{2} \equiv 1 \pmod{3}$. Then $6x + 2y^{2} \equiv 6x + 2 \equiv 2 \pmod{3}$ for all $x \in \mathbb{Z}$.
+        \end{Cases}
+        In either case, $6x + 2y^2 \equiv 0$ or $2 \pmod{3}$ for all $x \in \mathbb{Z}$.
+        \item Let $x, y \in \mathbb{Z}$. Now note that $2020 \equiv 1 \pmod{3}$. But from part (b), $6x + 2y^{2} \not\equiv 1 \pmod{3}$, so $6x + 2y^{2} \not\equiv 2020 \pmod{3}$, so $6x + 2y^{2} \ne 2020$. Therefore there exist no integer solutions to the equation $6x + 2y^{2} = 2020$.
+    \end{enumerate}
+
+\subsection*{Question 3}
+    Use congruencies to prove each part below. Show your work.
+    \begin{enumerate}
+        \item Show that $5$ divides $6^{n} - 1$ for all natural numbers $n$.
+        \item Show that $7$ divides $3^{n} + 4^{n}$ for all odd numbers $n$.
+        \item Show that $7$ divides $111\dots1$ where there are $2022$ many ones.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item Note that $6 \equiv 1 \pmod{5}$, so $6^{n} \equiv 1 \pmod{5}$, and by definition $5 \mid 6^{n} - 1$ for all $n \in \mathbb{N}$.
+        \item Note that $3 \equiv -4 \pmod{7}$, so $3^{n} \equiv (-4)^{n} = (-1)^{n}(4^{n}) \pmod{7}$. Since $n$ is odd, $(-1)^{n} = -1$, so $3^{n} \equiv -4^{n} = 0 \pmod{7}$, so $3^{n} + 4^{n} \equiv 0 \pmod{7}$, and by definition $7 \mid 3^{n} + 4^{n}$.
+        \item Let $n$ be the number $$n = 111\dots 1\text{, where there are 2022 many ones}.$$ Then $$n = \sum_{i = 0}^{2021} 10^{i} = \sum_{i = 0}^{\left\lfloor \frac{2021}{6} \right\rfloor} \sum_{j = 0}^{5} 10^{6i + j} = \sum_{i = 0}^{336} \left(10^{6i} \sum_{j = 0}^{5} 10^{j}\right) = \sum_{i = 0}^{336} (111111 \times 10^{6i}).$$ Now since $7$ is prime, by Fermat's Theorem, $10^{6} \equiv 1 \pmod{7}$. Furthermore, $111111 \equiv 0 \pmod{7}$. Hence $111111 \times 10^{6} \equiv 1 \cdot 0 = 0 \pmod{7}$, so $$n = \sum_{i = 0}^{336} (111111 \times 10^{6i}) = \sum_{i = 0}^{336} (111111 \times 10^{6})^{i} \equiv 0 \pmod{7},$$ and by definition $7 \mid n$.
+    \end{enumerate}
+
+\subsection*{Question 4}
+    \textbf{Wilson's theorem} says that a number $p$ is prime if and only if $$(p - 1)! + 1 \equiv 0 \pmod{p}.$$
+    \begin{enumerate}
+        \item Recall that for $p$ prime, every number $0 < x < p$ has an inverse (mod $p$). Which of these numbers are their own inverse? Prove your answer.
+        \item Use part (a) to simplify $(p - 1)! \pmod{p}$ and conclude that, for $p$ prime, $(p - 1)! + 1 \equiv 0 \pmod{p}$. Show your work.
+        \item Conclude the proof of the theorem by showing that, if $N$ is not prime, then $(N - 1)! + 1$ is not a multiple of $N$. (\textit{Hint: since $N$ is not prime, there is a divisor $d$ of $N$ with $1 < d < N$}.)
+    \end{enumerate}
+    
+\subsection*{Solution}
+    \begin{enumerate}
+        \item If $x$ is its own inverse, then $x^{2} \equiv 1 \pmod{p}$, so $x^{2} - 1 = (x + 1)(x - 1) \equiv 0 \pmod{p}$, so $x = 1$ or $x = p - 1$.
+        \item Since $p$ is prime, each $a \in \{1, \dots p - 1\}$ has a unique inverse $a^{-1} \in \{1, \dots p - 1\}$. As shown in part (a), $a = a^{-1}$ for $a = 1$ and $a = p - 1$. Now we rearrange the factorization of $(p - 1)!$ so that each $a \in \{2, \dots, p - 2\}$ is matched to its unique inverse modulo $p$, leading to
+        $$(p - 1)! = 1 \times 2 \times \dots \times (p - 2) \times (p - 1) \equiv 1 \times 1 \times (p - 1) \equiv p - 1 \pmod{p}.$$ Hence $(p - 1)! + 1 \equiv (p - 1) + 1 = p \equiv 0 \pmod{p}$.
+        \item Suppose $N$ is composite. Then there exists some $d$ such that $d \mid N$ and $1 < d < N$. Now since $d \mid N$ and $d \ne N$, it follows that $d \mid (N - 1)!$. 
+        
+        \vspace{1.5mm}
+        We will conclude this proof using contradiction. Suppose $(N - 1)! + 1$ is a multiple of $N$. Then $kN = (N - 1)! + 1$, or equivalently, $kN - (N - 1)! = 1$ for some integer $k$. But $d \mid N$ and $d \mid (N - 1)!$, so $d \mid 1$. This is a contradiction, as $1 < d < N$. Hence $(N - 1)! + 1$ is not a multiple of $N$.
+    \end{enumerate}
+
+\subsection*{Question 5}
+    \textit{RSA cryptosystems.}
+    \begin{enumerate}
+        \item Explain why we should never use $(N = 2q, e)$ as a public key in an RSA system.
+        \item Explain why our RSA system will fail if $\gcd(m, N) > 1$.
+        \item Let $(N, e = 3)$ be your public key. Suppose you want to encrypt the message $m$ such that $m^{3} < N$. Explain why sending this small message is not protected by the RSA system.
+        \item Let $(N = 391 = 17 \times 23, e = 3)$ be a public key for an RSA system. What value of $d$ should be used for the secret key? Briefly explain your answer.
+        \item Prof.\ Brito's kids, Dario, Oliver, and Raquel, each use an RSA system with public keys $(N_{i}, e = 3)$, for $1 \le i \le 3$ to communicate with him. Brito sends the same message $m$ to each of them using their corresponding RSA system. That is, he sends $m^{3} \pmod{N_{i}}$ to each kid. Lianet (Brito's wife!), intercepted the three encrypted messages! Show how Lianet can find the original message $m$. You must explain a procedure Lianet can use to find $m$.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item One of the factors of $N = 2q$ is $2$, a very small number. It will be easy for an attacker to guess this number and therefore obtain the factorization of $N$, compromising the security of our RSA system.
+        \item 
+        \item Suppose there exists some encrypted message $c$. Then $m^{3} \equiv c \pmod{N}$, but since $m^{3} < N$, $m^{3} = c$. Hence an attacker can easily obtain the original message, given by $m = \sqrt[3]{c}$.
+        \item The value $d$ is given by $d \equiv e^{-1} \pmod{\phi(N)}$. Now $\phi(N) = (p - 1)(q - 1) = 16 \cdot 22 = 352$. Hence $d \equiv 3^{-1} \pmod{352}$. Using divisibility rules, we find that $d = 235$.
+        \item Let $c_{i}$ be the encrypted message sent to each child, and assume all $N_{i}$ are pairwise coprime. Then Lianet has three encrypted messages $c_{1}$, $c_{2}$, and $c_{3}$, where
+        $$\begin{aligned}[t]
+            c_{1} &\equiv m^{3} \pmod{N_{1}} \\
+            c_{2} &\equiv m^{3} \pmod{N_{2}} \\
+            c_{3} &\equiv m^{3} \pmod{N_{3}}.
+        \end{aligned}$$
+        Let $N = N_{1}N_{2}N_{3}$. By the Chinese Remainder Theorem, there exists some $c$ such that $$c \equiv m^{3} \pmod{N}$$ that is unique for all values less than $N$. But since $m$ is chosen such that $m < N_{1}, N_{2}, N_{3}$, it follows that $m^{3} < N$. With this knowledge, we conclude that $c = m^{3}$. Lianet can use the Extended Euclidean Algorithm to determine this unique $c$ value, and then the original message is given  by $m = \sqrt[3]{c}$.
+    \end{enumerate}
+
+\subsection*{Question 6} 
+    (\textit{Uniqueness of the message}) Let $(N, e)$ be a public key. In this problem, we will check that we can recover the correct message.
+    \begin{enumerate}
+        \item Explain why if the message $x$ is greater than $N$ we end up losing information.
+        
+        \vspace{3mm} One way to avoid the above situation is to break the message is to break the message into smaller parts. Let $x < N$ and $\gcd(x, N) = 1$. Assume there are two such messages, $x$ and $y$, such that after decoding $x^{e}$ and $y^{e}$ we get the same message.
+        \item Check that, for $x, y$ as above, if $x^{e} \equiv y^{e} \pmod{N}$ then we must have $x = y$. (\textit{Hint: because $\gcd(e, \phi(N)) = 1$ we can compute the inverse of $e, d$, mod $\phi(N)$. Consider $x^{ed}$ and $y^{ed}$}.)
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item Consider $x \equiv c^{d} \pmod{N}$, the decryption formula used to obtain the original message. If $x > n$, then $c^{d} < N < x$ WRONG, and thus we will obtain a number smaller than our original message $x$, causing a loss in information.
+        \item Suppose $x^{e} \equiv y^{e} \pmod{N}$. Then $x^{ed} \equiv y^{ed} \pmod{N}$, so $x \equiv y \pmod{N}$. But $x, y < N$, so $x = y$.
+    \end{enumerate}
+
+\end{document}

@@ -1,0 +1,420 @@
+\documentclass{article}
+
+%Basics
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Vertical Dots in Align Environment
+\usepackage{mathtools}
+
+% Better tables
+\usepackage{booktabs}
+\usepackage[table]{xcolor}
+
+%Multiple Columns
+\usepackage{multicol}
+
+%Fancy Footnotes
+\newcommand{\fancyfootnotetext}[2]{
+  \fancypagestyle{dingens}{\fancyfoot[LO]{\parbox{6cm}{\footnotemark[#1]\footnotesize #2}}}\thispagestyle{dingens}
+ }
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+%Easy Numbering
+\newcounter{counter}
+\newcommand{\Exercise}{Exercise \stepcounter{counter}\thecounter}
+
+%Cases Environment (Messy)
+\newlist{Cases}{enumerate}{3}
+\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+%Custom Title Fields
+\newcommand{\hmwkTitle}{Homework 6 (with Solutions)}
+\newcommand{\hmwkDueDate}{March 26, 2022}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Gerandy Brito}
+\newcommand{\hmwkSection}{Spring 2022}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{Homework 6}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\\ \hmwkTitle}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkSection}}
+    \vspace{3in}
+    \author{\textbf{\hmwkAuthorName}}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\subsection*{\Exercise}
+    First, read the section in the Appendix below on Upper and Lower Bounds. Then, find upper and lower bounds for the runtime of the algorithm represented by the summation $$\sum_{i = 1}^{n} \sum_{j = 1}^{i^2} \sum_{k = j}^{i^2} c,$$ where $n$ is the number of times the outer loop is iterated and $c$ is the execution cost of the statement that contributed most to the running time of the algorithm. Remember that your upper and lower bounds must differ by only a constant.
+
+\subsection*{Solution }
+    For an upper bound, we have $$\sum_{i = 1}^{n} \sum_{j = 1}^{i^2} \sum_{k = j}^{i^2} c = c \sum_{i = 1}^{n} \sum_{j = 1}^{i^2} (i^{2} - j) \le c \sum_{i = 1}^{n} \sum_{j = 1}^{i^2} i^{2} = c \sum_{i = 1}^{n} i^{4} \le c \sum_{i = 1}^{n}  n^{4} = cn^{5}.$$ For a lower bound, we need to make the original summation representation at least as large as a quintic function:
+    $$\begin{aligned}[t]
+        \sum_{i = 1}^{n} \sum_{j = 1}^{i^2} \sum_{k = j}^{i^2} c &= c \sum_{i = 1}^{n} \sum_{j = 1}^{i^2} (i^{2} - j) \ge c \sum_{i = 1}^{n} \sum_{j = 1}^{i^2/2} (i^{2} - j) \ge c \sum_{i = 1}^{n} \sum_{j = 1}^{i^2/2} \left(i^{2} - \frac{i^2}{2}\right) \\
+        &= c \sum_{i = 1}^{n} \left(\frac{i^2}{2}\right) \left(i^{2} - \frac{i^2}{2}\right) \\
+        &= c \sum_{i = 1}^{n} \frac{i^{4}}{4} \ge c \sum_{i = n/2}^{n} \frac{i^{4}}{4} \ge c \sum_{i = n/2}^{n} \frac{(n/2)^{4}}{4} = c \sum_{i = n/2}^{n} \frac{n^{4}/16}{4} \\
+        &= c \left(\frac{n}{2}\right)\left(\frac{n^{4}/16}{4}\right) \\
+        &= \left(\frac{c}{128}\right)n^{5}.
+    \end{aligned}$$ Therefore, the runtime of the algorithm represented by the summation $$\sum_{i = 1}^{n} \sum_{j = 1}^{i^2} \sum_{k = j}^{i^2} c$$ is $\Bar{c}n^{5}$, where $\frac{c}{128} \le \Bar{c} \le c$.
+
+\subsection*{\Exercise}
+    Let $a \equiv 4 \pmod{13}$ and $b \equiv 9 \pmod{13}$. Find the smallest positive value of $c$ such that
+    \begin{multicols}{2}
+    \begin{enumerate}
+        \item $c \equiv 9a \pmod{13}$.
+        \item $c \equiv 11b \pmod{13}$.
+        \item $c \equiv ab \pmod{13}$.
+        \item $c \equiv 2a + 3b \pmod{13}$.
+        \item $c \equiv a^{2} + b^{2} \pmod{13}$.
+        \item $c \equiv a^{3} - b^{3} \pmod{13}$.
+        \item $c \equiv b^{-1} \pmod{13}$.
+        \item $c \equiv a^{12} \pmod{13}$.
+        \item $c \equiv a^{2021} \pmod{13}$.
+        \item $c \equiv (a - b)^{2021} \pmod{13}$.
+    \end{enumerate}
+    \end{multicols}
+    (You do not need to justify your work.)
+
+\subsection*{Solution}
+    \begin{multicols}{2}
+    \begin{enumerate}
+        \item $c = 10$.
+        \item $c = 8$.
+        \item $c = 10$.
+        \item $c = 9$.
+        \item $c = 6$.
+        \item $c = 11$.
+        \item $c = 3$.
+        \item $c = 1$.
+        \item $c = 10$.
+        \item $c = 8$.
+    \end{enumerate}
+    \end{multicols}
+
+\subsection*{\Exercise}
+    \begin{enumerate}
+        \item Find $\gcd(12345, 54321)$ using the Euclidean algorithm. Outline each iteration of the process, as in Chapter 4.3 Example 16 in the textbook.
+        
+        \vspace{1.5mm}
+        Next, express $\gcd(12345, 54321)$ as a linear combination of $12345$ and $54321$. Outline each iteration of the process, as in Chapter 4.3 Example 17 in the textbook.
+        
+        \item The \textit{extended Euclidean algorithm} is an algorithm that not only computes $\gcd(a, b)$, but also expresses $\gcd(a, b)$ as a linear combination with B\'ezout coefficients of the integers $a$ and $b$. The main advantage of the algorithm is that it only requires one pass through the steps of the Euclidean algorithm, rather than two passes, as in part (a). The procedure is as follows:
+        \begin{enumerate}[leftmargin=1.2in]
+            \item [\textbf{Initialization.}] Set $s_{0} = 1$, $s_{1} = 0$, $t_{0} = 0$, and $t_{1} = 1$.
+            \item [\textbf{Inductive Step.}] For $i = 2,3,\dots,n$, let $s_{i} = s_{i - 2} - q_{i - 1}s_{i - 1}$ and $t_{i} = t_{i - 2} - q_{i - 1}t_{i - 1}$, where each $q_{i}$ is the $i$-th quotient in the divisions used when the Euclidean algorithm finds $\gcd(a,b)$.
+            \item [\textbf{Termination.}] Return $\gcd(a, b) = s_{n}a + t_{n}b$. 
+        \end{enumerate}
+        
+        \vspace{2mm}
+        Run the extended Euclidean algorithm to find $\gcd(12345, 54321)$ and express it as a linear combination of $12345$ and $54321$. Your work should be given in the form of a table, whose first row is given below.
+        \rowcolors{2}{white}{gray!20}
+        % $$\begin{array}{|c|c|c|c|c|c|}
+        %     \hline
+        %     a_{i} & b_{i} & q_{i} & s_{i} & t_{i} \\
+        %     \hline
+        %     54321 & 12345 & \text{N/A} & 1 & 0 \\
+        %     \hline
+        % \end{array}$$
+        $$\begin{array}{ccccc}
+            \toprule
+            a_{i} & b_{i} & q_{i} & s_{i} & t_{i} \\
+            \midrule
+            54321 & 12345 & \text{N/A} & 1 & 0
+        \end{array}$$
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item
+        \begin{minipage}[t]{0.4\textwidth}
+        Note that
+        \begin{align*}
+            54321 &= 4 \cdot 12345 + 4941  \\
+            12345 &= 2 \cdot 4941 + 2463 \\
+            4941 &= 2 \cdot 2463 + 15 \\
+            2463 &= 164 \cdot 15 + 3.
+        \end{align*}
+        \end{minipage}
+        \begin{minipage}[t]{0.4\textwidth}
+        Thus
+        \begin{align*}
+            \gcd(54321, 12345) &= \gcd(12345, 4941) \\
+            \gcd(12345, 4941) &= \gcd(4941, 2463) \\
+            \gcd(12345, 2463) &= \gcd(2463, 15) \\
+            \gcd(2463, 15) &= \gcd(15, 3) = 3.
+        \end{align*}
+        \end{minipage}
+        
+        \vspace{3mm}
+        To express $\gcd(12345, 54321)$ as a linear combination of $12345$ and $54321$, we work backwards from our work shown in the Euclidean algorithm:
+        \begin{align*}
+            \gcd(12345, 54321) = 3 &= 2463 - 164 \cdot 15 \\
+            &= 2463 - 164 \cdot (4941 - 2 \cdot 2463) \\
+            &= 329 \cdot 2463 - 164 \cdot 4941 \\
+            &= 329 \cdot (12345 - 2 \cdot 4941) - 164 \cdot 4941 \\
+            &= 329 \cdot 12345 - 822 \cdot 4941 \\
+            &= 329 \cdot 12345 - 822 \cdot (54321 - 4 \cdot 12345) \\
+            &= -822 \cdot 54321 + 3617 \cdot 12345
+        \end{align*}
+        \item Using the table below, we find that $\gcd(12345, 54321) = 3 = -822 \cdot 54321 + 3617 \cdot 12345$.
+        \rowcolors{2}{white}{gray!20}
+        $$\begin{array}{ccccc}
+            \toprule
+            a_{i} & b_{i} & q_{i} & s_{i} & t_{i} \\
+            \midrule
+            54321 & 12345 & \text{N/A} & 1 & 0 \\
+            12345 & 4941 & 4 & 0 & 1 \\
+            4941 & 2463 & 2 & 1 & -4 \\
+            2463 & 15 & 2 & -2 & 9 \\
+            15 & 3 & 164 & 5 & -22 \\
+            3 & 0 & 5 & -822 & 3617 \\
+            \bottomrule
+        \end{array}$$
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    \begin{enumerate}
+        \item \label{b} Prove that if $a$ and $b$ are both positive integers, then $2^{a} - 1 \pmod{2^{b} - 1} = 2^{a \text{ mod $b$}} - 1$.
+        
+        \vspace{1.5mm}{\small Note: The following proposition may be useful: $(\forall a, b \in \mathbb{N}^{+})(\exists! q, r \in \mathbb{Z})((0 \le r < b) \land (a = qb + r))$. This is commonly known as Euclid's division lemma.}
+        \item Use part \ref{b} to show that if $a$ and $b$ are both positive integers, then $\gcd(2^{a} - 1, 2^{b} - 1) = 2^{\gcd(a, b)} - 1$.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item \label{b2} Using Euclid's division lemma, we have $$2^{a} - 1  = 2^{qb + r} - 1 = (2^{b})^{q} \cdot 2^{r} - 1 \equiv (1)^{q}2^{r} - 1 = 2^{r} - 1  \pmod{(2^{b} - 1)}.$$ Since $0 \le r < b$, by definition $2^{r} - 1 = 2^{a \text{ mod $b$}} - 1$, and the proof is complete.
+        \item From part \ref{b2} and our knowledge of the Euclidean algorithm, we have
+        $$\begin{aligned}[t]
+            \gcd(2^{a} - 1, 2^{b} - 1) &= \gcd(2^{b} - 1, 2^{a \text{ mod $b$}} - 1) \\
+            &= \gcd(2^{a \text{ mod $b$}} - 1, 2^{b \text{ mod ($a \text{ mod } b$)}} - 1) \\
+            &\vdotswithin{ = } \\
+            &= \gcd(2^{\gcd(a, b)} - 1, 0) = 2^{\gcd(a, b)} - 1.
+        \end{aligned}$$
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    Recall that we denote the set of congruency classes modulo $n$ as $\mathbb{Z}_{n}$.
+    \begin{enumerate}
+        \item A \textit{zero divisor} is a nonzero element $\Bar{a}$ such that, there exists a nonzero element $\Bar{b}$ satisfying $\Bar{a}\Bar{b} = \Bar{0}$. How many elements in $\mathbb{Z}_{16}$ are zero divisors? Show your work.
+        \item An element $\Bar{a}$ is a \textit{unit} if there exists a nonzero element $\Bar{b}$ satisfying $\Bar{a}\Bar{b} = \Bar{1}$. How many elements in $\mathbb{Z}_{14}$ are units? Show your work.
+        \item What is the relationship between the number of zero divisors and the number of units in any $\mathbb{Z}_{n}$? You do not have to justify your answer, but consider possible explanations for this phenomenon.
+    \end{enumerate}
+
+\subsection*{Solution}
+% https://math.stackexchange.com/questions/2781511/find-all-the-units-and-zero-divisors-of-bbb-z-15
+    \begin{enumerate}
+        \item Note that in $\mathbb{Z}$,
+        
+        \vspace{-8mm}
+        \begin{center}
+        \begin{minipage}[t]{0.4\textwidth}
+            \begin{align*}
+                2 \times 8 &= 16 \equiv 0 \pmod{16} \\
+                4 \times 4 &= 16 \equiv 0 \pmod{16} \\
+                6 \times 8 &= 48 \equiv 0 \pmod{16} \\
+                8 \times 2 &= 16 \equiv 0 \pmod{16}
+            \end{align*}
+        \end{minipage}
+        \begin{minipage}[t]{0.4\textwidth}
+        \begin{align*}
+            10 \times 8 &= 80 \equiv 0 \pmod{16} \\
+            12 \times 4 &= 48 \equiv 0 \pmod{16} \\
+            14 \times 8 &= 112 \equiv 0 \pmod{16} 
+        \end{align*}
+        \end{minipage}
+        \end{center}
+        We conclude that there are $7$ zero divisors in $\mathbb{Z}_{16}$; specifically, the congruency classes $[0]$, $[2]$, $[4]$, $[6]$, $[10]$, $[12]$, and $[14]$.
+        
+        \vspace{1mm}
+        \textbf{Remark.} Note that $[a] \in \mathbb{Z}_{16}$ was a zero divisor iff $\gcd(a, 16) \ne 1$. The proof of this statement can be obtained using the CRT.
+        \item Note that in $\mathbb{Z}$,
+        \begin{align*}
+            1 \times 1 &= 1 \equiv 1 \pmod{14} \\
+            3 \times 5 &= 15 \equiv 1 \pmod{14} \\
+            9 \times 11 &= 99 \equiv 1 \pmod{14} \\
+            13 \times 13 &= 169 \equiv 1 \pmod{14}
+        \end{align*}
+        We conclude that there are $6$ units in $\mathbb{Z}_{14}$; specifically, the congruency classes $[1]$, $[3]$, $[5]$, $[9]$, $[11]$, and $[13]$.
+        
+        \vspace{1mm}
+        \textbf{Remark.} Note that $[a] \in \mathbb{Z}_{14}$ was a unit iff $\gcd(a, 14) = 1$. We can prove this statement from B\'ezout's identity. As a starting point, the reverse implication is as follows: if $\gcd(a, 14) = 1$, then we can find $x, y \in \mathbb{Z}$ for which $ax + 14y = 1$; in $\mathbb{Z}_{14}$, this means $ax = 1$ for some $x \in \mathbb{Z}_{14}$, so $a$ is a unit.
+        \item The sum of the number of zero divisors and the number of units in any $\mathbb{Z}_{n}$ is equal to $n$. 
+        
+        \vspace{1mm}
+        \textbf{Remark.}
+        We can show that this property holds for any finite ring. (Note: The following proof will use some terms slightly outside the scope of this course.) Take an element $x$ in a finite ring $R$ with $k$ elements. Consider the ring morphism $g: y \mapsto xy$ from $R$ to $R$.
+        \begin{Cases}
+            \item Suppose $g$ is injective. Then the image of $g$ contains exactly $k$ elements. As the codomain of $g$ also has exactly $k$ elements, we conclude that $g$ is an isomorphism. By surjectivity there exists nonzero $y$ such that $xy = 1$, so $x$ is a unit.
+            \item Suppose $g$ is not injective. Then there exists nonzero $y$ such that $xy = 0$, so $x$ is a zero divisor.
+        \end{Cases}
+        It follows that every element of a finite ring is either a unit or a zero divisor, and cannot be both.
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    \begin{enumerate}
+        \item Find the last digit of $17^{17^{17}}$.
+        \item Find the last two digits of $1987^{1987}$. 
+        
+        \vspace{.5mm}{\small \textit{Hint: It may benefit you to use the CRT}}.
+        
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item Finding the last digit of $17^{17^{17}}$ is equivalent to finding $17^{17^{17}} \pmod{10}$. 
+            
+        \vspace{1.5mm}
+        First note that $17^{17} \equiv 1^{17} \equiv 1 \pmod 4$. Hence $17^{17} = 4k + 1$ for some $k \in \mathbb{Z}$. 
+        
+        Now using Euler's Theorem, we have that $$17^{17^{17}} = 17^{4k + 1} \equiv (17^{4k})(17) \equiv (17^{4})^{k}(17) \equiv (17^{\phi(10)})^{k}(17) \equiv 1^{k}(17) \equiv 7 \pmod{10}.$$ Hence the last digit of $17^{17^{17}}$ is 7.
+        
+        \item Finding the last two digits of $1987^{1987}$ is equivalent to finding $1987^{1987} \pmod{100}$. Using CRT, this is equivalent to solving the system 
+        $$\begin{aligned}[t]
+            x &\equiv 1987^{1987} \pmod{4} \\
+            x &\equiv 1987^{1987} \pmod{25}.
+        \end{aligned}$$
+        Now 
+        $\begin{aligned}[t]
+            1987^{1987} &\equiv 3^{1987} \equiv 3 \cdot 3^{1986} \equiv 3 \cdot (3^{2})^{993} \equiv 3 \cdot (3^{\phi(4)})^{993} \equiv 3 \cdot 1^{993} \equiv 3 \pmod{4} \text{\quad and} \\
+            1987^{1987} &\equiv 12^{1987} \equiv 12^{7} \cdot (12^{20})^{99} \equiv 12^{7} \cdot (12^{\phi(25)})^{99} \equiv 12^{7} \equiv 12 \cdot (12^{3})^{2} \equiv 8 \pmod{25}.
+        \end{aligned}$
+        
+        \vspace{1.5mm}
+        Thus by the CRT, our system can be reduced to
+        $$\begin{aligned}[t]
+            x &\equiv 3 \pmod{4} \\
+            x &\equiv 8 \pmod{25}.
+        \end{aligned}$$
+        Due to the first constraint, $x$ must be of the form $x = 4k + 3$ for some integer $k$. Substituting this into the second constraint, we get $4k + 3 \equiv 8 \pmod{25}$, equivalent to $k \equiv 20 \pmod{25}$.
+        
+        \vspace{1.5mm}
+        It follows that the smallest positive number fulfilling both constraints (and thus the last two digits of $1987^{1987}$) is given by $x = 4(20) + 3 = 83$.
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    \begin{enumerate}
+        \item Derive an non-recursive formula with finitely many terms for the number of trailing zeroes in $n!$, where $n$ is a positive integer greater than or equal to $5$. Thoroughly explain your answer. 
+        
+        \vspace{.5mm} {\small \textit{Hint: Floor/ceiling functions are feeling lonely in this course. Perhaps it is time to include them.}}
+        \item Using the formula derived in part (a), determine the last \underline{8} digits in $32!$. Show your work.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item First note that for a number to have a trailing zero, it must have both a $2$ and a $5$ in its prime factorization. Since every even number less than $n$ contributes at least one $2$ to $n!$'s prime factorization, we will claim that the number of trailing zeroes in $n!$ is bounded by (and thus equal to) the number of $5$s in its prime factorization.
+        
+        \vspace{1.5mm}
+        We can construct a formula to find this number by examination. Take $n = 54$, for example. Each one of $5, 10, \dots, 45, 50$ contributes one factor of $5$ to $n!$. However, $25$ and $50$ each contribute one extra factor of $5$. Hence $54$ has $10 + 2 = 12$ fives in its prime factorization.
+        
+        \vspace{1.5mm}
+        We can now generalize this procedure for any $n$ as follows.
+        \begin{enumerate}[leftmargin=1.2in]
+            \item [\textbf{Initialization.}] Round the number down to its nearest multiple of $5$. This can be done using $5\lfloor\frac{n}{5}\rfloor$. Also set $i = 1$ and $T(n) = 0$.
+            \item [\textbf{Inductive Step.}] Divide $n$ by $5^{i}$ and add this result to $T(n)$. Repeat this step, incrementing $i$ in each iteration, until $5^{i} > n$.
+            \item [\textbf{Termination.}] Return $T(n)$.
+        \end{enumerate}
+        The algorithm terminates when $5^{i} > n$; in other words, when $i > \log_{5}(n)$. Hence the inductive step runs a total of $\lfloor\log_{5}(n)\rfloor$ times. Our final formula for the number of trailing zeroes in $n!$ is given by $$T(n) = \sum_{i = 1}^{\lfloor\log_{5}(n)\rfloor} \frac{5\lfloor\frac{n}{5}\rfloor}{5^{i}} = \sum_{i = 1}^{\lfloor\log_{5}(n)\rfloor} \frac{\lfloor\frac{n}{5}\rfloor}{5^{i - 1}} = \sum_{i = 1}^{\lfloor\log_{5}(n)\rfloor} \left\lfloor\frac{n}{5^{i}}\right\rfloor.$$
+        \textbf{Remark.} This formula is one example of Legendre's formula, which states that for any prime number $p$ and any $n \in \mathbb{N}^{+}$, the exponent of the largest power of $p$ that divides $n$ is given by $\sum_{i = 1}^{\lfloor \log_{p}(n) \rfloor} \lfloor \frac{n}{p^{i}} \rfloor$.
+        \item From part (a), we know the last $7$ digits in $32!$ are all zeroes. It remains to determine the last nonzero digit in $32!$. This is equivalent to finding $$\frac{32!}{10^{7}} \pmod{10}.$$ Observe that $$10^{7} = 2^{7} \cdot 5^{7} = 2 \cdot 5 \cdot 8 \cdot 10 \cdot 5 \cdot 20 \cdot 25 \cdot 5.$$
+        Expanding out the factorial and cancelling terms, we have
+        \begin{align*}
+            \frac{32!}{10^{7}} &\equiv 1 \cdot 3 \cdot 4 \cdot 6 \cdot 7 \cdot 9 \cdot 1 \cdot 2 \cdot 3 \cdot 4 \cdot 3 \cdot 6 \cdot 7 \cdot 8 \cdot 9 \cdot 1 \cdot 2 \cdot 3 \cdot 4 \cdot 6 \cdot 7 \cdot 8 \cdot 9 \cdot 6 \cdot 1 \cdot 2 \\
+            &= (3 \cdot 4 \cdot 6 \cdot 7 \cdot 9)^{4} \times 8^{2} \times 2^{3} \times 3 \times 6 \\
+            &= (3 \cdot 4 \cdot 6 \cdot 7 \cdot 9)^{4} \times 8^{3} \times 18 \\
+            &\equiv (3 \cdot 4 \cdot (-4) \cdot (-3) \cdot (-1))^{4} \times 8^{4} \\
+            &\equiv (-144)^{4} \times (-2)^{4} = 288^{4} \equiv (-2)^{4} \equiv 6 \pmod{10}.
+        \end{align*}
+        Thus the last eight digits of $32!$ are 600000000.
+    
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    You have returned to The Farm, equipped with your new knowledge of modular arithmetic. Good timing, as the wise farmer now has a dilemma he'd like your help with. 
+    
+    \hspace{15pt} Yesterday, he instructed his 7 nieces to count the number of cows on the farm. However, it seems the farmer's wisdom was not passed on throughout the family tree, as each of the nieces forgot the exact number overnight. You question each of the nieces to obtain more information:
+    \begin{itemize}
+        \item Betsy counted the cows, but all she remembers is that her count was off by 1 in the 1’s place. 
+        \item Clara counted the cows, but all she remembers is that her count was off by 1 in the 10’s place.
+        \item Delilah counted the cows, but all she remembers is that her count was off by 1 in the 100’s place. 
+        \item Evelyn, Fiona, Grace, and Helen all counted the cows. They remember that they got the correct count.
+    \end{itemize}
+    The farmer's one saving grace is that at the end of the day, the nieces tallied up each of their counts and wrote the sum down on a piece of paper, which reads $3162$.
+    
+    \hspace{15pt} Your task is to find the correct total number of cows on the farm. Along the way, you should be able to determine the incorrect counts that Betsy, Clara, and Delilah obtained. Clearly explain each step you take to obtain your answers.
+    
+    \vspace{1.5mm} {\small Note: We do not consider changing digit $9$ to $0$ or $0$ to $9$ as being off by $1$, since in this case we would be off by $9$. }
+
+\subsection*{Solution}
+    For any digit $d$ between $1$ through $8$, we denote a digit being off by one as $d \pm 1$. When $d = 9$, being off by $1$ means the digit is changed to $d - 1 = 8$ and when $d = 0$, being off by $1$ means the digit is changed to $d + 1 = 1$. Since the average of the seven counts is about $452$ and the error is at most $\pm 111$, the number of cows is some $3$-digit number $$N = abc = 100a + 10b + c,$$ with $a$ being the digit of hundreds, $b$ the digit of tens, and $c$ the digit of ones. Then Betsy's, Clara's, and Delilah's counts are respectively $$B = 100a + 10b + c \pm 1,\qquad C = 100a + 10(b \pm 1) + c, \qquad D = 100(a \pm 1) + 10b + c,$$ with the proviso that if one of the digits is $0$ or $9$, the error can go only one way. Then adding these three together with the four correct counts yields $$4N + 3(100a + 10b + c) \pm 100 \pm 10 \pm 1 = 3162.$$ Therefore, $$7N \pm 100 \pm 10 \pm 1 = 3162 = 7 \cdot 452 - 2.$$ It follows that $2 \pm 100 \pm 10 \pm 1 = 7(452 - N)$ is divisible by $7$. Since $10 \equiv 3 \pmod{7}$ and $100 \equiv 2 \pmod{7}$, that means that $2 \pm 2 \pm 3 \pm 1$ must be divisible by $7$ with an appropriate choice of signs. We now consider all possible choices for $+$ and $-$ signs.
+    
+    \vspace{-7mm}
+    \begin{center}
+    \begin{minipage}[t]{0.4\textwidth}
+        \begin{align*}
+            2 + 2 + 3 + 1 &= 8 \\
+            2 + 2 + 3 - 1 &= 6 \\
+            2 + 2 - 3 + 1 &= 2 \\
+            2 + 2 - 3 - 1 &= 0
+        \end{align*}
+    \end{minipage}
+    \begin{minipage}[t]{0.4\textwidth}
+        \begin{align*}
+            2 - 2 + 3 + 1 &= 4 \\
+            2 - 2 + 3 - 1 &= 2 \\
+            2 - 2 - 3 + 1 &= -2 \\
+            2 - 2 - 3 - 1 &= -4
+        \end{align*}
+    \end{minipage}
+    \end{center}
+    As shown above, we see that the only possible combination is the one corresponding to $2 + 2 - 3 - 1 = 0$. With this choice of signs, Betsy's count was off by undercounting by $1$ the units, Clara's count was off by 1 in tens by undercounting by 10, and Delilah's count was off by 1 in hundreds by overcounting by 100. Then $$7N + 100 - 10 - 1 = 3162.$$ Thus $N = 439$ is the true number of cows on the farm, whereas Betsy's, Clara's, and Delilah's counts were respectively $$B = 438, \qquad C = 429, \qquad D = 539.$$
+
+\newpage
+\section*{Appendix}
+
+\subsection*{Upper and Lower Bounds}
+    \qquad Some summations are difficult to work with. In this part, we find upper and lower bounds for running time. This allows us to simplify the summations.
+    
+    \qquad In adopting this approach, we require that the upper and lower bounds must be the same function, only differing by a constant. The constant for the upper bound must be larger than or equal the constant for the lower bound. 
+    
+    \qquad To obtain an upper bound in this approach, we remove terms of expression being subtracted, if helpful, and substitute terms (usually, but not necessarily, the upper/top bound of the summation) into the expression. To obtain a lower bound, we split summations to reduce size, if helpful, and substitute terms (usually, but not necessarily, the lower/bottom bound of the summation) into the expression.
+
+    \vspace{1.5mm}
+    \textbf{Example}
+    
+    Find the runtime  of the algorithm\footnotemark[1] 
+    \fancyfootnotetext{1}{Technically, $\sum_{j = 1}^{n} = (n - i + 1)$, but we ignore the negligible `1' term in this course.} $$\sum_{i = 1}^{n}\sum_{j = i}^{n} c = c \sum_{i = 1}^{n} (n - i).$$ Finding an upper bound is straightforward: $$c \sum_{i = 1}^{n} (n - i) \le c \sum_{i = 1}^{n} n = cn^2.$$ We now find a lower bound. 
+    $$c\sum_{i = 1}^{n} (n - i) \ge c \sum_{i = n/2}^{n} (n - i).$$ Our goal is to make the original summation in the previous equation at least as large as a quadratic function. Let us try to substitute $n/2$ or $n$ for $i$ and see what happens. 
+    
+    \begin{itemize}
+        \item Substituting $n/2$ for $i$, we get $$c \sum_{i = n/2}^{n} (n - i) \le c \sum_{i = n/2}^{n} \left(n - \frac{n}{2}\right),$$ but this does not work because it makes the lower bound larger instead of smaller.
+        \item Substituting $n$ for $i$, we get $$c \sum_{i = n/2}^{n} (n - i) \ge c \sum_{i = n/2}^{n} (n - n) = 0,$$ but this does not work either because it makes the lower bound too small.
+    \end{itemize}
+    However, splitting the summation another way can help us get where we want.
+    
+    $$\sum_{i = 1}^{n}c(n - i) \ge \sum_{i = 1}^{n/2}c(n - i) \ge \sum_{i = 1}^{n/2}c\left(n - \frac{n}{2}\right) = c\left(\frac{n}{2}\right)\left(\frac{n}{2}\right) = \left(\frac{c}{4}\right)n^{2}.$$ Thus, the runtime is $\Bar{c}n^{2}$ where $\frac{c}{4} \le \Bar{c} \le c$.
+
+\end{document}

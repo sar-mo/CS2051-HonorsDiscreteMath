@@ -1,0 +1,210 @@
+\documentclass{article}
+
+%Basics
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+%Easy Numbering
+\newcounter{counter}
+\newcommand{\Exercise}{Exercise \stepcounter{counter}\thecounter}
+
+%Cases Environment (Messy)
+\newlist{Cases}{enumerate}{3}
+\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+%Custom Title Fields
+\newcommand{\hmwkTitle}{Extra Homework}
+\newcommand{\hmwkDueDate}{February 31, 2000}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Gerandy Brito}
+\newcommand{\hmwkSection}{Spring 2022}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{Homework 7}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\\ \hmwkTitle}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkSection}}
+    \vspace{3in}
+    \author{\textbf{\hmwkAuthorName}}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\subsection*{\Exercise}
+    For each part, show all your computations and explain how you used Fermat's theorem.
+    \begin{enumerate}
+        \item Compute $10^{33} \pmod{7}$.
+        \item Show that $(x + y)^{p} \equiv x^{p} + y^{p} \pmod{p}$, where $p$ is prime.
+        \item Compute $2^{p-2} + 3^{p-2} + 6^{p-2} - 1 \pmod{p}$, where $p > 3$ is prime.
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    Use congruencies to prove each part below. Show your work.
+    \begin{enumerate}
+        \item Show that $5$ divides $6^{n} - 1$ for all natural numbers $n$.
+        \item Show that $7$ divides $3^{n} + 4^{n}$ for all odd numbers $n$.
+        \item Show that $7$ divides $111\dots1$, where there are 2022 many ones.
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    \textbf{Wilson's theorem} says that a number $p$ is prime if and only if $$(p - 1)! + 1 \equiv 0 \pmod{p}.$$
+    \begin{enumerate}
+        \item Recall that for $p$ prime, every number $0 < x < p$ has an inverse (mod $p$). Which of these numbers are their own inverse? Prove your answer.
+        \item Use part (a) to simplify $(p - 1)! \pmod{p}$ and conclude that, for $p$ prime, $(p - 1)! + 1 \equiv 0 \pmod{p}$. Show your work.
+        \item Conclude the proof of the theorem by showing that, if $N$ is not prime, then $(N - 1)! + 1$ is not a multiple of $N$. (\textit{Hint: since $N$ is not prime, there is a divisor $d$ of $N$ with $1 < d < N$}.)
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    (Application of Wilson's Theorem)
+    \begin{enumerate}
+        \item Let $$1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{23} = \frac{a}{23!}.$$ Find the remainder when $a$ is divided by $13$.
+        \item Find $$\gcd(19! + 19, 20! + 19).$$
+        \item Let $p$ be an odd prime. Prove that
+        $$\left(\left(\frac{p - 1}{2}\right)!\right)^2 \equiv (-1)^{\frac{p + 1}{2}} \pmod{p}.$$
+    \end{enumerate}
+
+
+\subsection*{\Exercise}
+    Find all pairs of natural numbers $(x, p)$ where $p$ is prime, such that $$x \text{ (mod }p) + x \text{ (mod }2p) + x \text{ (mod }3p) + x \text{ (mod }4p) = x + p.$$
+    Here, $a \text{ (mod }b)$ denotes the remainder of the division of $a$ by $b$.
+
+\subsection*{\Exercise}
+    \textit{(RSA Implementation)} First express your answers without computing modular exponentiations. Then use a computational aid to complete these computations.
+    \begin{enumerate}
+        \item Encrypt the message ATTACK using the RSA system with $n = 47 \cdot 59$ and $e = 13$, translating each letter into integers and grouping together pairs of integers, as in Chapter 4.6 Example 8 in the textbook.
+        \item What is the original message encrypted using the RSA system with $n = 53 \cdot 61$ and $e=17$ if the encrypted message is $3185\ 2038\ 2460\ 2550$? (To decrypt, first find the decryption exponent $d$.)
+    \end{enumerate}
+
+\subsection*{\Exercise} 
+    (\textit{RSA Validity \& Uniqueness}) Let $(N, e)$ be a public key. In this problem, we will check that we can recover the correct message.
+    \begin{enumerate}
+        \item Explain why if the message $m$ is greater than $N$ we end up losing information.
+        
+        \vspace{3mm}
+        One way to avoid the above situation is to break the message is to break the message into smaller parts. Let $x < N$ and $\gcd(x, N) = 1$. Assume there are two such messages, $x$ and $y$, such that after decoding $x^{e}$ and $y^{e}$ we get the same message.
+        \item Check that, for $x, y$ as above, if $x^{e} \equiv y^{e} \pmod{N}$ then we must have $x = y$. 
+        
+        \vspace{1mm} \textit{Hint: because $\gcd(e, \phi(N)) = 1$ we can compute the inverse of $e, d$, mod $\phi(N)$. Consider $x^{ed}$ and $y^{ed}$}.)
+    \end{enumerate}
+    
+    \textbf{Remark. }Although not graded, I strongly recommend you fully understand the proof of the decryption step of the RSA process, which can be found in Chapter 4.6 of the textbook.
+
+
+\subsection*{\Exercise}
+    \textit{(RSA Vulnerabilities)}
+    \begin{enumerate}
+        \item Explain why we should never use $(N = 2q, e)$ as a public key in an RSA system.
+        \item Let $(N, e = 3)$ be your public key. Suppose you want to encrypt the message $m$ such that $m^{3} < N$. Explain why sending this small message is not protected by the RSA system.
+        \item Prof.\ Brito's kids, Dario, Oliver, and Raquel, each use an RSA system with public keys $(N_{i}, e = 3)$, for $1 \le i \le 3$ to communicate with him. Brito sends the same message $m$ to each of them using their corresponding RSA system. That is, he sends $m^{3} \pmod{N_{i}}$ to each kid. Lianet (Brito's wife!), intercepted the three encrypted messages! Show how Lianet can find the original message $m$. You must explain a procedure Lianet can use to find $m$.
+    \end{enumerate}
+
+
+% \subsection*{\Exercise}
+%     \begin{enumerate}
+%         \item Use similar strategies as in class to find all positive integers $x, y$ such that $$|12^{x} - 5^{y}| = 7.$$
+%         {\small \textit{Hint: Consider congruencies modulo 4 and modulo 6}}.
+%     \end{enumerate}
+
+% \subsection*{Solution}
+    % If $x, y$ satisfy $|12^{x} - 5^{y}| = 7$, then either $12^{x} - 5^{y} = 7$ or $12^{x} - 5^{y} = -7$
+%     \begin{enumerate}
+%         \item 
+%         \begin{Cases}
+%             \item  $5^{y} - 12^{x} = 7$. In modulo $4$, this becomes $1 \equiv 3 \pmod{4}$, so there are no solutions for this case.
+%             \item $12^{x} - 5^{y} = 7$. In modulo $6$, this becomes $(-1)^{n} \equiv -1 \pmod{6}$, so $n$ is odd. Note that $m = n = 1$ is a solution, so taking modulo $5$ and $4$ would not help. Instead, we can assume that $m \ge 2$ and now we can analyze with modulo $8$: $$5^{n} \equiv 1 \pmod{8} \implies 2 \mid n.$$ This contradicts wtih $n$ begin odd, what we found earlier. So $m = n = 1$ is our only solution.
+%         \end{Cases}
+%     \end{enumerate}
+
+
+% % Reused from last semester, not very elegant proof. Keep as backup.
+% \subsection*{\Exercise}
+%     Let $a, b \in \mathbb{N}^{*}$ with $a \ge b$.
+%     \begin{enumerate}
+%         \item Show that, if $a$ and $b$ are odd, $2\gcd(a, b) = \gcd(a + b, a - b)$.
+%         \item Give a counterexample to show that the equality $2\gcd(a, b) = \gcd(a + b, a - b)$ is not always true.
+%     \end{enumerate}
+
+% \subsection*{Solution}
+%     \begin{enumerate}
+%         \item Let $d = 2\gcd(a, b)$. Then $\frac{d}{2} = \gcd(a, b)$, so $\frac{d}{2} \mid a$ and $\frac{d}{2} \mid b$, so $\frac{d}{2} \mid a + b = \frac{2(a + b)}{2}$ and $\frac{d}{2} \mid a - b = \frac{2(a - b)}{2}$. But $\frac{d}{2}$ and $2$ are coprime, so $\frac{d}{2} \mid \frac{a + b}{2}$ and $\frac{d}{2} \mid \frac{a - b}{2}$. Therefore $\frac{d}{2} \mid \gcd\left(\frac{a + b}{2}, \frac{a - b}{2}\right) = \frac{1}{2}\gcd(a + b, a - b)$, so $d \mid \gcd(a + b, a - b)$.
+        
+%         \vspace{1.5mm}
+%         Now let $d' = \gcd(a + b, a - b)$. Then $d' \mid (a + b)$ and $d' \mid (a - b)$. Then $d' \mid 2a$ and $d' \mid 2b$, so $d' \mid \gcd(2a, 2b)$, so $d' \mid 2\gcd(a, b)$.
+        
+%         \vspace{1.5mm}
+%         Now $d \mid d'$ and $d' \mid d$. Hence $d = d'$.
+%         \item Let $a = 2$ and $b = 4$. Then $2\gcd(a, b) = 4$, but $\gcd(a + b, a - b) = 2$.
+%     \end{enumerate}
+
+% \subsection*{\Exercise \ (Not finished, will probably be removed, better suited for 3510)}
+%     \textit{(Analysis of Algorithms)} Consider Euclid's algorithm given below, which calculates $\gcd(a, b)$ for two integers $a, b$ such that $0 \le b \le a$. % https://www.quora.com/What-is-the-time-complexity-of-Euclids-GCD-algorithm
+%     \begin{enumerate}[leftmargin=1.2in]
+%         \item [\textbf{Initialization.}] Set $a_{1} = a$ and $b_{1} = b$.
+%         \item [\textbf{Inductive Step.}] Set $a_{i} = b_{i - 1}$, and set $b_{i} = a_{i - 1} \text{ (mod $b_{i - 1}$)}$. The cost of the $\text{mod}$ operation is constant $c$. Repeat this step, incrementing $i$ in each iteration, until $i = n$ such that $b_{n}$ is set equal to $0$.
+%         \item [\textbf{Termination.}] Return $\gcd(a, b)$, given by $a_{n}$.
+%     \end{enumerate}
+%     In this exercise, we will find an upper bound on the worst-case time complexity of this algorithm.
+%     \begin{enumerate}
+%         \item Recall the Fibonacci sequence: $$f_{n} = f_{n - 1} + f_{n - 2}, f(1) = 0, f(2) = 1$$ Prove using induction that every two consecutive elements in this sequence are relatively prime. Use this fact to explain why the worst case for the Euclidean algorithm is on any two consecutive Fibonacci numbers.
+%         % Prove using induction that the smallest values for $a_{i}$ and $b_{i}$ are $f_{n + 2}$ and $f_{n + 1}$ respectively.
+%         \item It turns out the Fibonacci sequence has a closed form: $f_{i} = \frac{\phi^{i}}{\sqrt{5}}$. Use this information, along with part (a), to prove that an upper bound on the worst-case time complexity of this algorithm is $O(\log(b))$. Make sure to explain why the worst-case time complexity is dependent upon the \textit{smaller} of the two inputs.
+%     \end{enumerate} 
+
+% \subsection*{Solution}
+%     \begin{enumerate}
+%         \item Let $P(n)$ be the statement $$\gcd(f_{n + 1}, f_{n}) = 1.$$
+%         \textsc{Base Case}: $P(1)$ is true, since $\gcd(f_{1}, f_{2}) = \gcd(1, 0) = 1$. \\
+%         \textsc{Inductive Step}: Now let $n \in \mathbb{N}^{+}$ such that $P(n)$ is true. Using the inductive hypothesis, the Euclidean algorithm, and the fact that $f_{n + 2} = f_{n + 1} + f_{n}$, we obtain 
+%         $$\gcd(f_{n + 2}, f_{n + 1}) = \gcd(f_{n + 1} + f_{n}, f_{n + 1}) = \gcd(f_{n + 1}, f_{n}) = 1.$$ Hence $P(n + 1)$ is true as well. \\
+%         \textsc{Conclusion}: Therefore by induction, for all $n \in \mathbb{N}^{+}$, $P(n)$ is true.
+        
+%         \vspace{1.5mm}
+%         \item 
+%         \item Suppose at s fome iteration, we have $(a_{i}, b_{i})$. In the next iteration, we have $(b_{i}, a_{i} \text{ (mod $b_{i}$)})$. Note that after every iteration, both the numbers become at most the value of $b_{i}$.
+        
+        
+%         More specifically, if $\gcd(a, b)$ requires n steps, and $a < b \leq 0$, then the smallest possible values of a and b are $f_{n+2}$ and $f_{n+1}$, respectively. This can be proven by induction.
+        
+%         So when $n$ iterations are required, we have that $b \ge f_{n + 1} \ge f_{n} = \frac{\phi^{n}}{\sqrt{5}}$. 
+        
+%         Finally, solving for $n$, we find that $n \le \log_{\phi}(b)$.
+%     \end{enumerate}
+    
+% \subsection*{\Exercise}
+%     (May be cut) Prove the following identity using the Binomial Theorem $$\sum_{i = 0}^{c}\binom{a}{c - i}\binom{b}{i} = \binom{a + b}{c}.$$  \textit{(Hint: calculate the coefficient of $x^{c}$ in $(x + 1)^{a}(x + 1)^{b} = (x + 1)^{a + b}$ in two different ways.)}
+
+% \subsection*{Solution}
+% By the binomial theorem, $$(1 + x)^{m + n} = \sum_{r=0}^{m+n} \binom{m + n}{r} x^{r}.$$
+% Also by the binomial theorem,
+% $$\begin{aligned}
+%     (1 + x)^{m + n} &= (1 + x)^{m}(1 + x)^{n} \\
+%     &= \left(\sum_{i=0}^{m} \binom{m}{i} x^{i}\right) \left(\sum_{j=0}^{n} \binom{n}{j} x^{j}\right) \\
+%     &= \sum_{r = 0}^{m + n}\left(\sum_{k = 0}^{r} \binom{m}{k}\binom{n}{r - k}\right)x^{r} why? 
+% \end{aligned}$$
+% \textbf{Remark.} This is commonly known as \textit{Vandermonde's Identity}.
+
+
+\end{document}

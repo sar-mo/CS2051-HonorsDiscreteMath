@@ -1,0 +1,302 @@
+\documentclass{article}
+
+%Basics
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+%Creating subfigures
+\usepackage{subcaption}
+
+%Colored Strikethrough
+\usepackage{soul}
+\setstcolor{red}
+
+\usepackage[colorlinks, urlcolor = red]{hyperref}
+
+%Coloring Digits
+\usepackage{xcolor}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+%Easy Numbering
+\newcounter{counter}
+\newcommand{\Exercise}{Exercise \stepcounter{counter}\thecounter}
+
+%Custom Title Fields
+\newcommand{\hmwkTitle}{Exam 2 Extra Credit (With Solutions)}
+\newcommand{\hmwkDueDate}{Sunday, April 24, 2022}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Professor Gerandy Brito}
+\newcommand{\hmwkSection}{Spring 2022.}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{CS 2051}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{Exam 2 EC}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\\ \hmwkTitle} \\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm} \\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkSection}} \\
+    \vspace{1in}
+    \begin{minipage}[t]{0.5\columnwidth}
+    {\footnotesize \textbf{IMPORTANT:} For this assignment, you may NOT collaborate with other students, nor use resources outside the ones from class. Think of it as an open book, open notes, take-home exam.}
+    \end{minipage}
+    \vspace{1in}
+    \author{\textbf{\hmwkAuthorName}}
+    \date{}
+}
+
+\begin{document}
+    
+\maketitle
+\pagebreak
+
+\subsection*{\Exercise \ {\bf [1 pt]}}
+    \qquad Every time you visited The Farm, you went to the barn to get some fresh milk. To milk the cows, the farmer brings in $23$ distinct cows from the pasture into the barnyard and lines them up.
+
+    \vspace{1.5mm}
+    \qquad You notice that two adjacent cows never both give milk on the same day, but no more that two adjacent cows ever give no milk on the same day. On a given day, how many different ways can the farmer get milk? (An example would be ``Cow 1 gives milk, Cow 2 does not, Cow 3 does not, etc.")
+
+\subsection*{Solution}
+    \qquad There doesn't seem to be anything especially noticeable about the number 23 in this problem, meaning that we can replace the number 23 with any number without a big effect on the logic that we use to solve the problem. This pits the problem as a likely candidate for recursion.
+    
+    \vspace{2mm}
+    \qquad It's not immediately clear how to relate the state of $n$ cows to that of smaller values of $n$. Let's try breaking it up into cases, based on whether the first cow gets milk or not.
+    
+    \vspace{2mm}
+    \qquad Let $t_{n}$ be the number of ways to get milk from $n$ cows. Assume that the first cow gives milk. Therefore, since no two adjacent cows give milk on the same day, the second cow must not give milk. Starting from the third cow, however, things start to look messy. We will probably have to break our recurrence down into many more smaller cases, which is something that we don't want -- we want to calculate $t_{23}$, so we would preferably want a simple relation. Therefore, instead of working forwards, let's try to work backwards.
+    
+    \vspace{2mm}
+    \qquad Once the farmer gets milk from the first cow and (lack of milk) from the second cow, have him skip the third cow and get milk from the remaining $n - 3$ cows at the end of the line. There are $t_{n - 3}$ ways to do this. Now, note that the availability of milk from the third cow is fixed -- if the fourth cow doesn't give milk, the third one must, and if the fourth cow gives milk, the third one can't. Therefore, there are simply $t_{n-3}$ ways to get milk if the first cow gives milk.
+    
+    \vspace{2mm}
+    \qquad If the first cow doesn't give milk, then we use the same logic -- have the farmer skip the second cow and get milk from the $n - 2$ cows in $t_{n-2}$ ways. Then, the availability of milk from the second cow is fixed, so there are $t_{n - 2}$ ways to get the milk in this case.
+    
+    \vspace{2mm}
+    We have thus established a recurrence relation for our desired number: $$t_{n} = t_{n - 2} + t_{n - 3}, \text{\quad for $n > 3$}.$$ We now deduce the base cases.
+    
+    \begin{itemize}
+        \item $t_1 = 2$, because the first cow either does give milk or doesn't - there are no other possibilities.
+        \item $t_2 = 3$, because the only restricted possibility (out of the four total possibilities) is the one where both cows give milk.
+        \item $t_3 = 4,$ as there are $4$ possibilities: 101, 100, 001, and 010. (Here, 1 represents that the cow does give milk and 0 represents that it doesn't.)
+    \end{itemize}
+    Using this recurrence relation, we can easily calculate $t_{n}$ for increasing values of $n$, as shown in the table below.
+    $$\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        n & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 \\
+        \hline
+        t_{n} & 2 & 3 & 4 & 5 & 7 & 9 & 12 & 16 & 21 & 28 & 37 & 49 & 65 & 86 \\
+        \hline
+    \end{array}$$
+    $$\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        n & 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 \\
+        \hline
+        t_{n} & 114 & 151 & 200 & 265 & 351 & 465 & 616 & 816 & 1081 \\
+        \hline
+    \end{array}$$
+    We conclude that our answer, as given by $t_{23}$, is $\boxed{1081}$.
+
+\subsection*{\Exercise \ {\bf [1 pt]}}
+    Consider the grid shown below in Figure \ref*{E2}.
+    
+    \vspace{1mm}
+    \setlength{\tabcolsep}{2.7pt}
+    \begin{figure}[hbp]
+        \centering
+        \begin{tabular}{ccccccccccccc}
+            & & & & & & S \\
+            & & & & & S & A & S \\
+            & & & & S & A & R & A & S \\
+            & & & S & A & R & T & R & A & S \\
+            & & S & A & R & T & H & T & R & A & S \\
+            & S & A & R & T & H & A & H & T & R & A & S \\
+            S & A & R & T & H & A & K & A & H & T & R & A & S \\
+            & S & A & R & T & H & A & H & T & R & A & S \\
+            & & S & A & R & T & H & T & R & A & S \\
+            & & & S & A & R & T & R & A & S \\
+            & & & & S & A & R & A & S \\
+            & & & & & S & A & S \\
+            & & & & & & S
+        \end{tabular}
+        \caption{A diamond-shaped, narcissistic grid of letters.}
+        \label{E2}
+    \end{figure}
+    
+    Suppose you start at any $S$, and can move only left, right, down, or up to adjacent letters. In how many ways can the palindrome SARTHAKAHTRAS be read if
+    \begin{enumerate}
+        \item the same letter can be used more than once in each sequence?
+        \item \st{the same letter cannot be used more than one in each sequence?}
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item Let's begin by counting the number of ways to spell KAHTRAS in the triangle shown in Figure \ref*{fig:E2Sa}.
+        \begin{figure}[htbp]
+            \centering
+            \begin{subfigure}[t]{0.45\textwidth}
+                \centering
+                \begin{tabular}{lcccccc}
+                    S \\
+                    A & S \\
+                    R & A & S \\
+                    T & R & A & S \\
+                    H & T & R & A & S \\
+                    A & H & T & R & A & S \\
+                    K & A & H & T & R & A & S
+                \end{tabular}
+                \caption{A quadrant of the original diamond.}
+                \label{fig:E2Sa}
+            \end{subfigure}
+            \begin{subfigure}[t]{0.45\textwidth}
+                \centering
+                \begin{tabular}{lcccccc}
+                    1 \\
+                    1 & 6 \\
+                    1 & 5 & 15 \\
+                    1 & 4 & 10 & 20 \\
+                    1 & 3 & 6 & 10 & 15 \\
+                    1 & 2 & 3 & 4 & 5 & 6 \\
+                    1 & 1 & 1 & 1 & 1 & 1 & 1
+                \end{tabular}
+                \caption{A DP-style conversion of letters to paths.}
+                \label{fig:E2Sb}
+            \end{subfigure}
+            \caption{Breaking the grid down into four symmetric components.}
+            \label{E2S}
+        \end{figure}
+        
+        \qquad Note that we must start at $K$, and then our only choices are moving up or to the right. The number of ways to reach each letter in this manner is equal to the sum of the number of ways to reach the letter directly to the left plus the number of ways to reach the letter directly below. Using this dynamic programming-style approach, we build the triangle shown in Figure \ref*{fig:E2Sb}, and find that the total number of ways to spell KAHTRAS is the sum of these numbers on the triangle's hypotenuse, or $1 + 6 + 15 + 20 + 15 + 6 + 1 = 64$.
+        
+        \vspace{2mm}
+        \qquad Note that Figure \ref*{fig:E2Sb} forms Pascal's triangle. This is not a coincidence! Embedding each letter in the Cartesian plane starting with $K = (0, 0)$, the number of ways to reach coordinate $(i, j)$ is given by $\binom{i + j}{i}$. Hence another way to count the number of ways to spell KAHTRAS is by summing all the elements in row seven of Pascal's triangle, which is just $2^{6}$.
+        
+        \vspace{1.5mm}
+        \qquad The number of strings spelling KAHTRAS for the entire diamond is then obtained by the formula $4 \times 2^{6} - 4$. (We need to subtract $4$ to compensate for the overcounting of the strings along the diamond's diagonals.) Finally, counting the total number of ways to spell SARTHAKAHTRAS for the entire diamond is given by $(4 \times 2^{6} - 4)^{2} = \boxed{63504}$.
+        \item I have no clue. My friend Aditya Kalyanam and I were coming up with part (a) when he proposed part (b). We couldn't solve it, so we gave it to Professor Brito. Perhaps he knows the answer\dots
+    \end{enumerate}
+
+\pagebreak
+
+\subsection*{\Exercise \ {\bf [1 pt, Challenge]}}
+    Let $\mathcal{P}$ be the set of all prime numbers. Let $M$ be a subset of $\mathcal{P}$ with at least $3$ elements. Choose any proper subset $A$ of $M$. Consider the number $$n_{A} = -1 + \prod_{p \in A} p.$$ Suppose that any prime divisor of $n_{A}$ lies in $M$ for all $A \subseteq M$. Show that $M = \mathcal{P}$.
+    
+    % \vspace{1.5mm}
+    % \textit{Hint: \textbf{Dirchlet's Theorem} states that ``For any two coprime positive integers $a$ and $d$, there exist infinitely many primes of the form $a + nd$, where $n \in \mathbb{N}$." More information can be found \href{https://en.wikipedia.org/wiki/Dirichlet\%27s_theorem_on_arithmetic_progressions}{here}}.
+
+\subsection*{Solution}
+    \qquad We start by trying to manually show each prime is in $M$, at least for as many primes as we can. Firstly, $M$ has at least $3$ elements, so there exists some odd prime $p \in M$. Then $n_{\{p\}}$ is even and so $2 \in M$.
+    
+    \vspace{2mm}
+    \qquad Next, if a prime $p$ of the form $3k + 1$ lies in $M$, then $n_{\{p\}}$ is divisible by $3$. Otherwise there exists a prime $p$ of the form $3k + 2$ and so $n_{\{2,p\}} = -1 + 2p$ is divisible by $3$. Thus, in either case we get that $3 \in M$.
+    
+    \vspace{2mm}
+    \qquad Then $n_{\{2,3\}} = 5$ implies that $5 \in M$. Also, $n_{\{3,5\}} = 14 \implies 7 \in M$. The problem has the same construction as one we solved near the beginning of the course: ``Prove there exist infinitely many primes." So this problem is screaming at us to try to do what Euclid did to solve the infinite primes problem: show that the ``set" is infinite; in his case the set of primes, and in our case the set $M$.
+    
+    \vspace{2mm}
+    \textbf{Claim.} \textit{$M$ is an infinite set.}
+    
+    \vspace{2mm}
+    \textit{Proof.} Assume on the contrary, and set $M = \{p_{1}, p_{2}, \dots, p_{n}\}$. We can't directly consider $n_{M}$ since the subset we choose must be a proper subset.
+    
+    \vspace{2mm}
+    Hence, choose $S = \{p_{1}, p_{2}, \dots, p_{i-1}, p_{i+1}, \dots p_{n}\}$, i.e.\ we have removed $p_{i}$ from $M$. Let $P$ be the product of the elements of $M$. Then every factor of $n_{S}$ must be in $M$, and so we must have $$\frac{P}{p_{i}} - 1 = p_{i}^{a} \text{ for some $a$.}$$ Note that this statement is true because $\gcd(n_{S}, p_{j}) = 1$ for all $j \ne i$. Now this holds for all primes $p_{i} \in M$. We act greedily and choose $p_{i} = 2$. Then $$\frac{P}{2} - 1 = 2^{a}.$$ Note that $7 \mid P$ since $7 \in M$. Hence considering this equation modulo 7 yields $$2^{a} \equiv -1 \pmod{7}.$$
+    \textbf{Claim.} \textit{The above congruency has no solutions.}
+    
+    \vspace{2mm}
+    \textit{Proof.} Assume on the contrary. Then $2^{a} \equiv -1 \pmod{7}$ for some $a$. Then $2^{3a} \equiv (-1)^{3} \pmod{7} \implies 8^{a} \equiv -1 \pmod{7}$. But $8 \equiv 1 \pmod{7} \implies 8^{n} \equiv 1 \pmod{7}$. Combining these two statements, we get that $1 \equiv -1 \pmod{7} \implies 2 \equiv 0 \pmod{7}$, which is clearly not true.
+    
+    \vspace{2mm}
+    \qquad We have thus proved that $M$ is an infinite set. (We could also have done this mod 15 as $3, 5 \in M$.)
+    
+    \vspace{2mm}
+    \qquad It remains to show that $M$ contains every prime number. We can do this by showing that given any prime $q$, there exists some set of primes $A$ from $M$ such that $q \mid n_{A}$. If we could choose $q - 1$ equal primes from $M$, then our result would follow from Fermat's Little Theorem, but this is not possible since we can't use repeated elements. However, we can salvage this idea.
+    
+    \vspace{2mm}
+    \textbf{Claim.} \textit{Taken mod $q$, some residue (remainder) occurs infinitely many times in $M$.}
+    
+    \vspace{2mm}
+    \textit{Proof.} Consider $\mathbb{Z}_{q}$, the set of all congruency classes modulo $q$. The size of this set is $|\mathbb{Z}_{q}| = q$. Each prime in $M$ must be in one of these congruency classes.
+    
+    \vspace{2mm}
+    We now use a generalization of the pigeonhole principle, known as the \textit{infinite pigeonhole principle}: If you have infinitely many pigeons in finitely many holes, then some hole must have infinitely many pigeons.
+    
+    \vspace{2mm}
+    Letting the pigeons be the elements of $M$ and the holes be the $q$ congruency classes, we conclude that $M$ must contain an infinite number of elements from one of these congruency classes. In other words, we have proven there are an infinite number of primes that have the same residue mod $q$.
+    
+    \vspace{2mm}
+    \qquad WLOG, suppose that $p_{1} \equiv p_{2} \equiv \cdots \equiv p_{q-1} \text{ modulo } q$. Then take $A$ to be the first $q - 1$ elements from $M$. By Fermat's Little Theorem, $$n_{A} \equiv p_{1}^{q-1} - 1 \equiv 0 \pmod{q}$$ and we are done!
+
+\pagebreak
+
+\subsection*{\Exercise \ [0 pts, Fall '21 Challenge]}
+    (\textit{Power of two initial digits}) Let $N$ be a natural number, written in base 10. Show that there is a power of two such that its first digits are exactly those in $N$, in the same order. For example, \\
+    for $N = \textcolor{red}{3}$ we have $2^{5} = \textcolor{red}{3}2$; \\
+    for $N = \textcolor{blue}{12}$ we have $2^{7} = \textcolor{blue}{12}8$; \\
+    for $N = \textcolor{cyan}{102}$ we have $2^{10} = \textcolor{cyan}{102}4$.
+
+\subsection*{Solution}
+    In other words, we must prove the proposition $$(\forall N \in \mathbb{N}^{+})(\exists n \in \mathbb{N}^{+})(\exists d \in \mathbb{N}^{+})(N \times 10^{d} \le 2^{n} < (N + 1) \times 10^{d}).$$ Taking the logarithm of base 10 of the predicate, we get $$d + \log_{10}N \le n \log_{10}2 < d + \log_{10}(N + 1).$$
+    %or $$\log_{10}N \le n \log_{10}2 - m < \log_{10}(N + 1)$$
+    
+    Note that the number of digits in $2^{n}$ is given by $d_{2^{n}} = 1 + \lfloor \log_{10}2^{n} \rfloor = 1 + \lfloor n\log_{10}2 \rfloor$. Likewise, the number of digits in $N$ is given by $d_{N} = 1 + \lfloor \log_{10}N \rfloor$. Hence $d = d_{2^{n}} - d_{N} = \lfloor n\log_{10}2 \rfloor - \lfloor \log_{10}N \rfloor$, and the original proposition becomes $$(\forall N \in \mathbb{N}^{+})(\exists n \in \mathbb{N}^{+}) (\log_{10}N - \lfloor \log_{10}N \rfloor \le n \log_{10}2 - \lfloor n\log_{10}2 \rfloor  < \log_{10}(N + 1) - \lfloor \log_{10}N \rfloor).$$ Let $\{x\}$ be the fractional part of $x$. (in other words, $\{x\} = x - \lfloor x \rfloor$.) Then the predicate becomes 
+    \begin{equation}
+        \{\log_{10}N\} \le \{n \log_{10}2\} < \log_{10}(N + 1) - \lfloor \log_{10}N \rfloor.
+    \end{equation}
+    Before concluding our proof, we first state a few facts:
+    \begin{enumerate}[label = \textbf{Fact \arabic*:}, leftmargin = *]
+        \item $\log_{10} 2$ is irrational. Suppose not. Then there exists some $p \in \mathbb{Z}$ and some $q \in \mathbb{N^{+}}$ such that $\log_{10}2 = \frac{p}{q}$. Then $10^{p/q} = 2$, so $10^{q} = 2^{p}$, i.e.\ $2^{q} \cdot 5^{q} = 2^{p}$. By the Fundamental Theorem of Arithmetic, this means $q = 0$. This is a contradiction, therefore $\log_{10}2$ is irrational.
+        \item  Let $\alpha$ be an irrational number. For any $i, j \in \mathbb{Z}$ such that $i \ne j$, we must have $\{i\alpha\} \ne \{j\alpha\}$. Suppose not. Then $i\alpha - \lfloor i\alpha \rfloor =  \{i\alpha\} = \{j\alpha\} = j\alpha - \lfloor j\alpha \rfloor$, so $\alpha = \frac{\lfloor i\alpha \rfloor - \lfloor j\alpha \rfloor}{i- j} \in \mathbb{Q}$, which is a contradiction.
+    \end{enumerate}
+    Let $\epsilon$ be any real number and choose an integer $m$ such that $\frac{1}{\epsilon} < m$. Now divide the unit interval $[0, 1]$ into $m$ subintervals, each of length $\frac{1}{m}$. By the pigeonhole principle and Fact 2, some two of the numbers $\{\alpha\}, \{2\alpha\}, \dots, \{m\alpha\}, \{(m + 1)\alpha\}$ must be in the same subinterval, so there exist some $i, j \in \mathbb{Z}$ satisfying $1 \le i < j \le m + 1$ such that $|\{i\alpha\} - \{j\alpha\}| < \frac{1}{m}$. 
+    
+    \vspace{2mm}
+    Note that $|\{i\alpha\} - \{j\alpha\}| = \{(j - i) \alpha\}$, so $\{(j - i) \alpha\} \in \left[0, \frac{1}{m}\right]$. Then there exists some scalar integer $q$ such that for some $0 \le k \le m - 1$, $$q\{(j - i) \alpha\} = \{q(j - i) \alpha\} \in \left[\frac{k}{m}, \frac{k + 1}{m}\right].$$ It follows that every $x \in [0, 1]$ is within $1/m < \epsilon$ of some $\{n\alpha\}$, for any $\epsilon$. This means every interval $(a, b)$ with $0 \le a < b \le 1$ contains at least one of the values in the set  $\{\{n\alpha\} : n \in \mathbb{N}^{+}\}$. Formally, 
+    \begin{equation}
+        (\forall a \in [0, 1])(\forall b \in [0, 1] > a)(\exists n \in \mathbb{N}^{+})(a < \{n\alpha\} < b).
+    \end{equation}
+    Let $a = \{\log_{10}N\}$ and $b = \log_{10}(N + 1) - \lfloor \log_{10}N \rfloor$. Then by Equation 2 and Fact 1, Equation 1 is true, and thus our original proposition is true as well.
+\end{document}
+
+
+
+    % \setlength{\jot}{0pt}
+    % \begin{gather*}
+    %     \text{S} \\
+    %     \text{S\!A\!S} \\
+    %     \text{S\!A\!R\!A\!S} \\
+    %     \text{S\!A\!R\!T\!R\!A\!S} \\
+    %     \text{S\!A\!R\!T\!H\!T\!R\!A\!S} \\
+    %     \text{S\!A\!R\!T\!H\!A\!H\!T\!R\!A\!S} \\
+    %     \text{S\!A\!R\!T\!H\!A\!K\!A\!H\!T\!R\!A\!S} \\
+    %     \text{S\!A\!R\!T\!H\!A\!H\!T\!R\!A\!S} \\
+    %     \text{S\!A\!R\!T\!H\!T\!R\!A\!S} \\
+    %     \text{S\!A\!R\!T\!R\!A\!S} \\
+    %     \text{S\!A\!R\!A\!S} \\
+    %     \text{S\!A\!S} \\
+    %     \text{S}
+    % \end{gather*}
+    
+            % \item (MAY BE REMOVED) the same letter cannot be used more than one in each sequence?
+            
+            
+            
+    
+    % From Dirchlet's theorem, we know that in the set of all primes, for any coprime positive integers $a$ and $d$, there is an arithmetic progression of the form $$(nd + a) = (a,\, d + a,\, 2d + a,\, 3d + a, \, \dots)$$ that contains infinitely many primes.
+    
+    % \vspace{2mm}
+    % Consider the set of all arithmetic progressions of the form $(nq + r_{i})$. The size of this set is $\phi(q) = q - 1$. This is because $q$ is prime, so there are $q - 1$ different choies for $r_{i}$, and thus $q - 1$ different progressions. Since $r$ can be any number from $1$ to $q - 1$, every prime in $M$ must be in one of these arithmetic progressions.

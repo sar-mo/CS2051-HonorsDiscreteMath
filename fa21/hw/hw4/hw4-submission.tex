@@ -1,0 +1,166 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Vertical dots in code
+\usepackage{mathtools}
+
+%Multiple Columns
+\usepackage{multicol}
+
+%Formatting and Spacing
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setenumerate[2]{label = \roman*.}
+\setlength\parindent{0pt}
+\linespread{1.10}
+
+%Custom Commands
+\newcommand{\hmwkTitle}{Homework 4}
+\newcommand{\hmwkDueDate}{October 28, 2021}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Professor Gerandy Brito}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Fancy Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{\hmwkTitle}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\ \hmwkTitle}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+    \vspace{3in}
+    \author{\textbf{\hmwkAuthorName} \\ \\ \small No Collaborators, No Outside Sources}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\subsection*{Question 1}
+    Show by induction that $n^{3} < 2^{n}$ for all natural numbers $n \ge 10$.
+    
+\subsection*{Solution}
+    Let $P(n)$ be the sentence $$n^{3} < 2^{n}.$$
+    \textsc{Base Case}:  $P(10)$ is true, since $10^{3} = 1000 < 1024 = 2^{10}$. \\
+    \textsc{Inductive Step}: Now let $n \ge 10$ such that $P(n)$ is true. Then $$(n + 1)^{3} = n^{3} + 3n^{2} + 3n + 1 < n^{3} + 3n^{2} + 3n^{2} + n^{2} = n^{3} + 7n^{2} < n^{3} + n^{3} = 2n^{3} < 2^{n + 1},$$ using the induction hypothesis and the fact that $7n^{2} < n^{3}$ for all $n \ge 8$. Hence $P(n + 1)$ is true as well. \\
+    \textsc{Conclusion}: Therefore by induction, for all $n \ge 10$, $P(n)$ is true.
+
+\subsection*{Question 2}
+    Solve the following recursions by the method of your preference.
+    \begin{enumerate}
+        \item $T(n) = T(n - 4) + 1$, $T(1) = T(2) = T(3) = T(4) = 1$.
+        \item $T(n) = 2T(n - 1) + 1$, $T(1) = 1$.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item We will use the guess-and-confirm method to solve this recurrence relation. Using repeated substitutions, we have 
+        $$\begin{aligned}[t]
+            T(k_{1}) &= 1 \text{ for all } k_{1} \in \{1, \dots, 4\} \\
+            T(k_{2}) &= T(k_{1}) + 1 = 1 + 1 = 2 \text{ for all } k_{2} \in \{5, \dots, 8\} \\
+            T(k_{3}) &= T(k_{2}) + 1 = 2 + 1 = 3 \text{ for all } k_{3} \in \{9, \dots, 12\} \\
+            &\vdotswithin{ = } \\
+            T(n) &= \left \lceil \frac{n}{4} \right \rceil.
+        \end{aligned}$$
+        We prove the $n$-th term guess using mathematical induction. Let $P(n)$ be the sentence $$T(n) = \left \lceil \frac{n}{4} \right \rceil.$$
+        \textsc{Base Case}: $P(1), \dots P(4)$ are all true, since $T(1) = T(2) = T(3) = T(4) = 1$ and $\left \lceil \frac{k}{4} \right \rceil = 1$ for all $k \le 4$. \\
+        \textsc{Inductive Step}: Now let $n \ge 1$ such that $P(n), \dots, P(n + 3)$ are all true. Then $$T(n + 4) = T(n) + 1 = \left \lceil \frac{n}{4} \right \rceil + 1 = \left \lceil \frac{n}{4} + 1 \right \rceil = \left \lceil \frac{n + 4}{4} \right \rceil.$$ Hence $P(n + 4)$ is true as well. \\
+        \textsc{Conclusion}: Therefore by strong induction, for all $n \ge 1$, $P(n)$ is true.
+        \item We will use the iteration method to solve this recursion. Note that 
+        $$\begin{aligned}[t]
+            T(n) &= 2T(n - 1) + 1 \\
+            &= 2(2T(n - 2) + 1) + 1 \\
+            &= 2(2(2T(n - 3) + 1) + 1) + 1\\
+            &\vdotswithin{ = } \\
+            &= 2^{k}T(n - k) + 2^{k - 1} + \dots + 2^{1} + 2^{0}.
+        \end{aligned}$$
+        Let $k = n - 1$, then $n - k = 1$ and we have
+        $$\begin{aligned}[t]
+            T(n) &= 2^{n - 1}T(n - (n - 1)) + 2^{(n - 1) - 1} + \dots + 2^{1} + 2^{0} \\
+            &= 2^{n - 1}T(1) + 2^{n - 2} + \dots + 2^{1} + 2^{0} \\
+            &= 2^{n - 1} + 2^{n - 2} + \dots + 2^{1} + 2^{0}.
+        \end{aligned}$$
+        We now use the finite geometric series formula, that is, $\sum_{i = 0}^{n - 1} a^{i} = \frac{a^{n} - 1}{a - 1}$, to conclude 
+        $$\begin{aligned}[t]
+            T(n) &= \sum_{i = 0}^{n - 1} 2^{i} = \frac{2^{n} - 1}{2 - 1} = 2^{n} - 1.
+        \end{aligned}$$
+    \end{enumerate}
+
+\subsection*{Question 3}
+    Let $A$ be the set of all functions $f: \mathbb{N}^{*} \rightarrow \mathbb{R}^{*}_{+}$ (the codomain is the set of positive real numbers). Consider the relation $\sim$ on $A$ defined as follows: $$\text{$f \sim g$ if there exist constants $C_{1}, C_{2} > 0$ such that $C_{1}g(n) < f(n) < C_{2}g(n)$ for all $n \in \mathbb{N}^{*}$.}$$ Note that $C_{1}, C_{2}$ may depend on the functions $f$ and $g$.
+    \begin{enumerate}
+        \item Show that $\sim$ is an equivalent relation.
+        \item Group the following functions by equivalence classes (you do not need to show your work): 
+        \begin{multicols}{2}
+        \begin{itemize}
+            \item $\log_{2}(n) + 1$
+            \item $\ln(n^{2}) + 2021$
+            \item $n$
+            \item $2n + 5$
+            \item $n\log(n) + 1$
+            \item $2021n + \log(n)$
+            \item $2^{n}$
+        \end{itemize}
+        \end{multicols}
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item $\sim$ is an equivalent relation iff it is reflexive, symmetric, and transitive.
+        \begin{enumerate}[label = \arabic*.]
+            \item (Reflexivity) Let $C_{1} = \frac{1}{2}$ and $C_{2} = 2$. Then $\frac{1}{2}f(n) < f(n) < 2f(n)$ for all $n \in \mathbb{N^{*}}$, so $f \sim f$.
+            \item (Symmetry) Suppose $f \sim g$. Then there exist constants $C_{1}, C_{2} > 0$ such that $C_{1}g(n) < f(n) < C_{2}g(n)$ for all $n \in \mathbb{N^{*}}$. Since $C_{1}, C_{2} > 0$, we can divide by $C_{1}$ and $C_{2}$ to obtain $\frac{1}{C_{2}}f(n) < g(n) < \frac{1}{C_{1}}f(n)$. Thus $g \sim f$.
+            \item (Transitivity) Suppose $f \sim g$ and $g \sim h$. Then there exist constants $C_{1}, C_{2}, C_{3}, C_{4} > 0$ such that $C_{1}g(n) < f(n) < C_{2}g(n)$ and $C_{3}h(n) < g(n) < C_{4}h(n)$ for all $n \in \mathbb{N^{*}}$. Substituting the inequalities for $g(n)$ found in the second equation into the first equation, we get that $C_{1}C_{3}h(n) < f(n) < C_{2}C_{4}h(n)$. Thus $f \sim h$.
+        \end{enumerate}
+        \item The equivalence classes of these functions are $\{\log_{2}(n) + 1, \ln(n^{2}) + 2021\}$, $\{n, 2n + 5, 2021n + \log(n)\}$,  $\{n\log(n) + 1\}$, and $\{2^{n}\}$.
+    \end{enumerate}
+
+\subsection*{Question 4}
+    Let $f_{1}, f_{2}, g_{1}, g_{2}$ be real functions satisfying $f_{1} = O(g_{1})$ and $f_{2} = O(g_{2})$. Show that $f_{1}f_{2} O(g_{1}g_{2})$. (\textit{as in the lecture, start with the definition and get the values of $C$ and $K$.})
+
+\subsection*{Solution}
+    Since $f_{1} = O(g_{1})$, there exists some $k_1, c_1 > 0$ such that $|f_{1}(x)| < c_{1}|g_{1}(x)|$ for all $x > k_{1}$. Since $f_{2} = O(g_{2})$, there exists some $k_{2}, c_{2} > 0$ such that $|f_{2}(x)| < c_{2}|g_{2}(x)|$ for all $x > k_{2}$. Choosing $K = \max(k_{1}, k_{2})$, we have that $|f_{1}(x)f_{2}(x)| < c_{1}c_{2}|g_{1}(x)g_{2}(x)|$ for all $x > K$. Hence $f_{1}f_{2}O(g_{1}g_{2})$ for $C = c_{1}c_{2}$ and $K = \max(k_{1}, k_{2})$.
+
+\subsection*{Question 5}
+    (\textit{For this problem, you can use classical tools from Calculus such as $\epsilon-\delta$ definition of limits, derivatives, etc}) Let $f, g$ be real functions with $f$ not identically zero and $g(x) \ne 0$ for all $x \in \mathbb{R}$ satisfying $$\lim_{x \rightarrow \infty} \left|\frac{f(x)}{g(x)}\right| = \ell.$$
+    \begin{enumerate}
+        \item Show that if $0 < \ell < \infty$ then $f = \Theta(g)$.
+        \item Show that, if $l = 0$, then $f = O(g)$. Give an example of functions for which $g \ne O(f)$.
+        \item Can you deduce a relation (of the form big-$O$, big-$\Omega$, or big-$\Theta$) between $f$ and $g$ if $\ell = \infty$? Prove your answer.
+        \item Let $p(x) = a_{n}x^{n} + a_{n - 1}x^{n - 1} + \dots + a_{1}x + a_{0}$ and $q(x) = b_{m}x^{m} + b_{m - 1}x^{m - 1} + \dots + b_{1}x + b_{0}$ be two polynomials with real coefficients. Use parts (a)--(c) to deduce when $p = O(q)$, $p = \Omega(q)$, or $p = \Theta(q)$ \textit{(your answer should depend on $n$ and $m$)}.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item Suppose $0 < \ell < \infty$. Then by the formal definition of the limit, for all $\epsilon > 0$, there exists some $k > 0$ such that for all $x > k$, $\left|\left|\frac{f(x)}{g(x)}\right| - \ell\right| < \epsilon$. Now
+        \begin{align*}
+            \left|\left|\frac{f(x)}{g(x)}\right| - \ell\right| < \epsilon &\iff - \epsilon < \left|\frac{f(x)}{g(x)}\right| - \ell < \epsilon \\
+            &\iff \ell - \epsilon < \frac{|f(x)|}{|g(x)|} < \ell + \epsilon \\
+            &\iff (\ell - \epsilon)\left|g(x)\right| < \left|f(x)\right| < (\ell + \epsilon)\left|g(x)\right|.
+        \end{align*}
+        Since this statement is true for all $\epsilon > 0$, we can use universal instantiation to conclude that this statement is true for some $0 < \epsilon < l$. Thus there exists some $c_{1} = \ell - \epsilon > 0$, some $c_{2} = \ell + \epsilon > 0$, and some $k > 0$ such that $c_{1}|g(x)| < |f(x)| < c_{2}|g(x)|$ for all $x > k$, and so $f = \Theta(g)$.
+        \item Suppose $\ell = 0$. Then again using the formal definition of the limit, we have that for some $c = \epsilon > 0$ and some $k > 0$ such that $|f(x)| < c|g(x)|$ for all $x > k$. Hence $f = O(g)$.
+        
+        \vspace{1.5mm}
+        However, $g \ne O(f)$. To see this, take $f(x) = x$ and $g(x) = x^2$.
+        \item Suppose $l = \infty$. By the formal definition of the limit, this means that for all $c > 0$, there exists some $k > 0$ such that for all $x > k$, $\left|\frac{f(x)}{g(x)}\right| > c$. Again using universal instantiation, we conclude that there exists some $c, k > 0$ such that $c|g(x)| < |f(x)|$ for all $x > k$. Hence $f = \Omega(g)$.
+        \item The three cases below are disjoint and cover all possibilities for $n$ and $m$.
+        \begin{align*}
+            n > m &\iff \lim_{x \rightarrow \infty} \left|\frac{p(x)}{q(x)}\right| = \infty \implies p = \Omega(q) \\
+            m > n &\iff \lim_{x \rightarrow \infty} \left|\frac{p(x)}{q(x)}\right| = 0 \implies p = O(q) \\
+            m = n &\iff \lim_{x \rightarrow \infty} \left|\frac{p(x)}{q(x)}\right| = \frac{b_{m}}{a_{n}} \implies p = \Theta(q)
+        \end{align*}
+    \end{enumerate}
+\end{document}

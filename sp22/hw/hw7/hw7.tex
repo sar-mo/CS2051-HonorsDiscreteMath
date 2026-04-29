@@ -1,0 +1,103 @@
+\documentclass{article}
+
+%Basics
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+%Easy Numbering
+\newcounter{counter}
+\newcommand{\Exercise}{Exercise \stepcounter{counter}\thecounter}
+
+%Cases Environment (Messy)
+\newlist{Cases}{enumerate}{3}
+\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+%Custom Title Fields
+\newcommand{\hmwkTitle}{Homework 7}
+\newcommand{\hmwkDueDate}{April 8, 2022}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Professor Gerandy Brito}
+\newcommand{\hmwkSection}{Spring 2022}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{CS 2051}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{\hmwkTitle}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{1in}
+    \textbf{\hmwkClass:\\ \hmwkTitle} \\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm} \\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkSection}} \\
+    \vspace{1in}
+    \begin{minipage}[t]{0.5\columnwidth}
+    {\footnotesize You may collaborate with other students in this class, but (1) you must write up your own solutions in your own words, and (2) you must write down everyone you worked with at the top of the page, or ``no collaborators'' if you did it all on your own. Additionally, if you used any outside websites or textbooks besides the course text, please cite them here. You may not use question-answer sites like Chegg or MathOverflow.}
+    \end{minipage}
+    \vspace{1in}
+    \author{\textbf{\hmwkAuthorName}}
+    \date{}
+}
+
+\begin{document}
+    
+\maketitle
+\pagebreak
+
+\subsection*{\Exercise}
+    For each part, explicitly mention the rule you are using and explain how you deduce your answer.
+    \begin{enumerate}
+        \item How many positive integers less than $2022$ are divisible by $5$ but not by $6$?
+        \item Let $X, Y \subseteq \{1, 2, 3, 4, 5, 6, 7\}$ (they are subsets of the set).  How many ordered pairs $(X, Y)$ are there, such that $|X \cup Y| = 1$?
+        \item How many pairs of positive integers satisfy the equation $y + x^{3} < 100$?
+        \item You have a combination lock. The correct combination is composed of four numbers, from $1$ to $70$. You are also given the following clues:
+        \begin{enumerate}[label = \arabic*.]
+            \item The third number is twice the second.
+            \item No two numbers are the same.
+            \item The second number is prime.
+        \end{enumerate}
+        How many possible combinations exist for the lock?
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    For each part below, explain your reasoning.
+    \begin{enumerate}
+        \item How many ways are there to arrange $n$ wolves and $n$ sheep in a line, if the wolves and sheep are distinct and must alternate?
+        \item How many permutations of the letters GEORGIA contain the string GA?
+        \item Consider a standard (French-suited) deck of playing cards in which each card has one of four suits $\{\clubsuit,\diamondsuit,\spadesuit,\heartsuit\}$  and one of thirteen ranks $\{A,2,3,4,5,6,7,8,9,10,J,Q,K\}$. How many five-card hands are there with (i) three cards that share the same rank and (ii) the two cards that share a different rank (i.e. a “full house”)? For example: $\{\clubsuit 6, \diamondsuit Q, \heartsuit Q, \heartsuit 6, \spadesuit Q\}$.
+        \item You and your future roommates are trying to decide how to split up their rooms for next year. There are four distinctive rooms, and four of you in total. However, there can only be \underline{at most} $2$ friends per room. In how many ways can you and your roommates assign yourself to rooms?
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    For each part, show your work thoroughly.
+    \begin{enumerate}
+        \item There are $60$ students in CS 2051. Out of Snapchat, Instagram, and Tiktok, $5$ students use all three services and $7$ students use none of the three services. $26$ students use Tiktok, $33$ students use Snapchat, and $38$ students use Instagram. $14$ students use Tiktok and Instagram and $20$ students use Snapchat and Instagram. How many students use Snapchat and Tiktok?
+        \item The five CS 2051 TAs are grading the Exam 2 papers. They want to make sure the grading is correct, so they decide to cross-check the papers. Each TA brings one exam that they have graded and gives it to another TA. After the end of this exchange, each TA ends up with an exam. How many ways are there to distribute the $5$ exams brought? Note that a TA cannot receive the exam they brought.
+        \item Six CS 2051 students, each with a different grade in the course, are getting in line at North Ave Dining Hall to grab dinner. How many ways can they get in line such that there is no sequence of three consecutive people that are in decreasing order of grade (from the back to the front)?
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    For each part, show your work.
+    \begin{enumerate}
+        \item What is the coefficient of the $x^{5}$ term in $(2x + 1)^{7}$?
+        \item Prove the following identity: $$\binom{n}{k} = \binom{n - 2}{k} + 2\binom{n-2}{k-1} + \binom{n-2}{k-2}.$$
+        \item Consider the polynomial $$1 - x + x^2 - \dots + x^{14} - x^{15}.$$ We can write it in the form $$\theta_{0} + \theta_{1}y + \cdots + \theta_{14}y^{14} + \theta_{15}y^{15},$$ where $y = x + 1$ and the $\theta_{i}$'s are constants. Find the value of $\theta_{2}$.
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    For all $x \in \{1,2,3,4,5\}$, find the number of functions $g$ from $\{1,2,3,4,5\}$ to itself such that $g \circ g \circ g(x) = g \circ g(x)$. Show your work.
+
+\end{document}

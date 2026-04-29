@@ -1,0 +1,244 @@
+\documentclass{article}
+
+%Basics
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+%Easy Numbering
+\newcounter{counter}
+\newcommand{\Exercise}{Exercise \stepcounter{counter}\thecounter}
+
+%Cases Environment (Messy)
+\newlist{Cases}{enumerate}{3}
+\setlist[Cases]{leftmargin = .25in, label = {Case \arabic*.}, topsep = 0.01in, itemsep = 0.04in, itemindent = .5in, parsep = 0in}
+
+%Custom Title Fields
+\newcommand{\hmwkTitle}{Homework 7 (with Solutions)}
+\newcommand{\hmwkDueDate}{April 8, 2022}
+\newcommand{\hmwkClass}{Honors Discrete Mathematics}
+\newcommand{\hmwkClassInstructor}{Professor Gerandy Brito}
+\newcommand{\hmwkSection}{Spring 2022}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+%Headers and Footers
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\pagestyle{fancy}
+\lhead{CS 2051}
+\chead{\hmwkClass \ (\hmwkClassInstructor)}
+\rhead{Homework 7}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\title{
+    \vspace{2in}
+    \textbf{\hmwkClass:\\ \hmwkTitle}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkSection}}
+    \vspace{3in}
+    \author{\textbf{\hmwkAuthorName}}
+    \date{}
+}
+
+\begin{document}
+    
+\maketitle
+\pagebreak
+
+\subsection*{\Exercise}
+    For each of the following problems, explicitly mention the rule you are using and explain how you deduce your answer.
+    \begin{enumerate}
+        \item How many positive integers less than $2022$ are divisible by $5$ but not by $6$?
+        \item Let $X, Y \subseteq \{1, 2, 3, 4, 5, 6, 7\}$ (they are subsets of the set).  How many ordered pairs $(X, Y)$ are there, such that $|X \cup Y| = 1$?
+        \item How many pairs of positive integers satisfy the equation $y + x^{3} < 100$?
+        \item You have a combination lock. The correct combination is composed of four numbers, from $1$ to $70$. You are also given the following clues:
+        \begin{enumerate}[label = \arabic*.]
+            \item The third number is twice the second.
+            \item No two numbers are the same.
+            \item The second number is prime.
+        \end{enumerate}
+        How many possible combinations exist for the lock?
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item The number of positive integers less than $2022$ that are divisible by 5 is $\left \lfloor \frac{2021}{5} \right \rfloor$. The number of positive integers that are divisible by 5 and divisible by 6 is $\left \lfloor \frac{2021}{30} \right \rfloor$. Using the Rule of Subtraction, the number of positive integers divisible by 5 but not divisible by 6 is given by $\left \lfloor \frac{2021}{5} \right \rfloor - \left \lfloor \frac{2021}{30} \right \rfloor = 404 - 67 = 337$.
+        \item We know $|X \cup Y| = |X| + |Y| - |X \cap Y| \ge \max(|X|, |Y|)$.
+        \begin{Cases}
+            \item Suppose $|X| = 1$ and $|Y| = 0$.  Then there is only one choice for $Y$: $Y = \emptyset$. There are seven choices for $X$, so there are $7$ ordered pairs in this case.
+            \item Suppose $|X| = 0$ and $|Y| = 1$. By symmetry, there are also $7$ ordered pairs in this case.
+            \item Suppose $|X| = 1$ and $|Y| = 1$. Then $|X \cap Y| = 1$, so $X = Y$. There are possible seven sets for $X$, and then only one possible set for $Y$, since its value is determined by $X$. Thus, there are $7$ ordered pairs in this case.
+        \end{Cases}
+        Finally, using the Rule of Sum, we conclude that there are $7 + 7 + 7 = 21$ total solutions.
+        \item We use casework, based on the value of $x$.
+        \begin{Cases}
+            \item Suppose $x = 1$. Then this problem becomes $y < 99$, so there are $98$ possible values for $y$.
+            \item Suppose $x = 2$. Then this problem becomes $y < 92$, so there are $91$ possible values for $y$.
+            \item Suppose $x = 3$. Then this problem becomes $y < 73$, so there are $72$ solutions for $y$.
+            \item Suppose $x = 4$. Then this problem becomes $y < 36$, so there are $35$ solutions for $y$.
+            \item Suppose $x \ge 5$. Then $y + x^{3} - 100 > 0$, so there are no solutions in this case.
+        \end{Cases}
+        Finally, using the Rule of Sum, we conclude that there are $98 + 91 + 72 + 35 = 296$ total solutions.
+        \item First consider the last clue. There are $11$ prime numbers between $1$ and $70$ such that its doubled value is also between 1-70 (37 is the 12th prime, whose double is 74).
+    
+        \vspace{1.5mm} The third number would be 1 choice, since it is linked with the second number. Because no two numbers are the same, we use the Rule of Product to compute our answer, given by $68 \times 11 \times 1  \times 67 = 50116.$
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    For each part below, explain your reasoning.
+    \begin{enumerate}
+        \item How many ways are there to arrange $n$ wolves and $n$ sheep in a line, if the wolves and sheep are distinct and must alternate?
+        \item How many permutations of the letters GEORGIA contain the string GA?
+        \item Consider a standard (French-suited) deck of playing cards in which each card has one of four suits $\{\clubsuit,\diamondsuit,\spadesuit,\heartsuit\}$  and one of thirteen ranks $\{A,2,3,4,5,6,7,8,9,10,J,Q,K\}$. How many five-card hands are there with (i) three cards that share the same rank and (ii) the two cards that share a different rank (i.e. a “full house”)? For example: $\{\clubsuit 6, \diamondsuit Q, \heartsuit Q, \heartsuit 6, \spadesuit Q\}$.
+        \item You and your future roommates are trying to decide how to split up their rooms for next year. There are four distinctive rooms, and four of you in total. However, there can only be \underline{at most} $2$ friends per room. In how many ways can you and your roommates assign yourself to rooms?
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item There are $2$ ways to choose which type of animal will be first in the line. After we have chosen that, there are $n$ choices for the animal in the first position, $n$ choices for the animal in the second position, $n - 1$ choices for the animal in the third position, $n - 1$ choices for the animal in the fourth position, and so on. In total, there are $2(n!)^{2}$ arrangements.
+        \item We treat $GA$ as one `letter'. Then all permutations of GEORGIA contain the `letters' GA, E, O, R, G, I. We wish to find all permutations of six `letters', from a sample space of six `letters'. This is given by ${}^6P_{6} = 6! = 720$.
+        \item Note that to satisfy (i), we must choose a rank and choose three cards out of the four total cards with that rank. To satisfy (ii), we must choose a different rank for the other two cards and choose two cards out of the four total cards with that rank. Using the rule of product, the total number of five-card hands satisfying the criteria is $$\binom{13}{1} \times \binom{4}{3} \times \binom{12}{1} \times \binom{4}{2} = 3744.$$
+        \item 
+        There are three possible frequencies of roommates:
+        $$\{1, 1, 1, 1\}, \qquad \{1, 1, 2\}, \qquad \{2, 2\}.$$
+        \begin{Cases}
+            \item $\{1, 1, 1, 1\}$. There are $4! = 24$ ways to arrange the roommates in this case.
+            \item $\{1, 1, 2\}$. There are $4 \times \binom{3}{2}$ ways to assign the frequencies to rooms, and $\binom{4}{2} \times 2!$ ways to assign the roommates to rooms (once the frequencies have been assigned). Hence there are $4 \times \binom{3}{2} \times \binom{4}{2} \times 2! = 144$ ways to arrange the roommates in this case.
+            \item $\{2, 2\}$. There are $\binom{4}{2}$ ways to assign the frequencies to rooms, and $\binom{4}{2}$ ways to assign the roommates to rooms (once the frequencies have been assigned). Hence there are $\binom{4}{2} \times \binom{4}{2}= 36$ ways to arrange the roommates in this case.
+        \end{Cases}
+        The total number of assignments is thus given by $24 + 144 + 36 = 204.$
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    For each question, show your work thoroughly.
+    \begin{enumerate}
+        \item There are $60$ students in CS 2051. Out of Snapchat, Instagram, and Tiktok, $5$ students use all three services and $7$ students use none of the three services. $26$ students use Tiktok, $33$ students use Snapchat, and $38$ students use Instagram. $14$ students use Tiktok and Instagram and $20$ students use Snapchat and Instagram. How many students use Snapchat and Tiktok?
+        \item The five CS 2051 TAs are grading the Exam 2 papers. They want to make sure the grading is correct, so they decide to cross-check the papers. Each TA brings one exam that they have graded and gives it to another TA. After the end of this exchange, each TA ends up with an exam. How many ways are there to distribute the $5$ exams brought? Note that a TA cannot receive the exam they brought.
+        \item Six CS 2051 students, each with a different grade in the course, are getting in line at North Ave Dining Hall to grab dinner. How many ways can they get in line such that there is no sequence of three consecutive people that are in decreasing order of grade (from the back to the front)?
+    \end{enumerate}
+    
+\subsection*{Solution}
+    \begin{enumerate}
+        \item
+        Let $x$ be the number of students who use Snapchat and TikTok. By PIE, the number of students who do not use any of the three services is
+        $$7 = 60 - 26 - 33 - 38 + x + 14 + 20 - 5$$
+        Solving for $x$, we conclude that $15$ students use both Snapchat and TikTok.
+        \item Let $A$ denote the set of ways to distribute tests such that everyone receives a test, possibly their own. Let $A_{i}$ denote the set of ways to distribute tests such that person $i$ receives his or her own test. Then we want to find $$|A| - |A_{1} \cup A_{2} \cup \cdots \cup A_{5}|.$$ Since $A_{i}$ is the set of ways to distribute tests such that person $i$ receives his or her own test, there are $4$ choices of tests for the next person, $3$ choices of tests for the following person, and so on. By the rule of product, $$|A_{i}| = 4 \times 3 \times 2 \times 1 = 4!.$$ Since $A_{i} \cup A_{j}$ is the set of ways person $i$ and person $j$ both receive their own tests, there are $3$ choices of tests for the next person, $2$ choices of tests for the following person, and so on. Again by the rule of product, $$|A_{i} \cup A_{j}| = 3 \times 2 \times 1 = 3!.$$ By continuing this argument, if $k$ people receive their own tests, then there are $(5 - k)!$ possible ways. Applying PIE, we obtain $$|A| - |A_{1} \cup A_{2} \cup \cdots \cup A_{5}| = 5! - \binom{5}{1} \times 4! + \binom{5}{2} \times 3! - \dots + \binom{5}{5} \times 1! = 44.$$
+        \textbf{Remark.} This is an example of counting \textit{derangements}, which you will learn more about if you take the course Math 3012: Applied Combinatorics.
+        \item Let $A$ be the event that the first, second and third people are in ordered grade, $B$ be the event that the second, third, and fourth people are in ordered grade, $C$ be the event that the third, fourth, and fifth people are in ordered grade, and $D$ be the event that the fourth, fifth, and sixth people are in ordered grade. By the rule of product and PIE, we wish to find
+        $$\begin{aligned}
+        6! &- |A| - |B| - |C| - |D| + |A \cap B| + |A \cap C| + |A \cap D| + |B \cap C| + |B \cap D| + |C \cap D| \\
+        &- |A \cap B \cap C| - |A \cap B \cap D| - |A \cap C \cap D| - |B \cap C \cap D| + |A \cap B \cap C \cap D|.
+        \end{aligned}$$
+        \qquad Now for the task of evaluating all of this. For $|A|$, we just choose $3$ people and there is only one way to put them in order, then $3!$ ways to order the other three guys for $3!\binom{6}{3} = 120$. Same goes for $|B|$, $|C|$, and $|D|$.
+        
+        \vspace{1.5mm}
+        \qquad Next, $|A \cap B|$ is just putting four people in order. By the same logic as above, this is $2!\binom{6}{4} = 30$. Again, $|A \cap C|$ would be putting five people in order, so $1!\binom{6}{5} = 6$. $|A \cap D|$ is choosing $3$ people out of $6$, then $3$ people out of $3$ for $\binom{6}{3} = 20$. Now, $|B \cap C|$ is the same as $|A \cap B$, $|B \cap D|$ is the same as $|A \cap C$, and $|C \cap D|$ is the same as $|A \cap B|$.
+        
+        \vspace{1.5mm} 
+        \qquad Moving on to the next set: $|A \cap B \cap C|$ is the same as $|A \cap C|$ which is $6$, $|A \cap B \cap D|$ is ordering everybody to $1$, $|A \cap C \cap D$ is again ordering everybody which is $1$, and $|B \cap C \cap D|$ is the same as $|A \cap B \cap C|$ so $6$.
+        
+        \vspace{1.5mm}
+        \qquad Finally, $|A \cap B \cap C \cap D|$ is ordering everybody so $1$.
+        
+        \vspace{1.5mm}
+        Substituting everything back in, we get a final answer of $720 - 120 - 120 - 120 - 120 + 30 + 6 + 20 + 30 + 6 + 30 - 6 - 1 - 1 - 6 + 1 = 349$.
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    For each part, you must use the binomial theorem.
+    \begin{enumerate}
+        \item What is the coefficient of the $x^{5}$ term in $(2x + 1)^{7}$?
+        \item Prove the following identity: $$\binom{n}{k} = \binom{n - 2}{k} + 2\binom{n-2}{k-1} + \binom{n-2}{k-2}.$$
+        \item Consider the polynomial $$1 - x + x^2 - \dots + x^{14} - x^{15}.$$ We can write it in the form $$\theta_{0} + \theta_{1}y + \cdots + \theta_{14}y^{14} + \theta_{15}y^{15},$$ where $y = x + 1$ and the $\theta_{i}$'s are constants. Find the value of $\theta_{2}$.
+    \end{enumerate}
+
+\subsection*{Solution}
+    \begin{enumerate}
+        \item Using the binomial theorem, we know 
+        $$(2x + 1)^{7} = \sum_{k = 0}^{7} \binom{7}{k} (2x)^{7 - k}(1)^{k}.$$
+        Choosing $k = 2$, we find that the coefficient of the $x^{5}$ term is $\binom{7}{2}(2)^{5} = 672$.
+        \item Rewrite the RHS as $$\left[\binom{n - 2}{k} + \binom{n-2}{k-1}\right] +  \left[\binom{n-2}{k-1} + \binom{n-2}{k-2}\right].$$ Using Pascal's Identity, we know this is equivalent to $$\binom{n - 1}{k} + \binom{n - 1}{k - 1} = \binom{n}{k}.$$
+        \item \textbf{Solution 1.} Using the geometric series formula, $$1 - x + x^2 + \cdots - x^{15} = \frac{1 - x^{16}}{1 + x} = \frac{1-x^{16}}{y} = \frac{1-(y - 1)^{16}}{y}.$$ We want $a_2$, which is the coefficient of the $y^3$ term in $-(y - 1)^{16}$ (because the $y$ in the denominator reduces the degrees in the numerator by $1$). By the Binomial Theorem, this is $(-1) \cdot (-1)^{16}{\binom{16}{3}} = 560$.
+
+        \textbf{Solution 2.} We have
+        \begin{align*}
+            1 - x + x^2 + \cdots - x^{15} &= 1 - (y - 1) + (y - 1)^2 - (y - 1)^3 + \cdots - (y - 1)^{15} \\ 
+            &= 1 + (1 - y) + (1 - y)^2 + (1 - y)^3 + \cdots + (1 - y)^{15}.
+        \end{align*}
+        We want the coefficient of the $y^2$ term of each power of each binomial, which by the binomial theorem is $$\binom{2}{2} + \binom{3}{2} + \cdots + \binom{15}{2} = \binom{16}{3} = 560.$$
+    \end{enumerate}
+
+\subsection*{\Exercise}
+    For all $x \in \{1,2,3,4,5\}$, find the number of functions $g$ from $\{1,2,3,4,5\}$ to itself such that $g(g(g(x))) = g(g(x))$.
+
+\subsection*{Solution 1 (AIME Solution)}
+    \textit{(Alex Zhu)} For a function $g$, let $A = \{i : g(i) = i\}$ be the set of values that are fixed, let $B = \{i : g(i) \in A \text{ and } i \ne A\}$ be the set of values that evaluate to an element in $A$ but are not elements of $A$ themselves, and let $C = \{1, 2, 3, 4, 5\} - (A \cup B)$ be the set of the remaining values. Notice that all possible values of $g(g(x))$ are in $A$, so $A$ must be nonempty. We will now use casework on the size of $A$.
+    
+    \begin{Cases}
+        \item Suppose $|A| = 1$. WLOG, let $g(1) = 1$, so we will multiply our result by $5$ at the end. Now, let $|B| = x$, so $|C| = 4 - x$. We must have $g(g(x)) = 1$ for all $x$, so each element $c$ in $C$ must satisfy  $g(x) = b$ for some $b$ in $B$, because $g(x) \ne 1$ and the only other numbers for which $g(x) = 1$ are the elements of $b$. This also implies $|B| > 0$. Conversely, it is easy to check any function satisfying $g(c) = b$ works, so the total number of functions in this case is $$ 5 \sum_{x = 1}^{4} \binom{4}{x}x^{4 - x} = 5(4 + 6 \cdot 4 + 4 \cdot 3 + 1) = 205$$ because there are $\binom{4}{x}$ ways to choose the elements in $b$, and each of the $4 - x$ elements in $C$ can map to any of the $x$ elements in $B$. Hence there are $205$ functions in this case.
+        \item Suppose $|A| = 2$. This is very similar to Case 1, except for the fact that each element in $B$ now corresponds to one of two possible elements in $A$, so this adds a factor of $2^{x}$. The sum is $$\binom{5}{2} \sum_{x = 1}^{3} 2^{x} x^{3 - x} = 10(3 \cdot 2 + 3 \cdot 4 \cdot 2 + 8) = 380,$$ so there are $380$ functions in this case.
+        \item Suppose $|A| = 3$. The sum is $$\binom{5}{3} \sum_{x = 1}^{2} \binom{2}{x}3^{x}x^{2 - x} = 10(2 \cdot 3 + 9) = 150,$$ so there are $150$ functions in this case.
+        \item Suppose $|A| = 4$. There are clearly $5(4) = 20$ functions in this case.
+        \item Suppose $|A| = 5$. There is only one function (the identity) in this case.
+    \end{Cases}
+    This cases are disjoint, so using the rule of sum, our final answer is $205 + 380 + 150 + 20 + 1 = 756$.
+    
+\subsection*{Solution 2 (My Solution)}
+    
+    For this solution, we use a visual aide. The following table represents all possible $(x,f(x))$, where $x \in \{1, 2, 3, 4, 5\}$.
+    $$
+    \setlength{\arraycolsep}{1.5pt}
+    \renewcommand{\arraystretch}{1.4}
+    \begin{array}{ccccc}
+        (1, 1) & (1, 2) & (1, 3) & (1, 4) & (1, 5) \\
+        (2, 1) & (2, 2) & (2, 3) & (2, 4) & (2, 5) \\
+        (3, 1) & (3, 2) & (3, 3) & (3, 4) & (3, 5) \\
+        (4, 1) & (4, 2) & (4, 3) & (4, 4) & (4, 5) \\
+        (5, 1) & (5, 2) & (5, 3) & (5, 4) & (5, 5)
+    \end{array}$$
+    As in Solution 1, we set $A = \{i : g(i) = i\}$ and perform casework on the size of $A$. We will work from the easiest case to the most difficult.
+
+    \begin{Cases}
+        \item Suppose $|A| = 5$. This means in each row of the grid, there is only one choice: $(i, i)$. Hence there is only $1 \cdot 1 \cdot 1 \cdot 1 \cdot 1 = 1$ function $g$ (the identity function) in this case.
+        \item Suppose $|A| = 4$. There are $\binom{5}{4}$ ways to choose the $4$ fixed points. WLOG, let them be $(1, 1), (2, 2), (3, 3), (4, 4)$. Looking at the last row of the grid, we see that the last point must be $(5, 1), (5, 2), (5, 3),$ or $(5, 4)$. Hence there are $\binom{5}{4} \cdot 1 \cdot 1 \cdot 1 \cdot 1 \cdot 4 = 20$ functions $g$ in this case.
+        \item Suppose $|A| = 3$. $\binom 53$ ways to choose the $3$ fixed points. WLOG, let them be $(1, 1), (2, 2), (3, 3)$.
+        
+        \begin{Cases}[label* = \arabic*., itemindent = .6in, topsep = 0.04in]
+            \item None of $4$ or $5$ map to each other. The points on their rows must be $(4, 1), (4, 2), (4, 3)$ and $(5, 1), (5, 2), (5, 3)$, giving $1 \cdot 1 \cdot 1 \cdot 3 \cdot 3 = 9$ possibilities.
+            \item $4$ maps to $5$ or $5$ maps to $4$. The points on their rows must be $(4, 5)$ and $(5, 1), (5, 2), (5, 3)$; or $(5, 4)$ and $(4, 1), (4, 2), (4, 3)$, giving $3+3 = 6$ possibilities.
+            \item $4$ maps to $5$ and $5$ maps to $4$. This is impossible, as $g(g(g(4))) \ne g(g(4))$ in this case.
+        \end{Cases}
+        There are $\binom 53 \cdot (9+6) = 150$ functions for this case.
+        \item Suppose $|A| = 2$. There are $\binom{5}{2}$ ways to choose the $2$ fixed points. WLOG, let them be $(1, 1), (2, 2)$.
+        
+        \begin{Cases}[label* = \arabic*., itemindent = .6in, topsep = 0.04in]
+            \item None of $3$, $4$, or $5$ map to any other. There are $1 \cdot 1 \cdot 2 \cdot 2 \cdot 2 = 8$ solutions for this case, by similar logic to Case 3.1.
+            \item Exactly one of $3, 4, 5$ maps to another. Example: $(3, 4), (4, 1), (5, 2)$. $\binom 32 \cdot 2! = 6$ ways to choose the first point, and $2 \cdot 2 = 4$ ways to choose which ones of $1$ and $2$ the other two numbers map to, giving $24$ functions.
+            \item Two of $3, 4, 5$ map to the third. Example: $(3, 5), (4, 5), (5, 2)$. $\binom 31$ ways to choose which point is being mapped to, and $2$ ways to choose which one of $1$ and $2$ it maps to, giving $6$ functions.
+            \item Any other choice is impossible, using similar logic to Case 3.3.
+        \end{Cases}
+        There are $\binom 52 \cdot (8+24+6) = 380$ functions in this case.
+        \item Suppose $|A| = 1$. There are $\binom{5}{1}$ ways to choose the fixed point. WLOG, let it be $(1, 1)$.
+        
+        \begin{Cases}[label* = \arabic*., itemindent = .6in, topsep = 0.04in]
+            \item None of $2, 3, 4, 5$ map to any other. There is only $1^4 = 1$ solution to this; all of them map to $1$.
+            \item One maps to another, and the other two map to $1$. There are $\binom 42 \cdot 2!$ ways to choose which two map to each other, and since each must map to $1$, this gives $12$.
+            \item One maps to another, and of the other two, one maps to the other as well. (Example: $(3, 1), (2, 3), (5, 4), (4, 1)$). There are $\binom 42 \cdot 2! \cdot 2! / 2!$ ways to choose which ones map to another. This also gives $12$ solutions.
+            \item Two map to a third, and the fourth maps to $1$. There are $\binom 42 \cdot \binom 21 = 12$ ways again.
+            \item Three map to the fourth. There are $\binom 41$ ways to choose which one is being mapped to, giving $4$ ways.
+            \item Any other choice is impossible, using similar logic to Case 3.3.
+        \end{Cases}
+        There are $\binom{5}{1} \cdot (1 + 12 + 12 + 12 + 4) = 205$ functions in this case.
+    \end{Cases}
+    Therefore, the answer is $1 + 20 + 150 + 380 + 205 = \boxed{756}$.
+
+\end{document}

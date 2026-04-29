@@ -1,0 +1,121 @@
+\documentclass{article}
+
+%Basics
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+
+%Drawing Graphs
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+%Figures and Subfigures
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+%Formatting and Spacing
+\setitemize[1]{noitemsep, parsep = 5pt, topsep = 5pt}
+\setenumerate[1]{label = (\alph*), parsep = 1pt, topsep = 5pt}
+\setlength\parindent{0pt}
+\linespread{1.1}
+
+%Easy Numbering
+\newcounter{counter}
+\newcommand{\Exercise}{Exercise \stepcounter{counter}\thecounter}
+
+% %Custom Title Fields
+\newcommand{\hmwkTitle}{Homework 4}
+\newcommand{\hmwkDueDate}{Feb 19, 2022}
+\newcommand{\hmwkClass}{CS 2051}
+\newcommand{\hmwkClassInstructor}{Professor Gerandy Brito}
+\newcommand{\hmwkSection}{Spring 2022}
+\newcommand{\hmwkAuthorName}{Sarthak Mohanty}
+
+\title{
+    \hmwkTitle \\
+    \vspace{0.1in}\large{Georgia Tech\ \hmwkClass,\ \hmwkSection}
+    \author{\large{\hmwkAuthorName}} \\
+    \vspace{0.2in}
+    \small{Due\ on\ \hmwkDueDate\ at 11:59pm}
+    \date{}
+}
+
+\begin{document}
+
+\maketitle
+
+\textbf{Reminder:} You may collaborate with other students in this
+class, but (1) you must write up your own solutions in your own words, and (2) you must write down everyone you worked with at the top of the page, or ``no collaborators'' if you did it all on your own. Additionally, if you used any outside websites or textbooks besides the course text, please cite them here. You may not use question-answer sites like Chegg or MathOverflow.
+
+\vspace{5mm} \hrule
+
+\subsection*{Exercise 0 (Not Graded)}
+About how many hours did you spend on this homework in total? Are there any topics that were particularly unclear that we should spend more time on?
+
+\subsection*{\Exercise}
+    Prove that for each $x \in \mathbb{Z}$, 6 divides $x^3 - x$.
+    
+    \vspace{1.5mm}
+    {\small \textit{Hint}: Use induction to prove the statement for any $x \in \mathbb{N}$, then extend this reasoning to all $x \in \mathbb{Z}$.}
+
+\subsection*{\Exercise}
+    Landscaper Larry is planning on remodeling a square enclosure. He wants to split it up into multiple smaller square enclosures. However, he does not know how many enclosures he will need to make. Prove using induction that Larry can divide any square enclosure into $n$ smaller square enclosures for $n \ge 6$. For example, Larry can divide the enclosure into $9$ smaller enclosures, as shown below. Include drawing(s) of your work.
+    \begin{center}
+        \pgfmathsetmacro{\relativefibrethickness}{0.50}
+        \pgfmathsetmacro{\relativefibrevariation}{0.07}
+        \pgfmathsetmacro{\numberoffibres}{15}
+        \pgfmathsetmacro{\fibresteps}{50}
+        \pgfmathsetmacro{\boardwidth}{3}
+        \pgfmathsetmacro{\boardheight}{3}
+        \newcommand{\backgroundcolor}{ForestGreen}
+        \newcommand{\fibrecolor}{ForestGreen!90!black}
+        \begin{tikzpicture}[scale = 0.67]
+             \pgfmathsetmacro{\segmentwidth}{\boardwidth/(\numberoffibres+1)}
+            \pgfmathsetmacro{\segmentvariation}{\relativefibrethickness/2*\segmentwidth}
+        
+            \pgfmathsetmacro{\secondfibre}{2*\segmentwidth}
+            \pgfmathsetmacro{\lastfibre}{\numberoffibres*\segmentwidth}
+        
+            \pgfmathsetmacro{\stepheight}{\boardheight/\fibresteps}
+        
+            %auto generated courtyard
+            \filldraw[\backgroundcolor] (0,0) rectangle (\boardwidth,\boardheight);
+            
+            \foreach \x in {1,2,...,\numberoffibres}
+            {   \fill[\fibrecolor] ($(\x*\segmentwidth-\segmentvariation,0) + (rand*\relativefibrevariation*\relativefibrethickness,0)$) 
+                \foreach \y in {1,...,\fibresteps}
+                {   -- ($(\x*\segmentwidth-\segmentvariation,\y*\stepheight) + (rand*\relativefibrevariation*\relativefibrethickness,0)$)
+                }
+                -- ($(\x*\segmentwidth+\segmentvariation,\boardheight)+ (rand*\relativefibrevariation*\relativefibrethickness,0)$) 
+                \foreach \y in {\fibresteps,...,0}
+                {   -- ($(\x*\segmentwidth+\segmentvariation,\y*\stepheight) + (rand*\relativefibrevariation*\relativefibrethickness,0)$)
+                }
+                -- cycle;
+            }
+            \draw[thick] (0,0) rectangle (\boardwidth,\boardheight);
+        
+            % manually added squares
+            \draw (0,0) grid (3,3);
+        \end{tikzpicture}
+    \end{center}
+
+\subsection*{\Exercise}
+    Suppose we have an infinite chessboard, with each square labeled as coordinates $(i, j)$ with $i, j \in \mathbb{N}$. A knight starts at the square $(0, 0)$ (in other words, it has already visited this square). Use induction to prove that this knight can visit every square using a finite sequence of moves.
+    
+    \vspace{1.5mm}
+    {\small \textit{Hint}: Use induction on the variable $n = i + j$.}
+
+\subsection*{\Exercise}
+    The fabled city of Ba Sing Se has $2$ cats for every person, $2$ serpents for every bison, and $2$ lemurs for every cat. What is the greatest total number of people, bison, lemurs, serpents, and cats that \underline{cannot} exist in Ba Sing Se? Prove using induction.
+    
+    \vspace{1.5mm}
+    {\small \textit{Hint}: We covered a problem in lecture that Professor Brito called the ``Bill Denomination" problem. Can you find some similarities?}
+
+\subsection*{\Exercise}
+    One day, you encounter a rather large farm. The very wise farmer informs you that there are exactly $2025$ cows in the farm. However, these cows have very poor memory. In order to make sure the cows remember each other, the farmer trained them until the following rule was satisfied: $$\text{Among each group of $4$ cows, there is at least one cow who knows each of the other three.}$$ The farmer explains that this rule ensures at least $2022$ cows know every other cow. You seem suspicious, and decide to prove the farmer's claim either correct or incorrect. Show this proof below. Is the farmer correct?
+    
+    \vspace{1.5mm}
+    {\small \textit{Hint}: Sometimes we cannot use induction to prove a result, but we can use induction to prove a stronger result (in the textbook, this is called \textit{inductive loading}). Can you use induction to prove this statement for any $n$ cows on a farm?}
+
+\end{document}
